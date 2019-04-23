@@ -10,8 +10,7 @@ public class Account {
     private Table playingTable;
     private boolean isAI;
     private int winsNumber;
-
-    public final String folderAddress = "";
+    private final String folderAddress = "";
 
     public void playTurn() {
     }
@@ -36,6 +35,8 @@ public class Account {
 
         winsNumber++;
     }
+
+
 
     public void resetPlayerVariables() {
     }
