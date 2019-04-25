@@ -10,7 +10,13 @@ public class Account {
     private Table playingTable;
     private boolean isAI;
     private int winsNumber;
-    private final String folderAddress = "";
+    private String folderAddress;
+
+    public boolean isPasswordCorrect(String password) {
+
+        if (this.password.equals(password)) return true;
+        return false;
+    }
 
     public void playTurn() {
     }

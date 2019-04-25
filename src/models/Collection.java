@@ -29,5 +29,8 @@ public class Collection {
         return items;
     }
 
-    //todo get selected card
+    public Deck getSelectedDeck() {
+
+        return selectedDeck;
+    }
 }
