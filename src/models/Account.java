@@ -3,7 +3,8 @@ package models;
 public class Account {
 
     private String userName, password;
-    private long money;
+    private final int initialMoney = 15000;
+    private int money;
     private Collection collection;
     private Hand hand;
     private int mana;
@@ -22,6 +23,7 @@ public class Account {
     }
 
     public void addToHand(Card card) {
+
     }
 
     public void playAI(Match match) {
