@@ -24,7 +24,8 @@ public class LoginMenu {
     public void logout(Account account) {
     }
 
-    public static String findUserFolder(Account account) {
-    }
+//    public static String findUserFolder(Account account) {
+//    }
+//    return bezar , error midad
 
 }

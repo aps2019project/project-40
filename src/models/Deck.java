@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Deck {
 
     private ArrayList<Card> cards = new ArrayList<>();
-    private Hero hero;
+    //private Hero hero;
     private int maxCardNumber;
     private Item item;
 
