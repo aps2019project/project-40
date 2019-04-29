@@ -73,7 +73,8 @@ public class BattleView {
 
         if (battleView instanceof ShowHandBattleView) {
 
-
+            showHand((ShowHandBattleView) battleView);
+            return;
         }
 
         if (battleView instanceof ShowCollectedItemsBattleView) {
@@ -176,5 +177,20 @@ public class BattleView {
         System.out.println("MP: " + showInfo.getManaPoint());
         System.out.println("Cost: " + showInfo.getCost());
         System.out.println("Desc: " + showInfo.getDescription());
+    }
+
+    private void showHand(ShowHandBattleView showHand) {
+
+        ArrayList<String> cardsName = showHand.getHandCardsName();
+
+        for (String cardName : cardsName) {
+
+            System.out.println("a hand card is: " + cardName);
+        }
+
+        if (showHand.getReserveCardName() != null) {
+
+            System.out.println("reserve card is: " + showHand.getReserveCardName());
+        }
     }
 }
