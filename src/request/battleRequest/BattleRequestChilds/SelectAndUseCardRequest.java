@@ -4,7 +4,7 @@ import request.battleRequest.BattleRequest;
 
 import java.util.ArrayList;
 
-public class SelectAndUseCard extends BattleRequest {
+public class SelectAndUseCardRequest extends BattleRequest {
 
     private String cardID, opponentCardID;
     private ArrayList<String> myCardsID = new ArrayList<>();

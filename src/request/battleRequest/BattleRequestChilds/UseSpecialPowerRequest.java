@@ -2,20 +2,9 @@ package request.battleRequest.BattleRequestChilds;
 
 import request.battleRequest.BattleRequest;
 
-public class InsertCard extends BattleRequest {
+public class UseSpecialPowerRequest extends BattleRequest {
 
-    private String cardName;
     private int row, column;
-
-    public String getCardName() {
-
-        return cardName;
-    }
-
-    public void setCardName(String cardName) {
-
-        this.cardName = cardName;
-    }
 
     public int getRow() {
 
