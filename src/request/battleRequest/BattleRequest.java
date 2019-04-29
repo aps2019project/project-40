@@ -1,4 +1,4 @@
-package Request.BattleRequest;
+package request.battleRequest;
 
 public class BattleRequest {
 }
