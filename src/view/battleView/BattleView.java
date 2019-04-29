@@ -79,7 +79,8 @@ public class BattleView {
 
         if (battleView instanceof ShowCollectedItemsBattleView) {
 
-
+            showCollectedItems((ShowCollectedItemsBattleView) battleView);
+            return;
         }
 
         if (battleView instanceof ShowSelectedItemInfoBattleView) {
@@ -191,6 +192,16 @@ public class BattleView {
         if (showHand.getReserveCardName() != null) {
 
             System.out.println("reserve card is: " + showHand.getReserveCardName());
+        }
+    }
+
+    private void showCollectedItems(ShowCollectedItemsBattleView showCollected) {
+
+        ArrayList<String> itemsName = showCollected.getItemName();
+
+        for (String itemName : itemsName) {
+
+            System.out.println(itemName);
         }
     }
 }
