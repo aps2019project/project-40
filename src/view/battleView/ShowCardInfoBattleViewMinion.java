@@ -50,7 +50,7 @@ public class ShowCardInfoBattleViewMinion extends ShowCardInfoBattleView {
         this.range = range;
     }
 
-    public boolean isHasComboAbility() {
+    public boolean hasComboAbility() {
 
         return hasComboAbility;
     }

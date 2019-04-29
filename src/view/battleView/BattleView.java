@@ -46,24 +46,28 @@ public class BattleView {
 
         if (battleView instanceof ShowMinionsBattleView) {
 
-
+            showMinions((ShowMinionsBattleView) battleView);
+            return;
         }
 
         if (battleView instanceof ShowCardInfoBattleView) {
 
             if (battleView instanceof ShowCardInfoBattleViewHero) {
 
-
+                showCardInfoHero((ShowCardInfoBattleViewHero) battleView);
+                return;
             }
 
             if (battleView instanceof ShowCardInfoBattleViewMinion) {
 
-
+                showCardInfoMinion((ShowCardInfoBattleViewMinion) battleView);
+                return;
             }
 
             if (battleView instanceof ShowCardInfoBattleViewSpell) {
 
-
+                showCardInfoSpell((ShowCardInfoBattleViewSpell) battleView);
+                return;
             }
         }
 
@@ -143,5 +147,34 @@ public class BattleView {
                     "column :" + locations.get(i).getColumn() + "), ");
             System.out.println("power : " + attackPoints.get(i));
         }
+    }
+
+    private void showCardInfoHero(ShowCardInfoBattleViewHero showInfo) {
+
+        System.out.println("Hero:");
+        System.out.println("Name: " + showInfo.getName());
+        System.out.println("Cost: " + showInfo.getCost());
+        System.out.println("Desc: " + showInfo.getDescription());
+    }
+
+    private void showCardInfoMinion(ShowCardInfoBattleViewMinion showInfo) {
+
+        System.out.println("Minion:");
+        System.out.println("Name: " + showInfo.getName());
+        System.out.println("HP: " + showInfo.getHealthPoint() +
+                " AP:" + showInfo.getAttackPoint() + " MP:" + showInfo.getManaPoint());
+        System.out.println("Range: " + showInfo.getRange());
+        System.out.println("Combo-ability: " + showInfo.hasComboAbility());
+        System.out.println("Cost: " + showInfo.getCost());
+        System.out.println("Desc: " + showInfo.getDescription());
+    }
+
+    private void showCardInfoSpell(ShowCardInfoBattleViewSpell showInfo) {
+
+        System.out.println("Spell:");
+        System.out.println("Name: " + showInfo.getName());
+        System.out.println("MP: " + showInfo.getManaPoint());
+        System.out.println("Cost: " + showInfo.getCost());
+        System.out.println("Desc: " + showInfo.getDescription());
     }
 }
