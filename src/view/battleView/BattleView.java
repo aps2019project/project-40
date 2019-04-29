@@ -99,7 +99,7 @@ public class BattleView {
         System.out.println("There is a flag in row : " + gameInfo.getFlagCoordination().getRow() +
                 " and column : " + gameInfo.getFlagCoordination().getColumn());
 
-        if (gameInfo.getFlagHolderTeam() != null || gameInfo.getFlagHolderName() != null){
+        if (gameInfo.getFlagHolderTeam() != null || gameInfo.getFlagHolderName() != null) {
 
             System.out.println(gameInfo.getFlagHolderName() + " Of " + gameInfo.getFlagHolderTeam() + " has flag");
         }
@@ -120,5 +120,28 @@ public class BattleView {
                 System.out.printf("%s of %s has flag\n", holderName, team));
     }
 
+    private void showMinions(ShowMinionsBattleView showMinions) {
 
+        ArrayList<String> cardsID = showMinions.getCardsID();
+        ArrayList<String> cardsName = showMinions.getCardsName();
+        ArrayList<Integer> healthPoints = showMinions.getHealthPoints();
+        ArrayList<Coordination> locations = showMinions.getLocations();
+        ArrayList<Integer> attackPoints = showMinions.getAttackPoints();
+
+        if (cardsID.size() != cardsName.size() || cardsName.size() != healthPoints.size() ||
+                healthPoints.size() != locations.size() || locations.size() != attackPoints.size()) {
+
+            System.err.println("In show minion view size of arrayList doesn't equal");
+            return;
+        }
+
+        for (int i = 0; i < cardsID.size(); i++) {
+
+            System.out.println(cardsID.get(i) + " : " + cardsName.get(i) + ", ");
+            System.out.println("health : " + healthPoints.get(i) + ", ");
+            System.out.println("location : (row :" + locations.get(i).getRow() + ", " +
+                    "column :" + locations.get(i).getColumn() + "), ");
+            System.out.println("power : " + attackPoints.get(i));
+        }
+    }
 }
