@@ -91,7 +91,7 @@ public class BattleView {
 
         if (battleView instanceof ShowCardsBattleView) {
 
-
+            showSelectedItemInfo((ShowSelectedItemInfoBattleView) battleView);
         }
     }
 
@@ -210,5 +210,15 @@ public class BattleView {
 
         System.out.println("Name: " + itemInfo.getName());
         System.out.println("Desc: " + itemInfo.getDescription());
+    }
+
+    private void showCards(ShowCardsBattleView showCards) {
+
+        ArrayList<String> cards = showCards.getCards();
+
+        for (String card : cards) {
+
+            System.out.println(card);
+        }
     }
 }

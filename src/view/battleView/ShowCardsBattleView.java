@@ -4,15 +4,15 @@ import java.util.ArrayList;
 
 public class ShowCardsBattleView extends BattleView {
 
-    private ArrayList<String> ShowCardBattleView = new ArrayList<>();
+    private ArrayList<String> cards = new ArrayList<>();
 
-    public ArrayList<String> getShowCardBattleView() {
+    public ArrayList<String> getCards() {
 
-        return ShowCardBattleView;
+        return cards;
     }
 
-    public void setShowCardBattleView(ArrayList<String> showCardBattleView) {
+    public void setCards(ArrayList<String> cards) {
 
-        ShowCardBattleView = showCardBattleView;
+        this.cards = cards;
     }
 }

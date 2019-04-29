@@ -1,4 +1,6 @@
 package request.battleRequest;
 
-public class BattleRequest {
+import request.Request;
+
+public class BattleRequest extends Request {
 }
