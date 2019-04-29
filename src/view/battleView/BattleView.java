@@ -85,7 +85,8 @@ public class BattleView {
 
         if (battleView instanceof ShowSelectedItemInfoBattleView) {
 
-
+            showSelectedItemInfo((ShowSelectedItemInfoBattleView) battleView);
+            return;
         }
 
         if (battleView instanceof ShowCardsBattleView) {
@@ -195,13 +196,19 @@ public class BattleView {
         }
     }
 
-    private void showCollectedItems(ShowCollectedItemsBattleView showCollected) {
+    private void showCollectedItems(ShowCollectedItemsBattleView collectedItem) {
 
-        ArrayList<String> itemsName = showCollected.getItemName();
+        ArrayList<String> itemsName = collectedItem.getItemName();
 
         for (String itemName : itemsName) {
 
             System.out.println(itemName);
         }
+    }
+
+    private void showSelectedItemInfo(ShowSelectedItemInfoBattleView itemInfo) {
+
+        System.out.println("Name: " + itemInfo.getName());
+        System.out.println("Desc: " + itemInfo.getDescription());
     }
 }
