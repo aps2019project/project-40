@@ -1,6 +1,6 @@
 package models;
 
-public class Hero extends Unit{
+public class Minion extends Unit{
     public String getInfo(){
         return "";
     }

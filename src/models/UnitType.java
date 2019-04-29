@@ -1,4 +1,5 @@
 package models;
 
-public class UnitType {
+enum UnitType {
+    RANGED,HYBRID,MELEE
 }
