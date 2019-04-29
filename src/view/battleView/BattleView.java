@@ -91,7 +91,8 @@ public class BattleView {
 
         if (battleView instanceof ShowCardsBattleView) {
 
-            showSelectedItemInfo((ShowSelectedItemInfoBattleView) battleView);
+            showCards((ShowCardsBattleView) battleView);
+            return;
         }
     }
 
