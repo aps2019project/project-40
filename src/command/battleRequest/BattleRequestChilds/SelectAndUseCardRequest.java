@@ -1,24 +1,24 @@
-package request.battleRequest.BattleRequestChilds;
+package command.battleRequest.BattleRequestChilds;
 
-import request.battleRequest.BattleRequest;
+import command.battleRequest.BattleRequest;
 
 import java.util.ArrayList;
 
 public class SelectAndUseCardRequest extends BattleRequest {
 
-    private String cardID, opponentCardID;
+    private String id, opponentCardID;
     private ArrayList<String> myCardsID = new ArrayList<>();
     private int row, column;
-    private boolean isForMove, isForAttack, isForAttackCombo;
+    private boolean isForMove, isForAttack, isForAttackCombo, isForShowInfo, isForUse;
 
-    public String getCardID() {
+    public String getID() {
 
-        return cardID;
+        return id;
     }
 
-    public void setCardID(String cardID) {
+    public void setID(String id) {
 
-        this.cardID = cardID;
+        this.id = id;
     }
 
     public String getOpponentCardID() {
@@ -89,5 +89,25 @@ public class SelectAndUseCardRequest extends BattleRequest {
     public void setForAttackCombo(boolean forAttackCombo) {
 
         isForAttackCombo = forAttackCombo;
+    }
+
+    public boolean isForShowInfo() {
+
+        return isForShowInfo;
+    }
+
+    public void setForShowInfo(boolean forShowInfo) {
+
+        isForShowInfo = forShowInfo;
+    }
+
+    public boolean isForUse() {
+
+        return isForUse;
+    }
+
+    public void setForUse(boolean forUse) {
+
+        isForUse = forUse;
     }
 }

@@ -1,7 +1,6 @@
-package request.battleRequest.BattleRequestChilds;
+package command.battleRequest.BattleRequestChilds;
 
-public enum RequestWithoutVariable {
-
+public enum RequestWithoutVariableEnum {
 
     GAME_INFO_REQUEST,
     SHOW_MY_MINIONS_REQUEST,

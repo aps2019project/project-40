@@ -1,6 +1,6 @@
-package request.battleRequest.BattleRequestChilds;
+package command.battleRequest.BattleRequestChilds;
 
-import request.battleRequest.BattleRequest;
+import command.battleRequest.BattleRequest;
 
 public class SelectItemRequest extends BattleRequest {
 
