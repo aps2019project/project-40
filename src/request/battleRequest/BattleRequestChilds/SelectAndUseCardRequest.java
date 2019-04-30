@@ -9,7 +9,23 @@ public class SelectAndUseCardRequest extends BattleRequest {
     private String id, opponentCardID;
     private ArrayList<String> myCardsID = new ArrayList<>();
     private int row, column;
-    private boolean isForMove, isForAttack, isForAttackCombo, isForShowInfo, isForUse;
+    private boolean isForMove;
+    private boolean isForAttack;
+    private boolean isForAttackCombo;
+    private boolean isForShowInfo;
+    private boolean isForUse;
+
+    public boolean isForHelp() {
+
+        return isForHelp;
+    }
+
+    public void setForHelp(boolean forHelp) {
+
+        isForHelp = forHelp;
+    }
+
+    private boolean isForHelp;
 
     public String getID() {
 
