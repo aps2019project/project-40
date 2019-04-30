@@ -35,6 +35,7 @@ public class LoginMenu {
     }
 
     public static String findUserFolder(Account account) {
+        return "";
     }
 
 }

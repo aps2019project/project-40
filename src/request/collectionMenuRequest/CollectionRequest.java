@@ -1,4 +1,4 @@
-package request.collectionRequest;
+package request.collectionMenuRequest;
 
 import request.Request;
 

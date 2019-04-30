@@ -1,4 +1,4 @@
-package request.collectionRequest.collectionRequestChilds;
+package request.collectionMenuRequest.collectionRequestChilds;
 
 public enum CollectionOptionList {
     EXIT,

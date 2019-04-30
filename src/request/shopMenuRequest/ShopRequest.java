@@ -1,4 +1,4 @@
-package request.shopRequest;
+package request.shopMenuRequest;
 
 import request.Request;
 

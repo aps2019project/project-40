@@ -20,9 +20,11 @@ public class ShopMenu {
     public void searchCollection(String name) {
     }
     public boolean checkCardOrItemExistance(String name) {
+        return true;
     }
 
     public boolean checkMoneyForBuying(String name) {
+        return true;
     }
 
 }

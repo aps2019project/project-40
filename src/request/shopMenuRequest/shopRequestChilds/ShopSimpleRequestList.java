@@ -1,4 +1,4 @@
-package request.shopRequest.shopRequestChilds;
+package request.shopMenuRequest.shopRequestChilds;
 
 public enum ShopSimpleRequestList {
     EXIT,

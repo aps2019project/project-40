@@ -1,6 +1,6 @@
-package request.shopRequest.shopRequestChilds;
+package request.shopMenuRequest.shopRequestChilds;
 
-import request.shopRequest.ShopRequest;
+import request.shopMenuRequest.ShopRequest;
 
 public class Show extends ShopRequest {
     private ShopSimpleRequestList shopSimpleRequestList;

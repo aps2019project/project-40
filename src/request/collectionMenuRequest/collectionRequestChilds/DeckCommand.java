@@ -1,6 +1,6 @@
-package request.collectionRequest.collectionRequestChilds;
+package request.collectionMenuRequest.collectionRequestChilds;
 
-import request.collectionRequest.CollectionRequest;
+import request.collectionMenuRequest.CollectionRequest;
 
 public class DeckCommand extends CollectionRequest {
     private String deckName;

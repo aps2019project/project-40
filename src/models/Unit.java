@@ -2,7 +2,7 @@ package models;
 
 import java.util.ArrayList;
 
-public class Unit extends Card{
+public class Unit{
     private String name;
     private int HP;
     private int AP;
