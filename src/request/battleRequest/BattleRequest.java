@@ -1,10 +1,8 @@
 package request.battleRequest;
 
 import request.Request;
-import request.battleRequest.BattleRequestChilds.RequestWithoutVariable;
-import request.battleRequest.BattleRequestChilds.RequestWithoutVariableEnum;
-import request.battleRequest.BattleRequestChilds.SelectAndUseCardRequest;
-import request.battleRequest.BattleRequestChilds.ShowCardInfoRequest;
+import request.battleRequest.BattleRequestChilds.*;
+
 import java.util.ArrayList;
 
 public class BattleRequest extends Request {
@@ -41,12 +39,10 @@ public class BattleRequest extends Request {
                 return showCardInfo(command);
 
             if (command.matches("select \\w+"))
-                select(command);
+                return select(command);
 
-            if (command.matches("use special power\\s*\\(\\s*\\d+\\s*,\\s*\\d+\\s*\\)")) {
-
-
-            }
+            if (command.matches("use special power\\s*\\(\\s*\\d+\\s*,\\s*\\d+\\s*\\)"))
+                return useSpecialPower(command);
 
             if (command.matches("enter graveyard")) {
 
@@ -147,10 +143,10 @@ public class BattleRequest extends Request {
                 return attackCombo(secondCommand, selectAndUseCardRequest);
 
             if (secondCommand.matches("show info"))
-                return selectAndUseCardRequest;
+                return showInfo(secondCommand, selectAndUseCardRequest);
 
             if (secondCommand.matches("use \\(\\d+,\\d+\\)"))
-                return selectAndUseCardRequest;
+                return use(secondCommand, selectAndUseCardRequest);
 
             //todo error if invalid
         }
@@ -212,5 +208,20 @@ public class BattleRequest extends Request {
                         command.split("[\\(,\\)]")[1].split(",")[1]));
 
         return selectAndUseCardRequest;
+    }
+
+    private BattleRequest useSpecialPower(String command) {
+
+        UseSpecialPowerRequest useSpecialPowerRequest = new UseSpecialPowerRequest();
+
+        useSpecialPowerRequest.setRow(
+                Integer.parseInt(
+                        command.split("[\\(,\\)]")[1].split(",")[0]));
+
+        useSpecialPowerRequest.setColumn(
+                Integer.parseInt(
+                        command.split("[\\(,\\)]")[1].split(",")[1]));
+
+        return useSpecialPowerRequest;
     }
 }
