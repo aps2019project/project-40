@@ -29,7 +29,7 @@ public class Controller {
     }
 
     public void mainController() {
-        while (!isProgramEnded) {
+        do {
             Object currentMenu = orderOfMenu.peek();
 
             if (currentMenu instanceof ShopController)
@@ -46,7 +46,7 @@ public class Controller {
 
             if (currentMenu instanceof StartMenuController)
                 StartMenuController.getInstance().startMenuControllerMain();
-        }
+        }while (!isProgramEnded);
     }
 
 }

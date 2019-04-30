@@ -9,12 +9,19 @@ public class Account {
     private Hand hand;
     private int mana;
     private Table playingTable;
-    private boolean isAI;
-    private int winsNumber;
-    private String folderAddress;
+    private boolean isAI=false;
+    private int winsNumber=0;
 
     public String getUserName() {
         return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public boolean isPasswordCorrect(String password) {

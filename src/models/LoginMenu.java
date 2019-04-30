@@ -15,8 +15,12 @@ public class LoginMenu {
         return loginMenu;
     }
 
-    public void createAccount(String userName, String passWord) {
-
+    public Account createAccount(String userName, String passWord) {
+        Account account=new Account();
+        account.setPassword(passWord);
+        account.setUserName(userName);
+        users.add(account);
+        return account;
     }
 
     public boolean checkIfAccountExist(String userName) {
@@ -36,13 +40,7 @@ public class LoginMenu {
         return null;
     }
 
-    public void getLeaderBoard() {
-    }
-
     public void save(Account account) {
-    }
-
-    public void logout(Account account) {
     }
 
     private static void initializeUsers(){

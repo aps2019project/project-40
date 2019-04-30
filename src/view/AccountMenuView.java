@@ -28,8 +28,8 @@ public class AccountMenuView {
         System.out.println("help");
     }
 
-    public void showError(AccountError accountError){
-        switch (accountError){
+    public void showError(AccountError accountError) {
+        switch (accountError) {
             case USERNAME_ALREADY_EXIST:
                 System.out.println("Username already exist please try another one");
                 break;
@@ -43,3 +43,5 @@ public class AccountMenuView {
 
     }
 }
+
+

@@ -34,6 +34,9 @@ public class AccountMenuController {
         if (accountMenuRequest instanceof AccountLoginRequest)
             loginCommand((AccountLoginRequest) accountMenuRequest);
 
+        if (accountMenuRequest instanceof AccountCreate)
+            createCommand((AccountCreate) accountMenuRequest);
+
     }
 
     private void simpleCommand(AccountSimpleRequest accountSimpleRequest) {
@@ -73,8 +76,8 @@ public class AccountMenuController {
             AccountMenuView.getInstance().showError(AccountError.USERNAME_ALREADY_EXIST);
             return;
         }
-
-        LoginMenu.getInstance().createAccount(userName, AccountMenuRequest.getInstance().getPassWord());
+        Controller.getInstance().addStack(StartMenuController.getInstance());
+        account=LoginMenu.getInstance().createAccount(userName, AccountMenuRequest.getInstance().getPassWord());
 
     }
 
