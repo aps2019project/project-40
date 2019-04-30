@@ -13,6 +13,10 @@ public class Account {
     private int winsNumber;
     private String folderAddress;
 
+    public String getUserName() {
+        return userName;
+    }
+
     public boolean isPasswordCorrect(String password) {
 
         if (this.password.equals(password)) return true;
@@ -35,19 +39,14 @@ public class Account {
     }
 
     public int getWinsNumber() {
-
         return winsNumber;
     }
 
     public void incrementWinsNumber() {
-
         winsNumber++;
     }
 
-
-
     public void resetPlayerVariables() {
     }
-
 
 }

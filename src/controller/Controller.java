@@ -5,9 +5,16 @@ import models.Account;
 import java.util.Stack;
 
 public class Controller {
-    private Stack orderOfMenu;
+    private static Controller controller;
+    private static Stack orderOfMenu=new Stack();
     private Account account;
     private boolean isProgramEnded = false;
+
+    public static Controller getInstance(){
+        if (controller==null)
+            controller=new Controller();
+        return controller;
+    }
 
     public void setAccount(Account account) {
         this.account = account;
@@ -36,6 +43,9 @@ public class Controller {
 
             if (currentMenu instanceof CollectionController)
                 CollectionController.getInstance().collectionControllerMain();
+
+            if (currentMenu instanceof StartMenuController)
+                StartMenuController.getInstance().startMenuControllerMain();
         }
     }
 

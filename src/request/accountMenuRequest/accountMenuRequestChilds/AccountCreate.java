@@ -2,7 +2,7 @@ package request.accountMenuRequest.accountMenuRequestChilds;
 
 import request.accountMenuRequest.AccountMenuRequest;
 
-public class AccountLoginRequest extends AccountMenuRequest {
+public class AccountCreate extends AccountMenuRequest {
     private String line;
 
     public String getLine() {
@@ -12,5 +12,4 @@ public class AccountLoginRequest extends AccountMenuRequest {
     public void setLine(String line) {
         this.line = line;
     }
-
 }

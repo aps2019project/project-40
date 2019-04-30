@@ -1,6 +1,7 @@
 package request.accountMenuRequest;
 
 import request.Request;
+import request.accountMenuRequest.accountMenuRequestChilds.AccountCreate;
 import request.accountMenuRequest.accountMenuRequestChilds.AccountLoginRequest;
 import request.accountMenuRequest.accountMenuRequestChilds.AccountOptionList;
 import request.accountMenuRequest.accountMenuRequestChilds.AccountSimpleRequest;
@@ -17,20 +18,20 @@ public class AccountMenuRequest extends Request {
         return accountMenuRequest;
     }
 
-    public AccountMenuRequest getPassWord() {
-        String passWord = scanner.nextLine();
-        AccountLoginRequest accountLoginRequest = new AccountLoginRequest();
-        accountLoginRequest.setLine(passWord);
-        return accountLoginRequest;
+    public String getPassWord() {
+        System.out.println("password :");
+        String passWord = scanner.nextLine().trim();
+        return passWord;
     }
 
     public AccountMenuRequest getCommand() {
-        String command = scanner.nextLine().trim().toLowerCase();
+        String actualCommand=scanner.nextLine().trim();
+        String command = actualCommand.toLowerCase();
         Pattern pattern = Pattern.compile("create account (\\w+)");
         Matcher matcher = pattern.matcher(command);
         if (matcher.find()) {
-            AccountLoginRequest accountLoginRequest = new AccountLoginRequest();
-            accountLoginRequest.setLine(matcher.group(1));
+            AccountCreate accountLoginRequest = new AccountCreate();
+            accountLoginRequest.setLine(actualCommand.split("\\s")[2]);
             return accountLoginRequest;
         }
 
@@ -38,7 +39,7 @@ public class AccountMenuRequest extends Request {
         matcher = pattern.matcher(command);
         if (matcher.find()) {
             AccountLoginRequest accountLoginRequest = new AccountLoginRequest();
-            accountLoginRequest.setLine(matcher.group(1));
+            accountLoginRequest.setLine(actualCommand.split("\\s")[1]);
             return accountLoginRequest;
         }
 
@@ -50,21 +51,22 @@ public class AccountMenuRequest extends Request {
 
         if (command.indexOf("save") >= 0) {
             AccountSimpleRequest accountSimpleRequest = new AccountSimpleRequest();
-            accountSimpleRequest.setAccountOptionList(AccountOptionList.SHOW_LEADERBOARD);
+            accountSimpleRequest.setAccountOptionList(AccountOptionList.SAVE);
             return accountSimpleRequest;
         }
 
         if (command.indexOf("logout") >= 0) {
             AccountSimpleRequest accountSimpleRequest = new AccountSimpleRequest();
-            accountSimpleRequest.setAccountOptionList(AccountOptionList.SHOW_LEADERBOARD);
+            accountSimpleRequest.setAccountOptionList(AccountOptionList.LOGOUT);
             return accountSimpleRequest;
         }
 
         if (command.indexOf("help") >= 0) {
             AccountSimpleRequest accountSimpleRequest = new AccountSimpleRequest();
-            accountSimpleRequest.setAccountOptionList(AccountOptionList.SHOW_LEADERBOARD);
+            accountSimpleRequest.setAccountOptionList(AccountOptionList.HELP);
             return accountSimpleRequest;
         }
+
         return null;
     }
 

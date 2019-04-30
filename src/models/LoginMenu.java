@@ -3,16 +3,37 @@ package models;
 import java.util.ArrayList;
 
 public class LoginMenu {
-    private ArrayList<Account> users;
+    private static ArrayList<Account> users=new ArrayList<Account>();
+    private static LoginMenu loginMenu;
+
+    static {
+        initializeUsers();
+    }
+    public static LoginMenu getInstance() {
+        if (loginMenu == null)
+            loginMenu = new LoginMenu();
+        return loginMenu;
+    }
 
     public void createAccount(String userName, String passWord) {
 
     }
 
-    public void checkIfAccountExist(String userName) {
+    public boolean checkIfAccountExist(String userName) {
+        for (Account account : users)
+            if (account.getUserName().equals(userName))
+                return true;
+        return false;
     }
 
-    public void login(String userName, String passWord) {
+    public Account login(String userName, String passWord) {
+        for (Account account : users) {
+            if (account.getUserName().equals(userName)) {
+                if (account.isPasswordCorrect(passWord))
+                    return account;
+            }
+        }
+        return null;
     }
 
     public void getLeaderBoard() {
@@ -24,8 +45,12 @@ public class LoginMenu {
     public void logout(Account account) {
     }
 
-//    public static String findUserFolder(Account account) {
-//    }
-//    return bezar , error midad
+    private static void initializeUsers(){
+
+    }
+    public static ArrayList<Account> getUsers() {
+        return users;
+    }
+
 
 }
