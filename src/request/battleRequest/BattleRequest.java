@@ -1,10 +1,10 @@
-package command.battleRequest;
+package request.battleRequest;
 
-import command.Request;
-import command.battleRequest.BattleRequestChilds.RequestWithoutVariable;
-import command.battleRequest.BattleRequestChilds.RequestWithoutVariableEnum;
-import command.battleRequest.BattleRequestChilds.SelectAndUseCardRequest;
-import command.battleRequest.BattleRequestChilds.ShowCardInfoRequest;
+import request.Request;
+import request.battleRequest.BattleRequestChilds.RequestWithoutVariable;
+import request.battleRequest.BattleRequestChilds.RequestWithoutVariableEnum;
+import request.battleRequest.BattleRequestChilds.SelectAndUseCardRequest;
+import request.battleRequest.BattleRequestChilds.ShowCardInfoRequest;
 import java.util.ArrayList;
 
 public class BattleRequest extends Request {
@@ -40,10 +40,8 @@ public class BattleRequest extends Request {
             if (command.matches("show card info \\w+"))
                 return showCardInfo(command);
 
-            if (command.matches("select \\w+")) {
-
-
-            }
+            if (command.matches("select \\w+"))
+                select(command);
 
             if (command.matches("use special power\\s*\\(\\s*\\d+\\s*,\\s*\\d+\\s*\\)")) {
 

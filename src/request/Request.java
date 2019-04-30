@@ -1,4 +1,4 @@
-package command;
+package request;
 
 import java.util.Scanner;
 

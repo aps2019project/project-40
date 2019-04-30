@@ -1,6 +1,6 @@
-package command.battleRequest.BattleRequestChilds;
+package request.battleRequest.BattleRequestChilds;
 
-import command.battleRequest.BattleRequest;
+import request.battleRequest.BattleRequest;
 
 public class RequestWithoutVariable extends BattleRequest {
 
