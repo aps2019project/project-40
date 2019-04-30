@@ -15,16 +15,6 @@ public class SelectAndUseCardRequest extends BattleRequest {
     private boolean isForShowInfo;
     private boolean isForUse;
 
-    public boolean isForHelp() {
-
-        return isForHelp;
-    }
-
-    public void setForHelp(boolean forHelp) {
-
-        isForHelp = forHelp;
-    }
-
     private boolean isForHelp;
 
     public String getID() {

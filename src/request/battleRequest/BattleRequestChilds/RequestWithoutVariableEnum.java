@@ -10,6 +10,5 @@ public enum RequestWithoutVariableEnum {
     END_TURN_REQUEST,
     SHOW_COLLECTED_ITEM_REQUEST,
     END_GAME_REQUEST,
-    SHOW_MENU_REQUEST, //todo show menu in battle
-    HELP
+    HELP_REQUEST
 }

@@ -20,11 +20,9 @@ public class BattleRequest extends Request {
 
     public BattleRequest getRequest() {
 
-        String command;
-
         while (true) {
 
-            command = scanner.nextLine().trim().toLowerCase();
+            String command = scanner.nextLine().trim().toLowerCase();
 
             if (command.matches("game info"))
                 return new RequestWithoutVariable(RequestWithoutVariableEnum.GAME_INFO_REQUEST);
@@ -45,7 +43,7 @@ public class BattleRequest extends Request {
                 else continue;
             }
 
-            if (command.matches("use special power\\s*\\(\\s*\\d+\\s*,\\s*\\d+\\s*\\)"))
+            if (command.matches("use special power \\(\\d+,\\d+\\)"))
                 return useSpecialPower(command);
 
             if (command.matches("enter graveyard")) {
@@ -55,7 +53,7 @@ public class BattleRequest extends Request {
                 else continue;
             }
 
-            if (command.matches("insert \\w+ in \\(\\s*\\d+\\s*,\\s*\\d+\\s*\\)"))
+            if (command.matches("insert \\w+ in \\(\\d+,\\d+\\)"))
                 return insertCard(command);
 
             if (command.matches("show hand"))
@@ -71,7 +69,7 @@ public class BattleRequest extends Request {
                 return new RequestWithoutVariable(RequestWithoutVariableEnum.SHOW_NEXT_CARD_REQUEST);
 
             if (command.matches("help"))
-                return new RequestWithoutVariable(RequestWithoutVariableEnum.HELP);
+                return new RequestWithoutVariable(RequestWithoutVariableEnum.HELP_REQUEST);
 
             if (command.matches("end game"))
                 return new RequestWithoutVariable(RequestWithoutVariableEnum.END_GAME_REQUEST);
@@ -123,11 +121,11 @@ public class BattleRequest extends Request {
         selectAndUseCardRequest.setForMove(true);
         selectAndUseCardRequest.setRow(
                 Integer.parseInt(
-                        command.split("[\\(,\\)]")[1].split(",")[0]));
+                        command.split("[\\(|\\)]")[1].split(",")[0]));
 
         selectAndUseCardRequest.setColumn(
                 Integer.parseInt(
-                        command.split("[\\(,\\)]")[1].split(",")[1]));
+                        command.split("[\\(|\\)]")[1].split(",")[1]));
 
         return selectAndUseCardRequest;
     }
@@ -167,11 +165,11 @@ public class BattleRequest extends Request {
         selectAndUseCardRequest.setForUse(true);
         selectAndUseCardRequest.setRow(
                 Integer.parseInt(
-                command.split("[\\(,\\)]")[1].split(",")[0]));
+                command.split("[\\(|\\)]")[1].split(",")[0]));
 
         selectAndUseCardRequest.setColumn(
                 Integer.parseInt(
-                        command.split("[\\(,\\)]")[1].split(",")[1]));
+                        command.split("[\\(|\\)]")[1].split(",")[1]));
 
         return selectAndUseCardRequest;
     }
@@ -182,11 +180,11 @@ public class BattleRequest extends Request {
 
         useSpecialPowerRequest.setRow(
                 Integer.parseInt(
-                        command.split("[\\(,\\)]")[1].split(",")[0]));
+                        command.split("[\\(|\\)]")[1].split(",")[0]));
 
         useSpecialPowerRequest.setColumn(
                 Integer.parseInt(
-                        command.split("[\\(,\\)]")[1].split(",")[1]));
+                        command.split("[\\(|\\)]")[1].split(",")[1]));
 
         return useSpecialPowerRequest;
     }
@@ -228,8 +226,8 @@ public class BattleRequest extends Request {
 
         InsertCardRequest insertCardRequest = new InsertCardRequest();
         insertCardRequest.setCardName(command.split("\\s")[1]);
-        insertCardRequest.setRow(Integer.parseInt(command.split("[\\(,\\)]")[0]));
-        insertCardRequest.setColumn(Integer.parseInt(command.split("[\\(,\\)]")[1]));
+        insertCardRequest.setRow(Integer.parseInt(command.split("[\\(|\\)]")[1].split(",")[0]));
+        insertCardRequest.setColumn(Integer.parseInt(command.split("[\\(|\\)]")[1].split(",")[1]));
         return insertCardRequest;
     }
 
