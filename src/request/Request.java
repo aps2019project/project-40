@@ -1,13 +1,13 @@
 package request;
 
+import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
-public class Request {
-    protected Scanner scanner=new Scanner(System.in);
+public abstract class Request {
 
-    public void main(){
-        while (true){
-            System.out.println("yes");
-        }
-    }
+    protected Scanner scanner = new Scanner(System.in);
+    protected ArrayList<Pattern> commandPattern = new ArrayList<>();
+    protected boolean isCommandPatternsInitialized = false;
+
 }

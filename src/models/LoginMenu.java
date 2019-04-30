@@ -3,16 +3,6 @@ package models;
 import java.util.ArrayList;
 
 public class LoginMenu {
-    private static LoginMenu loginMenu;
-    public static LoginMenu getInstance() {
-
-        if (loginMenu == null) {
-
-            loginMenu = new LoginMenu();
-        }
-
-        return loginMenu;
-    }
     private ArrayList<Account> users;
 
     public void createAccount(String userName, String passWord) {
@@ -34,8 +24,8 @@ public class LoginMenu {
     public void logout(Account account) {
     }
 
-    public static String findUserFolder(Account account) {
-        return "";
-    }
+//    public static String findUserFolder(Account account) {
+//    }
+//    return bezar , error midad
 
 }
