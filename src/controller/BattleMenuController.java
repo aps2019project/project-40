@@ -1,6 +1,7 @@
 package controller;
 
 import models.Account;
+import models.GamePlay.Match;
 import models.LoginMenu;
 import models.MatchType;
 import request.battleMenuRequest.BattleMenuRequest;
@@ -26,6 +27,7 @@ public class BattleMenuController {
     }
 
     public void battleMenuControllerMain(){
+
         account=Controller.getInstance().getAccount();
 
         if (!checkValidateDeck()) {

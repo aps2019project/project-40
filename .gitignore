@@ -26,3 +26,9 @@ hs_err_pid*
 
 /gson-2.8.2.jar
 /json-20180813.jar
+/.idea/misc.xml
+/.idea/modules.xml
+/.idea/uiDesigner.xml
+/.idea/project-40.iml
+/.idea/vcs.xml
+/.idea/workspace.xml

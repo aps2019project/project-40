@@ -14,6 +14,32 @@ public class Match {
     MatchType matchType;
     private GameLogic gameLogic;
     int turnNumber = 0;  //todo 0 or 1?
+    int player1Mana, player2Mana;
+
+    public Table getTable() {
+
+        return table;
+    }
+
+    public MatchType getMatchType() {
+
+        return matchType;
+    }
+
+    public GameLogic getGameLogic() {
+
+        return gameLogic;
+    }
+
+    public int getPlayer1Mana() {
+
+        return player1Mana;
+    }
+
+    public int getPlayer2Mana() {
+
+        return player2Mana;
+    }
 
     public Match(MatchType matchType, Account player1, Account player2) {
 
@@ -43,11 +69,4 @@ public class Match {
         if (turnNumber % 2 == 1) return player1;
         return player2;
     }
-
-    public Table getTable() {
-
-        return table;
-    }
-
-
 }

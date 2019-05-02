@@ -2,8 +2,18 @@ package models;
 
 public class Table {
 
-    final int COLUMNS = 9, ROWS = 5;
+    public static final int COLUMNS = 9, ROWS = 5;
     private Cell[][] cells = new Cell[ROWS][COLUMNS];
+
+    public Cell getCellByCoordination(Coordination coordination) {
+
+        return cells[coordination.getRow()][coordination.getColumn()];
+    }
+
+    public Cell[][] getCells() {
+
+        return cells;
+    }
 
     public Table() {
 
@@ -14,10 +24,5 @@ public class Table {
                 cells[row][column].setCoordination(row, column);
             }
         }
-    }
-
-    public Cell getCellByCoordination(Coordination coordination) {
-
-        return cells[coordination.getRow()][coordination.getColumn()];
     }
 }

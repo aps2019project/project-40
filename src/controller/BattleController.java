@@ -1,9 +1,14 @@
 package controller;
 
+import models.Cell;
 import models.GamePlay.Match;
+import models.MatchType;
+import models.Table;
 import request.battleRequest.BattleRequest;
 import request.battleRequest.BattleRequestChilds.*;
 import view.battleView.BattleView;
+import view.battleView.GameInfoBattleView;
+import view.battleView.GameInfoBattleViewKillTheHero;
 
 public class BattleController {
 
@@ -22,9 +27,10 @@ public class BattleController {
         return battleController;
     }
 
-    public void battleControllerMain(){
+    public void mainBattleController(Match match){
 
         //todo
+        this.match = match;
     }
 
     private void manageRequest() {
@@ -102,7 +108,30 @@ public class BattleController {
 
     private void gameInfoRequest() {
 
+        if (match.getMatchType() == MatchType.KILL_THE_HERO) {
 
+            GameInfoBattleViewKillTheHero gameInfoBattleViewKillTheHero = new GameInfoBattleViewKillTheHero();
+            gameInfoBattleViewKillTheHero.setPlayer1Mana(match.getPlayer1Mana());
+            gameInfoBattleViewKillTheHero.setPlayer2Mana(match.getPlayer2Mana());
+            //todo hp
+            gameInfoBattleViewKillTheHero.show(gameInfoBattleViewKillTheHero);
+        } else
+
+        if (match.getMatchType() == MatchType.HOLD_THE_FLAG) {
+
+            Cell[][] cells = match.getTable().getCells();
+
+            for (int row = 0; row < Table.ROWS; row++) {
+                for (int column = 0; column < Table.COLUMNS; column++) {
+
+                    if (cells[row][column].isThereFlag()) {
+
+
+                    }
+                }
+            }
+        }
+        if (match.getMatchType() == MatchType.COLLECT_THE_FLAGS);
     }
 
     private void showMyMinionsRequest() {
