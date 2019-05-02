@@ -5,7 +5,7 @@ import request.battleRequest.BattleRequest;
 public class EnterGraveYardRequest extends BattleRequest {
 
     private String cardID;
-    private boolean isForShowInfo, isForShowCards, isForHelp;
+    private boolean isForShowInfo, isForShowCards, isForExit;
 
     public String getCardID() {
 
@@ -37,13 +37,13 @@ public class EnterGraveYardRequest extends BattleRequest {
         isForShowCards = forShowCards;
     }
 
-    public boolean isForHelp() {
+    public boolean isForExit() {
 
-        return isForHelp;
+        return isForExit;
     }
 
-    public void setForHelp(boolean forHelp) {
+    public void setForExit(boolean forExit) {
 
-        isForHelp = forHelp;
+        isForExit = forExit;
     }
 }

@@ -62,7 +62,7 @@ public class BattleRequest extends Request {
             if (command.matches("end turn"))
                 return new RequestWithoutVariable(RequestWithoutVariableEnum.END_TURN_REQUEST);
 
-            if (command.matches("show collectables"))
+            if (command.matches("show collectibles"))
                 return new RequestWithoutVariable(RequestWithoutVariableEnum.SHOW_COLLECTED_ITEM_REQUEST);
 
             if (command.matches("show next card"))
@@ -110,7 +110,7 @@ public class BattleRequest extends Request {
             if (secondCommand.matches("use \\(\\d+,\\d+\\)"))
                 return use(secondCommand, selectAndUseCardRequest);
 
-            if (secondCommand.matches("exit")) return null;
+            if (secondCommand.matches("exit")) return null; //todo pay attention to null
 
             //todo error if invalid
         }
@@ -210,13 +210,11 @@ public class BattleRequest extends Request {
                 return enterGraveYardRequest;
             }
 
-            if (command.matches("help")) {
+            if (command.matches("exit")) {
 
-                enterGraveYardRequest.setForHelp(true);
+                enterGraveYardRequest.setForExit(true);
                 return enterGraveYardRequest;
             }
-
-            if (command.matches("exit")) return null;
 
             //todo error
         }
