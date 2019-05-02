@@ -1,8 +1,8 @@
 package view.battleMenuView.battleMenuViewChilds;
 
 public enum BattleMenuError {
-    INVALID_DECK("selected deck is invalid");
-
+    INVALID_DECK("selected deck is invalid"),
+    INVALID_COMMAND("Invalid Command");
 
     BattleMenuError(String errorMessage){
         this.errorMessage=errorMessage;

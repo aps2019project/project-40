@@ -1,5 +1,6 @@
 import controller.AccountMenuController;
 import controller.Controller;
+import models.MatchType;
 import view.battleMenuView.battleMenuViewChilds.BattleMenuError;
 
 public class Main {
