@@ -4,7 +4,7 @@ import models.Coordination;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class GameInfoBattleViewMode3 extends GameInfoBattleView {
+public class GameInfoBattleViewCollectTheFlags extends GameInfoBattleView {
 
     private HashMap<String, String> flagHoldersName = new HashMap<>();
     private ArrayList<Coordination> flagsCoordination = new ArrayList<>();

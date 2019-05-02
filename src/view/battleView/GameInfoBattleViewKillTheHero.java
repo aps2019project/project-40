@@ -1,6 +1,6 @@
 package view.battleView;
 
-public class GameInfoBattleViewMode1 extends GameInfoBattleView {
+public class GameInfoBattleViewKillTheHero extends GameInfoBattleView {
 
     private int player1HeroHP;
     private int player2HeroHP;

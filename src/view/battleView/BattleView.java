@@ -25,21 +25,21 @@ public class BattleView {
             System.out.println("player 1's mana : " + gameInfoBattleView.getPlayer1Mana());
             System.out.println("player 2's mana : " + gameInfoBattleView.getPlayer2Mana());
 
-            if (battleView instanceof GameInfoBattleViewMode1) {
+            if (battleView instanceof GameInfoBattleViewKillTheHero) {
 
-                showGameInfoMode1((GameInfoBattleViewMode1) battleView);
+                showGameInfoModeKillTheHero((GameInfoBattleViewKillTheHero) battleView);
                 return;
             }
 
-            if (battleView instanceof GameInfoBattleViewMode2) {
+            if (battleView instanceof GameInfoBattleViewHoldTheFlag) {
 
-                showGameInfoMode2((GameInfoBattleViewMode2) battleView);
+                showGameInfoModeHoldTheFlag((GameInfoBattleViewHoldTheFlag) battleView);
                 return;
             }
 
-            if (battleView instanceof GameInfoBattleViewMode3) {
+            if (battleView instanceof GameInfoBattleViewCollectTheFlags) {
 
-                showGameInfoMode3((GameInfoBattleViewMode3) battleView);
+                showGameInfoModeCollectTheFlags((GameInfoBattleViewCollectTheFlags) battleView);
                 return;
             }
         }
@@ -96,13 +96,13 @@ public class BattleView {
         }
     }
 
-    private void showGameInfoMode1(GameInfoBattleViewMode1 gameInfo) {
+    private void showGameInfoModeKillTheHero(GameInfoBattleViewKillTheHero gameInfo) {
 
         System.out.println("HP Of player 1's Hero : " + gameInfo.getPlayer1HeroHP());
         System.out.println("HP Of player 2's Hero : " + gameInfo.getPlayer2HeroHP());
     }
 
-    private void showGameInfoMode2(GameInfoBattleViewMode2 gameInfo) {
+    private void showGameInfoModeHoldTheFlag(GameInfoBattleViewHoldTheFlag gameInfo) {
 
         System.out.println("There is a flag in row : " + gameInfo.getFlagCoordination().getRow() +
                 " and column : " + gameInfo.getFlagCoordination().getColumn());
@@ -114,7 +114,7 @@ public class BattleView {
         //if any cards have flag getFlagHolderName() will null and cause exception
     }
 
-    private void showGameInfoMode3(GameInfoBattleViewMode3 gameInfo) {
+    private void showGameInfoModeCollectTheFlags(GameInfoBattleViewCollectTheFlags gameInfo) {
 
         ArrayList<Coordination> coordinations = gameInfo.getFlagsCoordination();
 
