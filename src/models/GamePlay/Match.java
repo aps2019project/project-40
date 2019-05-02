@@ -21,7 +21,7 @@ public class Match {
         this.matchType = matchType;
         this.player1 = player1;
         this.player2 = player2;
-        gameLogic = new GameLogic();
+        gameLogic = new GameLogic(this);
         if (matchType == MatchType.HOLD_THE_FLAG)
             gameLogic.remainTurnToHoldingTheFlag = gameLogic.NUMBER_OF_TURNS_TO_HOLD_THE_FLAG;
     }
@@ -32,7 +32,7 @@ public class Match {
         matchType = MatchType.COLLECT_THE_FLAGS;
         this.player1 = player1;
         this.player2 = player2;
-        gameLogic = new GameLogic();
+        gameLogic = new GameLogic(this);
         gameLogic.flagsNumber = flagsNumber;
     }
 
