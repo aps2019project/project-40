@@ -72,8 +72,10 @@ public class BattleController {
     }
 
     private void enterGraveYardRequest(EnterGraveYardRequest request) {
-
         //todo
+        if (request.isForShowInfo());
+        if (request.isForShowCards());
+        if (request.isForHelp());
     }
 
     private void insertCardRequest(InsertCardRequest request) {
@@ -82,7 +84,9 @@ public class BattleController {
     }
 
     private void requestWithoutVariable(RequestWithoutVariable request) {
-
         //todo
+        if (request.getEnumRequest() == RequestWithoutVariableEnum.GAME_INFO_REQUEST);
+        if (request.getEnumRequest() == RequestWithoutVariableEnum.SHOW_MY_MINIONS_REQUEST);
+
     }
 }

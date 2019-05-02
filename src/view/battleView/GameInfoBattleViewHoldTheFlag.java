@@ -2,7 +2,7 @@ package view.battleView;
 
 import models.Coordination;
 
-public class GameInfoBattleViewMode2 extends GameInfoBattleView {
+public class GameInfoBattleViewHoldTheFlag extends GameInfoBattleView {
 
     private Coordination flagCoordination;
     private String flagHolderName;
