@@ -1,5 +1,6 @@
 package controller;
 
+import models.BattleMenu;
 import request.startMenuController.StartMenuRequest;
 import request.startMenuController.startMenuRequestChilds.StartMenuOption;
 import view.StartMenuView;
@@ -32,7 +33,7 @@ public class StartMenuController {
                 Controller.getInstance().addStack(ShopController.getInstance());
                 break;
             case BATTLE:
-                Controller.getInstance().addStack(BattleController.getInstance());
+                Controller.getInstance().addStack(BattleMenuController.getInstance());
                 break;
             case EXIT:
                 Controller.getInstance().endProgram();

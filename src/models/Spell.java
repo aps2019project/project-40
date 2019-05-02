@@ -6,6 +6,12 @@ public class Spell extends Card{
     private Buff buff;
     private Account account;
 
+    private void initializeTarget(){
+
+    }
+    private void initializeBuff(){}
+
+
     public Spell(int manaCost, int price, String spellName, Buff buff, Target target, Account account) {
         super(manaCost, price);
         this.spellName = spellName;
@@ -29,4 +35,5 @@ public class Spell extends Card{
     public Buff getBuff() {
         return buff;
     }
+
 }

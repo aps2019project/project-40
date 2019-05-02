@@ -1,7 +1,8 @@
 package models;
 
-public class Minion extends Unit {
-    public Minion(int mana,int price){
+
+public class Hero extends Unit {
+    public Hero(int mana,int price){
         super(mana,price);
     }
 

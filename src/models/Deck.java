@@ -1,6 +1,7 @@
 package models;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Deck {
 
@@ -14,9 +15,15 @@ public class Deck {
         return cards;
     }
 
-    //todo is deck validate
+    public boolean isDeckValidate(){
+        return true;
+    }
 
-    //todo get last card
+    public Card getLastCard(){
+        return  null;
+    }
 
-    //todo shuffle cards
+    public void shuffleCards(){
+        Collections.shuffle(cards);
+    }
 }

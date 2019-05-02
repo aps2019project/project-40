@@ -1,13 +1,14 @@
 package controller;
 
 import models.Account;
+import models.BattleMenu;
 
 import java.util.Stack;
 
 public class Controller {
     private static Controller controller;
     private static Stack orderOfMenu=new Stack();
-    private Account account;
+    private Account account=null;
     private boolean isProgramEnded = false;
 
     public static Controller getInstance(){
@@ -18,6 +19,10 @@ public class Controller {
 
     public void setAccount(Account account) {
         this.account = account;
+    }
+
+    public Account getAccount() {
+        return account;
     }
 
     public void addStack(Object object) {
@@ -38,14 +43,15 @@ public class Controller {
             if (currentMenu instanceof AccountMenuController)
                 AccountMenuController.getInstance().accountControllerMain();
 
-            if (currentMenu instanceof BattleController)
-                BattleController.getInstance().battleControllerMain();
+            if (currentMenu instanceof BattleMenuController)
+                BattleMenuController.getInstance().battleMenuControllerMain();
 
             if (currentMenu instanceof CollectionController)
                 CollectionController.getInstance().collectionControllerMain();
 
             if (currentMenu instanceof StartMenuController)
                 StartMenuController.getInstance().startMenuControllerMain();
+
         }while (!isProgramEnded);
     }
 

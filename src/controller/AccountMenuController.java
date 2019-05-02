@@ -37,6 +37,7 @@ public class AccountMenuController {
         if (accountMenuRequest instanceof AccountCreate)
             createCommand((AccountCreate) accountMenuRequest);
 
+        Controller.getInstance().setAccount(account);
     }
 
     private void simpleCommand(AccountSimpleRequest accountSimpleRequest) {

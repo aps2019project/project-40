@@ -139,7 +139,7 @@ public class BattleView {
         if (cardsID.size() != cardsName.size() || cardsName.size() != healthPoints.size() ||
                 healthPoints.size() != locations.size() || locations.size() != attackPoints.size()) {
 
-            System.err.println("In show minion view size of arrayList doesn't equal");
+            System.err.println("In show minion View size of arrayList doesn't equal");
             return;
         }
 
