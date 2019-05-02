@@ -1,5 +1,6 @@
 package controller;
 
+import models.GamePlay.Match;
 import request.battleRequest.BattleRequest;
 import request.battleRequest.BattleRequestChilds.*;
 import view.battleView.BattleView;
@@ -9,6 +10,7 @@ public class BattleController {
     private static BattleController battleController;
     private BattleRequest battleRequest = BattleRequest.getInstance();
     private BattleView battleView = BattleView.getInstance();
+    private Match match;
 
     public static BattleController getInstance() {
 
@@ -98,21 +100,38 @@ public class BattleController {
             helpRequest();
     }
 
-    private void gameInfoRequest() {}
+    private void gameInfoRequest() {
 
-    private void showMyMinionsRequest() {}
 
-    private void showOpponentMinionsRequest() {}
+    }
 
-    private void showNextCardRequest() {}
+    private void showMyMinionsRequest() {
+        //todo
+    }
 
-    private void showHandRequest() {}
+    private void showOpponentMinionsRequest() {
+        //todo
+    }
 
-    private void endTurnRequest() {}
+    private void showNextCardRequest() {
+        //todo
+    }
 
-    private void showCollectedItemRequest() {}
+    private void showHandRequest() {
+        //todo
+    }
 
-    private void endGameRequest() {}
+    private void endTurnRequest() {
+        //todo
+    }
+
+    private void showCollectedItemRequest() {
+        //todo
+    }
+
+    private void endGameRequest() {
+        //todo
+    }
 
     private void helpRequest() {
 

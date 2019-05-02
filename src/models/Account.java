@@ -1,5 +1,7 @@
 package models;
 
+import models.GamePlay.Match;
+
 public class Account {
 
     private String userName, password;
