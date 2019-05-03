@@ -10,10 +10,11 @@ public class Unit extends Card{
     private SpecialPowerType specialPowerType;
     private UnitType unitType;
     private boolean combo;
+    private int flag;
 
     Unit(int manaCost, int price, int HP, int AP,UnitType unitType,
          String name,  ArrayList<Spell> spells, String description, CardType type,
-         SpecialPowerType specialPowerType, Spell specialPower, boolean combo){
+         SpecialPowerType specialPowerType, Spell specialPower, boolean combo, int flag){
         super(manaCost, price, name,spells, description, type);
         this.HP = HP;
         this.AP = AP;
@@ -21,6 +22,7 @@ public class Unit extends Card{
         this.specialPower = specialPower;
         this.combo = combo;
         this.unitType = unitType;
+        this.flag = flag;
     }
     public int getHealthPoint(){
         return HP;
@@ -60,5 +62,9 @@ public class Unit extends Card{
 
     public boolean isCombo() {
         return combo;
+    }
+
+    public int getFlag() {
+        return flag;
     }
 }
