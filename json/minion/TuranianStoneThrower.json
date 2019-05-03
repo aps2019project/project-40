@@ -1,0 +1,11 @@
+{
+  "cardName": "turanian_stone_thrower",
+  "description": "a ranged MINION, 4 HP and 2 AP",
+  "type": "MINION",
+  "price": 600,
+  "HP" : 4,
+  "AP" : 2,
+  "unitType": "RANGED",
+  "manaCost": 1,
+  "range": 7
+} 
