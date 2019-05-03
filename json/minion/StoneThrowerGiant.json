@@ -1,0 +1,11 @@
+{
+  "cardName": "stone_thrower_giant",
+  "description": "a hybrid MINION with 12 HP,12 AP",
+  "type": "MINION",
+  "HP": 12,
+  "AP": 12,
+  "price": 300,
+  "mannaPoint": 9,
+  "unitType": "RANGED",
+  "range": 7
+}

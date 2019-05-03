@@ -1,0 +1,10 @@
+{
+  "cardName": "hog_rider_demon",
+  "description": "a melee MINION with 16 HP,8 AP",
+  "type": "MINION",
+  "HP": 16,
+  "AP": 8,
+  "manaCost": 6,
+  "price": 300,
+  "unitType": "MELEE"
+}

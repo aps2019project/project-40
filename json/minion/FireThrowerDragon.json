@@ -1,0 +1,11 @@
+{
+  "cardName": "fire_thrower_dragon",
+  "description": "a melee MINION with 9 HP,5 AP",
+  "type": "MINION",
+  "HP": 9,
+  "AP": 5,
+  "manaCost": 5,
+  "price": 250,
+  "unitType": "RANGED",
+  "range": 4
+}

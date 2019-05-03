@@ -6,23 +6,23 @@ public class Unit extends Card{
     private int HP;
     private int AP;
     private ArrayList<Buff> buffs;
-    private Spell specialPower;
     private SpecialPowerType specialPowerType;
     private UnitType unitType;
     private boolean combo;
     private int flag;
+    private int range;
 
     Unit(int manaCost, int price, int HP, int AP,UnitType unitType,
          String name,  ArrayList<Spell> spells, String description, CardType type,
-         SpecialPowerType specialPowerType, Spell specialPower, boolean combo, int flag){
+         SpecialPowerType specialPowerType, boolean combo, int flag, int range){
         super(manaCost, price, name,spells, description, type);
         this.HP = HP;
         this.AP = AP;
         this.specialPowerType = specialPowerType;
-        this.specialPower = specialPower;
         this.combo = combo;
         this.unitType = unitType;
         this.flag = flag;
+        this.range = range;
     }
     public int getHealthPoint(){
         return HP;
@@ -38,10 +38,6 @@ public class Unit extends Card{
 
     public SpecialPowerType getSpecialPowerType() {
         return specialPowerType;
-    }
-
-    public Spell getSpecialPower() {
-        return specialPower;
     }
 
     public ArrayList<Buff> getBuffs() {
@@ -66,5 +62,9 @@ public class Unit extends Card{
 
     public int getFlag() {
         return flag;
+    }
+
+    public int getRange() {
+        return range;
     }
 }

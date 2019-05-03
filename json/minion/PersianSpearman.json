@@ -1,0 +1,11 @@
+{
+  "cardName": "persian_spear_man",
+  "description": "a hybrid MINION with 5 HP, 3 AP",
+  "type": "MINION",
+  "HP": 5,
+  "AP": 3,
+  "manaCost": 1,
+  "price": 500,
+  "unitType": "HYBRID",
+  "range": 3
+}

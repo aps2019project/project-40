@@ -1,0 +1,11 @@
+{
+  "cardName": "iraj",
+  "description": "a ranged MINION with 6 HP,20 AP",
+  "type": "MINION",
+  "HP": 6,
+  "AP": 20,
+  "manaCost": 4,
+  "price": 500,
+  "unitType": "RANGED",
+  "range": 3
+}

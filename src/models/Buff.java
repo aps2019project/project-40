@@ -9,6 +9,7 @@ public class Buff {
     private int weaknessHP;
     private boolean stun;
     private boolean disarm;
+    private int manaChange;
     private int unholy;
     private int cancelBuff;
     private boolean applyWhenTurnEnds;
@@ -19,7 +20,7 @@ public class Buff {
 
     public Buff(int duration, int holy, int power, int poison, int weaknessAP,
                 int weaknessHP, boolean stun, boolean disarm,
-                int unholy, int cancelBuff,boolean applyWhenTurnEnds, boolean lasts) {
+                int unholy, int cancelBuff,boolean applyWhenTurnEnds, boolean lasts, int manaChange) {
         this.duration = duration;
         this.holy = holy;
         this.power = power;
@@ -32,6 +33,7 @@ public class Buff {
         this.cancelBuff = cancelBuff;
         this.applyWhenTurnEnds = applyWhenTurnEnds;
         this.lasts = lasts;
+        this.manaChange = manaChange;
     }
 
     public int getUnholy() {
@@ -80,5 +82,9 @@ public class Buff {
 
     public boolean isApplyWhenTurnEnds() {
         return applyWhenTurnEnds;
+    }
+
+    public int getManaChange() {
+        return manaChange;
     }
 }

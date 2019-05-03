@@ -1,0 +1,11 @@
+{
+  "cardName": "big_giant",
+  "description": "a hybrid MINION with 30 HP,8 AP",
+  "type": "MINION",
+  "HP": 30,
+  "AP": 8,
+  "price": 600,
+  "manaCost": 8,
+  "unitType": "HYBRID",
+  "range": 2
+}
