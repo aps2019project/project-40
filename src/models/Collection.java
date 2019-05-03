@@ -53,4 +53,7 @@ public class Collection {
 
         return null;        //added by amirhossein todo pay attention return null
     }
+    public void addCardToCollection(Card card){
+        cards.add(card);
+    }
 }
