@@ -7,11 +7,25 @@ public class Account {
     private int money;
     private Collection collection;
     private Hand hand;
-    private int mana;
     private Table playingTable;
-    private boolean isAI;
-    private int winsNumber;
-    private String folderAddress;
+    private boolean isAI=false;
+    private int winsNumber=0;
+
+    public String getUserName() {
+
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+
+
+        this.userName = userName;
+    }
+
+    public void setPassword(String password) {
+
+        this.password = password;
+    }
 
     public boolean isPasswordCorrect(String password) {
 
@@ -26,28 +40,22 @@ public class Account {
 
     }
 
-    public void playAI(Match match) {
-    }
-
     public Collection getCollection() {
 
         return collection;
     }
 
     public int getWinsNumber() {
-
         return winsNumber;
     }
 
     public void incrementWinsNumber() {
-
         winsNumber++;
     }
 
-
-
     public void resetPlayerVariables() {
     }
+
 
 
 }

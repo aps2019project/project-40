@@ -7,16 +7,5 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://E:/java-json.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES>
-          <root url="jar://E:/java-json.jar!/" />
-        </SOURCES>
-      </library>
-    </orderEntry>
   </component>
 </module>

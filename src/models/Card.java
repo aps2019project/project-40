@@ -1,8 +1,18 @@
 package models;
 
 public class Card {
-    private int manaCost;
-    private int price;
+    private String cardName, cardID;
+    private int manaCost, price;
+
+    public String getCardName() {
+
+        return cardName;
+    }
+
+    public String getCardID() {
+
+        return cardID;
+    }
 
     public int getPrice() {
         return price;
@@ -16,4 +26,5 @@ public class Card {
         this.manaCost = manaCost;
         this.price = price;
     }
+
 }

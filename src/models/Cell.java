@@ -5,7 +5,37 @@ public class Cell {
     private Coordination coordination;
     private Card card;
     private Item item;
-    public boolean isThereFlag = false;
+    private boolean isThereFlag = false;
+
+    public Card getCard() {
+
+        return card;
+    }
+
+    public void setCard(Card card) {
+
+        this.card = card;
+    }
+
+    public Item getItem() {
+
+        return item;
+    }
+
+    public void setItem(Item item) {
+
+        this.item = item;
+    }
+
+    public boolean isThereFlag() {
+
+        return isThereFlag;
+    }
+
+    public void setThereFlag(boolean thereFlag) {
+
+        isThereFlag = thereFlag;
+    }
 
     public Coordination getCoordination() {
 
@@ -16,15 +46,5 @@ public class Cell {
 
         coordination.setRow(row);
         coordination.setColumn(column);
-    }
-
-    public Card getCard() {
-
-        return card;
-    }
-
-    public Item getItem() {
-
-        return item;
     }
 }

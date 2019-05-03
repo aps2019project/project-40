@@ -3,25 +3,36 @@ package models;
 import java.util.ArrayList;
 
 public class Unit extends Card{
-    private String name;
-    private int HP;
-    private int AP;
-    private ArrayList<Buff> buffs;
+    private ArrayList<Buff> buffs=new ArrayList<>();
+    private String cardID;
+    private  String name;
+    private int healthPoint;
+    private int attackPoint;
+    private int numberOfFlags;
     private Account player;
     private boolean canMove;
     private boolean canAttack;
     private Spell specialPower;
     private SpecialPowerType specialPowerType;
-    private String cardID;
     private boolean isFlying;
 
-    public int getNumberOfFlags(){
-        return 0;
+    public Unit(int mana,int price){
+        super(mana,price);
     }
-    public int getHealthPoint(){
-        return HP;
+
+    public int getNumberOfFlags() {
+        return numberOfFlags;
     }
-    public int getAttackPoint(){
-        return AP;
+
+    public int getHealthPoint() {
+        return healthPoint;
+    }
+
+    public int getAttackPoint() {
+        return attackPoint;
+    }
+
+    public void receiveAttack(int attackPoint){
+
     }
 }

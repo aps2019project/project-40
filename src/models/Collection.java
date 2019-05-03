@@ -33,4 +33,24 @@ public class Collection {
 
         return selectedDeck;
     }
+
+    public static Card findCardByCardID(ArrayList<Card> cards, String cardID) {
+
+        for (Card card : cards) {
+
+            if (card.getCardID().equals(cardID)) return card;
+        }
+
+        return null;        //added by amirhossein todo pay attention return null
+    }
+
+    public static Card findCardByCardName(ArrayList<Card> cards, String cardName) {
+
+        for (Card card : cards) {
+
+            if (card.getCardID().equals(cardName)) return card;
+        }
+
+        return null;        //added by amirhossein todo pay attention return null
+    }
 }
