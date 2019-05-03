@@ -1,0 +1,47 @@
+{
+  "cardName": "dispel",
+  "description": " deletes positive buffs for enemy or negative buffs of a friend",
+  "type": "SPELL",
+  "price": 2100,
+  "spells ": [
+    {
+      "spellName": "dispel_enemy",
+      "buff": {
+        "duration": 1,
+        "cancelBuff": 1,
+        "lasts": true
+      },
+      "target": {
+        "rowsAffected": 1,
+        "columnsAffected": 1,
+        "isAffectMinion": true,
+        "isAffectHero": true,
+        "targetType": {
+          "isHybrid": true,
+          "isRanged": true,
+          "isMelee": true
+        },
+        "isTargetEnemy": true
+      }
+    },
+    {
+      "spellName": "dispel_friend",
+      "buff": {
+        "duration": 1,
+        "cancelBuff": -1,
+        "lasts" : true
+      },
+      "target": {
+        "rowsAffected": 1,
+        "columnsAffected": 1,
+        "isAffectMinion": true,
+        "isAffectHero": true,
+        "targetType": {
+          "isHybrid": true,
+          "isRanged": true,
+          "isMelee": true
+        }
+      }
+    }
+  ]
+}

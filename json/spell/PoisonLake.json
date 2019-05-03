@@ -1,0 +1,22 @@
+{
+  "cardName": "poison_lake",
+  "description": "for 1 turn, applies poison effect on a 3*3 square to cells",
+  "type": "SPELL",
+  "price": 900,
+  "spells ": [
+    {
+      "spellName": "poison_lake",
+      "buff": {
+        "duration": 1,
+        "poison": 1,
+        "lasts": true
+      },
+      "target": {
+        "rowsAffected": 3,
+        "columnsAffected": 3,
+        "isAffectCells": true
+      }
+    }
+  ],
+  "manaCost": 5
+}

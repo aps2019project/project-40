@@ -1,0 +1,27 @@
+{
+  "cardName": "power_up",
+  "description": "gives a power BUFF that adds 6 point AP to a friend unit",
+  "type": "SPELL",
+  "price": 2500,
+  "spells ": [
+    {
+      "spellName": "power_up",
+      "buff": {
+        "duration": 1000000,
+        "weaknessAP": -6
+      },
+      "target": {
+        "rowsAffected": 1,
+        "columnsAffected": 1,
+        "isAffectMinion": true,
+        "isAffectHero": true,
+        "targetType": {
+          "isHybrid": true,
+          "isRanged": true,
+          "isMelee": true
+        }
+      }
+    }
+  ],
+  "manaCost": 2
+}

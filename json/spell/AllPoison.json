@@ -1,0 +1,28 @@
+{
+  "cardName": "all_poison",
+  "description": "for 4 turn all enemy units are poisoned",
+  "type": "SPELL",
+  "price": 1500,
+  "spells ": [
+    {
+      "spellName": "all_poison",
+      "buff": {
+        "duration": 4,
+        "poison": 1
+      },
+      "target": {
+        "rowsAffected": 5,
+        "columnsAffected": 9,
+        "isAffectMinion": true,
+        "isAffectHero": true,
+        "targetType": {
+          "isHybrid": true,
+          "isRanged": true,
+          "isMelee": true
+        },
+        "isTargetEnemy": true
+      }
+    }
+  ],
+  "manaCost": 8
+}

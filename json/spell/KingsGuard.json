@@ -1,0 +1,31 @@
+{
+  "cardName": "kings_guard",
+  "description": "a random enemy minion adjacent to our hero is killed",
+  "type": "SPELL",
+  "price": 1750,
+  "spells ": [
+    {
+      "spellName": "kings_guard",
+      "buff": {
+        "duration": 1,
+        "lasts" : true,
+        "weaknessHP": 2000,
+        "applyWhenTurnEnds": true
+      },
+      "target": {
+        "rowsAffected": 3,
+        "columnsAffected": 3,
+        "isAffectMinion": true,
+        "isRandom": true,
+        "isTargetEnemy": true,
+        "targetType": {
+          "isHybrid": true,
+          "isRanged": true,
+          "isMelee": true
+        },
+        "isDependentToHeroLocation": true
+      }
+    }
+  ],
+  "manaCost": 9
+}

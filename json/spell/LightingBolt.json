@@ -1,0 +1,28 @@
+{
+  "cardName": "lighting_bolt",
+  "description": "8 unit damage to enemy hero",
+  "type": "SPELL",
+  "price": 1250,
+  "spells ": [
+    {
+      "spellName": "lighting_bolt",
+      "buff": {
+        "duration": 1,
+        "lasts": true,
+        "weaknessHP": 8
+      },
+      "target": {
+        "rowsAffected": 5,
+        "columnsAffected": 9,
+        "isTargetEnemy": true,
+        "targetType": {
+          "isHybrid": true,
+          "isRanged": true,
+          "isMelee": true
+        },
+        "isAffectHero": true
+      }
+    }
+  ],
+  "manaCost": 2
+}

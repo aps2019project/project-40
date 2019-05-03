@@ -1,0 +1,44 @@
+{
+  "cardName": "madness",
+  "description": "adds 4 AP, but disarms a unit for 3 turns,",
+  "type": "SPELL",
+  "price": 1250,
+  "spells ": [
+    {
+      "spellName": "madness_power_buff_AP",
+      "buff": {
+        "duration": 3,
+        "weaknessAP": -4
+      },
+      "target": {
+        "rowsAffected": 1,
+        "columnsAffected": 1,
+        "targetType": {
+          "isHybrid": true,
+          "isRanged": true,
+          "isMelee": true
+        },
+        "isAffectHero": true,
+        "isAffectMinion": true
+      }
+    },
+    {
+      "spellName": "madness_disarm_buff",
+      "buff": {
+        "duration": 3,
+        "disarm": true
+      },
+      "target": {
+        "rowsAffected": 1,
+        "columnsAffected": 1,
+        "targetType": {
+          "isHybrid": true,
+          "isRanged": true,
+          "isMelee": true
+        },
+        "isAffectHero": true,
+        "isAffectMinion": true
+      }
+    }
+  ]
+}

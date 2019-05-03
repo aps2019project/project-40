@@ -3,36 +3,68 @@ package models;
 import java.util.ArrayList;
 
 public class Unit extends Card{
-    private ArrayList<Buff> buffs=new ArrayList<>();
-    private String cardID;
-    private  String name;
-    private int healthPoint;
-    private int attackPoint;
-    private int numberOfFlags;
-    private Account player;
-    private boolean canMove;
-    private boolean canAttack;
+    private int HP;
+    private int AP;
+    private ArrayList<Buff> buffs;
     private Spell specialPower;
     private SpecialPowerType specialPowerType;
-    private boolean isFlying;
+    private UnitType unitType;
+    private boolean combo;
+    private int flag;
 
-    public Unit(int mana,int price){
-        super(mana,price);
+    Unit(int manaCost, int price, int HP, int AP,UnitType unitType,
+         String name,  ArrayList<Spell> spells, String description, CardType type,
+         SpecialPowerType specialPowerType, Spell specialPower, boolean combo, int flag){
+        super(manaCost, price, name,spells, description, type);
+        this.HP = HP;
+        this.AP = AP;
+        this.specialPowerType = specialPowerType;
+        this.specialPower = specialPower;
+        this.combo = combo;
+        this.unitType = unitType;
+        this.flag = flag;
+    }
+    public int getHealthPoint(){
+        return HP;
+    }
+    public int getAttackPoint(){
+        return AP;
     }
 
-    public int getNumberOfFlags() {
-        return numberOfFlags;
+
+    public int getAP() {
+        return AP;
     }
 
-    public int getHealthPoint() {
-        return healthPoint;
+    public SpecialPowerType getSpecialPowerType() {
+        return specialPowerType;
     }
 
-    public int getAttackPoint() {
-        return attackPoint;
+    public Spell getSpecialPower() {
+        return specialPower;
     }
 
-    public void receiveAttack(int attackPoint){
+    public ArrayList<Buff> getBuffs() {
+        return buffs;
+    }
 
+    public int getHP() {
+        return HP;
+    }
+
+    public UnitType getUnitType() {
+        return unitType;
+    }
+
+    public void addBuff(Buff buff) {
+        this.buffs.add(buff);
+    }
+
+    public boolean isCombo() {
+        return combo;
+    }
+
+    public int getFlag() {
+        return flag;
     }
 }

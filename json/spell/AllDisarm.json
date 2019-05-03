@@ -1,0 +1,28 @@
+{
+  "cardName": "all_disarm",
+  "description": "1 turn disarm for all enemy units",
+  "type": "SPELL",
+  "price": 2000,
+  "spells ": [
+    {
+      "spellName": "all_disarm",
+      "buff": {
+        "duration": 1,
+        "disarm": true
+      },
+      "target": {
+        "rowsAffected": 5,
+        "columnsAffected": 9,
+        "isAffectMinion": true,
+        "isAffectHero": true,
+        "targetType": {
+          "isHybrid": true,
+          "isRanged": true,
+          "isMelee": true
+        },
+        "isTargetEnemy": true
+      }
+    }
+  ],
+  "manaCost": 9
+}
