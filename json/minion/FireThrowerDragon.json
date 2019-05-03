@@ -4,7 +4,7 @@
   "type": "MINION",
   "HP": 9,
   "AP": 5,
-  "mannaPoint": 5,
+  "manaCost": 5,
   "price": 250,
   "unitType": "RANGED",
   "range": 4

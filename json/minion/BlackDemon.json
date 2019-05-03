@@ -4,7 +4,7 @@
   "type": "MINION",
   "HP": 14,
   "AP": 10,
-  "mannaPoint": 9,
+  "manaCost": 9,
   "price": 300,
   "unitType": "HYBRID",
   "range": 7

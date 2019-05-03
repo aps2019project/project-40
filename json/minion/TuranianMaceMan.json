@@ -4,7 +4,7 @@
   "type": "MINION",
   "HP": 3,
   "AP": 10,
-  "mannaPoint": 2,
+  "manaCost": 2,
   "price": 450,
   "unitType": "MELEE"
 }

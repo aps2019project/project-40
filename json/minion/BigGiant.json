@@ -5,7 +5,7 @@
   "HP": 30,
   "AP": 8,
   "price": 600,
-  "mannaPoint": 8,
+  "manaCost": 8,
   "unitType": "HYBRID",
   "range": 2
 }
