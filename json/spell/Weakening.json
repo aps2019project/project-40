@@ -1,0 +1,28 @@
+{
+  "cardName": "weakening",
+  "description": "an enemy MINION gets a weakness BUFF with 4 units AP reduction",
+  "type": "SPELL",
+  "price": "1000",
+  "spells ": [
+    {
+      "spellName": "weakening",
+      "buff": {
+        "duration": 1000000,
+        "weaknessAP": 4
+      },
+      "target": {
+        "rowsAffected": 1,
+        "columnsAffected": 1,
+        "isAffectMinion": true,
+        "targetType": {
+          "isHybrid": true,
+          "isRanged": true,
+          "isMelee": true
+        },
+        "isAffectHero": true,
+        "isTargetEnemy": true
+      }
+    }
+  ],
+  "manaCost": 1
+}

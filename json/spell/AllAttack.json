@@ -1,0 +1,29 @@
+{
+  "cardName": "all_attack",
+  "description": "damage 6 points to all enemy units in one column",
+  "type": "SPELL",
+  "spells ": [
+    {
+      "spellName": "all_attack",
+      "buff": {
+        "duration": 1,
+        "lasts": true,
+        "weaknessHP": 6
+      },
+      "target": {
+        "rowsAffected": 5,
+        "columnsAffected": 1,
+        "isAffectMinion": true,
+        "isAffectHero": true,
+        "targetType": {
+          "isHybrid": true,
+          "isRanged": true,
+          "isMelee": true
+        },
+        "isTargetEnemy": true
+      }
+    }
+  ],
+  "manaCost": 4,
+  "price": 1500
+}

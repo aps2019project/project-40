@@ -1,0 +1,23 @@
+{
+  "cardName": "hellfire",
+  "description": "fire effect on a 2*2 square for 2 rounds",
+  "type": "SPELL",
+  "price": 600,
+  "spells ": [
+    {
+      "spellName": "hellfire",
+      "buff": {
+        "duration": 2,
+        "lasts": true,
+        "weaknessHP": 2,
+        "applyWhenTurnEnds": true
+      },
+      "target": {
+        "rowsAffected": 2,
+        "columnsAffected": 2,
+        "isAffectCells": true
+      }
+    }
+  ],
+  "manaCost": 3
+}

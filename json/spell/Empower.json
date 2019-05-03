@@ -1,0 +1,28 @@
+{
+  "cardName": "empower",
+  "description": "adds 2 point AP to a friend unit",
+  "type": "SPELL",
+  "price": 250,
+  "spells ": [
+    {
+      "spellName": "empower",
+      "buff": {
+        "duration": 1,
+        "lasts": true,
+        "weaknessAP": -2
+      },
+      "target": {
+        "rowsAffected": 1,
+        "columnsAffected": 1,
+        "isAffectHero": true,
+        "targetType": {
+          "isHybrid": true,
+          "isRanged": true,
+          "isMelee": true
+        },
+        "isAffectMinion": true
+      }
+    }
+  ],
+  "manaCost": 1
+}

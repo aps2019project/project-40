@@ -1,0 +1,29 @@
+{
+  "cardName": "fireball",
+  "description": " deals 4 damage to an enemy unit",
+  "type": "SPELL",
+  "price": 400,
+  "spells ": [
+    {
+      "spellName": "fireball",
+      "buff": {
+        "duration": 1,
+        "lasts": true,
+        "weaknessHP": 4
+      },
+      "target": {
+        "rowsAffected": 1,
+        "columnsAffected": 1,
+        "isAffectMinion": true,
+        "isAffectHero": true,
+        "targetType": {
+          "isHybrid": true,
+          "isRanged": true,
+          "isMelee": true
+        }
+      },
+      "isTargetEnemy": true
+    }
+  ],
+  "manaCost": 1
+}

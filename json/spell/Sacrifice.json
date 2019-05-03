@@ -1,0 +1,43 @@
+{
+  "cardName": "sacrifice",
+  "description": "a MINION gets a power BUFF that adds 8 point AP increment and a weakness BUFF with 6 points HP decrement",
+  "type": "SPELL",
+  "price": 1600,
+  "spells ": [
+    {
+      "spellName": "sacrifice_power",
+      "buff": {
+        "duration": 1000000,
+        "weaknessAP": -8
+      },
+      "target": {
+        "rowsAffected": 1,
+        "columnsAffected": 1,
+        "isAffectMinion": true,
+        "targetType": {
+          "isHybrid": true,
+          "isRanged": true,
+          "isMelee": true
+        }
+      }
+    },
+    {
+      "spellName": "sacrifice_weakness",
+      "buff": {
+        "duration": 1000000,
+        "weaknessHP": 6
+      },
+      "target": {
+        "rowsAffected": 1,
+        "columnsAffected": 1,
+        "isAffectMinion": true,
+        "targetType": {
+          "isHybrid": true,
+          "isRanged": true,
+          "isMelee": true
+        }
+      }
+    }
+  ],
+  "manaCost": 2
+}

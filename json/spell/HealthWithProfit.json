@@ -1,0 +1,47 @@
+{
+  "cardName": "health_with_profit",
+  "description": "gives a Weakness Buff with -6 HP change, but two Holy Buff for 3 rounds to a unit",
+  "type": "SPELL",
+  "price": 2250,
+  "spells ": [
+    {
+      "spellName": "hwp_weakness_hp_6_points",
+      "buff": {
+        "duration": 3,
+        "weaknessHP": 6
+      },
+      "target": {
+        "rowsAffected": 1,
+        "columnsAffected": 1,
+        "isAffectHero": true,
+        "targetType": {
+          "isHybrid": true,
+          "isRanged": true,
+          "isMelee": true
+        },
+        "isAffectMinion": true
+      }
+    },
+    {
+      "spellId": "hwp_holy_buff",
+      "action": {
+        "duration": 3,
+        "holy": 2
+      },
+      "availabilityType": {
+        "onPut": true
+      },
+      "target": {
+        "rowsAffected": 1,
+        "columnsAffected": 1,
+        "isAffectHero": true,
+        "isAffectMinion": true,
+        "targetType": {
+          "isHybrid": true,
+          "isRanged": true,
+          "isMelee": true
+        }
+      }
+    }
+  ]
+}
