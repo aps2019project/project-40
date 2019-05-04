@@ -1,0 +1,11 @@
+{
+  "cardName": "turanian_archer",
+  "description": "a ranged MINION, 3 HP and 4 AP",
+  "type": "MINION",
+  "price": 500,
+  "HP" : 3,
+  "AP" : 4,
+  "unitType": "RANGED",
+  "manaCost": 1,
+  "range": 5
+}

@@ -1,39 +1,30 @@
 package models;
 
-public class Spell extends Card{
+import java.util.ArrayList;
+
+public class Spell extends Card {
     private String spellName;
     private Target target;
     private Buff buff;
-    private Account account;
 
-    private void initializeTarget(){
-
-    }
-    private void initializeBuff(){}
-
-
-    public Spell(int manaCost, int price, String spellName, Buff buff, Target target, Account account) {
-        super(manaCost, price);
+    public Spell(int manaCost, int price, String name,
+                 ArrayList<Spell> spells, String description, CardType type,
+                 String spellName, Buff buff, Target target) {
+        super(manaCost, price, name,spells,description,type);
         this.spellName = spellName;
         this.buff = buff;
         this.target = target;
-        this.account = account;
-    }
-
-    public String getSpellName() {
-        return spellName;
     }
 
     public Target getTarget() {
         return target;
     }
 
-    public Account getAccount() {
-        return account;
-    }
-
     public Buff getBuff() {
         return buff;
     }
 
+    public String getSpellName() {
+        return spellName;
+    }
 }

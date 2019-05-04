@@ -1,0 +1,10 @@
+{
+  "cardName": "turanian_mace_man",
+  "description": "a melee MINION with 3 HP, 10 AP",
+  "type": "MINION",
+  "HP": 3,
+  "AP": 10,
+  "manaCost": 2,
+  "price": 450,
+  "unitType": "MELEE"
+}

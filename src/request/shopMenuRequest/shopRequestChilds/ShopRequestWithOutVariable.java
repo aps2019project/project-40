@@ -2,7 +2,7 @@ package request.shopMenuRequest.shopRequestChilds;
 
 import request.shopMenuRequest.ShopRequest;
 
-public class Show extends ShopRequest {
+public class ShopRequestWithOutVariable extends ShopRequest {
     private ShopSimpleRequestList shopSimpleRequestList;
 
     public ShopSimpleRequestList getShopSimpleRequestList() {

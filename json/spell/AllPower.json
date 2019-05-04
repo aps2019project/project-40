@@ -1,0 +1,27 @@
+{
+  "cardName": "all_power",
+  "description": "add 2 AP by a power buff to all friend units ",
+  "type": "SPELL",
+  "price": 2000,
+  "spells ": [
+    {
+      "spellName": "all_power",
+      "buff": {
+        "duration": 1000000,
+        "weaknessAP": -2
+      },
+      "target": {
+        "rowsAffected": 5,
+        "columnsAffected": 9,
+        "isAffectMinion": true,
+        "isAffectHero": true,
+        "targetType": {
+          "isHybrid": true,
+          "isRanged": true,
+          "isMelee": true
+        }
+      }
+    }
+  ],
+  "manaCost": 4
+}

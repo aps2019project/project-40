@@ -1,0 +1,27 @@
+{
+  "cardName": "god_strength",
+  "description": "adds 4 units AP to our hero",
+  "type": "SPELL",
+  "price": 450,
+  "spells ": [
+    {
+      "spellName": "god_strength",
+      "buff": {
+        "duration": 1,
+        "lasts": true,
+        "weaknessAP": -4
+      },
+      "target": {
+        "rowsAffected": 5,
+        "columnsAffected": 9,
+        "isAffectHero": true,
+        "targetType": {
+          "isHybrid": true,
+          "isRanged": true,
+          "isMelee": true
+        }
+      }
+    }
+  ],
+  "manaCost": 2
+}

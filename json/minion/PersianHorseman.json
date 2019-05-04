@@ -1,0 +1,10 @@
+{
+  "cardName": "persian_horse_man",
+  "description": "a melee MINION, 10 HP and 6 AP",
+  "type": "MINION",
+  "price": 200,
+  "HP" : 10,
+  "AP" : 6,
+  "unitType": "MELEE",
+  "manaCost": 4
+}

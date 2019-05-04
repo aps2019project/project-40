@@ -50,5 +50,13 @@ public class LoginMenu {
         return users;
     }
 
+    public Account getAccountByUserName(String userName){
+        for (Account account:users){
+            if (account.getUserName().equals(userName))
+                return account;
+        }
+        return null;
+    }
+
 
 }

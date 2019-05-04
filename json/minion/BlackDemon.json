@@ -1,0 +1,11 @@
+{
+  "cardName": "black_demon",
+  "description": "a hybrid MINION with 14 HP,10 AP",
+  "type": "MINION",
+  "HP": 14,
+  "AP": 10,
+  "manaCost": 9,
+  "price": 300,
+  "unitType": "HYBRID",
+  "range": 7
+}

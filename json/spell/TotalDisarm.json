@@ -1,0 +1,27 @@
+{
+  "cardName": "total_disarm",
+  "description": "an enemy is DISARM ed until end game",
+  "type": "SPELL",
+  "price": "1000",
+  "spells ": [
+    {
+      "spellName": "total_disarm",
+      "buff": {
+        "duration": 1000000,
+        "disarm":true
+      },
+      "target": {
+        "rowsAffected": 1,
+        "columnsAffected": 1,
+        "isAffectMinion": true,
+        "isAffectHero": true,
+        "targetType": {
+          "isHybrid": true,
+          "isRanged": true,
+          "isMelee": true
+        },
+        "isTargetEnemy": true
+      }
+    }
+  ]
+}
