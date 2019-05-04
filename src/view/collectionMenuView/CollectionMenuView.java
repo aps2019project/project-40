@@ -1,5 +1,6 @@
 package view.collectionMenuView;
 
+import controller.CollectionErrors;
 import view.View;
 
 public class CollectionMenuView extends View {
@@ -13,7 +14,11 @@ public class CollectionMenuView extends View {
         return collectionMenuView;
     }
 
-    public void showHelp(){
+    public void showError(CollectionErrors collectionErrors) {
+        System.out.println(collectionErrors);
+    }
+
+    public void showHelp() {
         System.out.println("exit");
         System.out.println("show");
         System.out.println("search [card name|item name]");

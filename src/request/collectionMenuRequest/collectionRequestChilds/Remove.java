@@ -13,7 +13,7 @@ public class Remove extends CollectionRequest {
         this.cardID = cardID;
     }
 
-    public String getDecknNme() {
+    public String getDeckName() {
         return decknNme;
     }
 

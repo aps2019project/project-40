@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class Deck  implements Serializable {
+public class Deck implements Serializable {
     private String deckName;
     private ArrayList<Card> cards = new ArrayList<>();
     private int maxCardNumber;
@@ -19,19 +19,19 @@ public class Deck  implements Serializable {
     }
 
     public ArrayList<Card> getCards() {
-
         return cards;
     }
 
-    public boolean isDeckValidate(){
+    public boolean isDeckValidate() {
         return true;
     }
 
-    public Card getLastCard(){
-        return  null;
+    public Card getLastCard() {
+        return null;
     }
 
-    public void shuffleCards(){
+    public void shuffleCards() {
         Collections.shuffle(cards);
     }
+
 }

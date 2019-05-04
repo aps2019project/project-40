@@ -7,8 +7,8 @@ public class Account {
     private int money;
     private Collection collection;
     private Hand hand;
-    private boolean isAI=false;
-    private int winsNumber=0;
+    private boolean isAI = false;
+    private int winsNumber = 0;
 
     public String getUserName() {
 
@@ -55,9 +55,11 @@ public class Account {
     public void resetPlayerVariables() {
     }
 
-    public static Account getAIAccount(MatchType matchType){
+    public static Account getAIAccount(MatchType matchType) {
         return null;
     }
 
+    public static void save(Account account) {
 
+    }
 }

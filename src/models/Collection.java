@@ -1,5 +1,8 @@
 package models;
 
+
+import controller.CollectionErrors;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -7,7 +10,6 @@ public class Collection implements Serializable {
 
     private ArrayList<Card> cards = new ArrayList<>();
     private ArrayList<Deck> decks = new ArrayList<>();
-    private ArrayList<Item> items = new ArrayList<>();
     private Deck selectedDeck;
 
     public void setSelectedDeck(Deck selectedDeck) {
@@ -24,19 +26,14 @@ public class Collection implements Serializable {
         return cards;
     }
 
-    public ArrayList<Item> getItems() {
-
-        return items;
-    }
-
     public Deck getSelectedDeck() {
 
         return selectedDeck;
     }
 
     public void changeSelectedDeck(String deckName) {
-        for (Deck deck:decks)
-            if (deck.getDeckName().equals(deckName)){
+        for (Deck deck : decks)
+            if (deck.getDeckName().equals(deckName)) {
                 setSelectedDeck(deck);
                 return;
             }
@@ -64,5 +61,22 @@ public class Collection implements Serializable {
 
     public void addCardToCollection(Card card) {
         cards.add(card);
+    }
+
+    public CollectionErrors addToDeck(String cardID,String deckName) {
+
+        return null;
+    }
+
+    public CollectionErrors removeFromDeck(String cardID,String deckName) {
+
+        return null;
+    }
+
+    public boolean isDeckNameValid(String deckName) {
+        for (Deck deck : decks)
+            if (deck.getDeckName().equals(deckName))
+                return true;
+        return false;
     }
 }
