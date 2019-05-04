@@ -1,8 +1,9 @@
 package models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Card {
+public class Card  implements Serializable {
     private int manaCost;
     private int price;
     private String cardID;

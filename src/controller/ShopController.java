@@ -39,6 +39,7 @@ public class ShopController {
         }
     }
     public void handelShopRequestVariable(ShopRequestVariable shopRequestVariable){
+
         switch (shopRequestVariable.getCommandType()){
             case BUY:
 
@@ -58,6 +59,7 @@ public class ShopController {
 
                 default:
         }
+        
     }
 
     public void handelShopRequestWithOutVariable(ShopRequestWithOutVariable shopRequestWithOutVariable){

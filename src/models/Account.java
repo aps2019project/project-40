@@ -3,11 +3,10 @@ package models;
 public class Account {
 
     private String userName, password;
-    private final int initialMoney = 15000;
+    private int initialMoney = 15000;
     private int money;
     private Collection collection;
     private Hand hand;
-    private Table playingTable;
     private boolean isAI=false;
     private int winsNumber=0;
 
@@ -56,6 +55,9 @@ public class Account {
     public void resetPlayerVariables() {
     }
 
+    public static Account getAIAccount(MatchType matchType){
+        return null;
+    }
 
 
 }

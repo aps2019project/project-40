@@ -1,8 +1,9 @@
 package models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Unit extends Card{
+public class Unit extends Card implements Serializable {
     private int HP;
     private int AP;
     private ArrayList<Buff> buffs;

@@ -1,8 +1,9 @@
 package models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Collection {
+public class Collection implements Serializable {
 
     private ArrayList<Card> cards = new ArrayList<>();
     private ArrayList<Deck> decks = new ArrayList<>();
@@ -15,7 +16,6 @@ public class Collection {
     }
 
     public ArrayList<Deck> getDecks() {
-
         return decks;
     }
 
@@ -32,6 +32,14 @@ public class Collection {
     public Deck getSelectedDeck() {
 
         return selectedDeck;
+    }
+
+    public void changeSelectedDeck(String deckName) {
+        for (Deck deck:decks)
+            if (deck.getDeckName().equals(deckName)){
+                setSelectedDeck(deck);
+                return;
+            }
     }
 
     public static Card findCardByCardID(ArrayList<Card> cards, String cardID) {
@@ -53,7 +61,8 @@ public class Collection {
 
         return null;        //added by amirhossein todo pay attention return null
     }
-    public void addCardToCollection(Card card){
+
+    public void addCardToCollection(Card card) {
         cards.add(card);
     }
 }
