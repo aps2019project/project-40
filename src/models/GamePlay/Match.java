@@ -16,6 +16,16 @@ public class Match {
     int turnNumber = 0;  //todo 0 or 1?
     int player1Mana, player2Mana;
 
+    public Account getPlayer1() {
+
+        return player1;
+    }
+
+    public Account getPlayer2() {
+
+        return player2;
+    }
+
     public Table getTable() {
 
         return table;
