@@ -95,15 +95,19 @@ public class BattleController {
         if (request.getEnumRequest() == RequestWithoutVariableEnum.GAME_INFO_REQUEST)
             gameInfoRequest();
 
-        else if (request.getEnumRequest() == RequestWithoutVariableEnum.SHOW_MY_MINIONS_REQUEST) ;
-        else if (request.getEnumRequest() == RequestWithoutVariableEnum.SHOW_OPPONENT_MINIONS_REQUEST) ;
+        else if (request.getEnumRequest() == RequestWithoutVariableEnum.SHOW_MY_MINIONS_REQUEST)
+            showMyMinionsRequest();
+
+        else if (request.getEnumRequest() == RequestWithoutVariableEnum.SHOW_OPPONENT_MINIONS_REQUEST)
+            showOpponentMinionsRequest();
+
         else if (request.getEnumRequest() == RequestWithoutVariableEnum.SHOW_NEXT_CARD_REQUEST) ;
         else if (request.getEnumRequest() == RequestWithoutVariableEnum.SHOW_HAND_REQUEST) ;
         else if (request.getEnumRequest() == RequestWithoutVariableEnum.END_TURN_REQUEST) ;
         else if (request.getEnumRequest() == RequestWithoutVariableEnum.SHOW_COLLECTED_ITEM_REQUEST) ;
         else if (request.getEnumRequest() == RequestWithoutVariableEnum.END_GAME_REQUEST) ;
 
-        if (request.getEnumRequest() == RequestWithoutVariableEnum.HELP_REQUEST)
+        else if (request.getEnumRequest() == RequestWithoutVariableEnum.HELP_REQUEST)
             helpRequest();
     }
 
@@ -143,7 +147,7 @@ public class BattleController {
                         else
                             gameInfoBattleViewKillTheHero.setPlayer2HeroHP(hero.getHP());
                     }
-                } catch (Exception e) {
+                } catch (NullPointerException e) {
                     //there isn't hero in this cell
                 }
             }
@@ -166,7 +170,7 @@ public class BattleController {
                         gameInfoBattleViewHoldTheFlag.show(gameInfoBattleViewHoldTheFlag);
                         return;
                     }
-                } catch (Exception e) {
+                } catch (NullPointerException e) {
                     //there isn't flag in this cell
                 }
             }
@@ -177,6 +181,7 @@ public class BattleController {
 
                 try {
                     Card card = cell.getCard();
+
                     if (card.getType() == CardType.HERO || card.getType() == CardType.MINION) {
 
                         Unit unit = (Unit) card;
@@ -187,7 +192,7 @@ public class BattleController {
                             return;
                         }
                     }
-                } catch (Exception e) {
+                } catch (NullPointerException e) {
                     //there isn't unit in this cell
                 }
             }
@@ -215,7 +220,7 @@ public class BattleController {
                             gameInfoBattleViewCollectTheFlags.setFlagHolder(
                                     unit.getCardName(), unit.getTeam(), unit.getFlag());
                     }
-                } catch (Exception e) {
+                } catch (NullPointerException e) {
                     //there is any flag in this cell
                 }
             }
@@ -225,15 +230,78 @@ public class BattleController {
 
     private void showMyMinionsRequest() {
 
-
+        showMinionsRequestCommonCode(match.findPlayerPlayingThisTurn());
     }
 
     private void showOpponentMinionsRequest() {
-        //todo
+
+        if (match.findPlayerPlayingThisTurn().equals(match.getPlayer1()))
+            showMinionsRequestCommonCode(match.getPlayer2());
+
+        else
+            showMinionsRequestCommonCode(match.getPlayer1());
+    }
+
+    private void showMinionsRequestCommonCode(Account account) {
+
+        ShowMinionsBattleView showMinionsBattleView = new ShowMinionsBattleView();
+        Cell[][] cells = match.getTable().getCells();
+
+        for (Cell[] row : cells) {
+            for (Cell cell : row) {
+
+                try {
+                    Card card = cell.getCard();
+
+                    if (card.getType() == CardType.MINION &&
+                            account.getUserName().equals(card.getTeam())) {
+
+                        Unit unit = (Unit) card;
+                        showMinionsBattleView.setMinion(unit.getCardID(), unit.getCardName(),
+                                unit.getHealthPoint(), cell.getCoordination(), unit.getAttackPoint());
+                    }
+                } catch (NullPointerException e) {
+                    //there isn't my minion in this cell
+                }
+            }
+        }
+        showMinionsBattleView.show(showMinionsBattleView);
     }
 
     private void showNextCardRequest() {
-        //todo
+
+        Account player = match.findPlayerPlayingThisTurn();
+        Card card = player.getHand().getReserveCard();
+
+        try {
+            if (card.getType() == CardType.HERO) {
+
+                ShowCardInfoBattleViewHero showCardInfoBattleViewHero = new ShowCardInfoBattleViewHero();
+                showCardInfoBattleViewHero.setName(card.getCardName());
+                showCardInfoBattleViewHero.setCost(card.getPrice());
+                showCardInfoBattleViewHero.setDescription(card.getDescription());
+
+            } else if (card.getType() == CardType.MINION) {
+
+                Unit unit = (Unit) card;
+                ShowCardInfoBattleViewMinion showCardInfoBattleViewMinion = new ShowCardInfoBattleViewMinion();
+
+                showCardInfoBattleViewMinion.setName(unit.getCardName());
+                showCardInfoBattleViewMinion.setCost(unit.getPrice());
+                showCardInfoBattleViewMinion.setDescription(unit.getDescription());
+                showCardInfoBattleViewMinion.setAttackPoint(unit.getAttackPoint());
+                showCardInfoBattleViewMinion.setHealthPoint(unit.getHealthPoint());
+                showCardInfoBattleViewMinion.setManaPoint(unit.getManaCost());
+                showCardInfoBattleViewMinion.setRange(unit.getUnitType());
+                showCardInfoBattleViewMinion.setHasComboAbility(unit.hasComboAbility());
+
+            }
+
+        } catch (NullPointerException e) {
+            System.out.println("You don't have reserve card");
+        }
+
+
     }
 
     private void showHandRequest() {

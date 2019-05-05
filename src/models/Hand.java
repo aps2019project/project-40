@@ -10,6 +10,11 @@ public class Hand  implements Serializable {
     private Card selectedCard;
     private final int MAX_HANDS_CARD = 5;
 
+    public Card getReserveCard() {
+
+        return reserveCard;
+    }
+
     public ArrayList<Card> getCards() {
 
         return cards;

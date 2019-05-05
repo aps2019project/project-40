@@ -15,6 +15,11 @@ public class Account implements Serializable {
     private boolean isAI = false;
     private int winsNumber = 0;
 
+    public Hand getHand() {
+
+        return hand;
+    }
+
     public String getUserName() {
 
         return userName;
@@ -81,5 +86,11 @@ public class Account implements Serializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public boolean equals(Account account) {
+
+        if (this.getUserName().equals(account.getUserName())) return true;
+        return false;
     }
 }

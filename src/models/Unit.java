@@ -57,15 +57,16 @@ public class Unit extends Card implements Serializable {
         this.buffs.add(buff);
     }
 
-    public boolean isCombo() {
-        return combo;
-    }
-
     public int getFlag() {
         return flag;
     }
 
     public int getRange() {
         return range;
+    }
+
+    public boolean hasComboAbility() {
+
+        return combo;
     }
 }
