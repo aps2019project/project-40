@@ -21,7 +21,7 @@ public class ShopMenuView {
         System.out.println("show collection");
         System.out.println("search [card name|item name]");
         System.out.println("buy [card name|item name]");
-        System.out.println("sell [card name|item name]");
+        System.out.println("sell [card ID|item ID]");
         System.out.println("search collection [card name|item name]");
         System.out.println("help");
     }

@@ -4,6 +4,7 @@ public class TargetType {
     private boolean isHybrid;
     private boolean isRanged;
     private boolean isMelee;
+
     public TargetType(boolean isHybrid, boolean isRanged, boolean isMelee) {
         this.isHybrid = isHybrid;
         this.isRanged = isRanged;

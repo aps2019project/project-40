@@ -41,6 +41,9 @@ public class ShopRequest extends Request {
         if (matcher.find())
             return searchCollection(matcher.group(1));
 
+        if (command.matches("help"))
+            return simpleCommand(ShopSimpleRequestList.HELP);
+
         if (command.matches("exit"))
             return simpleCommand(ShopSimpleRequestList.EXIT);
 
@@ -53,37 +56,37 @@ public class ShopRequest extends Request {
         return null;
     }
 
-    public ShopRequest simpleCommand(ShopSimpleRequestList shopSimpleRequestList){
-        ShopRequestWithOutVariable shopRequestWithOutVariable=new ShopRequestWithOutVariable();
+    public ShopRequest simpleCommand(ShopSimpleRequestList shopSimpleRequestList) {
+        ShopRequestWithOutVariable shopRequestWithOutVariable = new ShopRequestWithOutVariable();
         shopRequestWithOutVariable.setShopSimpleRequestList(shopSimpleRequestList);
         return shopRequestWithOutVariable;
     }
 
-    public ShopRequest buy(String nameOrID){
-        ShopRequestVariable shopRequestVariable=new ShopRequestVariable();
+    public ShopRequest buy(String nameOrID) {
+        ShopRequestVariable shopRequestVariable = new ShopRequestVariable();
         shopRequestVariable.setCommandType(CommandType.BUY);
         shopRequestVariable.setNameOrId(nameOrID);
         return shopRequestVariable;
     }
 
-    public ShopRequest sell(String nameOrID){
-        ShopRequestVariable shopRequestVariable=new ShopRequestVariable();
+    public ShopRequest sell(String nameOrID) {
+        ShopRequestVariable shopRequestVariable = new ShopRequestVariable();
         shopRequestVariable.setCommandType(CommandType.SELL);
         shopRequestVariable.setNameOrId(nameOrID);
 
         return shopRequestVariable;
     }
 
-    public ShopRequest search(String nameOrID){
-        ShopRequestVariable shopRequestVariable=new ShopRequestVariable();
+    public ShopRequest search(String nameOrID) {
+        ShopRequestVariable shopRequestVariable = new ShopRequestVariable();
         shopRequestVariable.setCommandType(CommandType.SEARCH);
         shopRequestVariable.setNameOrId(nameOrID);
 
         return shopRequestVariable;
     }
 
-    public ShopRequest searchCollection(String nameOrID){
-        ShopRequestVariable shopRequestVariable=new ShopRequestVariable();
+    public ShopRequest searchCollection(String nameOrID) {
+        ShopRequestVariable shopRequestVariable = new ShopRequestVariable();
         shopRequestVariable.setCommandType(CommandType.SEARCH_COLLECTION);
         shopRequestVariable.setNameOrId(nameOrID);
 

@@ -16,14 +16,14 @@ public class StartMenuRequest extends Request {
     public StartMenuRequest getCommand() {
         String command = scanner.nextLine().toLowerCase().trim();
         StartMenuOption startMenuOption = new StartMenuOption();
-        if (command.indexOf("exit")>=0)
+        if (command.indexOf("exit") >= 0)
             startMenuOption.setStartMenuOptionList(StartMenuOptionList.EXIT);
-        else if (command.indexOf("help")>=0)
+        else if (command.indexOf("help") >= 0)
             startMenuOption.setStartMenuOptionList(StartMenuOptionList.HELP);
-        else if (command.indexOf("save")>=0)
+        else if (command.indexOf("save") >= 0)
             startMenuOption.setStartMenuOptionList(StartMenuOptionList.SAVE);
         else if (command.indexOf("enter") >= 0) {
-            String choice=command.split("\\s")[1];
+            String choice = command.split("\\s")[1];
             switch (choice) {
                 case "collection":
                     startMenuOption.setStartMenuOptionList(StartMenuOptionList.COLLECTION);
@@ -34,9 +34,8 @@ public class StartMenuRequest extends Request {
                 case "shop":
                     startMenuOption.setStartMenuOptionList(StartMenuOptionList.SHOP);
                     break;
-                }
-        }
-        else
+            }
+        } else
             return null;
         return startMenuOption;
     }

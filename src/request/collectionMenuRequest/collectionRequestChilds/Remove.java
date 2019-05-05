@@ -3,7 +3,7 @@ package request.collectionMenuRequest.collectionRequestChilds;
 import request.collectionMenuRequest.CollectionRequest;
 
 public class Remove extends CollectionRequest {
-    private String cardID,decknNme;
+    private String cardID, decknNme;
 
     public String getCardID() {
         return cardID;

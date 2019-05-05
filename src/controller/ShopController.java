@@ -28,6 +28,7 @@ public class ShopController {
     }
 
     public void shopControllerMain() {
+        isShopClosed = false;
         account = Controller.getInstance().getAccount();
         myCollection = account.getCollection();
         while (!isShopClosed) {
@@ -64,24 +65,28 @@ public class ShopController {
     }
 
     private boolean checkBuyItem(ArrayList<Card> cards) {
-        int numOfItemInCollection=0;
+        int numOfItemInCollection = 0;
         return true;
     }
 
     public void buy(String cardName) {
         for (Card card : shopCollection.getCards())
             if (card.getCardName().equals(cardName)) {
-                if (card.getType().equals(CardType.USABLE_ITEM) && checkBuyItem(myCollection.getCards())){
+                if (card.getType().equals(CardType.USABLE_ITEM) && checkBuyItem(myCollection.getCards())) {
                     shopMenuView.showError(ShopError.ALREADY_3_ITEM);
                     return;
                 }
-                if (account.getMoney() - card.getPrice() >= 0){
+                if (account.getMoney() - card.getPrice() >= 0) {
+                    try {
+                        Card newCard = card.clone();
+                        myCollection.getCards().add(newCard);
+                    } catch (CloneNotSupportedException e) {
+                    }
+
                     account.setMoney(account.getMoney() - card.getPrice());
-                    shopCollection.getCards().remove(card);
-                    myCollection.getCards().add(card);
+
                     shopMenuView.showError(ShopError.SUCSSES);
-                }
-                else
+                } else
                     shopMenuView.showError(ShopError.NOT_ENOUGH_MONEY);
                 return;
             }

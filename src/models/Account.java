@@ -10,7 +10,7 @@ public class Account implements Serializable {
     private String userName, password;
     private int money = 15000;
     private Collection collection;
-    private Hand hand;
+    private Hand hand = new Hand();
     private boolean isAI = false;
     private int winsNumber = 0;
 
@@ -43,8 +43,7 @@ public class Account implements Serializable {
 
     public boolean isPasswordCorrect(String password) {
 
-        if (this.password.equals(password)) return true;
-        return false;
+        return this.password.equals(password);
     }
 
     public void addToHand(Card card) {
@@ -52,9 +51,9 @@ public class Account implements Serializable {
     }
 
     public Collection getCollection() {
-        if (collection==null)
-            collection=new Collection();
-            return collection;
+        if (collection == null)
+            collection = new Collection();
+        return collection;
     }
 
     public int getWinsNumber() {
@@ -66,10 +65,14 @@ public class Account implements Serializable {
     }
 
     public void resetPlayerVariables() {
+        winsNumber = 0;
+        money = 15000;
+        collection = new Collection();
     }
 
     public static Account getAIAccount(MatchType matchType) {
-        return null;
+        Account account = new Account();
+        return account;
     }
 
     public static void save(Account account) {
@@ -93,7 +96,6 @@ public class Account implements Serializable {
 
     public boolean equals(Account account) {
 
-        if (this.getUserName().equals(account.getUserName())) return true;
-        return false;
+        return this.getUserName().equals(account.getUserName());
     }
 }

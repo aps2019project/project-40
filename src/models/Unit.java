@@ -14,10 +14,10 @@ public class Unit extends Card implements Serializable {
     private int flag;
     private int range;
 
-    Unit(int manaCost, int price, int HP, int AP,UnitType unitType,
-         String name,  ArrayList<Spell> spells, String description, CardType type,
-         SpecialPowerType specialPowerType, boolean combo, int flag, int range){
-        super(manaCost, price, name,spells, description, type);
+    Unit(int manaCost, int price, int HP, int AP, UnitType unitType,
+         String name, ArrayList<Spell> spells, String description, CardType type,
+         SpecialPowerType specialPowerType, boolean combo, int flag, int range) {
+        super(manaCost, price, name, spells, description, type);
         this.HP = HP;
         this.AP = AP;
         this.specialPowerType = specialPowerType;
@@ -31,10 +31,11 @@ public class Unit extends Card implements Serializable {
         return specialPower;
     }
 
-    public int getHealthPoint(){
+    public int getHealthPoint() {
         return HP;
     }
-    public int getAttackPoint(){
+
+    public int getAttackPoint() {
         return AP;
     }
 

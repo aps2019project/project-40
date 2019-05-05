@@ -13,9 +13,10 @@ public class Target {
     private boolean isDependentToHeroLocation;
 
     private boolean isTargetEnemy;
-    public Target(boolean isAffectCells,boolean isAffectHero, boolean isTargetEnemy,
+
+    public Target(boolean isAffectCells, boolean isAffectHero, boolean isTargetEnemy,
                   boolean isAffectMinion, boolean isDependentToHeroLocation, boolean isRandom,
-                  int rowsAffected, int columnsAffected, TargetType targetType){
+                  int rowsAffected, int columnsAffected, TargetType targetType) {
         this.isAffectCells = isAffectCells;
         this.isTargetEnemy = isTargetEnemy;
         this.isAffectHero = isAffectHero;

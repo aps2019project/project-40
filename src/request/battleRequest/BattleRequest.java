@@ -165,7 +165,7 @@ public class BattleRequest extends Request {
         selectAndUseCardRequest.setForUse(true);
         selectAndUseCardRequest.setRow(
                 Integer.parseInt(
-                command.split("[\\(|\\)]")[1].split(",")[0]));
+                        command.split("[\\(|\\)]")[1].split(",")[0]));
 
         selectAndUseCardRequest.setColumn(
                 Integer.parseInt(

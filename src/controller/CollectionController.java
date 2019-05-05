@@ -14,7 +14,7 @@ import view.collectionMenuView.CollectionMenuView;
 public class CollectionController {
     private static CollectionController collectionController;
     private CollectionMenuView collectionMenuView = CollectionMenuView.getInstance();
-    private boolean isShopClosed = false;
+    private boolean isCollectionClosed = false;
     private Account account;
     private Collection collection;
 
@@ -29,9 +29,10 @@ public class CollectionController {
     }
 
     public void collectionControllerMain() {
+        isCollectionClosed = false;
         account = Controller.getInstance().getAccount();
         collection = account.getCollection();
-        while (!isShopClosed) {
+        while (!isCollectionClosed) {
             CollectionRequest collectionRequest = CollectionRequest.getInstance().getCollectionOptionList();
 
             if (collectionRequest instanceof SimpleRequest)
@@ -52,7 +53,7 @@ public class CollectionController {
     public void simpleRequest(SimpleRequest simpleRequest) {
         switch (simpleRequest.getMessage()) {
             case EXIT:
-                isShopClosed = true;
+                isCollectionClosed = true;
                 return;
             case SHOW:
                 collectionMenuView.show(account.getCollection().getCards(), true);
@@ -93,7 +94,7 @@ public class CollectionController {
                 deleteDeck(deck);
                 break;
             case CREATE_DECK:
-                createDeck(deck,deckCommand.getDeckName());
+                createDeck(deck, deckCommand.getDeckName());
                 break;
             case VALIDATE_DECK:
                 validateDeck(deck);
@@ -123,13 +124,13 @@ public class CollectionController {
             collectionMenuView.showError(CollectionErrors.DECK_IS_NOT_VALID);
     }
 
-    public void createDeck(Deck deck,String deckName) {
+    public void createDeck(Deck deck, String deckName) {
         if (deck != null) {
             collectionMenuView.showError(CollectionErrors.ALREADY_A_DECK_WITH_THIS_USERNAME);
             return;
         }
 
-        deck=new Deck();
+        deck = new Deck();
         deck.setDeckName(deckName);
 
     }

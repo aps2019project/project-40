@@ -25,7 +25,7 @@ public class AccountMenuRequest extends Request {
     }
 
     public AccountMenuRequest getCommand() {
-        String actualCommand=scanner.nextLine().trim();
+        String actualCommand = scanner.nextLine().trim();
         String command = actualCommand.toLowerCase();
         Pattern pattern = Pattern.compile("create account (\\w+)");
         Matcher matcher = pattern.matcher(command);

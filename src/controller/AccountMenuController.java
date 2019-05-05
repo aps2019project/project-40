@@ -78,7 +78,7 @@ public class AccountMenuController {
             return;
         }
         Controller.getInstance().addStack(StartMenuController.getInstance());
-        account=LoginMenu.getInstance().createAccount(userName, AccountMenuRequest.getInstance().getPassWord());
+        account = LoginMenu.getInstance().createAccount(userName, AccountMenuRequest.getInstance().getPassWord());
 
     }
 

@@ -21,7 +21,7 @@ public class MultiPlayerMenuRequest extends BattleMenuRequest {
                 this.mode = MatchType.COLLECT_THE_FLAGS;
                 break;
             default:
-                this.mode=null;
+                this.mode = null;
                 BattleMenuView.getInstance().showError(BattleMenuError.INVALID_COMMAND);
         }
     }

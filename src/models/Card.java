@@ -3,15 +3,15 @@ package models;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Card implements Serializable {
+public class Card implements Serializable, Cloneable {
     private int manaCost;
     private int price;
     private String cardID;
     private String cardName;
     private int sellCost;
     private String team;
-    private static int numberOfInstances;
-    private ArrayList<Spell> spells;
+    private static int numberOfInstances = 0;
+    private ArrayList<Spell> spells = new ArrayList<>();
     private String description;
     private CardType type;
 
@@ -61,17 +61,20 @@ public class Card implements Serializable {
     }
 
     public String getTeam() {
-
         return team;
     }
 
     public void setTeam(String team) {
-
         this.team = team;
     }
 
     @Override
     public String toString() {
         return "" + manaCost + "\n" + description + "\n" + type + "\n" + cardName + "\n" + price;
+    }
+
+    public Card clone() throws CloneNotSupportedException {
+        Card card = (Card) super.clone();
+        return card;
     }
 }

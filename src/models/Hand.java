@@ -3,7 +3,7 @@ package models;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Hand  implements Serializable {
+public class Hand implements Serializable {
 
     private ArrayList<Card> cards = new ArrayList<>();
     private Card reserveCard;
@@ -30,7 +30,6 @@ public class Hand  implements Serializable {
 
     private boolean isThereEmptyPlace() {
 
-        if (cards.size() < MAX_HANDS_CARD) return true;
-        return false;
+        return cards.size() < MAX_HANDS_CARD;
     }
 }

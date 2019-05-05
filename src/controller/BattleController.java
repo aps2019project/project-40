@@ -6,9 +6,6 @@ import request.battleRequest.BattleRequest;
 import request.battleRequest.BattleRequestChilds.*;
 import view.battleView.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
 public class BattleController {
 
     private static BattleController battleController;
