@@ -2,6 +2,7 @@ package controller;
 
 import models.Account;
 import models.Collection;
+import models.JsonToCard;
 import request.shopMenuRequest.ShopRequest;
 import request.shopMenuRequest.shopRequestChilds.ShopRequestVariable;
 import request.shopMenuRequest.shopRequestChilds.ShopRequestWithOutVariable;
@@ -79,6 +80,8 @@ public class ShopController {
     }
 
     private static Collection initializeShopCollection() {
-        return null;
+        Collection collection = new Collection();
+        JsonToCard.moveToCollection(collection);
+        return collection;
     }
 }
