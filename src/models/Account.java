@@ -8,20 +8,25 @@ import java.io.Serializable;
 public class Account implements Serializable {
 
     private String userName, password;
-    private int initialMoney = 15000;
-    private int money;
+    private int money = 15000;
     private Collection collection;
     private Hand hand;
     private boolean isAI = false;
     private int winsNumber = 0;
 
-    public Hand getHand() {
+    public int getMoney() {
+        return money;
+    }
 
+    public void setMoney(int money) {
+        this.money = money;
+    }
+
+    public Hand getHand() {
         return hand;
     }
 
     public String getUserName() {
-
         return userName;
     }
 
@@ -42,16 +47,14 @@ public class Account implements Serializable {
         return false;
     }
 
-    public void playTurn() {
-    }
-
     public void addToHand(Card card) {
 
     }
 
     public Collection getCollection() {
-
-        return collection;
+        if (collection==null)
+            collection=new Collection();
+            return collection;
     }
 
     public int getWinsNumber() {
@@ -75,7 +78,7 @@ public class Account implements Serializable {
             return;
 
         try {
-            FileOutputStream fos = new FileOutputStream("users/"+account.getUserName()+".ser");
+            FileOutputStream fos = new FileOutputStream("users/" + account.getUserName() + ".ser");
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             // write object to file
             oos.writeObject(account);

@@ -8,24 +8,26 @@ public class Card implements Serializable {
     private int price;
     private String cardID;
     private String cardName;
+    private int sellCost;
     private String team;
     private static int numberOfInstances;
     private ArrayList<Spell> spells;
     private String description;
     private CardType type;
 
-    public int getPrice() {
+    public int getSellCost() {
+        return sellCost;
+    }
 
+    public int getPrice() {
         return price;
     }
 
     public String getCardID() {
-
         return cardID;
     }
 
     public int getManaCost() {
-
         return manaCost;
     }
 

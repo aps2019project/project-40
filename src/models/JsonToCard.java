@@ -11,9 +11,9 @@ public class JsonToCard {
     public static void moveToCollection(Collection collection){
         Gson gson = new Gson();
         saveSpellCards(gson,collection);
-        saveHeroCards(gson,collection);
+        //saveHeroCards(gson,collection);
         saveMinionCards(gson,collection);
-        saveItemCards(gson,collection);
+        //saveItemCards(gson,collection);
     }
     public static void saveSpellCards(Gson gson, Collection collection){
         File folder = new File("./json/spell/");

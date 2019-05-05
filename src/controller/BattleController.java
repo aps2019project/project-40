@@ -321,7 +321,6 @@ public class BattleController {
     }
 
     private void helpRequest() {
-
         System.out.println("Game info");
         System.out.println("Show my minions");
         System.out.println("Show opponent minions");

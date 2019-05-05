@@ -1,6 +1,8 @@
 package controller;
 
+import models.Account;
 import models.BattleMenu;
+import models.LoginMenu;
 import request.startMenuController.StartMenuRequest;
 import request.startMenuController.startMenuRequestChilds.StartMenuOption;
 import view.StartMenuView;
@@ -39,6 +41,9 @@ public class StartMenuController {
                 Controller.getInstance().endProgram();
                 break;
             case HELP:
+                break;
+            case SAVE:
+                Account.save(Controller.getInstance().getAccount());
                 break;
         }
     }
