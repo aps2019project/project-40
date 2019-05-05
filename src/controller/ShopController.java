@@ -36,6 +36,7 @@ public class ShopController {
                 handelShopRequestWithOutVariable((ShopRequestWithOutVariable) shopRequest);
 
         }
+        Controller.getInstance().addStack(StartMenuController.getInstance());
     }
 
     public void handelShopRequestVariable(ShopRequestVariable shopRequestVariable) {
