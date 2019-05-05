@@ -1,6 +1,11 @@
 package models;
 
-public class Account {
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+
+public class Account implements Serializable {
 
     private String userName, password;
     private int initialMoney = 15000;
@@ -60,6 +65,21 @@ public class Account {
     }
 
     public static void save(Account account) {
+        LoginMenu.getInstance().saveUserNames();
+        if (account.getUserName().isEmpty())
+            return;
 
+        try {
+            FileOutputStream fos = new FileOutputStream("users/"+account.getUserName()+".ser");
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            // write object to file
+            oos.writeObject(account);
+            System.out.println("Done");
+            // closing resources
+            oos.close();
+            fos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
