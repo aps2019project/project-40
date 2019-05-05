@@ -1,0 +1,34 @@
+{
+  "cardName": "predator_lion",
+  "description": "a MELEE minion, 8 HP and 1 AP, \n with ON_ATTACK: holy buff of prey has no effect",
+  "type": "MINION",
+  "price": 600,
+  "spells ": [
+    {
+      "spellName": "pl_holy",
+      "buff": {
+        "duration": 1,
+        "poison" : 1,
+        "lasts" : true,
+        "specialMinion": "Predator_Lion"
+      },
+      "target": {
+        "rowsAffected": 1,
+        "columnsAffected": 1,
+        "isAffectHero": true,
+        "targetType": {
+          "isHybrid": true,
+          "isRanged": true,
+          "isMelee": true
+        },
+        "isAffectMinion": true,
+        "isTargetEnemy": true
+      }
+    }
+  ],
+  "HP": 8,
+  "AP": 1,
+  "manaCost": 2,
+  "unitType": "MELEE",
+  "specialPowerType" : "ON_ATTACK"
+}

@@ -1,0 +1,34 @@
+{
+  "cardName": "poisonous_snake",
+  "description": "a RANGED minion, 5 HP and 6 AP, with ON_ATTACK: 3 turn poison buff",
+  "type": "MINION",
+  "price": 300,
+  "spells ": [
+    {
+      "spellName": "ps_poison",
+      "buff": {
+        "duration": 3,
+        "poison" : 1,
+        "lasts" : true
+      },
+      "target": {
+        "rowsAffected": 1,
+        "columnsAffected": 1,
+        "isAffectHero": true,
+        "targetType": {
+          "isHybrid": true,
+          "isRanged": true,
+          "isMelee": true
+        },
+        "isAffectMinion": true,
+        "isTargetEnemy": true
+      }
+    }
+  ],
+  "HP": 6,
+  "AP": 6,
+  "manaCost": 4,
+  "unitType": "RANGED",
+  "specialPowerType" : "ON_ATTACK",
+  "range": 4
+}

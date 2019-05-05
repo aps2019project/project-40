@@ -1,0 +1,33 @@
+{
+  "cardName": "wolf",
+  "description": "a MELEE minion, 6 HP and 1 AP, \n with ON_ATTACK: decreases 6 points HP next round",
+  "type": "MINION",
+  "price": 400,
+  "spells ": [
+    {
+      "spellName": "wolf_on_attack",
+      "buff": {
+        "weaknessHP": 6,
+        "duration": 1,
+        "lasts" : true,
+        "waitingTime": 1
+      },
+      "target": {
+        "rowsAffected": 1,
+        "columnsAffected": 1,
+        "targetType": {
+          "isHybrid": true,
+          "isRanged": true,
+          "isMelee": true
+        },
+        "isAffectMinion": true,
+        "isTargetEnemy": true
+      }
+    }
+  ],
+  "HP": 6,
+  "AP": 1,
+  "manaCost": 3,
+  "unitType": "MELEE",
+  "specialPowerType" : "ON_ATTACK"
+}

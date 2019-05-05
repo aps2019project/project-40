@@ -1,0 +1,34 @@
+{
+  "cardName": "persian_athlete",
+  "description": "a MELEE minion, 24 HP and 6 AP \n ON_ATTACK: 5 points more AP than number of times attacked to some unit",
+  "type": "MINION",
+  "price": 600,
+  "spells ": [
+    {
+      "spellName": "pa_on_attack",
+      "buff": {
+        "duration": 1,
+        "weaknessHP": 5,
+        "lasts" : true,
+        "specialMinion": "PERSIAN_ATHLETE"
+      },
+      "target": {
+        "rowsAffected": 1,
+        "columnsAffected": 1,
+        "isAffectHero": true,
+        "targetType": {
+          "isHybrid": true,
+          "isRanged": true,
+          "isMelee": true
+        },
+        "isAffectMinion": true,
+        "isTargetEnemy": true
+      }
+    }
+  ],
+  "HP": 24,
+  "AP": 6,
+  "manaCost": 9,
+  "unitType": "MELEE",
+  "specialPowerType" : "ON_ATTACK"
+}

@@ -52,8 +52,4 @@ public class Card {
         return type;
     }
 
-    @Override
-    public String toString() {
-        return ""+ manaCost + "\n" + description + "\n" + type + "\n" + cardName + "\n" + price;
-    }
 }
