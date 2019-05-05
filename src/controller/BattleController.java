@@ -224,7 +224,8 @@ public class BattleController {
     }
 
     private void showMyMinionsRequest() {
-        //todo
+
+
     }
 
     private void showOpponentMinionsRequest() {

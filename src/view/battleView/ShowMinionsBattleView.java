@@ -17,19 +17,9 @@ public class ShowMinionsBattleView extends BattleView {
         return cardsID;
     }
 
-    public void setCardsID(ArrayList<String> cardsID) {
-
-        this.cardsID = cardsID;
-    }
-
     public ArrayList<String> getCardsName() {
 
         return cardsName;
-    }
-
-    public void setCardsName(ArrayList<String> cardsName) {
-
-        this.cardsName = cardsName;
     }
 
     public ArrayList<Integer> getHealthPoints() {
@@ -37,19 +27,9 @@ public class ShowMinionsBattleView extends BattleView {
         return healthPoints;
     }
 
-    public void setHealthPoints(ArrayList<Integer> healthPoints) {
-
-        this.healthPoints = healthPoints;
-    }
-
     public ArrayList<Coordination> getLocations() {
 
         return locations;
-    }
-
-    public void setLocations(ArrayList<Coordination> locations) {
-
-        this.locations = locations;
     }
 
     public ArrayList<Integer> getAttackPoints() {
@@ -57,8 +37,10 @@ public class ShowMinionsBattleView extends BattleView {
         return attackPoints;
     }
 
-    public void setAttackPoints(ArrayList<Integer> attackPoints) {
+    public void setMinion(String cardID, String cardName, int healthPoint, Coordination location, int attackPoint) {
 
-        this.attackPoints = attackPoints;
+        this.cardsID.add(cardID);
+        this.cardsName.add(cardName);
+        this.
     }
 }
