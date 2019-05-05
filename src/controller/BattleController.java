@@ -1,14 +1,13 @@
 package controller;
 
-import models.Cell;
+import models.*;
 import models.GamePlay.Match;
-import models.MatchType;
-import models.Table;
 import request.battleRequest.BattleRequest;
 import request.battleRequest.BattleRequestChilds.*;
-import view.battleView.BattleView;
-import view.battleView.GameInfoBattleView;
-import view.battleView.GameInfoBattleViewKillTheHero;
+import view.battleView.*;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class BattleController {
 
@@ -27,7 +26,7 @@ public class BattleController {
         return battleController;
     }
 
-    public void mainBattleController(Match match){
+    public void mainBattleController(Match match) {
 
         //todo
         this.match = match;
@@ -61,11 +60,11 @@ public class BattleController {
 
     private void selectAndUseCardRequest(SelectAndUseCardRequest request) {
         //todo
-        if (request.isForMove());
-        if (request.isForAttack());
-        if (request.isForAttackCombo());
-        if (request.isForShowInfo());
-        if (request.isForUse());
+        if (request.isForMove()) ;
+        if (request.isForAttack()) ;
+        if (request.isForAttackCombo()) ;
+        if (request.isForShowInfo()) ;
+        if (request.isForUse()) ;
 
     }
 
@@ -81,9 +80,9 @@ public class BattleController {
 
     private void enterGraveYardRequest(EnterGraveYardRequest request) {
         //todo
-        if (request.isForShowInfo());
-        if (request.isForShowCards());
-        if (request.isForExit());
+        if (request.isForShowInfo()) ;
+        if (request.isForShowCards()) ;
+        if (request.isForExit()) ;
     }
 
     private void insertCardRequest(InsertCardRequest request) {
@@ -93,14 +92,16 @@ public class BattleController {
 
     private void requestWithoutVariable(RequestWithoutVariable request) {
         //todo
-        if (request.getEnumRequest() == RequestWithoutVariableEnum.GAME_INFO_REQUEST);
-        if (request.getEnumRequest() == RequestWithoutVariableEnum.SHOW_MY_MINIONS_REQUEST);
-        if (request.getEnumRequest() == RequestWithoutVariableEnum.SHOW_OPPONENT_MINIONS_REQUEST);
-        if (request.getEnumRequest() == RequestWithoutVariableEnum.SHOW_NEXT_CARD_REQUEST);
-        if (request.getEnumRequest() == RequestWithoutVariableEnum.SHOW_HAND_REQUEST);
-        if (request.getEnumRequest() == RequestWithoutVariableEnum.END_TURN_REQUEST);
-        if (request.getEnumRequest() == RequestWithoutVariableEnum.SHOW_COLLECTED_ITEM_REQUEST);
-        if (request.getEnumRequest() == RequestWithoutVariableEnum.END_GAME_REQUEST);
+        if (request.getEnumRequest() == RequestWithoutVariableEnum.GAME_INFO_REQUEST)
+            gameInfoRequest();
+
+        else if (request.getEnumRequest() == RequestWithoutVariableEnum.SHOW_MY_MINIONS_REQUEST) ;
+        else if (request.getEnumRequest() == RequestWithoutVariableEnum.SHOW_OPPONENT_MINIONS_REQUEST) ;
+        else if (request.getEnumRequest() == RequestWithoutVariableEnum.SHOW_NEXT_CARD_REQUEST) ;
+        else if (request.getEnumRequest() == RequestWithoutVariableEnum.SHOW_HAND_REQUEST) ;
+        else if (request.getEnumRequest() == RequestWithoutVariableEnum.END_TURN_REQUEST) ;
+        else if (request.getEnumRequest() == RequestWithoutVariableEnum.SHOW_COLLECTED_ITEM_REQUEST) ;
+        else if (request.getEnumRequest() == RequestWithoutVariableEnum.END_GAME_REQUEST) ;
 
         if (request.getEnumRequest() == RequestWithoutVariableEnum.HELP_REQUEST)
             helpRequest();
@@ -108,30 +109,118 @@ public class BattleController {
 
     private void gameInfoRequest() {
 
-        if (match.getMatchType() == MatchType.KILL_THE_HERO) {
+        Cell[][] cells = match.getTable().getCells();
 
-            GameInfoBattleViewKillTheHero gameInfoBattleViewKillTheHero = new GameInfoBattleViewKillTheHero();
-            gameInfoBattleViewKillTheHero.setPlayer1Mana(match.getPlayer1Mana());
-            gameInfoBattleViewKillTheHero.setPlayer2Mana(match.getPlayer2Mana());
-            //todo hp
-            gameInfoBattleViewKillTheHero.show(gameInfoBattleViewKillTheHero);
-        } else
+        if (match.getMatchType() == MatchType.KILL_THE_HERO)
+            gameInfoRequestKillTheHeroMode(cells);
 
-        if (match.getMatchType() == MatchType.HOLD_THE_FLAG) {
+        else if (match.getMatchType() == MatchType.HOLD_THE_FLAG)
+            gameInfoRequestHoldTheFlagMode(cells);
 
-            Cell[][] cells = match.getTable().getCells();
+        else if (match.getMatchType() == MatchType.COLLECT_THE_FLAGS)
+            gameInfoRequestCollectTheFlagsMode(cells);
+    }
 
-            for (int row = 0; row < Table.ROWS; row++) {
-                for (int column = 0; column < Table.COLUMNS; column++) {
+    private void gameInfoRequestKillTheHeroMode(Cell[][] cells) {
 
-                    if (cells[row][column].isThereFlag()) {
+        GameInfoBattleViewKillTheHero gameInfoBattleViewKillTheHero = new GameInfoBattleViewKillTheHero();
+        gameInfoBattleViewKillTheHero.setPlayer1Mana(match.getPlayer1Mana());
+        gameInfoBattleViewKillTheHero.setPlayer2Mana(match.getPlayer2Mana());
 
+        //for find the hero
+        for (Cell[] row : cells) {
+            for (Cell cell : row) {
 
+                try {
+                    Card card = cell.getCard();
+
+                    if (card.getType() == CardType.HERO) {
+
+                        Unit hero = (Unit) card;
+
+                        if (match.getPlayer1().getUserName().equals(card.getTeam()))
+                            gameInfoBattleViewKillTheHero.setPlayer1HeroHP(hero.getHP());
+                        else
+                            gameInfoBattleViewKillTheHero.setPlayer2HeroHP(hero.getHP());
                     }
+                } catch (Exception e) {
+                    //there isn't hero in this cell
                 }
             }
         }
-        if (match.getMatchType() == MatchType.COLLECT_THE_FLAGS);
+        gameInfoBattleViewKillTheHero.show(gameInfoBattleViewKillTheHero);
+    }
+
+    private void gameInfoRequestHoldTheFlagMode(Cell[][] cells) {
+
+        GameInfoBattleViewHoldTheFlag gameInfoBattleViewHoldTheFlag = new GameInfoBattleViewHoldTheFlag();
+
+        for (Cell[] row : cells) {
+            for (Cell cell : row) {
+
+                try {
+                    Card card = cell.getCard();
+                    if (card.getType() == CardType.FLAG) {
+
+                        gameInfoBattleViewHoldTheFlag.setFlagCoordination(cell.getCoordination());
+                        gameInfoBattleViewHoldTheFlag.show(gameInfoBattleViewHoldTheFlag);
+                        return;
+                    }
+                } catch (Exception e) {
+                    //there isn't flag in this cell
+                }
+            }
+        }
+
+        for (Cell[] row : cells) {
+            for (Cell cell : row) {
+
+                try {
+                    Card card = cell.getCard();
+                    if (card.getType() == CardType.HERO || card.getType() == CardType.MINION) {
+
+                        Unit unit = (Unit) card;
+                        if (unit.getFlag() > 0) {
+                            gameInfoBattleViewHoldTheFlag.setFlagHolderName(unit.getCardName());
+                            gameInfoBattleViewHoldTheFlag.setFlagHolderTeam(card.getTeam());
+                            gameInfoBattleViewHoldTheFlag.show(gameInfoBattleViewHoldTheFlag);
+                            return;
+                        }
+                    }
+                } catch (Exception e) {
+                    //there isn't unit in this cell
+                }
+            }
+        }
+    }
+
+    private void gameInfoRequestCollectTheFlagsMode(Cell[][] cells) {
+
+        GameInfoBattleViewCollectTheFlags gameInfoBattleViewCollectTheFlags = new GameInfoBattleViewCollectTheFlags();
+
+        for (Cell[] row : cells) {
+            for (Cell cell : row) {
+
+                try {
+                    Card card = cell.getCard();
+
+                    if (card.getType() == CardType.FLAG)
+                        gameInfoBattleViewCollectTheFlags.setFlagCoordination(cell.getCoordination());
+
+                    else if (card.getType() == CardType.MINION || card.getType() == CardType.HERO) {
+
+                        Unit unit = (Unit) card;
+
+                        if (unit.getFlag() > 0)
+                            gameInfoBattleViewCollectTheFlags.setFlagHolder(
+                                    unit.getCardName(), unit.getTeam(), unit.getFlag());
+                    }
+                } catch (Exception e) {
+                    //there is any flag in this cell
+                }
+            }
+        }
+        gameInfoBattleViewCollectTheFlags.show(gameInfoBattleViewCollectTheFlags);
     }
 
     private void showMyMinionsRequest() {

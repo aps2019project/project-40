@@ -117,6 +117,7 @@ public class BattleView {
     private void showGameInfoModeCollectTheFlags(GameInfoBattleViewCollectTheFlags gameInfo) {
 
         ArrayList<Coordination> coordinations = gameInfo.getFlagsCoordination();
+        ArrayList<String[]> flagsHolders = gameInfo.getFlagHolders();
 
         for (Coordination coordination : coordinations) {
 
@@ -124,8 +125,10 @@ public class BattleView {
                     " and column : " + coordination.getColumn());
         }
 
-        gameInfo.getFlagHoldersName().forEach((holderName, team) ->
-                System.out.printf("%s of %s has flag\n", holderName, team));
+        for (String[] flagHolder : flagsHolders) {
+
+            System.out.printf("%s of %s has %s flag(s)", flagHolder[0], flagHolder[1], flagHolder[2]);
+        }
     }
 
     private void showMinions(ShowMinionsBattleView showMinions) {

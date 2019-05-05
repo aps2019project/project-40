@@ -3,21 +3,24 @@ package models;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Card  implements Serializable {
+public class Card implements Serializable {
     private int manaCost;
     private int price;
     private String cardID;
-    private int numberOfInstances;
     private String cardName;
+    private String team;
+    private static int numberOfInstances;
     private ArrayList<Spell> spells;
     private String description;
     private CardType type;
+
     public int getPrice() {
 
         return price;
     }
 
     public String getCardID() {
+
         return cardID;
     }
 
@@ -25,10 +28,12 @@ public class Card  implements Serializable {
 
         return manaCost;
     }
-    Card(){
+
+    Card() {
         numberOfInstances += 1;
     }
-    Card(int manaCost, int price, String cardName, ArrayList<Spell> spells, String description, CardType type){
+
+    Card(int manaCost, int price, String cardName, ArrayList<Spell> spells, String description, CardType type) {
         this.manaCost = manaCost;
         this.price = price;
         this.cardName = cardName;
@@ -53,8 +58,18 @@ public class Card  implements Serializable {
         return type;
     }
 
+    public String getTeam() {
+
+        return team;
+    }
+
+    public void setTeam(String team) {
+
+        this.team = team;
+    }
+
     @Override
     public String toString() {
-        return ""+ manaCost + "\n" + description + "\n" + type + "\n" + cardName + "\n" + price;
+        return "" + manaCost + "\n" + description + "\n" + type + "\n" + cardName + "\n" + price;
     }
 }
