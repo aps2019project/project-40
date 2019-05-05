@@ -1,7 +1,9 @@
 package controller;
 
 import models.Account;
+import models.Card;
 import models.Collection;
+import models.Deck;
 import request.collectionMenuRequest.CollectionRequest;
 import request.collectionMenuRequest.collectionRequestChilds.Add;
 import request.collectionMenuRequest.collectionRequestChilds.DeckCommand;
@@ -43,8 +45,8 @@ public class CollectionController {
 
             if (collectionRequest instanceof DeckCommand)
                 handelDeckCommand((DeckCommand) collectionRequest);
-
         }
+        Controller.getInstance().addStack(StartMenuController.getInstance());
     }
 
     public void simpleRequest(SimpleRequest simpleRequest) {
@@ -53,6 +55,7 @@ public class CollectionController {
                 isShopClosed = true;
                 return;
             case SHOW:
+                collectionMenuView.show(account.getCollection().getCards(), true);
                 break;
             case HELP:
                 collectionMenuView.showHelp();
@@ -61,7 +64,7 @@ public class CollectionController {
                 Account.save(account);
                 break;
             case SHOW_ALL_DECKS:
-                showAllDecks();
+                collectionMenuView.showAllDecks(account.getCollection());
                 break;
         }
     }
@@ -71,47 +74,85 @@ public class CollectionController {
         String deckName = addRequst.getDeckName();
         CollectionErrors collectionErrors;
 
-        collectionErrors = collection.addToDeck(cardID,deckName);
+        collectionErrors = collection.addToDeck(cardID, deckName);
         if (collectionErrors != null)
             collectionMenuView.showError(collectionErrors);
 
     }
 
     public void handelDeckCommand(DeckCommand deckCommand) {
-        if (!collection.isDeckNameValid(deckCommand.getDeckName())) {
-            collectionMenuView.showError(CollectionErrors.CARD_NOT_FOUND);
-            return;
-        }
-
+        Deck deck = collection.getDeckByName(deckCommand.getDeckName());
         switch (deckCommand.getType()) {
             case SHOW_DECK:
-
+                collectionMenuView.showDeck(deck);
                 break;
             case SELECT_DECK:
-
+                selectDeck(deck);
                 break;
             case DELETE_DECK:
+                deleteDeck(deck);
                 break;
             case CREATE_DECK:
+                createDeck(deck,deckCommand.getDeckName());
                 break;
             case VALIDATE_DECK:
+                validateDeck(deck);
                 break;
         }
     }
+
+    public void deleteDeck(Deck deck) {
+        if (deck == null) {
+            collectionMenuView.showError(CollectionErrors.DECK_DOES_NOT_EXIST);
+            return;
+        }
+        collection.getDecks().remove(deck);
+        for (Card card : deck.getCards())
+            collection.getCards().add(card);
+    }
+
+    public void selectDeck(Deck deck) {
+        if (deck == null) {
+            collectionMenuView.showError(CollectionErrors.DECK_DOES_NOT_EXIST);
+            return;
+        }
+
+        if (deck.isDeckValidate())
+            collection.setSelectedDeck(deck);
+        else
+            collectionMenuView.showError(CollectionErrors.DECK_IS_NOT_VALID);
+    }
+
+    public void createDeck(Deck deck,String deckName) {
+        if (deck != null) {
+            collectionMenuView.showError(CollectionErrors.ALREADY_A_DECK_WITH_THIS_USERNAME);
+            return;
+        }
+
+        deck=new Deck();
+        deck.setDeckName(deckName);
+
+    }
+
+    public void validateDeck(Deck deck) {
+        if (deck == null) {
+            collectionMenuView.showError(CollectionErrors.DECK_DOES_NOT_EXIST);
+            return;
+        }
+
+        if (deck.isDeckValidate())
+            collectionMenuView.showError(CollectionErrors.DECK_IS_NOT_VALID);
+    }
+
 
     public void remove(Remove removeRequest) {
         String cardID = removeRequest.getCardID();
         String deckName = removeRequest.getDeckName();
         CollectionErrors collectionErrors;
 
-        collectionErrors = collection.removeFromDeck(cardID,deckName);
+        collectionErrors = collection.removeFromDeck(cardID, deckName);
         if (collectionErrors != null)
             collectionMenuView.showError(collectionErrors);
     }
-
-    public void showAllDecks() {
-
-    }
-
 
 }

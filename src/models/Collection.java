@@ -63,20 +63,20 @@ public class Collection implements Serializable {
         cards.add(card);
     }
 
-    public CollectionErrors addToDeck(String cardID,String deckName) {
+    public CollectionErrors addToDeck(String cardID, String deckName) {
 
         return null;
     }
 
-    public CollectionErrors removeFromDeck(String cardID,String deckName) {
+    public CollectionErrors removeFromDeck(String cardID, String deckName) {
 
         return null;
     }
 
-    public boolean isDeckNameValid(String deckName) {
+    public Deck getDeckByName(String deckName) {
         for (Deck deck : decks)
             if (deck.getDeckName().equals(deckName))
-                return true;
-        return false;
+                return deck;
+        return null;
     }
 }

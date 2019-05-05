@@ -43,7 +43,6 @@ public class BattleMenuController {
         if (battleMenuRequest instanceof RequestMatchType)
             handelMatchType((RequestMatchType) battleMenuRequest);
 
-
     }
 
     public boolean checkValidateDeck() {
