@@ -41,6 +41,5 @@ public class ShowMinionsBattleView extends BattleView {
 
         this.cardsID.add(cardID);
         this.cardsName.add(cardName);
-        this.
     }
 }
