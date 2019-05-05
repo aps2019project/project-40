@@ -139,9 +139,9 @@ public class BattleController {
                         Unit hero = (Unit) card;
 
                         if (match.getPlayer1().getUserName().equals(card.getTeam()))
-                            gameInfoBattleViewKillTheHero.setPlayer1HeroHP(hero.getHP());
+                            gameInfoBattleViewKillTheHero.setPlayer1HeroHP(hero.getHealthPoint());
                         else
-                            gameInfoBattleViewKillTheHero.setPlayer2HeroHP(hero.getHP());
+                            gameInfoBattleViewKillTheHero.setPlayer2HeroHP(hero.getHealthPoint());
                     }
                 } catch (Exception e) {
                     //there isn't hero in this cell
