@@ -1,29 +1,37 @@
 package models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class Deck {
-
+public class Deck implements Serializable {
+    private String deckName;
     private ArrayList<Card> cards = new ArrayList<>();
-    //private Hero hero;
     private int maxCardNumber;
     private Item item;
 
-    public ArrayList<Card> getCards() {
+    public String getDeckName() {
+        return deckName;
+    }
 
+    public void setDeckName(String deckName) {
+        this.deckName = deckName;
+    }
+
+    public ArrayList<Card> getCards() {
         return cards;
     }
 
-    public boolean isDeckValidate(){
+    public boolean isDeckValidate() {
         return true;
     }
 
-    public Card getLastCard(){
-        return  null;
+    public Card getLastCard() {
+        return null;
     }
 
-    public void shuffleCards(){
+    public void shuffleCards() {
         Collections.shuffle(cards);
     }
+
 }

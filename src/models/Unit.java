@@ -1,12 +1,14 @@
 package models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Unit extends Card{
+public class Unit extends Card implements Serializable {
     private int HP;
     private int AP;
     private ArrayList<Buff> buffs;
     private SpecialPowerType specialPowerType;
+    private Spell specialPower;
     private UnitType unitType;
     private boolean combo;
     private int flag;
@@ -24,15 +26,15 @@ public class Unit extends Card{
         this.flag = flag;
         this.range = range;
     }
+
+    public Spell getSpecialPower() {
+        return specialPower;
+    }
+
     public int getHealthPoint(){
         return HP;
     }
     public int getAttackPoint(){
-        return AP;
-    }
-
-
-    public int getAP() {
         return AP;
     }
 
@@ -44,10 +46,6 @@ public class Unit extends Card{
         return buffs;
     }
 
-    public int getHP() {
-        return HP;
-    }
-
     public UnitType getUnitType() {
         return unitType;
     }
@@ -56,15 +54,16 @@ public class Unit extends Card{
         this.buffs.add(buff);
     }
 
-    public boolean isCombo() {
-        return combo;
-    }
-
     public int getFlag() {
         return flag;
     }
 
     public int getRange() {
         return range;
+    }
+
+    public boolean hasComboAbility() {
+
+        return combo;
     }
 }

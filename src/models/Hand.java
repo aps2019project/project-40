@@ -1,13 +1,19 @@
 package models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Hand {
+public class Hand  implements Serializable {
 
     private ArrayList<Card> cards = new ArrayList<>();
     private Card reserveCard;
     private Card selectedCard;
     private final int MAX_HANDS_CARD = 5;
+
+    public Card getReserveCard() {
+
+        return reserveCard;
+    }
 
     public ArrayList<Card> getCards() {
 

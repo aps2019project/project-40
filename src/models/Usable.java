@@ -1,6 +1,8 @@
 package models;
 
-public class Usable extends Item{
+import java.io.Serializable;
+
+public class Usable extends Item  implements Serializable {
     public Spell getSpell(){
         return spell;
     }

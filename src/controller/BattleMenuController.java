@@ -1,6 +1,7 @@
 package controller;
 
 import models.Account;
+import models.GamePlay.Match;
 import models.LoginMenu;
 import models.MatchType;
 import request.battleMenuRequest.BattleMenuRequest;
@@ -42,12 +43,10 @@ public class BattleMenuController {
         if (battleMenuRequest instanceof RequestMatchType)
             handelMatchType((RequestMatchType) battleMenuRequest);
 
-
     }
 
     public boolean checkValidateDeck() {
-        return true;
-        //return account.getCollection().getSelectedDeck().isDeckValidate();
+        return account.getCollection().getSelectedDeck().isDeckValidate();
     }
 
     public void handelMatchType(RequestMatchType requestMatchType) {
@@ -72,7 +71,7 @@ public class BattleMenuController {
     }
 
     public void playMultiPlayer() {
-        battleMenuView.showUsers(getUsernamOfAllUsers(account));
+        battleMenuView.showUsers(getUsernameOfAllUsers(account));
         String name = battleMenuRequest.getUserName();
 
         if (LoginMenu.getInstance().checkIfAccountExist(name)) {
@@ -87,19 +86,59 @@ public class BattleMenuController {
     }
 
     public void playSinglePlayerCustomMode() {
-        CustomGameRequest customGameRequest=(CustomGameRequest) BattleMenuRequest.getInstance().customGame();
-        if (customGameRequest.getMode()==null)
+        CustomGameRequest customGameRequest = (CustomGameRequest) BattleMenuRequest.getInstance().customGame();
+        if (customGameRequest.getMode() == null)
             battleMenuView.showError(BattleMenuError.INVALID_COMMAND);
-        //else if (customGameRequest.getDeckName())
+        else {
+            account.getCollection().changeSelectedDeck(customGameRequest.getDeckName());
+            if (!checkValidateDeck()) {
+                battleMenuView.showError(BattleMenuError.INVALID_DECK);
+                return;
+            }
+
+            Account playerAI;
+            if (customGameRequest.getMode().equals(MatchType.COLLECT_THE_FLAGS)) {
+                playerAI = Account.getAIAccount(MatchType.COLLECT_THE_FLAGS);
+                Match match = new Match(customGameRequest.getFlagsNumber(), account, playerAI);
+                BattleController.getInstance().mainBattleController(match);
+                return;
+            } else {
+                playerAI = Account.getAIAccount(customGameRequest.getMode());
+                Match match = new Match(customGameRequest.getMode(), account, playerAI);
+                BattleController.getInstance().mainBattleController(match);
+                return;
+            }
+
+        }
     }
 
     public void playSinglePlayerStoryMode() {
-        int mode=BattleMenuRequest.getInstance().storyGame();
-        if (mode==0)
-            battleMenuView.showError(BattleMenuError.INVALID_COMMAND);
+        int mode = BattleMenuRequest.getInstance().storyGame();
+        Account playerAI;
+        Match match;
+        switch (mode) {
+            case 1:
+                playerAI = Account.getAIAccount(MatchType.KILL_THE_HERO);
+                match = new Match(MatchType.KILL_THE_HERO, account, playerAI);
+                BattleController.getInstance().mainBattleController(match);
+                break;
+            case 2:
+                playerAI = Account.getAIAccount(MatchType.HOLD_THE_FLAG);
+                match = new Match(MatchType.HOLD_THE_FLAG, account, playerAI);
+                BattleController.getInstance().mainBattleController(match);
+                break;
+            case 3:
+                playerAI = Account.getAIAccount(MatchType.COLLECT_THE_FLAGS);
+                match = new Match(6, account, playerAI);
+                BattleController.getInstance().mainBattleController(match);
+                break;
+            case 0:
+                battleMenuView.showError(BattleMenuError.INVALID_COMMAND);
+                break;
+        }
     }
 
-    public static ArrayList<String> getUsernamOfAllUsers(Account currentAccount) {
+    public static ArrayList<String> getUsernameOfAllUsers(Account currentAccount) {
         ArrayList<String> listOfUsers = new ArrayList<>();
         for (Account account : LoginMenu.getUsers()) {
             if (account.getUserName().equals(currentAccount.getUserName()))
@@ -115,9 +154,17 @@ public class BattleMenuController {
         if (request == null)
             return;
         else {
+            if (request.getMode().equals(MatchType.COLLECT_THE_FLAGS)) {
 
-            //todo
-            //Match match=new Match();
+                Match match = new Match(request.getNumberOfFlags(), account, player2);
+                BattleController.getInstance().mainBattleController(match);
+                return;
+            } else {
+
+                Match match = new Match(request.getMode(), account, player2);
+                BattleController.getInstance().mainBattleController(match);
+                return;
+            }
 
         }
     }

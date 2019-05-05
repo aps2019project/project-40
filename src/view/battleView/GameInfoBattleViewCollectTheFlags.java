@@ -6,17 +6,21 @@ import java.util.HashMap;
 
 public class GameInfoBattleViewCollectTheFlags extends GameInfoBattleView {
 
-    private HashMap<String, String> flagHoldersName = new HashMap<>();
+    private ArrayList<String[]> flagHoldersName = new ArrayList<>();
     private ArrayList<Coordination> flagsCoordination = new ArrayList<>();
 
-    public HashMap<String, String> getFlagHoldersName() {
+    public ArrayList<String[]> getFlagHolders() {
 
         return flagHoldersName;
     }
 
-    public void setFlagHoldersName(HashMap<String, String> flagHoldersName) {
+    public void setFlagHolder(String flagHolderName, String flagHolderTeam, int flagsNumber) {
 
-        this.flagHoldersName = flagHoldersName;
+        String[] flagHolder = new String[3];
+        flagHolder[0] = flagHolderName;
+        flagHolder[1] = flagHolderTeam;
+        flagHolder[2] = Integer.toString(flagsNumber);
+        flagHoldersName.add(flagHolder);
     }
 
     public ArrayList<Coordination> getFlagsCoordination() {
@@ -24,8 +28,8 @@ public class GameInfoBattleViewCollectTheFlags extends GameInfoBattleView {
         return flagsCoordination;
     }
 
-    public void setFlagsCoordination(ArrayList<Coordination> flagsCoordination) {
+    public void setFlagCoordination(Coordination flagCoordination) {
 
-        this.flagsCoordination = flagsCoordination;
+        flagsCoordination.add(flagCoordination);
     }
 }

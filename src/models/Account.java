@@ -1,15 +1,24 @@
 package models;
 
-public class Account {
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+
+public class Account implements Serializable {
 
     private String userName, password;
-    private final int initialMoney = 15000;
+    private int initialMoney = 15000;
     private int money;
     private Collection collection;
     private Hand hand;
-    private Table playingTable;
-    private boolean isAI=false;
-    private int winsNumber=0;
+    private boolean isAI = false;
+    private int winsNumber = 0;
+
+    public Hand getHand() {
+
+        return hand;
+    }
 
     public String getUserName() {
 
@@ -56,6 +65,32 @@ public class Account {
     public void resetPlayerVariables() {
     }
 
+    public static Account getAIAccount(MatchType matchType) {
+        return null;
+    }
 
+    public static void save(Account account) {
+        LoginMenu.getInstance().saveUserNames();
+        if (account.getUserName().isEmpty())
+            return;
 
+        try {
+            FileOutputStream fos = new FileOutputStream("users/"+account.getUserName()+".ser");
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            // write object to file
+            oos.writeObject(account);
+            System.out.println("Done");
+            // closing resources
+            oos.close();
+            fos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public boolean equals(Account account) {
+
+        if (this.getUserName().equals(account.getUserName())) return true;
+        return false;
+    }
 }

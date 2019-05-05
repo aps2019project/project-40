@@ -117,6 +117,7 @@ public class BattleView {
     private void showGameInfoModeCollectTheFlags(GameInfoBattleViewCollectTheFlags gameInfo) {
 
         ArrayList<Coordination> coordinations = gameInfo.getFlagsCoordination();
+        ArrayList<String[]> flagsHolders = gameInfo.getFlagHolders();
 
         for (Coordination coordination : coordinations) {
 
@@ -124,8 +125,10 @@ public class BattleView {
                     " and column : " + coordination.getColumn());
         }
 
-        gameInfo.getFlagHoldersName().forEach((holderName, team) ->
-                System.out.printf("%s of %s has flag\n", holderName, team));
+        for (String[] flagHolder : flagsHolders) {
+
+            System.out.printf("%s of %s has %s flag(s)", flagHolder[0], flagHolder[1], flagHolder[2]);
+        }
     }
 
     private void showMinions(ShowMinionsBattleView showMinions) {
@@ -156,30 +159,30 @@ public class BattleView {
     private void showCardInfoHero(ShowCardInfoBattleViewHero showInfo) {
 
         System.out.println("Hero:");
-        System.out.println("Name: " + showInfo.getName());
-        System.out.println("Cost: " + showInfo.getCost());
-        System.out.println("Desc: " + showInfo.getDescription());
+        System.out.println("    Name: " + showInfo.getName());
+        System.out.println("    Cost: " + showInfo.getCost());
+        System.out.println("    Desc: \n" + showInfo.getDescription());
     }
 
     private void showCardInfoMinion(ShowCardInfoBattleViewMinion showInfo) {
 
-        System.out.println("Minion:");
-        System.out.println("Name: " + showInfo.getName());
-        System.out.println("HP: " + showInfo.getHealthPoint() +
+        System.out.println("    Minion:");
+        System.out.println("    Name: " + showInfo.getName());
+        System.out.println("    HP: " + showInfo.getHealthPoint() +
                 " AP:" + showInfo.getAttackPoint() + " MP:" + showInfo.getManaPoint());
-        System.out.println("Range: " + showInfo.getRange());
-        System.out.println("Combo-ability: " + showInfo.hasComboAbility());
-        System.out.println("Cost: " + showInfo.getCost());
-        System.out.println("Desc: " + showInfo.getDescription());
+        System.out.println("    Range: " + showInfo.getRange());
+        System.out.println("    Combo-ability: " + showInfo.hasComboAbility());
+        System.out.println("    Cost: " + showInfo.getCost());
+        System.out.println("    Desc: \n" + showInfo.getDescription());
     }
 
     private void showCardInfoSpell(ShowCardInfoBattleViewSpell showInfo) {
 
-        System.out.println("Spell:");
-        System.out.println("Name: " + showInfo.getName());
-        System.out.println("MP: " + showInfo.getManaPoint());
-        System.out.println("Cost: " + showInfo.getCost());
-        System.out.println("Desc: " + showInfo.getDescription());
+        System.out.println("    Spell:");
+        System.out.println("    Name: " + showInfo.getName());
+        System.out.println("    MP: " + showInfo.getManaPoint());
+        System.out.println("    Cost: " + showInfo.getCost());
+        System.out.println("    Desc: \n" + showInfo.getDescription());
     }
 
     private void showHand(ShowHandBattleView showHand) {
@@ -215,11 +218,20 @@ public class BattleView {
 
     private void showCards(ShowCardsBattleView showCards) {
 
-        ArrayList<String> cards = showCards.getCards();
+        ArrayList<ShowCardInfoBattleView> cardsInfo = showCards.getCardsInfo();
 
-        for (String card : cards) {
+        for (ShowCardInfoBattleView cardInfo : cardsInfo) {
 
-            System.out.println(card);
+            if (cardInfo instanceof ShowCardInfoBattleViewHero)
+                showCardInfoHero((ShowCardInfoBattleViewHero) cardInfo);
+
+            else if (cardInfo instanceof ShowCardInfoBattleViewSpell)
+                showCardInfoSpell((ShowCardInfoBattleViewSpell) cardInfo);
+
+            else if (cardInfo instanceof ShowCardInfoBattleViewMinion)
+                showCardInfoMinion((ShowCardInfoBattleViewMinion) cardInfo);
         }
     }
+
+
 }

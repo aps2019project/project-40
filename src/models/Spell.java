@@ -1,8 +1,9 @@
 package models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Spell extends Card {
+public class Spell extends Card  implements Serializable {
     private String spellName;
     private Target target;
     private Buff buff;

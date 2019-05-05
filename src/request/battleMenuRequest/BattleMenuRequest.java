@@ -73,17 +73,30 @@ public class BattleMenuRequest extends Request {
 
     public BattleMenuRequest startMultiPlayerGameRequest() {
         String command = scanner.nextLine().trim().toLowerCase();
-        Pattern pattern = Pattern.compile("start multiplayer game (\\d+) (\\d+)");
+        Pattern pattern = Pattern.compile("start multiplayer game (\\d)");
         Matcher matcher = pattern.matcher(command);
 
         if (matcher.find()) {
 
             MultiPlayerMenuRequest multiPlayerMenuRequest = new MultiPlayerMenuRequest();
             multiPlayerMenuRequest.setMode(matcher.group(1));
-            multiPlayerMenuRequest.setNumberOfFlags(matcher.group(2));
-            if (multiPlayerMenuRequest.getMode() != null)
+            if (multiPlayerMenuRequest.getMode() != null) {
+
+                if (multiPlayerMenuRequest.getMode().equals(MatchType.COLLECT_THE_FLAGS)) {
+                    pattern = Pattern.compile("start multiplayer game (\\d) (\\d+)");
+                    matcher = pattern.matcher(command);
+
+                    if (matcher.find())
+                        multiPlayerMenuRequest.setNumberOfFlags(matcher.group(2));
+                    else {
+
+                        battleMenuView.showError(BattleMenuError.INVALID_COMMAND);
+                        return null;
+                    }
+                }
+
                 return multiPlayerMenuRequest;
-            else
+            } else
                 return null;
         } else {
 
@@ -94,13 +107,23 @@ public class BattleMenuRequest extends Request {
 
     public BattleMenuRequest customGame() {
         String command = scanner.nextLine().trim().toLowerCase();
-        Pattern pattern = Pattern.compile("start game (\\w+) (\\d) (\\d+)");
+        Pattern pattern = Pattern.compile("start game (\\w+) (\\d)");
         Matcher matcher = pattern.matcher(command);
         if (matcher.find()) {
             CustomGameRequest customGameRequest = new CustomGameRequest();
             customGameRequest.setDeckName(matcher.group(1));
             customGameRequest.setMode(Integer.parseInt(matcher.group(2)));
-            customGameRequest.setFlagsNumber(Integer.parseInt(matcher.group(3)));
+            if (customGameRequest.getMode().equals(MatchType.COLLECT_THE_FLAGS)){
+                pattern = Pattern.compile("start game (\\w+) (\\d) (\\d+)");
+                matcher = pattern.matcher(command);
+
+                if (matcher.find())
+                    customGameRequest.setFlagsNumber(Integer.parseInt(matcher.group(3)));
+                else {
+                    battleMenuView.showError(BattleMenuError.INVALID_COMMAND);
+                    return null;
+                }
+            }
 
             return customGameRequest;
         }

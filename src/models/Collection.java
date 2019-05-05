@@ -1,12 +1,15 @@
 package models;
 
+
+import controller.CollectionErrors;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Collection {
+public class Collection implements Serializable {
 
     private ArrayList<Card> cards = new ArrayList<>();
     private ArrayList<Deck> decks = new ArrayList<>();
-    private ArrayList<Item> items = new ArrayList<>();
     private Deck selectedDeck;
 
     public void setSelectedDeck(Deck selectedDeck) {
@@ -15,7 +18,6 @@ public class Collection {
     }
 
     public ArrayList<Deck> getDecks() {
-
         return decks;
     }
 
@@ -24,14 +26,17 @@ public class Collection {
         return cards;
     }
 
-    public ArrayList<Item> getItems() {
-
-        return items;
-    }
-
     public Deck getSelectedDeck() {
 
         return selectedDeck;
+    }
+
+    public void changeSelectedDeck(String deckName) {
+        for (Deck deck : decks)
+            if (deck.getDeckName().equals(deckName)) {
+                setSelectedDeck(deck);
+                return;
+            }
     }
 
     public static Card findCardByCardID(ArrayList<Card> cards, String cardID) {
@@ -53,7 +58,25 @@ public class Collection {
 
         return null;        //added by amirhossein todo pay attention return null
     }
-    public void addCardToCollection(Card card){
+
+    public void addCardToCollection(Card card) {
         cards.add(card);
+    }
+
+    public CollectionErrors addToDeck(String cardID, String deckName) {
+
+        return null;
+    }
+
+    public CollectionErrors removeFromDeck(String cardID, String deckName) {
+
+        return null;
+    }
+
+    public Deck getDeckByName(String deckName) {
+        for (Deck deck : decks)
+            if (deck.getDeckName().equals(deckName))
+                return deck;
+        return null;
     }
 }

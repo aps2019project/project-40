@@ -30,5 +30,10 @@ hs_err_pid*
 /.idea/modules.xml
 /.idea/uiDesigner.xml
 /.idea/project-40.iml
-/.idea/vcs.xml
 /.idea/workspace.xml
+/users/
+/listOfUserName.txt
+/.idea/dictionaries/ahak.xml
+/.idea/libraries/json_20180813.xml
+/.idea/encodings.xml
+/.idea/inspectionProfiles/Project_Default.xml
