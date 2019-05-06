@@ -46,6 +46,9 @@ public class StartMenuController {
             case MSTCH_HISTORY:
                 StartMenuView.getInstance().showHistory(Controller.getInstance().getAccount().getMatchHistories());
                 break;
+            case LOGIN_MENU:
+                Controller.getInstance().addStack(AccountMenuController.getInstance());
+                break;
         }
     }
 

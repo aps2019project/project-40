@@ -20,10 +20,11 @@ public class StartMenuView  {
         System.out.println("5. Help");
         System.out.println("6. Save");
         System.out.println("7. Match histories");
+        System.out.println("8. LoginMenu");
     }
 
     public void showHistory(ArrayList<History> histories){
         for (History history:histories)
-            System.out.println(history.getOpponentUserName()+" "+history.getDifference());
+            System.out.println(history.getOponnentUserName()+" "+history.getYourStatus()+" "+history.getDifference()+" ago");
     }
 }
