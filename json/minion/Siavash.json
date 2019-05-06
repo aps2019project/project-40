@@ -1,0 +1,32 @@
+{
+  "cardName": "siavash",
+  "description": "a HYBRID minion, 8 HP and 5 AP \n ON_DEATH : 6 point hp decrement to enemy hero",
+  "type": "MINION",
+  "price": 350,
+  "spells ": [
+    {
+      "spellName": "siavash_on_death",
+      "buff": {
+        "duration": 1,
+        "weaknessHP": 6,
+        "lasts": true
+      },
+      "target": {
+        "rowsAffected": 5,
+        "columnsAffected": 9,
+        "targetType": {
+          "isHybrid": true,
+          "isRanged": true,
+          "isMelee": true
+        },
+        "isAffectHero": true,
+        "isTargetEnemy": true
+      }
+    }
+  ],
+  "HP": 8,
+  "AP": 5,
+  "manaCost": 4,
+  "unitType": "MELEE",
+  "specialPowerType" : "ON_DEATH"
+}

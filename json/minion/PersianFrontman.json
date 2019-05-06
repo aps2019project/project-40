@@ -1,0 +1,11 @@
+{
+  "cardName": "persian_frontman",
+  "description": "a MELEE minion, 12 HP and 4 AP, \n with combo special power",
+  "type": "MINION",
+  "price": 800,
+  "HP": 12,
+  "AP": 4,
+  "manaCost": 7,
+  "unitType": "MELEE",
+  "combo": true
+}

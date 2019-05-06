@@ -1,0 +1,53 @@
+{
+  "cardName": "white_wolf",
+  "description": "a MELEE minion, 8 HP and 2 AP, \n with ON_ATTACK: 4 and 3 points hp decrement respectively  \n in the next 2 rounds when attacking a minion",
+  "type": "MINION",
+  "price": 400,
+  "spells ": [
+    {
+      "spellName": "white_wolf_on_attack_round_1",
+      "buff": {
+        "weaknessHP": 6,
+        "duration": 1,
+        "lasts" : true,
+        "waitingTime": 1
+      },
+      "target": {
+        "rowsAffected": 1,
+        "columnsAffected": 1,
+        "targetType": {
+          "isHybrid": true,
+          "isRanged": true,
+          "isMelee": true
+        },
+        "isAffectMinion": true,
+        "isTargetEnemy": true
+      }
+    },
+    {
+      "spellName": "white_wolf_on_attack_round_2",
+      "buff": {
+        "weaknessHP": 4,
+        "duration": 1,
+        "lasts" : true,
+        "waitingTime": 2
+      },
+      "target": {
+        "rowsAffected": 1,
+        "columnsAffected": 1,
+        "targetType": {
+          "isHybrid": true,
+          "isRanged": true,
+          "isMelee": true
+        },
+        "isAffectMinion": true,
+        "isTargetEnemy": true
+      }
+    }
+  ],
+  "HP": 8,
+  "AP": 2,
+  "manaCost": 5,
+  "unitType": "MELEE",
+  "specialPowerType" : "ON_ATTACK"
+}

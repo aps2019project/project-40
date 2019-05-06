@@ -1,0 +1,11 @@
+{
+  "cardName": "turanian_prince",
+  "description": "a MELEE minion, 6 HP and 10 AP, \n with combo special power",
+  "type": "MINION",
+  "price": 800,
+  "HP": 6,
+  "AP": 10,
+  "manaCost": 6,
+  "unitType": "MELEE",
+  "combo": true
+}

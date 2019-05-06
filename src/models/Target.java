@@ -10,7 +10,7 @@ public class Target {
     private boolean isAffectCells;
     private boolean isRandom;
     private TargetType targetType;
-    private boolean isDependentToHeroLocation;
+    private boolean isDependentToCardLocation;
 
     private boolean isTargetEnemy;
 
@@ -21,7 +21,7 @@ public class Target {
         this.isTargetEnemy = isTargetEnemy;
         this.isAffectHero = isAffectHero;
         this.isAffectMinion = isAffectMinion;
-        this.isDependentToHeroLocation = isDependentToHeroLocation;
+        this.isDependentToCardLocation = isDependentToHeroLocation;
         this.isRandom = isRandom;
         this.rowsAffected = rowsAffected;
         this.columnsAffected = columnsAffected;
@@ -40,8 +40,8 @@ public class Target {
         return columnsAffected;
     }
 
-    public boolean isDependentToHeroLocation() {
-        return isDependentToHeroLocation;
+    public boolean isDependentToCardLocation() {
+        return isDependentToCardLocation;
     }
 
     public int getRowsAffected() {

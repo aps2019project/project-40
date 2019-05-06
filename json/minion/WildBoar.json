@@ -1,0 +1,33 @@
+{
+  "cardName": "wild_boar",
+  "description": "a HYBRID minion, 8 HP and 5 AP \n ON_DEATH : 6 point hp decrement to enemy hero",
+  "type": "MINION",
+  "price": 500,
+  "spells ": [
+    {
+      "spellName": "wild_boar_on_defend",
+      "buff": {
+        "duration": 1,
+        "notDisarmable": true,
+        "lasts": true 
+      },
+      "target": {
+        "isDependentToCardLocation": true, 
+        "rowsAffected": 1,
+        "columnsAffected": 1,
+        "targetType": {
+          "isHybrid": true,
+          "isRanged": true,
+          "isMelee": true
+        },
+        "isAffectMinion": true,
+        "isTargetEnemy": true
+      }
+    }
+  ],
+  "HP": 14,
+  "AP": 10,
+  "manaCost": 6,
+  "unitType": "MELEE",
+  "specialPowerType" : "ON_DEFEND"
+}

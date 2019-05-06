@@ -1,0 +1,34 @@
+{
+  "cardName": "one_eye_giant",
+  "description": "a HYBRID minion, 12 HP and 11 AP \n ON_DEATH : 2 point hp decrement of enemies on the 3*3 square near it",
+  "type": "MINION",
+  "price": 500,
+  "spells ": [
+    {
+      "spellName": "eagle_power_buff",
+      "buff": {
+        "duration": 1,
+        "weaknessHP": 2,
+        "lasts": true
+      },
+      "target": {
+        "isDependentToCardLocation": true,
+        "rowsAffected": 3,
+        "columnsAffected": 3,
+        "targetType": {
+          "isHybrid": true,
+          "isRanged": true,
+          "isMelee": true
+        },
+        "isAffectMinion": true,
+        "isTargetEnemy": true
+      }
+    }
+  ],
+  "HP": 12,
+  "AP": 11,
+  "manaCost": 7,
+  "unitType": "HYBRID",
+  "specialPowerType" : "ON_DEATH",
+  "range": 3
+}
