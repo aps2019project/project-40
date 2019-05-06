@@ -13,6 +13,17 @@ public class Card implements Serializable {
     private ArrayList<Spell> spells;
     private String description;
     private CardType type;
+    private Cell cell;
+
+    public Cell getCell() {
+
+        return cell;
+    }
+
+    public void setCell(Cell cell) {
+
+        this.cell = cell;
+    }
 
     public int getPrice() {
 

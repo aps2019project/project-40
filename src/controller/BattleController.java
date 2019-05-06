@@ -16,6 +16,9 @@ public class BattleController {
     private BattleView battleView = BattleView.getInstance();
     private Match match;
 
+    //TODO check validity of card request
+    //TODO check destination validity
+
     public static BattleController getInstance() {
 
         if (battleController == null) {
@@ -101,8 +104,11 @@ public class BattleController {
         else if (request.getEnumRequest() == RequestWithoutVariableEnum.SHOW_OPPONENT_MINIONS_REQUEST)
             showOpponentMinionsRequest();
 
-        else if (request.getEnumRequest() == RequestWithoutVariableEnum.SHOW_NEXT_CARD_REQUEST) ;
+        else if (request.getEnumRequest() == RequestWithoutVariableEnum.SHOW_NEXT_CARD_REQUEST)
+            showNextCardRequest();
+
         else if (request.getEnumRequest() == RequestWithoutVariableEnum.SHOW_HAND_REQUEST) ;
+
         else if (request.getEnumRequest() == RequestWithoutVariableEnum.END_TURN_REQUEST) ;
         else if (request.getEnumRequest() == RequestWithoutVariableEnum.SHOW_COLLECTED_ITEM_REQUEST) ;
         else if (request.getEnumRequest() == RequestWithoutVariableEnum.END_GAME_REQUEST) ;
@@ -272,40 +278,35 @@ public class BattleController {
 
         Account player = match.findPlayerPlayingThisTurn();
         Card card = player.getHand().getReserveCard();
+        ShowCardsBattleView showCardsBattleView = new ShowCardsBattleView();
 
         try {
-            if (card.getType() == CardType.HERO) {
+            if (card.getType() == CardType.HERO)
+                showCardsBattleView.setCardForHero(card.getCardName(), card.getPrice(), card.getDescription());
 
-                ShowCardInfoBattleViewHero showCardInfoBattleViewHero = new ShowCardInfoBattleViewHero();
-                showCardInfoBattleViewHero.setName(card.getCardName());
-                showCardInfoBattleViewHero.setCost(card.getPrice());
-                showCardInfoBattleViewHero.setDescription(card.getDescription());
+            else if (card.getType() == CardType.MINION) {
 
-            } else if (card.getType() == CardType.MINION) {
+                Unit minion = (Unit) card;
+                showCardsBattleView.setCardsForMinion(minion.getCardName(), minion.getPrice(), minion.getDescription(),
+                        minion.getAttackPoint(), minion.getHealthPoint(), minion.getManaCost(), minion.getUnitType(),
+                        minion.hasComboAbility());
 
-                Unit unit = (Unit) card;
-                ShowCardInfoBattleViewMinion showCardInfoBattleViewMinion = new ShowCardInfoBattleViewMinion();
+            } else if (card.getType() == CardType.SPELL) {
 
-                showCardInfoBattleViewMinion.setName(unit.getCardName());
-                showCardInfoBattleViewMinion.setCost(unit.getPrice());
-                showCardInfoBattleViewMinion.setDescription(unit.getDescription());
-                showCardInfoBattleViewMinion.setAttackPoint(unit.getAttackPoint());
-                showCardInfoBattleViewMinion.setHealthPoint(unit.getHealthPoint());
-                showCardInfoBattleViewMinion.setManaPoint(unit.getManaCost());
-                showCardInfoBattleViewMinion.setRange(unit.getUnitType());
-                showCardInfoBattleViewMinion.setHasComboAbility(unit.hasComboAbility());
-
+                Unit spell = (Unit) card;
+                showCardsBattleView.setCardsForSpell(spell.getCardName(), spell.getPrice(), spell.getDescription(),
+                        spell.getManaCost());
             }
+
+            showCardsBattleView.show(showCardsBattleView);
 
         } catch (NullPointerException e) {
             System.out.println("You don't have reserve card");
         }
-
-
     }
 
     private void showHandRequest() {
-        //todo
+
     }
 
     private void endTurnRequest() {
