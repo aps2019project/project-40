@@ -76,7 +76,7 @@ public class BattleController {
 
     private void useSpecialPowerRequest(UseSpecialPowerRequest request) {
 
-        //todo
+
     }
 
     private void showCardInfoRequest(ShowCardInfoRequest request) {
@@ -104,8 +104,80 @@ public class BattleController {
     private void insertCardRequest(InsertCardRequest request) {
 
         Card card = Collection.findCardByCardName(
-                match.findPlayerPlayingThisTurn().getCollection().getSelectedDeck().getCards(), request.getCardName());
+                match.findPlayerPlayingThisTurn().getHand().getCards(), request.getCardName());
 
+        Coordination coordination = new Coordination();
+        coordination.setRow(request.getRow());
+        coordination.setColumn(request.getColumn());
+
+        if (isOutOfTable(coordination)) {
+            BattleLog.errorInvalidTarget();
+            return;
+        }
+
+        Cell cell = match.getTable().getCellByCoordination(coordination);
+
+        try {
+            if (card instanceof Unit) {
+
+                if (isCellFill(cell)) {
+                    BattleLog.errorCellIsFill();
+                    return;
+                }
+                if (!isCellAvailable(coordination)) {
+                    BattleLog.errorCellNotAvailable();
+                    return;
+                }
+
+                gameLogic.insertProcess((Unit) card, cell);
+
+            } else {
+
+            }
+
+        } catch (NullPointerException e) {
+        }
+    }
+
+    private boolean isOutOfTable(Coordination coordination) {
+
+        if (coordination.getRow() >= Table.ROWS && coordination.getRow() < 0 &&
+                coordination.getColumn() >= Table.COLUMNS && coordination.getColumn() < 0) {
+
+            BattleLog.errorInvalidTarget();
+            return true;
+        }
+
+        return false;
+    }
+
+    private boolean isCellFill(Cell cell) {
+
+        if (cell.getCard() == null) return false;
+        return true;
+    }
+
+    private boolean isCellAvailable(Coordination coordination) {
+
+        Table table = match.getTable();
+        Coordination aroundCoordination = new Coordination();
+
+        for (int row = -1; row <= 1; row++) {
+            for (int column = -1; column <= 1; column++) {
+
+                if (row == 0 && column == 0) continue;
+
+                try {
+                    aroundCoordination.setRow(coordination.getRow() + row);
+                    aroundCoordination.setColumn(coordination.getColumn() + column);
+                    if (table.getCellByCoordination(aroundCoordination).getCard().getTeam().equals(
+                            match.findPlayerPlayingThisTurn().getUserName())) return true;
+
+                } catch (ArrayIndexOutOfBoundsException e) {
+                }
+            }
+        }
+        return false;
     }
 
     private void requestWithoutVariable(RequestWithoutVariable request) {
