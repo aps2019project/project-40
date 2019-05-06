@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
 public class History implements Serializable {
-    private String OponnentUserName;
+    private String OpponentUserName;
     private LocalDateTime localDateTime;
 
     public void setLocalDateTime() {
@@ -40,11 +40,11 @@ public class History implements Serializable {
                 hours + " hours " +
                 minutes + " minutes " ;
     }
-    public String getOponnentUserName() {
-        return OponnentUserName;
+    public String getOpponentUserName() {
+        return OpponentUserName;
     }
 
-    public void setOponnentUserName(String oponnentUserName) {
-        OponnentUserName = oponnentUserName;
+    public void setOpponentUserName(String opponentUserName) {
+        OpponentUserName = opponentUserName;
     }
 }

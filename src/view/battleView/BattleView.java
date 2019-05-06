@@ -71,12 +71,6 @@ public class BattleView {
             }
         }
 
-        if (battleView instanceof ShowHandBattleView) {
-
-            showHand((ShowHandBattleView) battleView);
-            return;
-        }
-
         if (battleView instanceof ShowCollectedItemsBattleView) {
 
             showCollectedItems((ShowCollectedItemsBattleView) battleView);
@@ -185,21 +179,6 @@ public class BattleView {
         System.out.println("    Desc: \n" + showInfo.getDescription());
     }
 
-    private void showHand(ShowHandBattleView showHand) {
-
-        ArrayList<String> cardsName = showHand.getHandCards();
-
-        for (String cardName : cardsName) {
-
-            System.out.println("a hand card is: " + cardName);
-        }
-
-        if (showHand.getReserveCardName() != null) {
-
-            System.out.println("reserve card is: " + showHand.getReserveCardName());
-        }
-    }
-
     private void showCollectedItems(ShowCollectedItemsBattleView collectedItem) {
 
         ArrayList<String> itemsName = collectedItem.getItemName();
@@ -232,6 +211,4 @@ public class BattleView {
                 showCardInfoMinion((ShowCardInfoBattleViewMinion) cardInfo);
         }
     }
-
-
 }

@@ -24,6 +24,6 @@ public class StartMenuView  {
 
     public void showHistory(ArrayList<History> histories){
         for (History history:histories)
-            System.out.println(history.getOponnentUserName()+" "+history.getDifference());
+            System.out.println(history.getOpponentUserName()+" "+history.getDifference());
     }
 }

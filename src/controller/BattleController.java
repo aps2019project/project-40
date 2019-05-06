@@ -1,10 +1,13 @@
 package controller;
 
 import models.*;
+import models.GamePlay.GameLogic;
 import models.GamePlay.Match;
 import request.battleRequest.BattleRequest;
 import request.battleRequest.BattleRequestChilds.*;
 import view.battleView.*;
+
+import java.util.ArrayList;
 
 public class BattleController {
 
@@ -12,6 +15,7 @@ public class BattleController {
     private BattleRequest battleRequest = BattleRequest.getInstance();
     private BattleView battleView = BattleView.getInstance();
     private Match match;
+    private GameLogic gameLogic;
 
     //TODO check validity of card request
     //TODO check destination validity
@@ -30,6 +34,8 @@ public class BattleController {
 
         //todo
         this.match = match;
+        gameLogic = match.getGameLogic();
+
     }
 
     private void manageRequest() {
@@ -75,7 +81,17 @@ public class BattleController {
 
     private void showCardInfoRequest(ShowCardInfoRequest request) {
 
-        //todo
+        Card card = Collection.findCardByCardID(
+                match.findPlayerPlayingThisTurn().getCollection().getSelectedDeck().getCards(), request.getCardID());
+
+        try {
+            ShowCardsBattleView showCardsBattleView = new ShowCardsBattleView();
+            showCardsBattleView.setCard(card);
+            showCardsBattleView.show(showCardsBattleView);
+
+        } catch (NullPointerException e) {
+            BattleLog.errorInvalidCardID();
+        }
     }
 
     private void enterGraveYardRequest(EnterGraveYardRequest request) {
@@ -87,7 +103,9 @@ public class BattleController {
 
     private void insertCardRequest(InsertCardRequest request) {
 
-        //todo
+        Card card = Collection.findCardByCardName(
+                match.findPlayerPlayingThisTurn().getCollection().getSelectedDeck().getCards(), request.getCardName());
+
     }
 
     private void requestWithoutVariable(RequestWithoutVariable request) {
@@ -104,14 +122,15 @@ public class BattleController {
         else if (request.getEnumRequest() == RequestWithoutVariableEnum.SHOW_NEXT_CARD_REQUEST)
             showNextCardRequest();
 
-        else if (request.getEnumRequest() == RequestWithoutVariableEnum.SHOW_HAND_REQUEST) ;
+        else if (request.getEnumRequest() == RequestWithoutVariableEnum.SHOW_HAND_REQUEST)
+            showHandRequest();
 
         else if (request.getEnumRequest() == RequestWithoutVariableEnum.END_TURN_REQUEST) ;
         else if (request.getEnumRequest() == RequestWithoutVariableEnum.SHOW_COLLECTED_ITEM_REQUEST) ;
         else if (request.getEnumRequest() == RequestWithoutVariableEnum.END_GAME_REQUEST) ;
 
         else if (request.getEnumRequest() == RequestWithoutVariableEnum.HELP_REQUEST)
-            helpRequest();
+            BattleLog.showHelp();
     }
 
     private void gameInfoRequest() {
@@ -278,23 +297,7 @@ public class BattleController {
         ShowCardsBattleView showCardsBattleView = new ShowCardsBattleView();
 
         try {
-            if (card.getType() == CardType.HERO)
-                showCardsBattleView.setCardForHero(card.getCardName(), card.getPrice(), card.getDescription());
-
-            else if (card.getType() == CardType.MINION) {
-
-                Unit minion = (Unit) card;
-                showCardsBattleView.setCardsForMinion(minion.getCardName(), minion.getPrice(), minion.getDescription(),
-                        minion.getAttackPoint(), minion.getHealthPoint(), minion.getManaCost(), minion.getUnitType(),
-                        minion.hasComboAbility());
-
-            } else if (card.getType() == CardType.SPELL) {
-
-                Unit spell = (Unit) card;
-                showCardsBattleView.setCardsForSpell(spell.getCardName(), spell.getPrice(), spell.getDescription(),
-                        spell.getManaCost());
-            }
-
+            showCardsBattleView.setCard(card);
             showCardsBattleView.show(showCardsBattleView);
 
         } catch (NullPointerException e) {
@@ -304,6 +307,14 @@ public class BattleController {
 
     private void showHandRequest() {
 
+        ArrayList<Card> cards = match.findPlayerPlayingThisTurn().getHand().getCards();
+        cards.add(match.findPlayerPlayingThisTurn().getHand().getReserveCard());
+        ShowCardsBattleView showCardsBattleView = new ShowCardsBattleView();
+
+        for (Card card : cards)
+            showCardsBattleView.setCard(card);
+
+        showCardsBattleView.show(showCardsBattleView);
     }
 
     private void endTurnRequest() {
@@ -316,33 +327,5 @@ public class BattleController {
 
     private void endGameRequest() {
         //todo
-    }
-
-    private void helpRequest() {
-        System.out.println("Game info");
-        System.out.println("Show my minions");
-        System.out.println("Show opponent minions");
-        System.out.println("Show card info [card id]");
-        System.out.println("Select [card id]");
-        System.out.println("    Move to ([x],[y])");
-        System.out.println("    Attack [opponent card id]");
-        System.out.println("    Attack combo [opponent card id] [my card id] [my card id] ...");
-        System.out.println("    exit");
-        System.out.println("Use special power ([x],[y])");
-        System.out.println("Show hand");
-        System.out.println("Insert [card name] in ([x],[y])");
-        System.out.println("End turn");
-        System.out.println("Show collectibles");
-        System.out.println("Select [collectible id]");
-        System.out.println("    Show info");
-        System.out.println("    Use ([x],[y])");
-        System.out.println("    exit");
-        System.out.println("Show next card");
-        System.out.println("Enter graveyard");
-        System.out.println("    Show info [card id]");
-        System.out.println("    Show cards");
-        System.out.println("    exit");
-        System.out.println("Help");
-        System.out.println("End game");
     }
 }

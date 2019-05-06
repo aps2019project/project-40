@@ -1,5 +1,8 @@
 package view.battleView;
 
+import models.Card;
+import models.CardType;
+import models.Unit;
 import models.UnitType;
 
 import java.util.ArrayList;
@@ -13,7 +16,27 @@ public class ShowCardsBattleView extends BattleView {
         return cardsInfo;
     }
 
-    public void setCardForHero(String name, int cost, String description) {
+    public void setCard(Card card) {
+
+        if (card.getType() == CardType.HERO)
+            setCardForHero(card.getCardName(), card.getPrice(), card.getDescription());
+
+        else if (card.getType() == CardType.MINION) {
+
+            Unit minion = (Unit) card;
+            setCardsForMinion(minion.getCardName(), minion.getPrice(), minion.getDescription(),
+                    minion.getAttackPoint(), minion.getHealthPoint(), minion.getManaCost(), minion.getUnitType(),
+                    minion.hasComboAbility());
+
+        } else if (card.getType() == CardType.SPELL) {
+
+            Unit spell = (Unit) card;
+            setCardsForSpell(spell.getCardName(), spell.getPrice(), spell.getDescription(),
+                    spell.getManaCost());
+        }
+    }
+
+    private void setCardForHero(String name, int cost, String description) {
 
         ShowCardInfoBattleViewHero showCardInfoBattleViewHero = new ShowCardInfoBattleViewHero();
         showCardInfoBattleViewHero.setName(name);
@@ -22,7 +45,7 @@ public class ShowCardsBattleView extends BattleView {
         cardsInfo.add(showCardInfoBattleViewHero);
     }
 
-    public void setCardsForSpell(String name, int cost, String description, int manaPoint) {
+    private void setCardsForSpell(String name, int cost, String description, int manaPoint) {
 
         ShowCardInfoBattleViewSpell showCardInfoBattleViewSpell = new ShowCardInfoBattleViewSpell();
         showCardInfoBattleViewSpell.setName(name);
@@ -32,7 +55,7 @@ public class ShowCardsBattleView extends BattleView {
         cardsInfo.add(showCardInfoBattleViewSpell);
     }
 
-    public void  setCardsForMinion(String name, int cost, String description, int attackPoint, int healthPoint,
+    private void  setCardsForMinion(String name, int cost, String description, int attackPoint, int healthPoint,
                                    int manaPoint, UnitType unitType, boolean hasComboAbility) {
 
         ShowCardInfoBattleViewMinion showCardInfoBattleViewMinion = new ShowCardInfoBattleViewMinion();

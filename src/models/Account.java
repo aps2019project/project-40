@@ -23,7 +23,7 @@ public class Account implements Serializable {
     public void AddMatchHistory(Account oponnent){
         History history=new History();
         history.setLocalDateTime();
-        history.setOponnentUserName(oponnent.getUserName());
+        history.setOpponentUserName(oponnent.getUserName());
         matchHistories.add(history);
     }
 

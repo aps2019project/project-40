@@ -88,7 +88,6 @@ public class Collection implements Serializable {
         if (chosenCard == null)
             return CollectionErrors.CARD_NOT_FOUND;
 
-
         chosenDeck.getCards().add(chosenCard);
         return null;
     }
