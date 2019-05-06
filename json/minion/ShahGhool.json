@@ -1,0 +1,11 @@
+{
+  "cardName": "shah_ghool",
+  "description": "a MELEE minion, 10 HP and 4 AP, \n with combo special power",
+  "type": "MINION",
+  "price": 550,
+  "HP": 6,
+  "AP": 6,
+  "manaCost": 4,
+  "unitType": "MELEE",
+  "combo": true
+}

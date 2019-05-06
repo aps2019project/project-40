@@ -1,0 +1,12 @@
+{
+  "cardName": "arjang",
+  "description": "a MELEE minion, 6 HP and 6 AP, \n with combo special power",
+  "type": "MINION",
+  "price": 550,
+  "HP": 6,
+  "AP": 6,
+  "manaCost": 4,
+  "unitType": "MELEE",
+  "specialPowerType" : "ON_ATTACK",
+  "combo": true
+}

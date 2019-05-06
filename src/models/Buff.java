@@ -18,6 +18,7 @@ public class Buff implements Serializable {
     private boolean lasts;
     private SpecialMinion specialMinion;
     private int waitingTime;
+    private boolean isPositive;
 
     public void decrementDuration() {
         duration -= 1;
@@ -102,5 +103,27 @@ public class Buff implements Serializable {
 
     public SpecialMinion getSpecialMinion() {
         return specialMinion;
+    }
+
+    public boolean isPositive() {
+        return isPositive;
+    }
+
+    public void setPositive() {
+        int result = -weaknessAP
+                + -weaknessHP +
+                -cancelBuff + manaChange + poison;
+        if (isDisarm()) {
+            result++;
+        }
+        if (isStun()){
+            result++;
+        }
+        if (result > 0){
+            isPositive = true;
+        }
+        else {
+            isPositive = false;
+        }
     }
 }

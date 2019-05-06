@@ -1,0 +1,33 @@
+{
+  "cardName": "two_headed_giant",
+  "description": "a MELEE minion, 10 HP and 4 AP, \n with ON_ATTACK: deletes all positive buffs",
+  "type": "MINION",
+  "price": 550,
+  "spells ": [
+    {
+      "spellName": "thg_on_attack",
+      "buff": {
+        "duration": 1,
+        "lasts" : true,
+        "cancelBuff": 1
+      },
+      "target": {
+        "rowsAffected": 1,
+        "columnsAffected": 1,
+        "targetType": {
+          "isHybrid": true,
+          "isRanged": true,
+          "isMelee": true
+        },
+        "isAffectHero": true,
+        "isAffectMinion": true,
+        "isTargetEnemy": true
+      }
+    }
+  ],
+  "HP": 10,
+  "AP": 4,
+  "manaCost": 4,
+  "unitType": "MELEE",
+  "specialPowerType" : "ON_ATTACK"
+}
