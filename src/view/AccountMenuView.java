@@ -39,6 +39,9 @@ public class AccountMenuView {
             case USERNAME_DOESENT_EXIST:
                 System.out.println("username does not exist");
                 break;
+            case ALREADY_LOGGED_IN:
+                System.out.println("you are already logged in");
+                break;
         }
 
     }

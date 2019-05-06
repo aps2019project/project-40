@@ -7,5 +7,6 @@ public enum StartMenuOptionList {
     EXIT,
     SAVE,
     HELP,
-    MSTCH_HISTORY
+    MSTCH_HISTORY,
+    LOGIN_MENU
 }

@@ -39,11 +39,13 @@ public class ShopMenuView {
                 showHero(number++, (Unit) card, showBuyCost);
 
         number = 1;
+        System.out.println("Items : ");
         for (Card card : cards)
             if (card.getType().equals(CardType.USABLE_ITEM))
                 showItem(number++, card, showBuyCost);
 
         number = 1;
+        System.out.println("Cards : ");
         for (Card card : cards)
             switch (card.getType()) {
                 case MINION:

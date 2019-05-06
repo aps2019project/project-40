@@ -58,6 +58,10 @@ public class AccountMenuController {
     }
 
     private void loginCommand(AccountLoginRequest accountLoginRequest) {
+        if (account!=null){
+            AccountMenuView.getInstance().showError(AccountError.ALREADY_LOGGED_IN);
+            return;
+        }
         String userName = accountLoginRequest.getLine();
         if (LoginMenu.getInstance().checkIfAccountExist(userName)) {
             account = LoginMenu.getInstance().login(userName, AccountMenuRequest.getInstance().getPassWord());
@@ -72,6 +76,10 @@ public class AccountMenuController {
     }
 
     private void createCommand(AccountCreate accountCreate) {
+        if (account!=null){
+            AccountMenuView.getInstance().showError(AccountError.ALREADY_LOGGED_IN);
+            return;
+        }
         String userName = accountCreate.getLine();
         if (LoginMenu.getInstance().checkIfAccountExist(userName)) {
             AccountMenuView.getInstance().showError(AccountError.USERNAME_ALREADY_EXIST);

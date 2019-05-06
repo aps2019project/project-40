@@ -21,7 +21,7 @@ public class StartMenuRequest extends Request {
         else if (command.indexOf("help") >= 0)
             startMenuOption.setStartMenuOptionList(StartMenuOptionList.HELP);
         else if (command.indexOf("save") >= 0)
-            startMenuOption.setStartMenuOptionList(StartMenuOptionList.HELP);
+            startMenuOption.setStartMenuOptionList(StartMenuOptionList.SAVE);
         else if (command.indexOf("match history") >= 0)
             startMenuOption.setStartMenuOptionList(StartMenuOptionList.MSTCH_HISTORY);
         else if (command.indexOf("enter") >= 0) {
@@ -35,6 +35,9 @@ public class StartMenuRequest extends Request {
                     break;
                 case "shop":
                     startMenuOption.setStartMenuOptionList(StartMenuOptionList.SHOP);
+                    break;
+                case "loginmenu":
+                    startMenuOption.setStartMenuOptionList(StartMenuOptionList.LOGIN_MENU);
                     break;
             }
         } else

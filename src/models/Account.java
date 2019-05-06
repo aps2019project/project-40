@@ -20,10 +20,11 @@ public class Account implements Serializable {
         return matchHistories;
     }
 
-    public void AddMatchHistory(Account oponnent){
+    public void AddMatchHistory(Account oponnent,GameStatus gameStatus){
         History history=new History();
         history.setLocalDateTime();
         history.setOponnentUserName(oponnent.getUserName());
+        history.setYourStatus(gameStatus);
         matchHistories.add(history);
     }
 
@@ -112,7 +113,6 @@ public class Account implements Serializable {
     }
 
     public boolean equals(Account account) {
-
         return this.getUserName().equals(account.getUserName());
     }
 }
