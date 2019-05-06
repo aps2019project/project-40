@@ -1,0 +1,52 @@
+{
+  "cardName": "turanian_spy",
+  "description": "a MELEE minion, 6 HP and 6 AP, with ON_ATTACK: 1 turn disarm, 4 turn poison",
+  "type": "MINION",
+  "price": 600,
+  "spells ": [
+    {
+      "spellName": "ts_on_attack_disarm",
+      "buff": {
+        "duration": 1,
+        "disarm" : true
+      },
+      "target": {
+        "rowsAffected": 1,
+        "columnsAffected": 1,
+        "isAffectHero": true,
+        "targetType": {
+          "isHybrid": true,
+          "isRanged": true,
+          "isMelee": true
+        },
+        "isAffectMinion": true,
+        "isTargetEnemy": true
+      }
+    },
+    {
+      "spellName": "ts_on_attack_poison",
+      "buff": {
+        "duration": 4,
+        "lasts" : true,
+        "poison": 1
+      },
+      "target": {
+        "rowsAffected": 1,
+        "columnsAffected": 1,
+        "isAffectHero": true,
+        "targetType": {
+          "isHybrid": true,
+          "isRanged": true,
+          "isMelee": true
+        },
+        "isAffectMinion": true,
+        "isTargetEnemy": true
+      }
+    }
+  ],
+  "HP": 6,
+  "AP": 6,
+  "manaCost": 4,
+  "unitType": "MELEE",
+  "specialPowerType" : "ON_ATTACK"
+}

@@ -1,7 +1,8 @@
 package models;
 
 public class Target {
-
+    final int MAP_ROWS = 5;
+    final int MAP_Columns = 9;
     private int rowsAffected;
     private int columnsAffected;
     private boolean isAffectHero;
@@ -12,9 +13,10 @@ public class Target {
     private boolean isDependentToHeroLocation;
 
     private boolean isTargetEnemy;
-    public Target(boolean isAffectCells,boolean isAffectHero, boolean isTargetEnemy,
+
+    public Target(boolean isAffectCells, boolean isAffectHero, boolean isTargetEnemy,
                   boolean isAffectMinion, boolean isDependentToHeroLocation, boolean isRandom,
-                  int rowsAffected, int columnsAffected, TargetType targetType){
+                  int rowsAffected, int columnsAffected, TargetType targetType) {
         this.isAffectCells = isAffectCells;
         this.isTargetEnemy = isTargetEnemy;
         this.isAffectHero = isAffectHero;

@@ -5,5 +5,7 @@ public enum StartMenuOptionList {
     SHOP,
     BATTLE,
     EXIT,
-    HELP
+    SAVE,
+    HELP,
+    MSTCH_HISTORY
 }

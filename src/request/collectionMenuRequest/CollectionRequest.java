@@ -61,42 +61,42 @@ public class CollectionRequest extends Request {
         pattern = Pattern.compile("remove (\\d+) from deck (\\w+)");
         matcher = pattern.matcher(command);
         if (matcher.find())
-            return remove(matcher.group(1),matcher.group(2));
+            return remove(matcher.group(1), matcher.group(2));
 
         pattern = Pattern.compile("add (\\d+) to deck (\\w+)");
         matcher = pattern.matcher(command);
         if (matcher.find())
-            return add(matcher.group(1),matcher.group(2));
+            return add(matcher.group(1), matcher.group(2));
 
         return null;
     }
 
     public CollectionRequest handelDeck(CollectionOptionList collectionOptionList, String name) {
-        DeckCommand deckCommand=new DeckCommand();
+        DeckCommand deckCommand = new DeckCommand();
         deckCommand.setDeckName(name);
         deckCommand.setType(collectionOptionList);
 
         return deckCommand;
     }
 
-    public CollectionRequest remove(String cardID,String name){
-        Remove remove=new Remove();
+    public CollectionRequest remove(String cardID, String name) {
+        Remove remove = new Remove();
         remove.setCardID(cardID);
         remove.setDecknNme(name);
 
         return remove;
     }
 
-    public CollectionRequest add(String cardID,String name){
-        Add add=new Add();
+    public CollectionRequest add(String cardID, String name) {
+        Add add = new Add();
         add.setCardID(cardID);
         add.setDecknNme(name);
 
         return add;
     }
 
-    public CollectionRequest simpleCommand(CollectionOptionList collectionOptionList){
-        SimpleRequest simpleRequest=new SimpleRequest();
+    public CollectionRequest simpleCommand(CollectionOptionList collectionOptionList) {
+        SimpleRequest simpleRequest = new SimpleRequest();
         simpleRequest.setMessage(collectionOptionList);
 
         return simpleRequest;

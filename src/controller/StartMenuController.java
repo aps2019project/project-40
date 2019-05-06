@@ -1,6 +1,6 @@
 package controller;
 
-import models.BattleMenu;
+import models.Account;
 import request.startMenuController.StartMenuRequest;
 import request.startMenuController.startMenuRequestChilds.StartMenuOption;
 import view.StartMenuView;
@@ -15,17 +15,17 @@ public class StartMenuController {
     }
 
     public void startMenuControllerMain() {
-        StartMenuView startMenuView=StartMenuView.getInstance();
+        StartMenuView startMenuView = StartMenuView.getInstance();
         startMenuView.showOptions();
-        StartMenuRequest startMenuRequest=StartMenuRequest.getInstance().getCommand();
-        if (startMenuRequest==null)
+        StartMenuRequest startMenuRequest = StartMenuRequest.getInstance().getCommand();
+        if (startMenuRequest == null)
             return;
         if (startMenuRequest instanceof StartMenuOption)
             enterCommand((StartMenuOption) startMenuRequest);
     }
 
-    private void enterCommand(StartMenuOption startMenuOption){
-        switch (startMenuOption.getStartMenuOptionList()){
+    private void enterCommand(StartMenuOption startMenuOption) {
+        switch (startMenuOption.getStartMenuOptionList()) {
             case COLLECTION:
                 Controller.getInstance().addStack(CollectionController.getInstance());
                 break;
@@ -39,6 +39,12 @@ public class StartMenuController {
                 Controller.getInstance().endProgram();
                 break;
             case HELP:
+                break;
+            case SAVE:
+                Account.save(Controller.getInstance().getAccount());
+                break;
+            case MSTCH_HISTORY:
+                StartMenuView.getInstance().showHistory(Controller.getInstance().getAccount().getMatchHistories());
                 break;
         }
     }

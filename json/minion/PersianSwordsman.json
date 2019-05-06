@@ -1,0 +1,32 @@
+{
+  "cardName": "persian_swords_man",
+  "description": "a MELEE minion, 6 HP and 4 AP with stun ON_ATTACK",
+  "type": "MINION",
+  "price": 400,
+  "spells ": [
+    {
+      "spellName": "psm_on_attack_stun",
+      "buff": {
+        "duration": 1,
+        "stun": true
+      },
+      "target": {
+        "rowsAffected": 1,
+        "columnsAffected": 1,
+        "isAffectHero": true,
+        "targetType": {
+          "isHybrid": true,
+          "isRanged": true,
+          "isMelee": true
+        },
+        "isAffectMinion": true,
+        "isTargetEnemy": true
+      }
+    }
+  ],
+  "HP": 6,
+  "AP": 4,
+  "manaCost": 2,
+  "unitType": "MELEE",
+  "specialPowerType" : "ON_ATTACK"
+}

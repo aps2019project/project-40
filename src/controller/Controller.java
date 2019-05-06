@@ -1,19 +1,18 @@
 package controller;
 
 import models.Account;
-import models.BattleMenu;
 
 import java.util.Stack;
 
 public class Controller {
     private static Controller controller;
-    private static Stack orderOfMenu=new Stack();
-    private Account account=null;
+    private static Stack orderOfMenu = new Stack();
+    private Account account = null;
     private boolean isProgramEnded = false;
 
-    public static Controller getInstance(){
-        if (controller==null)
-            controller=new Controller();
+    public static Controller getInstance() {
+        if (controller == null)
+            controller = new Controller();
         return controller;
     }
 
@@ -29,8 +28,8 @@ public class Controller {
         orderOfMenu.push(object);
     }
 
-    public void endProgram(){
-        isProgramEnded=true;
+    public void endProgram() {
+        isProgramEnded = true;
     }
 
     public void mainController() {
@@ -52,7 +51,7 @@ public class Controller {
             if (currentMenu instanceof StartMenuController)
                 StartMenuController.getInstance().startMenuControllerMain();
 
-        }while (!isProgramEnded);
+        } while (!isProgramEnded);
     }
 
 }

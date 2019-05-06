@@ -6,9 +6,6 @@ import request.battleRequest.BattleRequest;
 import request.battleRequest.BattleRequestChilds.*;
 import view.battleView.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
 public class BattleController {
 
     private static BattleController battleController;
@@ -322,7 +319,6 @@ public class BattleController {
     }
 
     private void helpRequest() {
-
         System.out.println("Game info");
         System.out.println("Show my minions");
         System.out.println("Show opponent minions");

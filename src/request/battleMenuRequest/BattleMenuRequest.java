@@ -113,7 +113,7 @@ public class BattleMenuRequest extends Request {
             CustomGameRequest customGameRequest = new CustomGameRequest();
             customGameRequest.setDeckName(matcher.group(1));
             customGameRequest.setMode(Integer.parseInt(matcher.group(2)));
-            if (customGameRequest.getMode().equals(MatchType.COLLECT_THE_FLAGS)){
+            if (customGameRequest.getMode().equals(MatchType.COLLECT_THE_FLAGS)) {
                 pattern = Pattern.compile("start game (\\w+) (\\d) (\\d+)");
                 matcher = pattern.matcher(command);
 

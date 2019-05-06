@@ -1,6 +1,8 @@
 package models;
 
-public class Buff {
+import java.io.Serializable;
+
+public class Buff implements Serializable {
     private int duration;
     private int holy;
     private int power;
@@ -14,15 +16,17 @@ public class Buff {
     private int cancelBuff;
     private boolean applyWhenTurnEnds;
     private boolean lasts;
-    //private SpecialMinion specialMinion;
+    private SpecialMinion specialMinion;
+    private int waitingTime;
+
     public void decrementDuration() {
         duration -= 1;
     }
 
     public Buff(int duration, int holy, int power, int poison, int weaknessAP,
                 int weaknessHP, boolean stun, boolean disarm,
-                int unholy, int cancelBuff,boolean applyWhenTurnEnds,
-                boolean lasts, int manaChange/*, SpecialMinion specialMinion*/) {
+                int unholy, int cancelBuff, boolean applyWhenTurnEnds,
+                boolean lasts, int manaChange, SpecialMinion specialMinion, int waitingTime) {
         this.duration = duration;
         this.holy = holy;
         this.power = power;
@@ -36,7 +40,8 @@ public class Buff {
         this.applyWhenTurnEnds = applyWhenTurnEnds;
         this.lasts = lasts;
         this.manaChange = manaChange;
-        //this.specialMinion = specialMinion;
+        this.specialMinion = specialMinion;
+        this.waitingTime = waitingTime;
     }
 
     public int getUnholy() {
@@ -89,5 +94,13 @@ public class Buff {
 
     public int getManaChange() {
         return manaChange;
+    }
+
+    public int getWaitingTime() {
+        return waitingTime;
+    }
+
+    public SpecialMinion getSpecialMinion() {
+        return specialMinion;
     }
 }

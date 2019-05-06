@@ -10,7 +10,7 @@ public class Collection implements Serializable {
 
     private ArrayList<Card> cards = new ArrayList<>();
     private ArrayList<Deck> decks = new ArrayList<>();
-    private Deck selectedDeck;
+    private Deck selectedDeck = null;
 
     public void setSelectedDeck(Deck selectedDeck) {
 
@@ -64,7 +64,32 @@ public class Collection implements Serializable {
     }
 
     public CollectionErrors addToDeck(String cardID, String deckName) {
+        Deck chosenDeck = null;
+        for (Deck deck : decks)
+            if (deck.getDeckName().equals(deckName)) {
+                chosenDeck = deck;
+                break;
+            }
 
+        Card chosenCard = null;
+        for (Card card : cards)
+            if (card.getCardID().equals(cardID)) {
+                chosenCard = card;
+                break;
+            }
+
+        if (chosenDeck == null)
+            return CollectionErrors.DECK_DOES_NOT_EXIST;
+
+        for (Card card : chosenDeck.getCards())
+            if (card.getCardID().equals(cardID))
+                return CollectionErrors.ALREADY_IN_DECK;
+
+        if (chosenCard == null)
+            return CollectionErrors.CARD_NOT_FOUND;
+
+
+        chosenDeck.getCards().add(chosenCard);
         return null;
     }
 

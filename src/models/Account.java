@@ -4,24 +4,42 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Account implements Serializable {
 
     private String userName, password;
-    private int initialMoney = 15000;
-    private int money;
+    private int money = 15000;
     private Collection collection;
-    private Hand hand;
+    private ArrayList<History> matchHistories=new ArrayList<>();
+    private Hand hand = new Hand();
     private boolean isAI = false;
     private int winsNumber = 0;
 
-    public Hand getHand() {
+    public ArrayList<History> getMatchHistories() {
+        return matchHistories;
+    }
 
+    public void AddMatchHistory(Account oponnent){
+        History history=new History();
+        history.setLocalDateTime();
+        history.setOponnentUserName(oponnent.getUserName());
+        matchHistories.add(history);
+    }
+
+    public int getMoney() {
+        return money;
+    }
+
+    public void setMoney(int money) {
+        this.money = money;
+    }
+
+    public Hand getHand() {
         return hand;
     }
 
     public String getUserName() {
-
         return userName;
     }
 
@@ -38,11 +56,7 @@ public class Account implements Serializable {
 
     public boolean isPasswordCorrect(String password) {
 
-        if (this.password.equals(password)) return true;
-        return false;
-    }
-
-    public void playTurn() {
+        return this.password.equals(password);
     }
 
     public void addToHand(Card card) {
@@ -50,7 +64,8 @@ public class Account implements Serializable {
     }
 
     public Collection getCollection() {
-
+        if (collection == null)
+            collection = new Collection();
         return collection;
     }
 
@@ -63,10 +78,18 @@ public class Account implements Serializable {
     }
 
     public void resetPlayerVariables() {
+        winsNumber = 0;
+        money = 15000;
+        collection = new Collection();
     }
 
     public static Account getAIAccount(MatchType matchType) {
-        return null;
+        Account account = new Account();
+        return account;
+    }
+
+    public void setID(Card card){
+
     }
 
     public static void save(Account account) {
@@ -75,7 +98,7 @@ public class Account implements Serializable {
             return;
 
         try {
-            FileOutputStream fos = new FileOutputStream("users/"+account.getUserName()+".ser");
+            FileOutputStream fos = new FileOutputStream("users/" + account.getUserName() + ".ser");
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             // write object to file
             oos.writeObject(account);
@@ -90,7 +113,6 @@ public class Account implements Serializable {
 
     public boolean equals(Account account) {
 
-        if (this.getUserName().equals(account.getUserName())) return true;
-        return false;
+        return this.getUserName().equals(account.getUserName());
     }
 }

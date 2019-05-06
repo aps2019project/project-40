@@ -62,21 +62,21 @@ public class CollectionMenuView extends View {
             }
     }
 
-    public void showDeck(Deck deck){
-        ArrayList<Card> cards=deck.getCards();
-        show(cards,false);
+    public void showDeck(Deck deck) {
+        ArrayList<Card> cards = deck.getCards();
+        show(cards, false);
     }
 
-    public void showAllDecks(Collection collection){
-        int number=1;
-        for (Deck deck:collection.getDecks()){
-            System.out.println((number++)+" : "+deck.getDeckName()+" : ");
+    public void showAllDecks(Collection collection) {
+        int number = 1;
+        for (Deck deck : collection.getDecks()) {
+            System.out.println((number++) + " : " + deck.getDeckName() + " : ");
             showDeck(deck);
         }
     }
 
     public void showSpell(int num, Spell spell, boolean showCost) {
-        if (showCost)
+        if (!showCost)
             System.out.println(num + " : Type : Spell - Name : " + spell.getCardName()
                     + " - MP : " + spell.getManaCost()
                     + " - Special power : " + spell.getDescription());
@@ -84,12 +84,12 @@ public class CollectionMenuView extends View {
             System.out.println(num + " : Type : Spell - Name : " + spell.getCardName()
                     + " - MP : " + spell.getManaCost()
                     + " - Desc : " + spell.getDescription()
-                    + "- Sell Cost : " + spell.getPrice());
+                    + "- Sell Cost : " + spell.getSellCost());
 
     }
 
     public void showHero(int num, Unit unit, boolean showCost) {
-        if (showCost)
+        if (!showCost)
             System.out.println(num + " : Name : " + unit.getCardName()
                     + " - AP : " + unit.getAttackPoint()
                     + " - HP : " + unit.getHealthPoint()
@@ -101,11 +101,11 @@ public class CollectionMenuView extends View {
                     + " - AP : " + unit.getAttackPoint()
                     + " - HP : " + unit.getHealthPoint()
                     + " - Special power : " + unit.getSpecialPower().getDescription()
-                    + "- Sell Cost : " + unit.getPrice());
+                    + "- Sell Cost : " + unit.getSellCost());
     }
 
     public void showMinion(int num, Unit unit, boolean showCost) {
-        if (showCost)
+        if (!showCost)
             System.out.println(num + " : Type : Minion - Name : " + unit.getCardName()
                     + " - Class : " + unit.getUnitType()
                     + " - AP : " + unit.getAttackPoint()
@@ -119,7 +119,7 @@ public class CollectionMenuView extends View {
                     + " - HP : " + unit.getHealthPoint()
                     + " - MP : " + unit.getManaCost()
                     + " - Special power : " + unit.getSpecialPower().getDescription()
-                    + "- Sell Cost : " + unit.getPrice());
+                    + "- Sell Cost : " + unit.getSellCost());
     }
 
     public void showItem(int num, Card card, boolean showCost) {
