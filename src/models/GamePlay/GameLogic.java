@@ -119,4 +119,6 @@ public class GameLogic {
 
         //todo
     }
+
+    public void useBuff(Buff buff, Unit victimUnit) {}
 }
