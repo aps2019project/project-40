@@ -13,7 +13,7 @@ public class ShowCardsBattleView extends BattleView {
         return cardsInfo;
     }
 
-    public void setCardForHero(String name, int cost, String description, int manaPoint) {
+    public void setCardForHero(String name, int cost, String description) {
 
         ShowCardInfoBattleViewHero showCardInfoBattleViewHero = new ShowCardInfoBattleViewHero();
         showCardInfoBattleViewHero.setName(name);
@@ -44,5 +44,6 @@ public class ShowCardsBattleView extends BattleView {
         showCardInfoBattleViewMinion.setManaPoint(manaPoint);
         showCardInfoBattleViewMinion.setRange(unitType);
         showCardInfoBattleViewMinion.setHasComboAbility(hasComboAbility);
+        cardsInfo.add(showCardInfoBattleViewMinion);
     }
 }

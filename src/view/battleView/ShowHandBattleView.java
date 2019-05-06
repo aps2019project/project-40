@@ -1,31 +1,29 @@
 package view.battleView;
 
-import models.Account;
-
 import java.util.ArrayList;
 
 public class ShowHandBattleView extends BattleView {
 
-    private ArrayList<String> handCardsName = new ArrayList<>();
-    private String reserveCardName;
+    private ArrayList<ShowCardInfoBattleView> handCards = new ArrayList<>();
+    private ShowCardInfoBattleView reserveCard;
 
-    public ArrayList<String> getHandCardsName() {
+    public ArrayList<ShowCardInfoBattleView> getHandCards() {
 
-        return handCardsName;
+        return handCards;
     }
 
-    public void setHandCardsName(ArrayList<String> handCardsName) {
+    public void setHandCards(ArrayList<ShowCardInfoBattleView> handCardsName) {
 
-        this.handCardsName = handCardsName;
+        //todo
     }
 
-    public String getReserveCardName() {
+    public ShowCardInfoBattleView getReserveCard() {
 
-        return reserveCardName;
+        return reserveCard;
     }
 
-    public void setReserveCardName(String reserveCardName) {
+    public void setReserveCard(ShowCardInfoBattleView reserveCardName) {
 
-        this.reserveCardName = reserveCardName;
+        this.reserveCard = reserveCardName;
     }
 }

@@ -187,7 +187,7 @@ public class BattleView {
 
     private void showHand(ShowHandBattleView showHand) {
 
-        ArrayList<String> cardsName = showHand.getHandCardsName();
+        ArrayList<String> cardsName = showHand.getHandCards();
 
         for (String cardName : cardsName) {
 

@@ -14,6 +14,17 @@ public class Card implements Serializable, Cloneable {
     private ArrayList<Spell> spells = new ArrayList<>();
     private String description;
     private CardType type;
+    private Cell cell;
+
+    public Cell getCell() {
+
+        return cell;
+    }
+
+    public void setCell(Cell cell) {
+
+        this.cell = cell;
+    }
 
     public int getSellCost() {
         return sellCost;
