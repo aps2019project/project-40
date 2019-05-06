@@ -3,6 +3,7 @@ package controller;
 import models.*;
 import models.GamePlay.GameLogic;
 import models.GamePlay.Match;
+import org.omg.CORBA.BAD_CONTEXT;
 import request.battleRequest.BattleRequest;
 import request.battleRequest.BattleRequestChilds.*;
 import view.battleView.*;
@@ -96,9 +97,45 @@ public class BattleController {
 
     private void enterGraveYardRequest(EnterGraveYardRequest request) {
         //todo
-        if (request.isForShowInfo()) ;
-        if (request.isForShowCards()) ;
-        if (request.isForExit()) ;
+        if (request.isForShowInfo())
+            enterGraveYardRequestShowInfo(request.getCardID());
+
+        else if (request.isForShowCards())
+            enterGraveYardRequestShowCards();
+
+        else if (request.isForExit()) return;
+    }
+
+    private void enterGraveYardRequestShowInfo(String cardID) {
+
+        ShowCardsBattleView showCardsBattleView = new ShowCardsBattleView();
+
+        try {
+            if (match.findPlayerPlayingThisTurn().equals(match.getPlayer1()))
+                showCardsBattleView.setCard(Collection.findCardByCardID(match.getPlayer1GraveYard().getCards(), cardID));
+            else
+                showCardsBattleView.setCard(Collection.findCardByCardID(match.getPlayer2GraveYard().getCards(), cardID));
+
+            showCardsBattleView.show(showCardsBattleView);
+        } catch (NullPointerException e) {
+            BattleLog.errorInvalidCardID();
+        }
+    }
+
+    private void enterGraveYardRequestShowCards() {
+
+        ShowCardsBattleView showCardsBattleView = new ShowCardsBattleView();
+        ArrayList<Card> cards;
+        if (match.findPlayerPlayingThisTurn().equals(match.getPlayer1()))
+            cards = match.getPlayer1GraveYard().getCards();
+
+        else
+            cards = match.getPlayer2GraveYard().getCards();
+
+        for (Card card : cards)
+            showCardsBattleView.setCard(card);
+
+        showCardsBattleView.show(showCardsBattleView);
     }
 
     private void insertCardRequest(InsertCardRequest request) {
@@ -106,43 +143,40 @@ public class BattleController {
         Card card = Collection.findCardByCardName(
                 match.findPlayerPlayingThisTurn().getHand().getCards(), request.getCardName());
 
+        if (card == null) {
+            BattleLog.errorInvalidCardName();
+            return;
+        }
+
         Coordination coordination = new Coordination();
         coordination.setRow(request.getRow());
         coordination.setColumn(request.getColumn());
 
-        if (isOutOfTable(coordination)) {
-            BattleLog.errorInvalidTarget();
-            return;
-        }
+        if (isOutOfTable(coordination)) return;
 
         Cell cell = match.getTable().getCellByCoordination(coordination);
 
-        try {
-            if (card instanceof Unit) {
 
-                if (isCellFill(cell)) {
-                    BattleLog.errorCellIsFill();
-                    return;
-                }
-                if (!isCellAvailable(coordination)) {
-                    BattleLog.errorCellNotAvailable();
-                    return;
-                }
+        if (card instanceof Unit) {
 
-                gameLogic.insertProcess((Unit) card, cell);
-
-            } else {
-
+            if (isCellFill(cell)) {
+                BattleLog.errorCellIsFill();
+                return;
             }
+            if (!isCellAvailable(coordination)) return;
+            gameLogic.insertProcess((Unit) card, cell);
 
-        } catch (NullPointerException e) {
+        } else {
+            //TODO isTargetValid?
+            gameLogic.insertProcess((Spell) card, cell);
         }
+
     }
 
     private boolean isOutOfTable(Coordination coordination) {
 
-        if (coordination.getRow() >= Table.ROWS && coordination.getRow() < 0 &&
-                coordination.getColumn() >= Table.COLUMNS && coordination.getColumn() < 0) {
+        if (coordination.getRow() >= Table.ROWS || coordination.getRow() < 0 ||
+                coordination.getColumn() >= Table.COLUMNS || coordination.getColumn() < 0) {
 
             BattleLog.errorInvalidTarget();
             return true;
@@ -154,6 +188,7 @@ public class BattleController {
     private boolean isCellFill(Cell cell) {
 
         if (cell.getCard() == null) return false;
+        BattleLog.errorCellIsFill();
         return true;
     }
 
@@ -177,6 +212,8 @@ public class BattleController {
                 }
             }
         }
+
+        BattleLog.errorCellNotAvailable();
         return false;
     }
 
