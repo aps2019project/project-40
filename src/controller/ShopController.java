@@ -14,7 +14,6 @@ public class ShopController {
     private boolean isShopClosed = false;
     private Account account;
     private static Collection shopCollection = initializeShopCollection();
-    private Collection myCollection;
     private ShopMenuView shopMenuView = ShopMenuView.getInstance();
 
     public static ShopController getInstance() {
@@ -30,7 +29,6 @@ public class ShopController {
     public void shopControllerMain() {
         isShopClosed = false;
         account = Controller.getInstance().getAccount();
-        myCollection = account.getCollection();
         while (!isShopClosed) {
             ShopRequest shopRequest = ShopRequest.getInstance().getCommand();
 
@@ -59,28 +57,33 @@ public class ShopController {
                 break;
 
             case SEARCH_COLLECTION:
-                searchCollection(shopRequestVariable.getNameOrId(), myCollection);
+                searchCollection(shopRequestVariable.getNameOrId(), account.getCollection());
                 break;
         }
     }
 
     private boolean checkBuyItem(ArrayList<Card> cards) {
         int numOfItemInCollection = 0;
-        return true;
+        for (Card card : cards)
+            if (card.getType().equals(CardType.USABLE_ITEM))
+                numOfItemInCollection++;
+
+        if (numOfItemInCollection < 3)
+            return false;
+        else return true;
     }
 
     public void buy(String cardName) {
         for (Card card : shopCollection.getCards())
             if (card.getCardName().equals(cardName)) {
-                if (card.getType().equals(CardType.USABLE_ITEM) && checkBuyItem(myCollection.getCards())) {
+                if (card.getType().equals(CardType.USABLE_ITEM) && checkBuyItem(account.getCollection().getCards())) {
                     shopMenuView.showError(ShopError.ALREADY_3_ITEM);
                     return;
                 }
                 if (account.getMoney() - card.getPrice() >= 0) {
-
                     Card newCard = Card.deepClone(card);
                     account.setID(newCard);
-                    myCollection.getCards().add(newCard);
+                    account.getCollection().getCards().add(newCard);
                     account.setMoney(account.getMoney() - card.getPrice());
 
                     shopMenuView.showError(ShopError.SUCSSES);
@@ -92,10 +95,12 @@ public class ShopController {
     }
 
     public void sell(String cardID) {
-        for (Card card : myCollection.getCards())
+
+        for (Card card : account.getCollection().getCards())
             if (card.getCardID().equals(cardID)) {
-                myCollection.getCards().remove(card);
+                account.getCollection().getCards().remove(card);
                 account.setMoney(account.getMoney() + card.getSellCost());
+                shopMenuView.showError(ShopError.SUCSSES);
                 return;
             }
         shopMenuView.showError(ShopError.CARD_NOT_FOUND);
@@ -107,13 +112,10 @@ public class ShopController {
             if (card.getCardName().equals(cardName))
                 cardIDs.add(card.getCardID());
         }
-
         if (cardIDs.size() == 0)
             shopMenuView.showError(ShopError.CARD_NOT_FOUND);
-
         else
             shopMenuView.showIDs(cardIDs);
-
     }
 
     public void handelShopRequestWithOutVariable(ShopRequestWithOutVariable shopRequestWithOutVariable) {
@@ -128,7 +130,7 @@ public class ShopController {
                 shopMenuView.show(shopCollection.getCards(), true);
                 return;
             case SHOW_COLLECTION:
-                shopMenuView.show(myCollection.getCards(), false);
+                shopMenuView.show(account.getCollection().getCards(), false);
         }
     }
 

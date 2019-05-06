@@ -90,7 +90,8 @@ public class Account implements Serializable {
     }
 
     public void setID(Card card){
-
+        int instanceNum=collection.getNumberOfCardWithName(card.getCardName());
+        card.setCardID(userName+"_"+card.getCardName()+"_"+(instanceNum+1));
     }
 
     public static void save(Account account) {
