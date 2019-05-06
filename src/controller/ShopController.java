@@ -77,12 +77,10 @@ public class ShopController {
                     return;
                 }
                 if (account.getMoney() - card.getPrice() >= 0) {
-                    try {
-                        Card newCard = card.clone();
-                        myCollection.getCards().add(newCard);
-                    } catch (CloneNotSupportedException e) {
-                    }
 
+                    Card newCard = Card.deepClone(card);
+                    account.setID(newCard);
+                    myCollection.getCards().add(newCard);
                     account.setMoney(account.getMoney() - card.getPrice());
 
                     shopMenuView.showError(ShopError.SUCSSES);

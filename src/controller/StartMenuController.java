@@ -43,6 +43,9 @@ public class StartMenuController {
             case SAVE:
                 Account.save(Controller.getInstance().getAccount());
                 break;
+            case MSTCH_HISTORY:
+                StartMenuView.getInstance().showHistory(Controller.getInstance().getAccount().getMatchHistories());
+                break;
         }
     }
 

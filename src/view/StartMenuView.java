@@ -1,5 +1,9 @@
 package view;
 
+import models.History;
+
+import java.util.ArrayList;
+
 public class StartMenuView  {
     private static StartMenuView startMenuView;
 
@@ -15,5 +19,11 @@ public class StartMenuView  {
         System.out.println("4. Exit");
         System.out.println("5. Help");
         System.out.println("6. Save");
+        System.out.println("7. Match histories");
+    }
+
+    public void showHistory(ArrayList<History> histories){
+        for (History history:histories)
+            System.out.println(history.getOponnentUserName()+" "+history.getDifference());
     }
 }

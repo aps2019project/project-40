@@ -4,15 +4,28 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Account implements Serializable {
 
     private String userName, password;
     private int money = 15000;
     private Collection collection;
+    private ArrayList<History> matchHistories=new ArrayList<>();
     private Hand hand = new Hand();
     private boolean isAI = false;
     private int winsNumber = 0;
+
+    public ArrayList<History> getMatchHistories() {
+        return matchHistories;
+    }
+
+    public void AddMatchHistory(Account oponnent){
+        History history=new History();
+        history.setLocalDateTime();
+        history.setOponnentUserName(oponnent.getUserName());
+        matchHistories.add(history);
+    }
 
     public int getMoney() {
         return money;
@@ -73,6 +86,10 @@ public class Account implements Serializable {
     public static Account getAIAccount(MatchType matchType) {
         Account account = new Account();
         return account;
+    }
+
+    public void setID(Card card){
+
     }
 
     public static void save(Account account) {

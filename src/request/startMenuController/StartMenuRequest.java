@@ -21,7 +21,9 @@ public class StartMenuRequest extends Request {
         else if (command.indexOf("help") >= 0)
             startMenuOption.setStartMenuOptionList(StartMenuOptionList.HELP);
         else if (command.indexOf("save") >= 0)
-            startMenuOption.setStartMenuOptionList(StartMenuOptionList.SAVE);
+            startMenuOption.setStartMenuOptionList(StartMenuOptionList.HELP);
+        else if (command.indexOf("match history") >= 0)
+            startMenuOption.setStartMenuOptionList(StartMenuOptionList.MSTCH_HISTORY);
         else if (command.indexOf("enter") >= 0) {
             String choice = command.split("\\s")[1];
             switch (choice) {

@@ -1,6 +1,8 @@
 package models;
 
-public class Buff {
+import java.io.Serializable;
+
+public class Buff implements Serializable {
     private int duration;
     private int holy;
     private int power;

@@ -1,6 +1,6 @@
 package models;
 
-import java.io.Serializable;
+import java.io.*;
 import java.util.ArrayList;
 
 public class Card implements Serializable, Cloneable {
@@ -73,8 +73,19 @@ public class Card implements Serializable, Cloneable {
         return "" + manaCost + "\n" + description + "\n" + type + "\n" + cardName + "\n" + price;
     }
 
-    public Card clone() throws CloneNotSupportedException {
-        Card card = (Card) super.clone();
-        return card;
+    public static  Card deepClone(Card object){
+        try {
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteArrayOutputStream);
+            objectOutputStream.writeObject(object);
+            ByteArrayInputStream bais = new ByteArrayInputStream(byteArrayOutputStream.toByteArray());
+            ObjectInputStream objectInputStream = new ObjectInputStream(bais);
+            return (Card) objectInputStream.readObject();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }
+
