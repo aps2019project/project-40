@@ -12,8 +12,13 @@ public class Account implements Serializable {
     private int money = 15000;
     private Collection collection;
     private ArrayList<History> matchHistories = new ArrayList<>();
+    private Hand hand=new Hand();
     private boolean isAI = false;
     private int winsNumber = 0;
+
+    public Hand getHand() {
+        return hand;
+    }
 
     public ArrayList<History> getMatchHistories() {
         return matchHistories;
