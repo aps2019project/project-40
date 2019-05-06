@@ -13,6 +13,11 @@ public class Unit extends Card implements Serializable {
     private boolean combo;
     private int flag;
     private int range;
+    private boolean canMove;
+    private boolean canAttack;
+    private boolean cantBeStunned;
+    private boolean cantBeDisarmed;
+    private boolean cantBePoisoned;
 
     Unit(int manaCost, int price, int HP, int AP, UnitType unitType,
          String name, ArrayList<Spell> spells, String description, CardType type,
@@ -66,5 +71,73 @@ public class Unit extends Card implements Serializable {
     public boolean hasComboAbility() {
 
         return combo;
+    }
+
+    public void setBuffs(ArrayList<Buff> buffs) {
+        this.buffs = buffs;
+    }
+
+    public void setHP(int HP) {
+        this.HP = HP;
+    }
+
+    public void setAP(int AP) {
+        this.AP = AP;
+    }
+
+    public boolean isCombo() {
+        return combo;
+    }
+
+    public void setCombo(boolean combo) {
+        this.combo = combo;
+    }
+
+    public int getHP() {
+        return HP;
+    }
+
+    public boolean isCanMove() {
+        return canMove;
+    }
+
+    public boolean isCanAttack() {
+        return canAttack;
+    }
+
+    public int getAP() {
+        return AP;
+    }
+
+    public boolean isCantBeDisarmed() {
+        return cantBeDisarmed;
+    }
+
+    public boolean isCantBePoisoned() {
+        return cantBePoisoned;
+    }
+
+    public boolean isCantBeStunned() {
+        return cantBeStunned;
+    }
+
+    public void setCanAttack(boolean canAttack) {
+        this.canAttack = canAttack;
+    }
+
+    public void setCanMove(boolean canMove) {
+        this.canMove = canMove;
+    }
+
+    public void setCantBeDisarmed(boolean cantBeDisarmed) {
+        this.cantBeDisarmed = cantBeDisarmed;
+    }
+
+    public void setCantBePoisoned(boolean cantBePoisoned) {
+        this.cantBePoisoned = cantBePoisoned;
+    }
+
+    public void setCantBeStunned(boolean cantBeStunned) {
+        this.cantBeStunned = cantBeStunned;
     }
 }

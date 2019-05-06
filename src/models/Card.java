@@ -6,9 +6,9 @@ import java.util.ArrayList;
 public class Card implements Serializable, Cloneable {
     private int manaCost;
     private int price;
+    private int sellCost;
     private String cardID;
     private String cardName;
-    private int sellCost;
     private String team;
     private ArrayList<Spell> spells = new ArrayList<>();
     private String description;
