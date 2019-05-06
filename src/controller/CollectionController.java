@@ -78,7 +78,6 @@ public class CollectionController {
         collectionErrors = collection.addToDeck(cardID, deckName);
         if (collectionErrors != null)
             collectionMenuView.showError(collectionErrors);
-
     }
 
     public void handelDeckCommand(DeckCommand deckCommand) {
@@ -129,10 +128,9 @@ public class CollectionController {
             collectionMenuView.showError(CollectionErrors.ALREADY_A_DECK_WITH_THIS_USERNAME);
             return;
         }
-
         deck = new Deck();
         deck.setDeckName(deckName);
-
+        account.getCollection().getDecks().add(deck);
     }
 
     public void validateDeck(Deck deck) {

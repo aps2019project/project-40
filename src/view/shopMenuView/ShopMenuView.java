@@ -1,6 +1,9 @@
 package view.shopMenuView;
 
-import models.*;
+import models.Card;
+import models.CardType;
+import models.Spell;
+import models.Unit;
 
 import java.util.ArrayList;
 
@@ -71,8 +74,8 @@ public class ShopMenuView {
 
     }
 
-    public void showIDs(ArrayList<String> IDs){
-        for (String id:IDs)
+    public void showIDs(ArrayList<String> IDs) {
+        for (String id : IDs)
             System.out.println(id);
     }
 

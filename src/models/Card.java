@@ -10,19 +10,20 @@ public class Card implements Serializable, Cloneable {
     private String cardName;
     private int sellCost;
     private String team;
-    private static int numberOfInstances = 0;
     private ArrayList<Spell> spells = new ArrayList<>();
     private String description;
     private CardType type;
     private Cell cell;
 
-    public Cell getCell() {
+    public void setCardID(String cardID) {
+        this.cardID = cardID;
+    }
 
+    public Cell getCell() {
         return cell;
     }
 
     public void setCell(Cell cell) {
-
         this.cell = cell;
     }
 
@@ -40,10 +41,6 @@ public class Card implements Serializable, Cloneable {
 
     public int getManaCost() {
         return manaCost;
-    }
-
-    Card() {
-        numberOfInstances += 1;
     }
 
     Card(int manaCost, int price, String cardName, ArrayList<Spell> spells, String description, CardType type) {
@@ -84,7 +81,7 @@ public class Card implements Serializable, Cloneable {
         return "" + manaCost + "\n" + description + "\n" + type + "\n" + cardName + "\n" + price;
     }
 
-    public static  Card deepClone(Card object){
+    public static Card deepClone(Card object) {
         try {
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteArrayOutputStream);
@@ -92,8 +89,7 @@ public class Card implements Serializable, Cloneable {
             ByteArrayInputStream bais = new ByteArrayInputStream(byteArrayOutputStream.toByteArray());
             ObjectInputStream objectInputStream = new ObjectInputStream(bais);
             return (Card) objectInputStream.readObject();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }

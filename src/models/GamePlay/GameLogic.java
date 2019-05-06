@@ -43,7 +43,6 @@ public class GameLogic {
                 player2Units.add((Unit) card);
 
 
-
         if (match.getMatchType() == MatchType.KILL_THE_HERO)
             return getMatchResultForKillTheHero(player1Units, player2Units);
 

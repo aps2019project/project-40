@@ -11,17 +11,21 @@ public class Account implements Serializable {
     private String userName, password;
     private int money = 15000;
     private Collection collection;
-    private ArrayList<History> matchHistories=new ArrayList<>();
-    private Hand hand = new Hand();
+    private ArrayList<History> matchHistories = new ArrayList<>();
+    private Hand hand=new Hand();
     private boolean isAI = false;
     private int winsNumber = 0;
+
+    public Hand getHand() {
+        return hand;
+    }
 
     public ArrayList<History> getMatchHistories() {
         return matchHistories;
     }
 
-    public void AddMatchHistory(Account oponnent,GameStatus gameStatus){
-        History history=new History();
+    public void AddMatchHistory(Account oponnent, GameStatus gameStatus) {
+        History history = new History();
         history.setLocalDateTime();
         history.setOponnentUserName(oponnent.getUserName());
         history.setYourStatus(gameStatus);
@@ -36,9 +40,6 @@ public class Account implements Serializable {
         this.money = money;
     }
 
-    public Hand getHand() {
-        return hand;
-    }
 
     public String getUserName() {
         return userName;
@@ -89,8 +90,9 @@ public class Account implements Serializable {
         return account;
     }
 
-    public void setID(Card card){
-
+    public void setID(Card card) {
+        int instanceNum = collection.getNumberOfCardWithName(card.getCardName());
+        card.setCardID(userName + "_" + card.getCardName() + "_" + (instanceNum + 1));
     }
 
     public static void save(Account account) {

@@ -103,4 +103,17 @@ public class Collection implements Serializable {
                 return deck;
         return null;
     }
+
+    public int getNumberOfCardWithName(String userName) {
+        int num = 0;
+        for (Card card : cards)
+            if (card.getCardName().equals(userName))
+                num++;
+
+        for (Deck deck : decks)
+            for (Card card : deck.getCards())
+                if (card.getCardName().equals(userName))
+                    num++;
+        return num;
+    }
 }

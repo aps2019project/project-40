@@ -1,6 +1,7 @@
 package view.battleView;
 
 import models.Coordination;
+
 import java.util.ArrayList;
 
 public class BattleView {

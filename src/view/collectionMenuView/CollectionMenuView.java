@@ -37,7 +37,7 @@ public class CollectionMenuView extends View {
         System.out.println("help");
     }
 
-    public void show(ArrayList<Card> cards,boolean showCost) {
+    public void show(ArrayList<Card> cards, boolean showCost) {
         int number = 1;
         System.out.println("Heroes :");
 
@@ -48,11 +48,11 @@ public class CollectionMenuView extends View {
         number = 1;
         for (Card card : cards)
             if (card.getType().equals(CardType.USABLE_ITEM))
-                showItem(number++,card,showCost);
+                showItem(number++, card, showCost);
 
         number = 1;
         for (Card card : cards)
-            switch (card.getType()){
+            switch (card.getType()) {
                 case MINION:
                     showMinion(number++, (Unit) card, showCost);
                     break;
