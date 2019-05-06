@@ -58,7 +58,7 @@ public class AccountMenuController {
     }
 
     private void loginCommand(AccountLoginRequest accountLoginRequest) {
-        if (account!=null){
+        if (account != null) {
             AccountMenuView.getInstance().showError(AccountError.ALREADY_LOGGED_IN);
             return;
         }
@@ -76,7 +76,7 @@ public class AccountMenuController {
     }
 
     private void createCommand(AccountCreate accountCreate) {
-        if (account!=null){
+        if (account != null) {
             AccountMenuView.getInstance().showError(AccountError.ALREADY_LOGGED_IN);
             return;
         }

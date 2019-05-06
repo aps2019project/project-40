@@ -4,7 +4,7 @@ import models.History;
 
 import java.util.ArrayList;
 
-public class StartMenuView  {
+public class StartMenuView {
     private static StartMenuView startMenuView;
 
     public static StartMenuView getInstance() {
@@ -12,7 +12,8 @@ public class StartMenuView  {
             startMenuView = new StartMenuView();
         return startMenuView;
     }
-    public void showOptions(){
+
+    public void showOptions() {
         System.out.println("1. Collection");
         System.out.println("2. Shop");
         System.out.println("3. Battle");
@@ -23,8 +24,8 @@ public class StartMenuView  {
         System.out.println("8. LoginMenu");
     }
 
-    public void showHistory(ArrayList<History> histories){
-        for (History history:histories)
-            System.out.println(history.getOponnentUserName()+" "+history.getYourStatus()+" "+history.getDifference()+" ago");
+    public void showHistory(ArrayList<History> histories) {
+        for (History history : histories)
+            System.out.println(history.getOponnentUserName() + " " + history.getYourStatus() + " " + history.getDifference() + " ago");
     }
 }

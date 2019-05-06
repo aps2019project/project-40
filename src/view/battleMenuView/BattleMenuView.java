@@ -16,29 +16,29 @@ public class BattleMenuView extends View {
         return battleMenuView;
     }
 
-    public void showError(BattleMenuError battleMenuError){
+    public void showError(BattleMenuError battleMenuError) {
         System.out.println(battleMenuError);
     }
 
-    public void showBattleMenuPlayerType(){
+    public void showBattleMenuPlayerType() {
         System.out.println("1. Single Player");
         System.out.println("2. Multi Player");
     }
 
-    public void showSinglePlayerCommand(){
+    public void showSinglePlayerCommand() {
         System.out.println("1. Story");
         System.out.println("2. Custom Game");
     }
 
-    public void showStoryGame(){
+    public void showStoryGame() {
         System.out.println("1. Hero: dive sefid, Mode: kill the hero");
         System.out.println("2. Hero: zahak, Mode: hold flag for 6 term");
         System.out.println("3. Hero: arash, Mode: collect the flags");
     }
 
     public void showUsers(ArrayList<String> users) {
-        for (int i = 0; i <users.size() ; i++) {
-            System.out.println(i+1+". "+users.get(0));
+        for (int i = 0; i < users.size(); i++) {
+            System.out.println(i + 1 + ". " + users.get(0));
         }
     }
 }

@@ -1,6 +1,6 @@
 package view.battleView;
 
-public class ShowSelectedItemInfoBattleView extends BattleView{
+public class ShowSelectedItemInfoBattleView extends BattleView {
 
     private String name;
     private String description;

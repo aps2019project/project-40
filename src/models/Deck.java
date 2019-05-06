@@ -1,6 +1,6 @@
 package models;
 
-import java.io.Serializable;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -9,6 +9,7 @@ public class Deck implements Serializable {
     private ArrayList<Card> cards = new ArrayList<>();
     private int maxCardNumber;
     private Item item;
+    private Hand hand = new Hand();
 
     public String getDeckName() {
         return deckName;
@@ -23,7 +24,23 @@ public class Deck implements Serializable {
     }
 
     public boolean isDeckValidate() {
-        return true;
+        int numOfCards = 0, numOfHero = 0, numOfItem = 0;
+        for (Card card : cards)
+            switch (card.getType()) {
+                case SPELL:
+                    numOfCards++;
+                    break;
+                case HERO:
+                    numOfHero++;
+                    break;
+                case MINION:
+                    numOfCards++;
+                    break;
+                case USABLE_ITEM:
+                    numOfItem++;
+            }
+        return numOfCards == 20 && numOfHero == 1 && numOfItem == 1;
+
     }
 
     public Card getLastCard() {
@@ -34,4 +51,17 @@ public class Deck implements Serializable {
         Collections.shuffle(cards);
     }
 
+    public static Deck deepClone(Deck object) {
+        try {
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteArrayOutputStream);
+            objectOutputStream.writeObject(object);
+            ByteArrayInputStream bais = new ByteArrayInputStream(byteArrayOutputStream.toByteArray());
+            ObjectInputStream objectInputStream = new ObjectInputStream(bais);
+            return (Deck) objectInputStream.readObject();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

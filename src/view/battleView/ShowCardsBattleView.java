@@ -55,7 +55,7 @@ public class ShowCardsBattleView extends BattleView {
         cardsInfo.add(showCardInfoBattleViewSpell);
     }
 
-    private void  setCardsForMinion(String name, int cost, String description, int attackPoint, int healthPoint,
+    private void setCardsForMinion(String name, int cost, String description, int attackPoint, int healthPoint,
                                    int manaPoint, UnitType unitType, boolean hasComboAbility) {
 
         ShowCardInfoBattleViewMinion showCardInfoBattleViewMinion = new ShowCardInfoBattleViewMinion();

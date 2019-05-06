@@ -68,9 +68,7 @@ public class ShopController {
             if (card.getType().equals(CardType.USABLE_ITEM))
                 numOfItemInCollection++;
 
-        if (numOfItemInCollection < 3)
-            return false;
-        else return true;
+        return numOfItemInCollection >= 3;
     }
 
     public void buy(String cardName) {

@@ -81,7 +81,7 @@ public class Card implements Serializable, Cloneable {
         return "" + manaCost + "\n" + description + "\n" + type + "\n" + cardName + "\n" + price;
     }
 
-    public static  Card deepClone(Card object){
+    public static Card deepClone(Card object) {
         try {
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteArrayOutputStream);
@@ -89,8 +89,7 @@ public class Card implements Serializable, Cloneable {
             ByteArrayInputStream bais = new ByteArrayInputStream(byteArrayOutputStream.toByteArray());
             ObjectInputStream objectInputStream = new ObjectInputStream(bais);
             return (Card) objectInputStream.readObject();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
