@@ -100,4 +100,14 @@ public class BattleLog {
 
         System.out.println("Unit is stun");
     }
+
+    public static void errorUnitAttacked() {
+
+        System.out.println("This unit attacked previously");
+    }
+
+    public static void errorUnitMovedPreviously() {
+
+        System.out.println("This unit moved previously");
+    }
 }

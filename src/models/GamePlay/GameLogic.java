@@ -14,6 +14,18 @@ public class GameLogic {
     private Match match;
     int flagsNumber;
     int remainTurnToHoldingTheFlag; //todo initialize in dead and get
+    private ArrayList<Unit> attackedUnitsInATurn = new ArrayList<>();       //todo add attacker to array
+    private ArrayList<Unit> movedUnitsInATurn = new ArrayList<>();       //todo add moved to array
+
+    public ArrayList<Unit> getAttackedUnitsInATurn() {
+
+        return attackedUnitsInATurn;
+    }
+
+    public ArrayList<Unit> getMovedUnitsInATurn() {
+
+        return movedUnitsInATurn;
+    }
 
     GameLogic(Match match) {
 

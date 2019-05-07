@@ -64,7 +64,9 @@ public class BattleController {
 
     private void selectAndUseCardRequest(SelectAndUseCardRequest request) {
         //todo
-        if (request.isForMove()) ;
+        if (request.isForMove())
+            selectAndUseCardRequestMove(request);
+
         else if (request.isForAttack()) ;
         else if (request.isForAttackCombo()) ;
         else if (request.isForShowInfo())
@@ -92,11 +94,41 @@ public class BattleController {
         if (!isCellAvailableForMove(card.getCell(), destinationCell)) return;
 
         if (isUnitStun((Unit) card)) return;
+        if (isAttacked((Unit) card)) {
+            BattleLog.errorUnitAttacked();
+            return;
+        }
+        if (isMovedPreviously((Unit) card)) {
+            BattleLog.errorUnitMovedPreviously();
+            return;
+        }
 
-
-        //todo if attack or move
-        //todo check can move or not
+        gameLogic.moveProcess(card, destinationCell);
         //todo if there is flag in cell get that
+    }
+
+    private boolean isAttacked(Unit unit) {
+
+        ArrayList<Unit> attackedUnits = gameLogic.getAttackedUnitsInATurn();
+
+        for (Unit attackedUnit : attackedUnits) {
+
+            if (attackedUnit.getCardName().equals(attackedUnit.getCardName())) return true;
+        }
+
+        return false;
+    }
+
+    private boolean isMovedPreviously(Unit unit) {
+
+        ArrayList<Unit> movedUnits = gameLogic.getMovedUnitsInATurn();
+
+        for (Unit movedUnit : movedUnits) {
+
+            if (movedUnit.getCardName().equals(unit.getCardName())) return true;
+        }
+
+        return false;
     }
 
     private boolean isCellAvailableForMove(Cell originCell, Cell destinationCell) {
