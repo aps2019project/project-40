@@ -32,10 +32,8 @@ public class BattleController {
 
     public void mainBattleController(Match match) {
 
-        //todo
         this.match = match;
         gameLogic = match.getGameLogic();
-
         manageRequest();
     }
 
@@ -228,7 +226,7 @@ public class BattleController {
     }
 
     private void requestWithoutVariable(RequestWithoutVariable request) {
-        //todo
+
         if (request.getEnumRequest() == RequestWithoutVariableEnum.GAME_INFO_REQUEST)
             gameInfoRequest();
 
@@ -244,8 +242,11 @@ public class BattleController {
         else if (request.getEnumRequest() == RequestWithoutVariableEnum.SHOW_HAND_REQUEST)
             showHandRequest();
 
-        else if (request.getEnumRequest() == RequestWithoutVariableEnum.END_TURN_REQUEST) ;
-        else if (request.getEnumRequest() == RequestWithoutVariableEnum.SHOW_COLLECTED_ITEM_REQUEST) ;
+        else if (request.getEnumRequest() == RequestWithoutVariableEnum.END_TURN_REQUEST)
+            endTurnRequest();
+
+        else if (request.getEnumRequest() == RequestWithoutVariableEnum.SHOW_COLLECTED_ITEM_REQUEST)
+            showCollectedItemRequest();
 
         else if (request.getEnumRequest() == RequestWithoutVariableEnum.END_GAME_REQUEST)
             isEndedGame = true;
@@ -439,10 +440,18 @@ public class BattleController {
     }
 
     private void endTurnRequest() {
-        //todo
+
+        gameLogic.switchTurn();
     }
 
     private void showCollectedItemRequest() {
-        //todo
+
+        ShowCollectedItemsBattleView showCollectedItemsBattleView = new ShowCollectedItemsBattleView();
+        ArrayList<Card> collectedItems = match.findPlayerPlayingThisTurn().getHand().getCollectiblesItem();
+
+        for (Card item : collectedItems)
+            showCollectedItemsBattleView.setItemInfo(item.getCardName(), item.getDescription());
+
+        showCollectedItemsBattleView.show(showCollectedItemsBattleView);
     }
 }

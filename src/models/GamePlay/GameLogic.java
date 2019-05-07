@@ -135,7 +135,7 @@ public class GameLogic {
 
         match.turnNumber++;
         manaHandler();
-        //todo fill hand
+        match.findPlayerPlayingThisTurn().getHand().fillHandEmptyPlace();
     }
 
     private void manaHandler() {

@@ -3,6 +3,7 @@ package view.battleView;
 import models.Coordination;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class BattleView {
 
@@ -170,12 +171,10 @@ public class BattleView {
 
     private void showCollectedItems(ShowCollectedItemsBattleView collectedItem) {
 
-        ArrayList<String> itemsName = collectedItem.getItemName();
+        HashMap<String, String> itemsInfo = collectedItem.getItemInfo();
 
-        for (String itemName : itemsName) {
-
-            System.out.println(itemName);
-        }
+        itemsInfo.forEach((name, description) ->
+                System.out.println("name: " + name + "\ndescription: " + description));
     }
 
     private void showSelectedItemInfo(ShowSelectedItemInfoBattleView itemInfo) {

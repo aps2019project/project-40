@@ -1,18 +1,18 @@
 package view.battleView;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 public class ShowCollectedItemsBattleView extends BattleView {
 
-    private ArrayList<String> itemName = new ArrayList<>();
+    private HashMap<String, String> itemsInfo = new HashMap<>();
 
-    public ArrayList<String> getItemName() {
+    public HashMap<String, String> getItemInfo() {
 
-        return itemName;
+        return itemsInfo;
     }
 
-    public void setItemName(ArrayList<String> itemName) {
+    public void setItemInfo(String name, String description) {
 
-        this.itemName = itemName;
+        itemsInfo.put(name, description);
     }
 }
