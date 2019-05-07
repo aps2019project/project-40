@@ -64,11 +64,29 @@ public class BattleController {
     private void selectAndUseCardRequest(SelectAndUseCardRequest request) {
         //todo
         if (request.isForMove()) ;
-        if (request.isForAttack()) ;
-        if (request.isForAttackCombo()) ;
-        if (request.isForShowInfo()) ;
-        if (request.isForUse()) ;
-        if (request.isForSpecialPower()) ;
+        else if (request.isForAttack()) ;
+        else if (request.isForAttackCombo()) ;
+        else if (request.isForShowInfo())
+            selectAndUseCardRequestShowInfo(request);
+
+        else if (request.isForUse()) ;
+        else if (request.isForSpecialPower()) ;
+    }
+
+    private void selectAndUseCardRequestShowInfo(SelectAndUseCardRequest request) {
+
+        Card item = Collection.findCardByCardName(
+                match.findPlayerPlayingThisTurn().getHand().getCollectiblesItem(), request.getID());
+
+        if (item == null) {
+            BattleLog.errorInvalidItemName();
+            return;
+        }
+
+        ShowSelectedItemInfoBattleView showSelectedItemInfoBattleView = new ShowSelectedItemInfoBattleView();
+        showSelectedItemInfoBattleView.setName(item.getCardName());
+        showSelectedItemInfoBattleView.setDescription(item.getDescription());
+        showSelectedItemInfoBattleView.show(showSelectedItemInfoBattleView);
     }
 
     private void showCardInfoRequest(ShowCardInfoRequest request) {
