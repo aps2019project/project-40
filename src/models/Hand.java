@@ -8,6 +8,7 @@ public class Hand implements Serializable {
     private ArrayList<Card> cards = new ArrayList<>();
     private Card reserveCard;
     private Card selectedCard;
+    private ArrayList<Card> collectiblesItem = new ArrayList<>();
     private final int MAX_HANDS_CARD = 5;
 
     public Card getReserveCard() {
@@ -20,12 +21,14 @@ public class Hand implements Serializable {
         return cards;
     }
 
-    private void fillEmptyPlace(Card card) {
+    public ArrayList<Card> getCollectiblesItem() {
 
-        if (isThereEmptyPlace()) {
+        return collectiblesItem;
+    }
 
+    public void setItemToCollectiblesItem(Card card) {
 
-        }
+        collectiblesItem.add(card);
     }
 
     private boolean isThereEmptyPlace() {

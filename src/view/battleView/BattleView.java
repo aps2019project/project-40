@@ -6,18 +6,6 @@ import java.util.ArrayList;
 
 public class BattleView {
 
-    private static BattleView battleView;
-
-    public static BattleView getInstance() {
-
-        if (battleView == null) {
-
-            battleView = new BattleView();
-        }
-
-        return battleView;
-    }
-
     public void show(BattleView battleView) {
 
         if (battleView instanceof GameInfoBattleView) {

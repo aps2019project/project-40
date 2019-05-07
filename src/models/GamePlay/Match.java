@@ -13,7 +13,7 @@ public class Match {
     private MatchType matchType;
     private GameLogic gameLogic;
     int turnNumber = 0;  //todo 0 or 1?
-    int player1Mana, player2Mana;
+    int player1Mana = 2, player2Mana = 2, initialPlayer1Mana = 2, initialPlayer2Mana = 2;
 
     public Account getPlayer1() {
 

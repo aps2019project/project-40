@@ -14,11 +14,10 @@ public class BattleController {
 
     private static BattleController battleController;
     private BattleRequest battleRequest = BattleRequest.getInstance();
-    private BattleView battleView = BattleView.getInstance();
     private Match match;
     private GameLogic gameLogic;
+    private boolean isEndedGame = false;
 
-    //TODO check validity of card request
     //TODO check destination validity
 
     public static BattleController getInstance() {
@@ -37,6 +36,7 @@ public class BattleController {
         this.match = match;
         gameLogic = match.getGameLogic();
 
+        manageRequest();
     }
 
     private void manageRequest() {
@@ -59,6 +59,8 @@ public class BattleController {
 
             if (request instanceof RequestWithoutVariable)
                 requestWithoutVariable((RequestWithoutVariable) request);
+
+            if (isEndedGame) break;
         }
     }
 
@@ -140,14 +142,17 @@ public class BattleController {
             return;
         }
 
+        if (!hasEnoughMana(card)) {
+            BattleLog.errorNotEnoughMana();
+            return;
+        }
+
         Coordination coordination = new Coordination();
         coordination.setRow(request.getRow());
         coordination.setColumn(request.getColumn());
-
         if (isOutOfTable(coordination)) return;
-        //todo check mana
-        Cell cell = match.getTable().getCellByCoordination(coordination);
 
+        Cell cell = match.getTable().getCellByCoordination(coordination);
 
         if (card instanceof Unit) {
 
@@ -162,7 +167,20 @@ public class BattleController {
             //TODO isTargetValid?
             gameLogic.insertProcess((Spell) card, cell);
         }
+    }
 
+    private boolean hasEnoughMana(Card card) {
+
+        if (match.findPlayerPlayingThisTurn().equals(match.getPlayer1())) {
+
+            if (card.getManaCost() <= match.getPlayer1Mana()) return true;
+            else return false;
+
+        } else {
+
+            if (card.getManaCost() <= match.getPlayer2Mana()) return true;
+            else return false;
+        }
     }
 
     private boolean isOutOfTable(Coordination coordination) {
@@ -228,7 +246,9 @@ public class BattleController {
 
         else if (request.getEnumRequest() == RequestWithoutVariableEnum.END_TURN_REQUEST) ;
         else if (request.getEnumRequest() == RequestWithoutVariableEnum.SHOW_COLLECTED_ITEM_REQUEST) ;
-        else if (request.getEnumRequest() == RequestWithoutVariableEnum.END_GAME_REQUEST) ;
+
+        else if (request.getEnumRequest() == RequestWithoutVariableEnum.END_GAME_REQUEST)
+            isEndedGame = true;
 
         else if (request.getEnumRequest() == RequestWithoutVariableEnum.HELP_REQUEST)
             BattleLog.showHelp();
@@ -423,10 +443,6 @@ public class BattleController {
     }
 
     private void showCollectedItemRequest() {
-        //todo
-    }
-
-    private void endGameRequest() {
         //todo
     }
 }

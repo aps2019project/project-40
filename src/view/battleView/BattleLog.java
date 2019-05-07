@@ -85,4 +85,9 @@ public class BattleLog {
         System.out.println("Help");
         System.out.println("End game");
     }
+
+    public static void errorInvalidCommand() {
+
+        System.out.println("Invalid command");
+    }
 }
