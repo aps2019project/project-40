@@ -43,7 +43,7 @@ public class CollectionMenuView extends View {
 
         for (Card card : cards)
             if (card.getType().equals(CardType.HERO))
-                showHero(number++, (Unit) card, showCost);
+                showHero(number++, card, showCost);
 
         number = 1;
         System.out.println("Items : ");
@@ -56,7 +56,7 @@ public class CollectionMenuView extends View {
         for (Card card : cards)
             switch (card.getType()) {
                 case MINION:
-                    showMinion(number++, (Unit) card, showCost);
+                    showMinion(number++, card, showCost);
                     break;
                 case SPELL:
                     showSpell(number++, (Spell) card, showCost);
@@ -90,41 +90,85 @@ public class CollectionMenuView extends View {
 
     }
 
-    public void showHero(int num, Unit unit, boolean showCost) {
+    public void showHero(int num, Card unit, boolean showCost) {
+        String showMessage;
         if (!showCost)
-            System.out.println(num + " : Name : " + unit.getCardName()
-                    + " - AP : " + unit.getAttackPoint()
-                    + " - HP : " + unit.getHealthPoint()
-                    + " - Class : " + unit.getUnitType()
-                    + " - Special power : " + unit.getSpecialPower().getDescription());
-        else
-            System.out.println(num + " : Type : Minion - Name : " + unit.getCardName()
-                    + " - Class : " + unit.getUnitType()
-                    + " - AP : " + unit.getAttackPoint()
-                    + " - HP : " + unit.getHealthPoint()
-                    + " - Special power : " + unit.getSpecialPower().getDescription()
-                    + "- Sell Cost : " + unit.getSellCost());
+            if (((Unit) unit).getSpecialPower() == null)
+                showMessage=num + " : Name : " + unit.getCardName()
+                    + " - AP : " + ((Unit) unit).getAttackPoint()
+                    + " - HP : " + ((Unit) unit).getHealthPoint()
+                    + " - Class : " + ((Unit) unit).getUnitType()
+                    + " - Special power : " + ((Unit) unit).getSpecialPower();
+            else
+                showMessage=num + " : Name : " + unit.getCardName()
+                        + " - AP : " + ((Unit) unit).getAttackPoint()
+                        + " - HP : " + ((Unit) unit).getHealthPoint()
+                        + " - Class : " + ((Unit) unit).getUnitType()
+                        + " - Special power : " + ((Unit) unit).getSpecialPower().getDescription();
+        else {
+            if (((Unit) unit).getSpecialPower() == null)
+                showMessage=num + " : Type : Minion - Name : " + unit.getCardName()
+                        + " - Class : " + ((Unit) unit).getUnitType()
+                        + " - AP : " + ((Unit) unit).getAttackPoint()
+                        + " - HP : " + ((Unit) unit).getHealthPoint()
+                        + " - Special power : " + ((Unit) unit).getSpecialPower()
+                        + "- Sell Cost : " + unit.getSellCost();
+            else
+                showMessage=num + " : Type : Minion - Name : " + unit.getCardName()
+                        + " - Class : " + ((Unit) unit).getUnitType()
+                        + " - AP : " + ((Unit) unit).getAttackPoint()
+                        + " - HP : " + ((Unit) unit).getHealthPoint()
+                        + " - Special power : " + ((Unit) unit).getSpecialPower().getDescription()
+                        + "- Sell Cost : " + unit.getSellCost();
+        }
+        System.out.println(showMessage);
     }
 
-    public void showMinion(int num, Unit unit, boolean showCost) {
+    public void showMinion(int num, Card unit, boolean showCost) {
+        String showMessage;
         if (!showCost)
-            System.out.println(num + " : Type : Minion - Name : " + unit.getCardName()
-                    + " - Class : " + unit.getUnitType()
-                    + " - AP : " + unit.getAttackPoint()
-                    + " - HP : " + unit.getHealthPoint()
-                    + " - MP : " + unit.getManaCost()
-                    + " - Special power : " + unit.getSpecialPower().getDescription());
-        else
-            System.out.println(num + " : Type : Minion - Name : " + unit.getCardName()
-                    + " - Class : " + unit.getUnitType()
-                    + " - AP : " + unit.getAttackPoint()
-                    + " - HP : " + unit.getHealthPoint()
-                    + " - MP : " + unit.getManaCost()
-                    + " - Special power : " + unit.getSpecialPower().getDescription()
-                    + "- Sell Cost : " + unit.getSellCost());
+            if (((Unit) unit).getSpecialPower() == null)
+                showMessage = num + " : Type : Minion - Name : " + unit.getCardName()
+                        + " - Class : " + ((Unit) unit).getUnitType()
+                        + " - AP : " + ((Unit) unit).getAttackPoint()
+                        + " - HP : " + ((Unit) unit).getHealthPoint()
+                        + " - MP : " + ((Unit) unit).getManaCost()
+                        + " - Special power : " + ((Unit) unit).getSpecialPower();
+            else
+                showMessage = num + " : Type : Minion - Name : " + unit.getCardName()
+                        + " - Class : " + ((Unit) unit).getUnitType()
+                        + " - AP : " + ((Unit) unit).getAttackPoint()
+                        + " - HP : " + ((Unit) unit).getHealthPoint()
+                        + " - MP : " + ((Unit) unit).getManaCost()
+                        + " - Special power : " + ((Unit) unit).getSpecialPower().getDescription();
+        else {
+            if (((Unit) unit).getSpecialPower() == null)
+                showMessage = num + " : Type : Minion - Name : " + unit.getCardName()
+                        + " - Class : " + ((Unit) unit).getUnitType()
+                        + " - AP : " + ((Unit) unit).getAttackPoint()
+                        + " - HP : " + ((Unit) unit).getHealthPoint()
+                        + " - MP : " + unit.getManaCost()
+                        + " - Special power : " + ((Unit) unit).getSpecialPower()
+                        + "- Sell Cost : " + unit.getSellCost();
+            else
+                showMessage = num + " : Type : Minion - Name : " + unit.getCardName()
+                        + " - Class : " + ((Unit) unit).getUnitType()
+                        + " - AP : " + ((Unit) unit).getAttackPoint()
+                        + " - HP : " + ((Unit) unit).getHealthPoint()
+                        + " - MP : " + unit.getManaCost()
+                        + " - Special power : " + ((Unit) unit).getSpecialPower().getDescription()
+                        + "- Sell Cost : " + unit.getSellCost();
+        }
+        System.out.println(showMessage);
     }
 
-    public void showItem(int num, Card card, boolean showCost) {
-
+    public void showItem(int num, Card item, boolean showCost) {
+        if (showCost)
+            System.out.println(num + " : Name : " + item.getCardName()
+                    + " - Desc : " + item.getDescription());
+        else
+            System.out.println(num + " : Name : " + item.getCardName()
+                    + " - Desc : " + item.getDescription()
+                    + "- Sell Cost : " + item.getSellCost());
     }
 }
