@@ -58,12 +58,12 @@ public class CollectionRequest extends Request {
         if (matcher.find())
             return handelDeck(CollectionOptionList.CREATE_DECK, matcher.group(1));
 
-        pattern = Pattern.compile("remove (\\d+) from deck (\\w+)");
+        pattern = Pattern.compile("remove (\\w+) from deck (\\w+)");
         matcher = pattern.matcher(command);
         if (matcher.find())
             return remove(matcher.group(1), matcher.group(2));
 
-        pattern = Pattern.compile("add (\\d+) to deck (\\w+)");
+        pattern = Pattern.compile("add (\\w+) to deck (\\w+)");
         matcher = pattern.matcher(command);
         if (matcher.find())
             return add(matcher.group(1), matcher.group(2));

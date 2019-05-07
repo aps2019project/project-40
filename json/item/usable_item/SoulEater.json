@@ -7,17 +7,17 @@
     {
       "spellName": "se_add_spell",
       "buff": {
-        "duration" : 1,
-        "lasts" : true,
+        "duration": 1,
+        "lasts": true,
         "onStartUsable": true,
-        "itemSpell":{
+        "itemSpell": {
           "spellName": "se_power_buff",
-          "buff":{
-            "weaknessAP": -1 ,
+          "buff": {
+            "weaknessAP": -1,
             "duration": 100000
           },
-          "target":{
-            "isRandom" : true,
+          "target": {
+            "isRandom": true,
             "rowsAffected": 5,
             "columnsAffected": 9,
             "targetType": {
@@ -25,21 +25,21 @@
               "isRanged": true,
               "isMelee": true
             },
-            "isAffectHero" : true,
-            "isAffectMinion" : true
+            "isAffectHero": true,
+            "isAffectMinion": true
           },
           "specialPowerType": "ON_DEATH"
         }
       },
       "target": {
-        "isForDeck" : true,
+        "isForDeck": true,
         "targetType": {
           "isHybrid": true,
           "isRanged": true,
-          "isMelee" : true
+          "isMelee": true
         },
-        "isAffectMinion" : true,
-        "isAffectHero" : true
+        "isAffectMinion": true,
+        "isAffectHero": true
       }
     }
   ]

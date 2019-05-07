@@ -28,5 +28,5 @@
   "AP": 4,
   "manaCost": 2,
   "unitType": "MELEE",
-  "specialPowerType" : "ON_ATTACK"
+  "specialPowerType": "ON_ATTACK"
 }

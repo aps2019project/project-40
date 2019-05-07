@@ -152,5 +152,40 @@ public class GameLogic {
             }
             match.player2Mana = match.initialPlayer2Mana;
         }
+
+    }
+
+    public void cancelPositiveBuffs(Unit unit) {
+        for (Buff buff : unit.getBuffs()) {
+            if (buff.isPositive() && buff.getDuration() >= 0 && !buff.isLasts()) {
+                unit.removeBuff(buff);
+            }
+        }
+    }
+
+    public void killUnit(Unit unit) {
+
+    }
+
+    public void ActivateOnDeathSpells(Unit unit) {
+
+    }
+
+    public void checkRangeForAttack(Unit attacker, Unit defender) {
+        if (attacker.getUnitType() == UnitType.MELEE) {
+            if (!attacker.getCell().isAdjacent(defender.getCell())) {
+                throw new IllegalArgumentException("can't attack"); //
+            }
+        }
+        if (attacker.getUnitType() == UnitType.RANGED) {
+            if (attacker.getCell().isAdjacent(defender.getCell())) {
+                throw new IllegalArgumentException("can't attack"); //
+            }
+        }
+        if (attacker.getUnitType() == UnitType.HYBRID) {
+            if (attacker.getCell().isAdjacent(defender.getCell())) {
+                throw new IllegalArgumentException("can't attack"); //
+            }
+        }
     }
 }

@@ -3,7 +3,6 @@ package controller;
 import models.*;
 import models.GamePlay.GameLogic;
 import models.GamePlay.Match;
-import org.omg.CORBA.BAD_CONTEXT;
 import request.battleRequest.BattleRequest;
 import request.battleRequest.BattleRequestChilds.*;
 import view.battleView.*;
@@ -171,13 +170,11 @@ public class BattleController {
 
         if (match.findPlayerPlayingThisTurn().equals(match.getPlayer1())) {
 
-            if (card.getManaCost() <= match.getPlayer1Mana()) return true;
-            else return false;
+            return card.getManaCost() <= match.getPlayer1Mana();
 
         } else {
 
-            if (card.getManaCost() <= match.getPlayer2Mana()) return true;
-            else return false;
+            return card.getManaCost() <= match.getPlayer2Mana();
         }
     }
 

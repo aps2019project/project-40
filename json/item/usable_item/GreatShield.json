@@ -7,8 +7,8 @@
     {
       "spellName": "great_shield_holy",
       "buff": {
-        "holy":12,
-        "duration" : 1000000,
+        "holy": 12,
+        "duration": 1000000,
         "onStartUsable": true
       },
       "target": {
@@ -19,7 +19,7 @@
           "isRanged": true,
           "isMelee": true
         },
-        "isAffectHero" : true
+        "isAffectHero": true
       },
       "HeroManaCost": 2,
       "coolDown": 1

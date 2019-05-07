@@ -9,10 +9,10 @@ import java.util.ArrayList;
 public class Account implements Serializable {
 
     private String userName, password;
-    private int money = 15000;
+    private int money = 150000;
     private Collection collection;
     private ArrayList<History> matchHistories = new ArrayList<>();
-    private Hand hand=new Hand();
+    private Hand hand = new Hand();
     private boolean isAI = false;
     private int winsNumber = 0;
 
@@ -24,10 +24,10 @@ public class Account implements Serializable {
         return matchHistories;
     }
 
-    public void AddMatchHistory(Account oponnent, GameStatus gameStatus) {
+    public void AddMatchHistory(Account opponent, GameStatus gameStatus) {
         History history = new History();
         history.setLocalDateTime();
-        history.setOponnentUserName(oponnent.getUserName());
+        history.setOponnentUserName(opponent.getUserName());
         history.setYourStatus(gameStatus);
         matchHistories.add(history);
     }
@@ -61,10 +61,6 @@ public class Account implements Serializable {
         return this.password.equals(password);
     }
 
-    public void addToHand(Card card) {
-
-    }
-
     public Collection getCollection() {
         if (collection == null)
             collection = new Collection();
@@ -91,7 +87,11 @@ public class Account implements Serializable {
     }
 
     public void setID(Card card) {
-        int instanceNum = collection.getNumberOfCardWithName(card.getCardName());
+        int instanceNum = 0;
+        try {
+            instanceNum = collection.getNumberOfCardWithName(card.getCardName());
+        } catch (NullPointerException e) {
+        }
         card.setCardID(userName + "_" + card.getCardName() + "_" + (instanceNum + 1));
     }
 

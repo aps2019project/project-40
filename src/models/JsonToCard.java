@@ -8,12 +8,23 @@ import java.io.IOException;
 import java.io.Reader;
 
 public class JsonToCard {
+    public static void collectibleToCollection(Collection collection) {
+        Gson gson = new Gson();
+        saveCollectibleItemCards(gson, collection);
+    }
+
     public static void moveToCollection(Collection collection) {
         Gson gson = new Gson();
         saveSpellCards(gson, collection);
-        //saveHeroCards(gson,collection);
+        saveHeroCards(gson, collection);
         saveMinionCards(gson, collection);
-        //saveItemCards(gson,collection);
+        saveUsableItemCards(gson, collection);
+        saveFlag(gson, collection);
+    }
+
+    public static void saveFlag(Gson gson, Collection collection) {
+        File folder = new File("./json/item/flag");
+        saveCards(gson, collection, folder);
     }
 
     public static void saveSpellCards(Gson gson, Collection collection) {
@@ -31,8 +42,13 @@ public class JsonToCard {
         saveCards(gson, collection, folder);
     }
 
-    public static void saveItemCards(Gson gson, Collection collection) {
-        File folder = new File("./json/item/");
+    public static void saveUsableItemCards(Gson gson, Collection collection) {
+        File folder = new File("./json/item/usable_item");
+        saveCards(gson, collection, folder);
+    }
+
+    public static void saveCollectibleItemCards(Gson gson, Collection collection) {
+        File folder = new File("./json/item/collectible_item");
         saveCards(gson, collection, folder);
     }
 

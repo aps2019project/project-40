@@ -150,14 +150,16 @@ public class Unit extends Card implements Serializable {
     public void setCantBeStunned(boolean cantBeStunned) {
         this.cantBeStunned = cantBeStunned;
     }
-    public void removeBuff(Buff buff){
+
+    public void removeBuff(Buff buff) {
         buffs.remove(buff);
     }
 
     public boolean isDisarm() {
         return isDisarm;
     }
-    public boolean isStunned(){
+
+    public boolean isStunned() {
         return isStunned;
     }
 

@@ -8,7 +8,7 @@
       "spellName": "total_disarm",
       "buff": {
         "duration": 1000000,
-        "disarm":true
+        "disarm": true
       },
       "target": {
         "rowsAffected": 1,

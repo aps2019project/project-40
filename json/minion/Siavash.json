@@ -28,5 +28,5 @@
   "AP": 5,
   "manaCost": 4,
   "unitType": "MELEE",
-  "specialPowerType" : "ON_DEATH"
+  "specialPowerType": "ON_DEATH"
 }

@@ -3,8 +3,8 @@
   "description": "a ranged MINION, 6 HP and 4 AP",
   "type": "MINION",
   "price": 300,
-  "HP" : 6,
-  "AP" : 4,
+  "HP": 6,
+  "AP": 4,
   "unitType": "RANGED",
   "manaCost": 2,
   "range": 7

@@ -71,6 +71,7 @@ public class CollectionController {
     }
 
     public void add(Add addRequst) {
+        System.out.println("add");
         String cardID = addRequst.getCardID();
         String deckName = addRequst.getDeckName();
         CollectionErrors collectionErrors;
@@ -140,6 +141,8 @@ public class CollectionController {
         }
 
         if (deck.isDeckValidate())
+            collectionMenuView.showError(CollectionErrors.DECK_IS_VALID);
+        else
             collectionMenuView.showError(CollectionErrors.DECK_IS_NOT_VALID);
     }
 

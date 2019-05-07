@@ -29,7 +29,7 @@
       "buff": {
         "duration": 1,
         "cancelBuff": -1,
-        "lasts" : true
+        "lasts": true
       },
       "target": {
         "rowsAffected": 1,

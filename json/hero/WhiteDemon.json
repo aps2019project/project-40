@@ -7,11 +7,11 @@
     {
       "spellName": "white_demon",
       "buff": {
-        "weaknessAP" : -4,
-        "duration" : 1000000
+        "weaknessAP": -4,
+        "duration": 1000000
       },
       "target": {
-        "isDependentToCardLocation" : true,
+        "isDependentToCardLocation": true,
         "rowsAffected": 1,
         "columnsAffected": 1,
         "targetType": {
@@ -20,7 +20,7 @@
           "isMelee": true
         },
         "isAffectMinion": true,
-        "isAffectHero" : true
+        "isAffectHero": true
       },
       "coolDown": 2,
       "heroManaCost": 1
@@ -29,5 +29,5 @@
   "HP": 50,
   "AP": 2,
   "unitType": "MELEE",
-  "specialPowerType" : "SPECIAL_POWER"
+  "specialPowerType": "SPECIAL_POWER"
 }

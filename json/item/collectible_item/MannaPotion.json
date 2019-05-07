@@ -6,10 +6,10 @@
     {
       "spellName": "mp_add",
       "buff": {
-        "manaChange" : 3,
-        "duration" : 1,
-        "lasts" : true,
-        "waitingTime" : 1
+        "manaChange": 3,
+        "duration": 1,
+        "lasts": true,
+        "waitingTime": 1
       }
     }
   ]
