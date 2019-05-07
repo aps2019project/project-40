@@ -6,7 +6,8 @@ import java.util.ArrayList;
 public class Hand implements Serializable {
 
     private ArrayList<Card> deck = new ArrayList<>(); //todo add main deck to this deck
-    private ArrayList<Card> cards = new ArrayList<>();
+    private ArrayList<Card> handCards = new ArrayList<>();
+    private ArrayList<Card> cardsInTable = new ArrayList<>(); //todo fill that in game and delete when minion die
     private Card reserveCard;
     private Card selectedCard;
     private ArrayList<Card> collectiblesItem = new ArrayList<>();
@@ -22,14 +23,24 @@ public class Hand implements Serializable {
         this.deck = deck;
     }
 
+    public ArrayList<Card> getCardsInTable() {
+
+        return cardsInTable;
+    }
+
+    public void setCardToCardsInTable(Card card) {
+
+        cardsInTable.add(card);
+    }
+
     public Card getReserveCard() {
 
         return reserveCard;
     }
 
-    public ArrayList<Card> getCards() {
+    public ArrayList<Card> getHandCards() {
 
-        return cards;
+        return handCards;
     }
 
     public ArrayList<Card> getCollectiblesItem() {
@@ -45,7 +56,7 @@ public class Hand implements Serializable {
     public void fillHandEmptyPlace() {
 
         if (isThereEmptyPlace()) {
-            if (reserveCard != null) cards.add(reserveCard);
+            if (reserveCard != null) handCards.add(reserveCard);
             try {
             reserveCard = deck.get(0);
             deck.remove(0);
@@ -56,6 +67,6 @@ public class Hand implements Serializable {
 
     private boolean isThereEmptyPlace() {
 
-        return cards.size() <= MAX_HANDS_CARD;
+        return handCards.size() <= MAX_HANDS_CARD;
     }
 }
