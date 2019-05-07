@@ -2,6 +2,7 @@ package request.battleRequest;
 
 import request.Request;
 import request.battleRequest.BattleRequestChilds.*;
+import view.battleView.BattleLog;
 
 import java.util.ArrayList;
 
@@ -112,7 +113,7 @@ public class BattleRequest extends Request {
 
             if (secondCommand.matches("exit")) return null; //todo pay attention to null
 
-            //todo error if invalid
+            BattleLog.errorInvalidCommand();
         }
     }
 
@@ -162,7 +163,7 @@ public class BattleRequest extends Request {
 
     private BattleRequest use(String command, SelectAndUseCardRequest selectAndUseCardRequest) {
 
-        selectAndUseCardRequest.setForUse(true);
+        selectAndUseCardRequest.setForUseItem(true);
         selectAndUseCardRequest.setRow(
                 Integer.parseInt(
                         command.split("[\\(|\\)]")[1].split(",")[0]));
@@ -184,6 +185,7 @@ public class BattleRequest extends Request {
                 Integer.parseInt(
                         command.split("[\\(|\\)]")[1].split(",")[1]));
 
+        selectAndUseCardRequest.setForUseSpecialPower(true);
         return selectAndUseCardRequest;
     }
 

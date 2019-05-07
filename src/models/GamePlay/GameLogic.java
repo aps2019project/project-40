@@ -14,17 +14,17 @@ public class GameLogic {
     private Match match;
     int flagsNumber;
     int remainTurnToHoldingTheFlag; //todo initialize in dead and get
-    private ArrayList<Unit> attackedUnitsInATurn = new ArrayList<>();       //todo add attacker to array
-    private ArrayList<Unit> movedUnitsInATurn = new ArrayList<>();       //todo add moved to array
+    private ArrayList<Card> attackedCardsInATurn = new ArrayList<>();      //todo add attacker to array
+    private ArrayList<Card> movedCardsInATurn = new ArrayList<>();
 
-    public ArrayList<Unit> getAttackedUnitsInATurn() {
+    public ArrayList<Card> getAttackedCardsInATurn() {
 
-        return attackedUnitsInATurn;
+        return attackedCardsInATurn;
     }
 
-    public ArrayList<Unit> getMovedUnitsInATurn() {
+    public ArrayList<Card> getMovedCardsInATurn() {
 
-        return movedUnitsInATurn;
+        return movedCardsInATurn;
     }
 
     GameLogic(Match match) {
@@ -37,6 +37,7 @@ public class GameLogic {
         card.getCell().setCard(null);
         cell.setCard(card);
         card.setCell(cell);
+        movedCardsInATurn.add(card);
     }
 
     public int getMatchResult() {
@@ -141,11 +142,18 @@ public class GameLogic {
             match.player2Mana -= mana;
     }
 
+    public void useItem(Spell spell, Cell cell) {
+
+
+    }
+
     public void switchTurn() {
 
         match.turnNumber++;
         manaHandler();
-        //todo fill hand
+        match.findPlayerPlayingThisTurn().getHand().fillHandEmptyPlace();
+        attackedCardsInATurn = new ArrayList<>();
+        movedCardsInATurn = new ArrayList<>();
     }
 
     private void manaHandler() {

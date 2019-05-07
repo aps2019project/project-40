@@ -35,7 +35,7 @@ public class BattleView {
         }
 
         if (battleView instanceof ShowMinionsBattleView) {
-
+//todo ooooooooooooooooooooooooo
             showMinions((ShowMinionsBattleView) battleView);
             return;
         }

@@ -13,10 +13,9 @@ public class SelectAndUseCardRequest extends BattleRequest {
     private boolean isForAttack;
     private boolean isForAttackCombo;
     private boolean isForShowInfo;
-    private boolean isForUse;
-    private boolean isForSpecialPower;
-
-    private boolean isForHelp;
+    private boolean isForUseItem;
+    private boolean isForUseSpecialPower;
+    private boolean isForHelp; //todo help
 
     public String getID() {
 
@@ -108,23 +107,23 @@ public class SelectAndUseCardRequest extends BattleRequest {
         isForShowInfo = forShowInfo;
     }
 
-    public boolean isForUse() {
+    public boolean isForUseItem() {
 
-        return isForUse;
+        return isForUseItem;
     }
 
-    public void setForUse(boolean forUse) {
+    public void setForUseItem(boolean forUseItem) {
 
-        isForUse = forUse;
+        isForUseItem = forUseItem;
     }
 
-    public boolean isForSpecialPower() {
+    public boolean isForUseSpecialPower() {
 
-        return isForSpecialPower;
+        return isForUseSpecialPower;
     }
 
-    public void setForSpecialPower(boolean forSpecialPower) {
+    public void setForUseSpecialPower(boolean forUseSpecialPower) {
 
-        isForSpecialPower = forSpecialPower;
+        isForUseSpecialPower = forUseSpecialPower;
     }
 }

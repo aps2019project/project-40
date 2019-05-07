@@ -17,7 +17,7 @@ public class BattleController {
     private GameLogic gameLogic;
     private boolean isEndedGame = false;
 
-    //TODO check destination validity
+    //TODO add coordination for show minion
 
     public static BattleController getInstance() {
 
@@ -63,41 +63,64 @@ public class BattleController {
 
     private void selectAndUseCardRequest(SelectAndUseCardRequest request) {
         //todo
-        if (request.isForMove())
-            selectAndUseCardRequestMove(request);
+        if (request.isForMove() || request.isForAttack() || request.isForAttackCombo() || request.isForUseSpecialPower()) {
 
-        else if (request.isForAttack()) ;
-        else if (request.isForAttackCombo()) ;
-        else if (request.isForShowInfo())
-            selectAndUseCardRequestShowInfo(request);
+            Card card = Collection.findCardByCardID(
+                    match.findPlayerPlayingThisTurn().getHand().getCardsInTable(), request.getID());
 
-        else if (request.isForUse()) ;
-        else if (request.isForSpecialPower()) ;
+            if (card == null || !(card instanceof Unit)) {
+                BattleLog.errorInvalidCardID();
+                return;
+            }
+
+            Coordination destinationCoordination = new Coordination();
+            destinationCoordination.setRow(request.getRow());
+            destinationCoordination.setColumn(request.getColumn());
+            if (isOutOfTable(destinationCoordination)) return;
+
+            Cell destinationCell = match.getTable().getCellByCoordination(destinationCoordination);
+
+            //doing request
+            if (request.isForMove())
+                selectAndUseCardRequestMove(request, card, destinationCoordination, destinationCell);
+
+            else if (request.isForAttack()) ;
+            else if (request.isForAttackCombo()) ;
+            else if (request.isForUseSpecialPower()) ;
+
+        } else {
+
+            Card item = Collection.findCardByCardName(
+                    match.findPlayerPlayingThisTurn().getHand().getCollectiblesItem(), request.getID());
+
+            if (item == null) {
+                BattleLog.errorInvalidItemName();
+                return;
+            }
+
+            //doing request
+            if (request.isForShowInfo())
+                selectAndUseCardRequestShowInfo(request, item);
+
+            else if (request.isForUseItem()) ;
+        }
     }
 
-    private void selectAndUseCardRequestMove(SelectAndUseCardRequest request) {
+    private void selectAndUseCardRequestAttack(SelectAndUseCardRequest request) {
+        //todo current easy
+    }
 
-        Card card = Collection.findCardByCardID(
-                match.findPlayerPlayingThisTurn().getHand().getCardsInTable(), request.getID());
-        if (card == null || !(card instanceof Unit)) {
-            BattleLog.errorInvalidCardID();
-            return;
-        }
+    private void selectAndUseCardRequestMove(SelectAndUseCardRequest request, Card card,
+                                             Coordination destinationCoordination, Cell destinationCell) {
 
-        Coordination destinationCoordination = new Coordination();
-        destinationCoordination.setRow(request.getRow());
-        destinationCoordination.setColumn(request.getColumn());
-        if (isOutOfTable(destinationCoordination)) return;
-
-        Cell destinationCell = match.getTable().getCellByCoordination(destinationCoordination);
         if (!isCellAvailableForMove(card.getCell(), destinationCell)) return;
 
         if (isUnitStun((Unit) card)) return;
-        if (isAttacked((Unit) card)) {
+        if (isAttackedPreviously(card)) {
             BattleLog.errorUnitAttacked();
             return;
         }
-        if (isMovedPreviously((Unit) card)) {
+        if (isMovedPreviously(card)) {
             BattleLog.errorUnitMovedPreviously();
             return;
         }
@@ -106,25 +129,25 @@ public class BattleController {
         //todo if there is flag in cell get that
     }
 
-    private boolean isAttacked(Unit unit) {
+    private boolean isAttackedPreviously(Card card) {
 
-        ArrayList<Unit> attackedUnits = gameLogic.getAttackedUnitsInATurn();
+        ArrayList<Card> attackedCards = gameLogic.getAttackedCardsInATurn();
 
-        for (Unit attackedUnit : attackedUnits) {
+        for (Card attackedCard : attackedCards) {
 
-            if (attackedUnit.getCardName().equals(attackedUnit.getCardName())) return true;
+            if (attackedCard.getCardName().equals(card.getCardName())) return true;
         }
 
         return false;
     }
 
-    private boolean isMovedPreviously(Unit unit) {
+    private boolean isMovedPreviously(Card card) {
 
-        ArrayList<Unit> movedUnits = gameLogic.getMovedUnitsInATurn();
+        ArrayList<Card> movedCards = gameLogic.getMovedCardsInATurn();
 
-        for (Unit movedUnit : movedUnits) {
+        for (Card movedCard : movedCards) {
 
-            if (movedUnit.getCardName().equals(unit.getCardName())) return true;
+            if (movedCard.getCardName().equals(card.getCardName())) return true;
         }
 
         return false;
@@ -160,15 +183,7 @@ public class BattleController {
         return false;
     }
 
-    private void selectAndUseCardRequestShowInfo(SelectAndUseCardRequest request) {
-
-        Card item = Collection.findCardByCardName(
-                match.findPlayerPlayingThisTurn().getHand().getCollectiblesItem(), request.getID());
-
-        if (item == null) {
-            BattleLog.errorInvalidItemName();
-            return;
-        }
+    private void selectAndUseCardRequestShowInfo(SelectAndUseCardRequest request, Card item) {
 
         ShowSelectedItemInfoBattleView showSelectedItemInfoBattleView = new ShowSelectedItemInfoBattleView();
         showSelectedItemInfoBattleView.setName(item.getCardName());

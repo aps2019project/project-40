@@ -1,5 +1,7 @@
 package view.battleView;
 
+import models.Coordination;
+
 public class ShowCardInfoBattleView extends BattleView {
 
     private String name;
