@@ -47,6 +47,16 @@ public class BattleLog {
         System.out.println("It is not your turn");
     }
 
+    public static void errorCellIsFill() {
+
+        System.out.println("This cell is fill and can not insert minion on this cell");
+    }
+
+    public static void errorCellNotAvailable() {
+
+        System.out.println("This cell not available for you");
+    }
+
     public static void showHelp() {
 
         System.out.println("Game info");
@@ -74,5 +84,10 @@ public class BattleLog {
         System.out.println("    exit");
         System.out.println("Help");
         System.out.println("End game");
+    }
+
+    public static void errorInvalidCommand() {
+
+        System.out.println("Invalid command");
     }
 }

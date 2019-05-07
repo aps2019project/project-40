@@ -14,6 +14,7 @@ public class SelectAndUseCardRequest extends BattleRequest {
     private boolean isForAttackCombo;
     private boolean isForShowInfo;
     private boolean isForUse;
+    private boolean isForSpecialPower;
 
     private boolean isForHelp;
 
@@ -115,5 +116,15 @@ public class SelectAndUseCardRequest extends BattleRequest {
     public void setForUse(boolean forUse) {
 
         isForUse = forUse;
+    }
+
+    public boolean isForSpecialPower() {
+
+        return isForSpecialPower;
+    }
+
+    public void setForSpecialPower(boolean forSpecialPower) {
+
+        isForSpecialPower = forSpecialPower;
     }
 }

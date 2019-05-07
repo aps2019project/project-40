@@ -3,6 +3,7 @@ package controller;
 import models.*;
 import models.GamePlay.GameLogic;
 import models.GamePlay.Match;
+import org.omg.CORBA.BAD_CONTEXT;
 import request.battleRequest.BattleRequest;
 import request.battleRequest.BattleRequestChilds.*;
 import view.battleView.*;
@@ -13,11 +14,10 @@ public class BattleController {
 
     private static BattleController battleController;
     private BattleRequest battleRequest = BattleRequest.getInstance();
-    private BattleView battleView = BattleView.getInstance();
     private Match match;
     private GameLogic gameLogic;
+    private boolean isEndedGame = false;
 
-    //TODO check validity of card request
     //TODO check destination validity
 
     public static BattleController getInstance() {
@@ -36,6 +36,7 @@ public class BattleController {
         this.match = match;
         gameLogic = match.getGameLogic();
 
+        manageRequest();
     }
 
     private void manageRequest() {
@@ -46,9 +47,6 @@ public class BattleController {
 
             if (request instanceof SelectAndUseCardRequest)
                 selectAndUseCardRequest((SelectAndUseCardRequest) request);
-
-            if (request instanceof UseSpecialPowerRequest)
-                useSpecialPowerRequest((UseSpecialPowerRequest) request);
 
             if (request instanceof ShowCardInfoRequest)
                 showCardInfoRequest((ShowCardInfoRequest) request);
@@ -61,6 +59,8 @@ public class BattleController {
 
             if (request instanceof RequestWithoutVariable)
                 requestWithoutVariable((RequestWithoutVariable) request);
+
+            if (isEndedGame) break;
         }
     }
 
@@ -71,12 +71,7 @@ public class BattleController {
         if (request.isForAttackCombo()) ;
         if (request.isForShowInfo()) ;
         if (request.isForUse()) ;
-
-    }
-
-    private void useSpecialPowerRequest(UseSpecialPowerRequest request) {
-
-        //todo
+        if (request.isForSpecialPower()) ;
     }
 
     private void showCardInfoRequest(ShowCardInfoRequest request) {
@@ -95,17 +90,141 @@ public class BattleController {
     }
 
     private void enterGraveYardRequest(EnterGraveYardRequest request) {
-        //todo
-        if (request.isForShowInfo()) ;
-        if (request.isForShowCards()) ;
-        if (request.isForExit()) ;
+        //todo help
+        if (request.isForShowInfo())
+            enterGraveYardRequestShowInfo(request.getCardID());
+
+        else if (request.isForShowCards())
+            enterGraveYardRequestShowCards();
+
+        else if (request.isForExit()) return;
+    }
+
+    private void enterGraveYardRequestShowInfo(String cardID) {
+
+        ShowCardsBattleView showCardsBattleView = new ShowCardsBattleView();
+
+        try {
+            if (match.findPlayerPlayingThisTurn().equals(match.getPlayer1()))
+                showCardsBattleView.setCard(Collection.findCardByCardID(match.getPlayer1GraveYard().getCards(), cardID));
+            else
+                showCardsBattleView.setCard(Collection.findCardByCardID(match.getPlayer2GraveYard().getCards(), cardID));
+
+            showCardsBattleView.show(showCardsBattleView);
+        } catch (NullPointerException e) {
+            BattleLog.errorInvalidCardID();
+        }
+    }
+
+    private void enterGraveYardRequestShowCards() {
+
+        ShowCardsBattleView showCardsBattleView = new ShowCardsBattleView();
+        ArrayList<Card> cards;
+        if (match.findPlayerPlayingThisTurn().equals(match.getPlayer1()))
+            cards = match.getPlayer1GraveYard().getCards();
+
+        else
+            cards = match.getPlayer2GraveYard().getCards();
+
+        for (Card card : cards)
+            showCardsBattleView.setCard(card);
+
+        showCardsBattleView.show(showCardsBattleView);
     }
 
     private void insertCardRequest(InsertCardRequest request) {
 
         Card card = Collection.findCardByCardName(
-                match.findPlayerPlayingThisTurn().getCollection().getSelectedDeck().getCards(), request.getCardName());
+                match.findPlayerPlayingThisTurn().getHand().getCards(), request.getCardName());
 
+        if (card == null) {
+            BattleLog.errorInvalidCardName();
+            return;
+        }
+
+        if (!hasEnoughMana(card)) {
+            BattleLog.errorNotEnoughMana();
+            return;
+        }
+
+        Coordination coordination = new Coordination();
+        coordination.setRow(request.getRow());
+        coordination.setColumn(request.getColumn());
+        if (isOutOfTable(coordination)) return;
+
+        Cell cell = match.getTable().getCellByCoordination(coordination);
+
+        if (card instanceof Unit) {
+
+            if (isCellFill(cell)) {
+                BattleLog.errorCellIsFill();
+                return;
+            }
+            if (!isCellAvailable(coordination)) return;
+            gameLogic.insertProcess((Unit) card, cell);
+
+        } else {
+            //TODO isTargetValid?
+            gameLogic.insertProcess((Spell) card, cell);
+        }
+    }
+
+    private boolean hasEnoughMana(Card card) {
+
+        if (match.findPlayerPlayingThisTurn().equals(match.getPlayer1())) {
+
+            if (card.getManaCost() <= match.getPlayer1Mana()) return true;
+            else return false;
+
+        } else {
+
+            if (card.getManaCost() <= match.getPlayer2Mana()) return true;
+            else return false;
+        }
+    }
+
+    private boolean isOutOfTable(Coordination coordination) {
+
+        if (coordination.getRow() >= Table.ROWS || coordination.getRow() < 0 ||
+                coordination.getColumn() >= Table.COLUMNS || coordination.getColumn() < 0) {
+
+            BattleLog.errorInvalidTarget();
+            return true;
+        }
+
+        return false;
+    }
+
+    private boolean isCellFill(Cell cell) {
+
+        if (cell.getCard() == null) return false;
+        BattleLog.errorCellIsFill();
+        return true;
+    }
+
+    private boolean isCellAvailable(Coordination coordination) {
+
+        Table table = match.getTable();
+        Coordination aroundCoordination = new Coordination();
+
+        for (int row = -1; row <= 1; row++) {
+            for (int column = -1; column <= 1; column++) {
+
+                if (row == 0 && column == 0) continue;
+
+                try {
+                    aroundCoordination.setRow(coordination.getRow() + row);
+                    aroundCoordination.setColumn(coordination.getColumn() + column);
+                    if (table.getCellByCoordination(aroundCoordination).getCard().getTeam().equals(
+                            match.findPlayerPlayingThisTurn().getUserName())) return true;
+
+                } catch (ArrayIndexOutOfBoundsException e) {
+                }
+            }
+        }
+
+        BattleLog.errorCellNotAvailable();
+        return false;
     }
 
     private void requestWithoutVariable(RequestWithoutVariable request) {
@@ -127,7 +246,9 @@ public class BattleController {
 
         else if (request.getEnumRequest() == RequestWithoutVariableEnum.END_TURN_REQUEST) ;
         else if (request.getEnumRequest() == RequestWithoutVariableEnum.SHOW_COLLECTED_ITEM_REQUEST) ;
-        else if (request.getEnumRequest() == RequestWithoutVariableEnum.END_GAME_REQUEST) ;
+
+        else if (request.getEnumRequest() == RequestWithoutVariableEnum.END_GAME_REQUEST)
+            isEndedGame = true;
 
         else if (request.getEnumRequest() == RequestWithoutVariableEnum.HELP_REQUEST)
             BattleLog.showHelp();
@@ -322,10 +443,6 @@ public class BattleController {
     }
 
     private void showCollectedItemRequest() {
-        //todo
-    }
-
-    private void endGameRequest() {
         //todo
     }
 }

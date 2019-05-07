@@ -1,7 +1,6 @@
 package models.GamePlay;
 
 import models.Account;
-import models.GraveYard;
 import models.MatchType;
 import models.Table;
 
@@ -14,7 +13,7 @@ public class Match {
     private MatchType matchType;
     private GameLogic gameLogic;
     int turnNumber = 0;  //todo 0 or 1?
-    int player1Mana, player2Mana;
+    int player1Mana = 2, player2Mana = 2, initialPlayer1Mana = 2, initialPlayer2Mana = 2;
 
     public Account getPlayer1() {
 
@@ -49,6 +48,16 @@ public class Match {
     public int getPlayer2Mana() {
 
         return player2Mana;
+    }
+
+    public GraveYard getPlayer1GraveYard() {
+
+        return Player1GraveYard;
+    }
+
+    public GraveYard getPlayer2GraveYard() {
+
+        return Player2GraveYard;
     }
 
     public Match(MatchType matchType, Account player1, Account player2) {

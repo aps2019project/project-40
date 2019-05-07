@@ -43,9 +43,6 @@ public class BattleRequest extends Request {
                 else continue;
             }
 
-            if (command.matches("use special power \\(\\d+,\\d+\\)"))
-                return useSpecialPower(command);
-
             if (command.matches("enter graveyard")) {
 
                 BattleRequest request = enterGraveYard();
@@ -109,6 +106,9 @@ public class BattleRequest extends Request {
 
             if (secondCommand.matches("use \\(\\d+,\\d+\\)"))
                 return use(secondCommand, selectAndUseCardRequest);
+
+            if (command.matches("use special power \\(\\d+,\\d+\\)"))
+                return useSpecialPower(secondCommand, selectAndUseCardRequest);
 
             if (secondCommand.matches("exit")) return null; //todo pay attention to null
 
@@ -174,19 +174,17 @@ public class BattleRequest extends Request {
         return selectAndUseCardRequest;
     }
 
-    private BattleRequest useSpecialPower(String command) {
+    private BattleRequest useSpecialPower(String command, SelectAndUseCardRequest selectAndUseCardRequest) {
 
-        UseSpecialPowerRequest useSpecialPowerRequest = new UseSpecialPowerRequest();
-
-        useSpecialPowerRequest.setRow(
+        selectAndUseCardRequest.setRow(
                 Integer.parseInt(
                         command.split("[\\(|\\)]")[1].split(",")[0]));
 
-        useSpecialPowerRequest.setColumn(
+        selectAndUseCardRequest.setColumn(
                 Integer.parseInt(
                         command.split("[\\(|\\)]")[1].split(",")[1]));
 
-        return useSpecialPowerRequest;
+        return selectAndUseCardRequest;
     }
 
     private BattleRequest enterGraveYard() {
