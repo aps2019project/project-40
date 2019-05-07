@@ -118,5 +118,39 @@ public class GameLogic {
     public void insertProcess(Spell spell, Cell cell) {
 
         //todo
+        decrementMana(spell.getManaCost());
+    }
+
+    private void decrementMana(int mana) {
+
+        if (match.findPlayerPlayingThisTurn().equals(match.getPlayer1()))
+            match.player1Mana -= mana;
+        else
+            match.player2Mana -= mana;
+    }
+
+    public void switchTurn() {
+
+        match.turnNumber++;
+        manaHandler();
+        //todo fill hand
+    }
+
+    private void manaHandler() {
+
+        if (match.findPlayerPlayingThisTurn().equals(match.getPlayer1())) {
+
+            if (match.turnNumber <= 15) {
+                match.initialPlayer1Mana++;
+            }
+            match.player1Mana = match.initialPlayer1Mana;
+
+        } else {
+
+            if (match.turnNumber <= 14) {
+                match.initialPlayer1Mana++;
+            }
+            match.player2Mana = match.initialPlayer2Mana;
+        }
     }
 }
