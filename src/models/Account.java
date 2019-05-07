@@ -83,8 +83,9 @@ public class Account implements Serializable {
 
     public static Account getAIAccount(MatchType matchType) {
         Account account = new Account();
-        account.isAI=true;
-        switch (matchType){
+        account.setUserName("Bot");
+        account.isAI = true;
+        switch (matchType) {
             case KILL_THE_HERO:
                 account.getCollection().getDecks().add(Deck.getDefaultMode1deck());
                 account.getCollection().setSelectedDeck(Deck.getDefaultMode1deck());

@@ -58,8 +58,8 @@ public class Hand implements Serializable {
         if (isThereEmptyPlace()) {
             if (reserveCard != null) handCards.add(reserveCard);
             try {
-            reserveCard = deck.get(0);
-            deck.remove(0);
+                reserveCard = deck.get(0);
+                deck.remove(0);
             } catch (ArrayIndexOutOfBoundsException e) {
             }
         }

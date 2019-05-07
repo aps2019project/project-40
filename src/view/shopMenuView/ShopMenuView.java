@@ -82,14 +82,14 @@ public class ShopMenuView {
         String showMessage;
         if (showCost)
             if (((Unit) unit).getSpecialPower() == null)
-                showMessage=num + " : Name : " + unit.getCardName()
-                    + " - AP : " + ((Unit) unit).getHealthPoint()
-                    + " - HP : " + ((Unit) unit).getHealthPoint()
-                    + " - Class : " + ((Unit) unit).getUnitType()
-                    + " - Special power : " + ((Unit) unit).getSpecialPower()
-                    + " - Buy Cost : " + unit.getPrice();
+                showMessage = num + " : Name : " + unit.getCardName()
+                        + " - AP : " + ((Unit) unit).getHealthPoint()
+                        + " - HP : " + ((Unit) unit).getHealthPoint()
+                        + " - Class : " + ((Unit) unit).getUnitType()
+                        + " - Special power : " + ((Unit) unit).getSpecialPower()
+                        + " - Buy Cost : " + unit.getPrice();
             else
-                showMessage=num + " : Name : " + unit.getCardName()
+                showMessage = num + " : Name : " + unit.getCardName()
                         + " - AP : " + ((Unit) unit).getHealthPoint()
                         + " - HP : " + ((Unit) unit).getHealthPoint()
                         + " - Class : " + ((Unit) unit).getUnitType()
@@ -98,14 +98,14 @@ public class ShopMenuView {
 
         else {
             if (((Unit) unit).getSpecialPower() == null)
-                showMessage=num + " : Type : Minion - Name : " + unit.getCardName()
+                showMessage = num + " : Type : Minion - Name : " + unit.getCardName()
                         + " - Class : " + ((Unit) unit).getUnitType()
                         + " - AP : " + ((Unit) unit).getAttackPoint()
                         + " - HP : " + ((Unit) unit).getHealthPoint()
                         + " - Special power : " + ((Unit) unit).getSpecialPower()
                         + "- Sell Cost : " + unit.getSellCost();
             else
-                showMessage=num + " : Type : Minion - Name : " + unit.getCardName()
+                showMessage = num + " : Type : Minion - Name : " + unit.getCardName()
                         + " - Class : " + ((Unit) unit).getUnitType()
                         + " - AP : " + ((Unit) unit).getAttackPoint()
                         + " - HP : " + ((Unit) unit).getHealthPoint()
