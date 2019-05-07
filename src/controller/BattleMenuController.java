@@ -51,7 +51,7 @@ public class BattleMenuController {
     }
 
     public void handelMatchType(RequestMatchType requestMatchType) {
-        if (requestMatchType.getMatchType()==null) {
+        if (requestMatchType.getMatchType() == null) {
             Controller.getInstance().addStack(StartMenuController.getInstance());
             return;
         }

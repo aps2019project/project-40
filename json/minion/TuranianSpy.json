@@ -8,7 +8,7 @@
       "spellName": "ts_on_attack_disarm",
       "buff": {
         "duration": 1,
-        "disarm" : true
+        "disarm": true
       },
       "target": {
         "rowsAffected": 1,
@@ -27,7 +27,7 @@
       "spellName": "ts_on_attack_poison",
       "buff": {
         "duration": 4,
-        "lasts" : true,
+        "lasts": true,
         "poison": 1
       },
       "target": {
@@ -48,5 +48,5 @@
   "AP": 6,
   "manaCost": 4,
   "unitType": "MELEE",
-  "specialPowerType" : "ON_ATTACK"
+  "specialPowerType": "ON_ATTACK"
 }

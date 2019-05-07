@@ -6,22 +6,22 @@
     {
       "spellName": "boa_add_ap",
       "buff": {
-        "weaknessAP" : -6,
-        "duration" : 1,
-        "lasts" : true
+        "weaknessAP": -6,
+        "duration": 1,
+        "lasts": true
       },
       "target": {
         "rowsAffected": 5,
         "columnsAffected": 9,
-        "isForDeck" : true,
+        "isForDeck": true,
         "targetType": {
           "isHybrid": true,
           "isRanged": true,
-          "isMelee" : true
+          "isMelee": true
         },
-        "isRandom" : true,
-        "isAffectMinion" : true,
-        "isAffectHero" : true
+        "isRandom": true,
+        "isAffectMinion": true,
+        "isAffectHero": true
       }
     }
   ]

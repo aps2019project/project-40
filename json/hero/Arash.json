@@ -8,7 +8,7 @@
       "spellName": "arash",
       "buff": {
         "duration": 1,
-        "weaknessHP" : 4,
+        "weaknessHP": 4,
         "lasts": true
       },
       "target": {
@@ -21,7 +21,7 @@
           "isMelee": true
         },
         "isAffectMinion": true,
-        "isAffectHero" : true,
+        "isAffectHero": true,
         "isTargetEnemy": true
       },
       "heroManaCost": 2,
@@ -31,6 +31,6 @@
   "HP": 30,
   "AP": 3,
   "unitType": "RANGED",
-  "specialPowerType" : "SPECIAL_POWER",
-  "range" : 6
+  "specialPowerType": "SPECIAL_POWER",
+  "range": 6
 }

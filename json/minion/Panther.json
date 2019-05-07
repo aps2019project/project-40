@@ -9,8 +9,8 @@
       "buff": {
         "weaknessHP": 8,
         "duration": 1,
-        "poison" : 1,
-        "lasts" : true,
+        "poison": 1,
+        "lasts": true,
         "waitingTime": 1
       },
       "target": {
@@ -31,5 +31,5 @@
   "AP": 2,
   "manaCost": 4,
   "unitType": "MELEE",
-  "specialPowerType" : "ON_ATTACK"
+  "specialPowerType": "ON_ATTACK"
 }

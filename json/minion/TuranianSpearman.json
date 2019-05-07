@@ -3,8 +3,8 @@
   "description": "a ranged MINION, 4 HP and 4 AP",
   "type": "MINION",
   "price": 600,
-  "HP" : 4,
-  "AP" : 4,
+  "HP": 4,
+  "AP": 4,
   "unitType": "HYBRID",
   "manaCost": 1,
   "range": 3

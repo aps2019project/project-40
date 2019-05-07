@@ -31,7 +31,7 @@ public class BattleMenuRequest extends Request {
         if (command.equals("2"))
             return getMultiPlayerCommand();
 
-        if (command.equals("exit")){
+        if (command.equals("exit")) {
             RequestMatchType requestMatchType = new RequestMatchType();
             requestMatchType.setMatchType(null);
             return requestMatchType;

@@ -8,12 +8,12 @@
       "spellName": "kaveh",
       "buff": {
         "duration": 3,
-        "holy" : 1
+        "holy": 1
       },
       "target": {
         "rowsAffected": 1,
         "columnsAffected": 1,
-        "isAffectCells" : true
+        "isAffectCells": true
       },
       "heroManaCost": 1,
       "coolDown": 3
@@ -22,6 +22,6 @@
   "HP": 35,
   "AP": 3,
   "unitType": "HYBRID",
-  "specialPowerType" : "SPECIAL_POWER",
-  "range" : 3
+  "specialPowerType": "SPECIAL_POWER",
+  "range": 3
 }

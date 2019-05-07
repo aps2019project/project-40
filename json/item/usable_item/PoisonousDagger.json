@@ -7,19 +7,19 @@
     {
       "spellName": "poisonous_dagger",
       "buff": {
-        "duration" : 1,
-        "lasts" : true,
+        "duration": 1,
+        "lasts": true,
         "onStartUsable": true,
-        "itemSpell":{
+        "itemSpell": {
           "spellName": "pd_poison",
-          "buff":{
-            "poison": 1 ,
-            "weaknessHP" : 1,
+          "buff": {
+            "poison": 1,
+            "weaknessHP": 1,
             "duration": 1,
-            "lasts" : true
+            "lasts": true
           },
-          "target":{
-            "isRandom" : true,
+          "target": {
+            "isRandom": true,
             "rowsAffected": 5,
             "columnsAffected": 9,
             "targetType": {
@@ -27,19 +27,19 @@
               "isRanged": true,
               "isMelee": true
             },
-            "isAffectHero" : true,
-            "isAffectMinion" : true
+            "isAffectHero": true,
+            "isAffectMinion": true
           },
           "specialPowerType": "ON_ATTACK"
         }
       },
       "target": {
-        "isForDeck" : true,
+        "isForDeck": true,
         "targetType": {
           "isHybrid": true,
           "isRanged": true
         },
-        "isAffectHero" : true
+        "isAffectHero": true
       }
     }
   ]

@@ -8,7 +8,7 @@
       "spellName": "rakhsh_stun",
       "buff": {
         "stun": true,
-        "duration" : 1
+        "duration": 1
       },
       "target": {
         "rowsAffected": 1,
@@ -19,8 +19,8 @@
           "isMelee": true
         },
         "isAffectMinion": true,
-        "isAffectHero" : true,
-        "isTargetEnemy" : true
+        "isAffectHero": true,
+        "isTargetEnemy": true
       },
       "heroManaCost": 2,
       "coolDown": 1
@@ -29,5 +29,5 @@
   "HP": 50,
   "AP": 4,
   "unitType": "MELEE",
-  "specialPowerType" : "SPECIAL_POWER"
+  "specialPowerType": "SPECIAL_POWER"
 }

@@ -7,38 +7,38 @@
     {
       "spellName": "ad_add_spell",
       "buff": {
-        "duration" : 1,
-        "lasts" : true,
+        "duration": 1,
+        "lasts": true,
         "onStartUsable": true,
-        "itemSpell":{
+        "itemSpell": {
           "spellName": "ad_damage",
-          "buff":{
-            "weaknessHP": 1 ,
+          "buff": {
+            "weaknessHP": 1,
             "duration": 1,
             "lasts": true
           },
-          "target":{
+          "target": {
             "rowsAffected": 5,
             "columnsAffected": 9,
-            "isTargetEnemy" : true,
+            "isTargetEnemy": true,
             "targetType": {
               "isHybrid": true,
               "isRanged": true,
               "isMelee": true
             },
-            "isAffectHero" : true
+            "isAffectHero": true
           },
           "specialPowerType": "ON_ATTACK"
         }
       },
       "target": {
-        "isForDeck" : true,
+        "isForDeck": true,
         "targetType": {
           "isHybrid": true,
           "isRanged": true,
-          "isMelee" : true
+          "isMelee": true
         },
-        "isAffectMinion" : true
+        "isAffectMinion": true
       }
     }
   ]

@@ -6,42 +6,42 @@
     {
       "spellName": "ex_add_hp",
       "buff": {
-        "weaknessHP" : -3,
-        "duration" : 1,
-        "lasts" : true
+        "weaknessHP": -3,
+        "duration": 1,
+        "lasts": true
       },
       "target": {
         "rowsAffected": 5,
         "columnsAffected": 9,
-        "isForDeck" : true,
+        "isForDeck": true,
         "targetType": {
           "isHybrid": true,
           "isRanged": true,
-          "isMelee" : true
+          "isMelee": true
         },
-        "isRandom" : true,
-        "isAffectMinion" : true
+        "isRandom": true,
+        "isAffectMinion": true
       }
     },
     {
       "spellName": "ex_add_ap",
       "buff": {
-        "weaknessHP" : -3,
-        "duration" : 100000,
-        "lasts" : true
+        "weaknessHP": -3,
+        "duration": 100000,
+        "lasts": true
       },
       "target": {
         "rowsAffected": 5,
         "columnsAffected": 9,
-        "isForDeck" : true,
+        "isForDeck": true,
         "targetType": {
           "isHybrid": true,
           "isRanged": true,
-          "isMelee" : true
+          "isMelee": true
         },
-        "isRandom" : true,
-        "isAffectMinion" : true,
-        "isAffectHero" : true
+        "isRandom": true,
+        "isAffectMinion": true,
+        "isAffectHero": true
       }
     }
   ]

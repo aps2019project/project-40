@@ -7,16 +7,16 @@
     {
       "spellName": "damol_disram",
       "buff": {
-        "duration" : 1,
+        "duration": 1,
         "onStartUsable": true,
-        "lasts" : true,
-        "itemSpell":{
+        "lasts": true,
+        "itemSpell": {
           "spellName": "da_disarm",
-          "buff":{
+          "buff": {
             "disarm": true,
             "duration": 1
           },
-          "target":{
+          "target": {
             "rowsAffected": 1,
             "columnsAffected": 1,
             "isTargetEnemy": true,
@@ -25,19 +25,19 @@
               "isRanged": true,
               "isMelee": true
             },
-            "isAffectHero" : true,
-            "isAffectMinion" : true
+            "isAffectHero": true,
+            "isAffectMinion": true
           },
           "specialPowerType": "ON_ATTACK"
         }
       },
       "target": {
-        "isForDeck" : true,
+        "isForDeck": true,
         "targetType": {
           "isHybrid": true,
           "isRanged": true
         },
-        "isAffectHero" : true
+        "isAffectHero": true
       }
     }
   ]

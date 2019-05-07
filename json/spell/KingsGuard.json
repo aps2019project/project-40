@@ -8,7 +8,7 @@
       "spellName": "kings_guard",
       "buff": {
         "duration": 1,
-        "lasts" : true,
+        "lasts": true,
         "weaknessHP": 2000,
         "applyWhenTurnEnds": true
       },

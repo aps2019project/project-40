@@ -8,8 +8,8 @@
       "spellName": "ps_poison",
       "buff": {
         "duration": 3,
-        "poison" : 1,
-        "lasts" : true
+        "poison": 1,
+        "lasts": true
       },
       "target": {
         "rowsAffected": 1,
@@ -29,6 +29,6 @@
   "AP": 6,
   "manaCost": 4,
   "unitType": "RANGED",
-  "specialPowerType" : "ON_ATTACK",
+  "specialPowerType": "ON_ATTACK",
   "range": 4
 }
