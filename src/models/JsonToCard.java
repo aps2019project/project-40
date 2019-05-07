@@ -8,6 +8,10 @@ import java.io.IOException;
 import java.io.Reader;
 
 public class JsonToCard {
+    public static void main(String[] args){
+        Collection a = new Collection();
+        moveToCollection(a);
+    }
     public static void collectibleToCollection(Collection collection) {
         Gson gson = new Gson();
         saveCollectibleItemCards(gson, collection);
@@ -29,17 +33,17 @@ public class JsonToCard {
 
     public static void saveSpellCards(Gson gson, Collection collection) {
         File folder = new File("./json/spell/");
-        saveCards(gson, collection, folder);
+        saveToSpellCards(gson, collection, folder);
     }
 
     public static void saveHeroCards(Gson gson, Collection collection) {
         File folder = new File("./json/hero/");
-        saveCards(gson, collection, folder);
+        saveUnitCards(gson, collection, folder);
     }
 
     public static void saveMinionCards(Gson gson, Collection collection) {
         File folder = new File("./json/minion/");
-        saveCards(gson, collection, folder);
+        saveUnitCards(gson, collection, folder);
     }
 
     public static void saveUsableItemCards(Gson gson, Collection collection) {
@@ -52,6 +56,31 @@ public class JsonToCard {
         saveCards(gson, collection, folder);
     }
 
+    private static void saveUnitCards(Gson gson, Collection collection, File folder) {
+        File[] listOfFiles = folder.listFiles();
+        for (File listOfFile : listOfFiles) {
+            try (Reader reader = new FileReader(listOfFile)) {
+
+                Card unit = gson.fromJson(reader, Unit.class);
+                collection.addCardToCollection(unit);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    private static void saveToSpellCards(Gson gson, Collection collection, File folder) {
+        File[] listOfFiles = folder.listFiles();
+        for (File listOfFile : listOfFiles) {
+            try (Reader reader = new FileReader(listOfFile)) {
+
+                Card spell= gson.fromJson(reader, Spell.class);
+
+                collection.addCardToCollection(spell);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
     private static void saveCards(Gson gson, Collection collection, File folder) {
         File[] listOfFiles = folder.listFiles();
         for (File listOfFile : listOfFiles) {

@@ -1,0 +1,27 @@
+create account amirhossein
+amir
+enter shop
+buy total_disarm
+buy lighting_bolt
+buy all_disarm
+buy all_poison
+buy dispel
+buy sacrifice
+buy shock
+
+buy white_demon
+buy soul_eater
+
+buy iraj
+buy iraj
+buy arjang
+buy big_giant
+buy panther
+buy siavash
+buy iraj
+buy iraj
+buy iraj
+buy big_giant
+buy panther
+buy big_giant
+buy panther

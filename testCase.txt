@@ -9,6 +9,23 @@ buy dispel
 buy sacrifice
 buy shock
 
+buy white_demon
+buy soul_eater
+
+buy iraj
+buy iraj
+buy arjang
+buy big_giant
+buy panther
+buy siavash
+buy iraj
+buy iraj
+buy iraj
+buy big_giant
+buy panther
+buy big_giant
+buy panther
+
 exit
 enter collection
 create deck mode1
@@ -19,3 +36,22 @@ add erfan_all_poison_1 to deck mode1
 add erfan_dispel_1 to deck mode1
 add erfan_sacrifice_1 to deck mode1
 add erfan_shock_1 to deck mode1
+
+add erfan_white_demon_1 to deck mode1
+add erfan_soul_eater_1 to deck mode1
+
+add erfan_iraj_1 to deck mode1
+add erfan_iraj_2 to deck mode1
+add erfan_arjang_1 to deck mode1
+add erfan_big_giant_1 to deck mode1
+add erfan_panther_1 to deck mode1
+add erfan_siavash_1 to deck mode1
+add erfan_iraj_3 to deck mode1
+add erfan_iraj_4 to deck mode1
+add erfan_iraj_5 to deck mode1
+add erfan_big_giant_2 to deck mode1
+add erfan_panther_2 to deck mode1
+add erfan_big_giant_3 to deck mode1
+add erfan_panther_3 to deck mode1
+
+select deck mode1
