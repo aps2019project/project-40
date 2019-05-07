@@ -124,15 +124,10 @@ public class Buff implements Serializable {
         if (isDisarm()) {
             result++;
         }
-        if (isStun()){
+        if (isStun()) {
             result++;
         }
-        if (result > 0){
-            isPositive = true;
-        }
-        else {
-            isPositive = false;
-        }
+        isPositive = result > 0;
     }
 
     public boolean isContinuous() {

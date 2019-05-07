@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class Account implements Serializable {
 
     private String userName, password;
-    private int money = 15000;
+    private int money = 150000;
     private Collection collection;
     private ArrayList<History> matchHistories = new ArrayList<>();
     private Hand hand = new Hand();
@@ -61,10 +61,6 @@ public class Account implements Serializable {
         return this.password.equals(password);
     }
 
-    public void addToHand(Card card) {
-
-    }
-
     public Collection getCollection() {
         if (collection == null)
             collection = new Collection();
@@ -94,7 +90,8 @@ public class Account implements Serializable {
         int instanceNum = 0;
         try {
             instanceNum = collection.getNumberOfCardWithName(card.getCardName());
-        } catch (NullPointerException e) { }
+        } catch (NullPointerException e) {
+        }
         card.setCardID(userName + "_" + card.getCardName() + "_" + (instanceNum + 1));
     }
 

@@ -132,7 +132,7 @@ public class ShopController {
         }
     }
 
-    private static Collection initializeShopCollection() {
+    public static Collection initializeShopCollection() {
         Collection collection = new Collection();
         JsonToCard.moveToCollection(collection);
         return collection;
