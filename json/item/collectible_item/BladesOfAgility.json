@@ -1,0 +1,28 @@
+{
+  "cardName": "blades_of_agility",
+  "description": " TODO",
+  "type": "COLLECTIBLE_ITEM",
+  "spells ": [
+    {
+      "spellName": "boa_add_ap",
+      "buff": {
+        "weaknessAP" : -6,
+        "duration" : 1,
+        "lasts" : true
+      },
+      "target": {
+        "rowsAffected": 5,
+        "columnsAffected": 9,
+        "isForDeck" : true,
+        "targetType": {
+          "isHybrid": true,
+          "isRanged": true,
+          "isMelee" : true
+        },
+        "isRandom" : true,
+        "isAffectMinion" : true,
+        "isAffectHero" : true
+      }
+    }
+  ]
+}

@@ -43,13 +43,15 @@ public class Card implements Serializable, Cloneable {
         return manaCost;
     }
 
-    Card(int manaCost, int price, String cardName, ArrayList<Spell> spells, String description, CardType type) {
+    Card(int manaCost, int price, String cardName, ArrayList<Spell> spells,
+         String description, CardType type, Cell cell) {
         this.manaCost = manaCost;
         this.price = price;
         this.cardName = cardName;
         this.spells = spells;
         this.description = description;
         this.type = type;
+        this.cell = cell;
     }
 
     public String getCardName() {
@@ -92,6 +94,12 @@ public class Card implements Serializable, Cloneable {
         } catch (Exception e) {
             e.printStackTrace();
             return null;
+        }
+    }
+
+    public void setSellCost() {
+        if (price > 0){
+            sellCost = 4*price/5;
         }
     }
 }

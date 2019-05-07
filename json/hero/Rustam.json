@@ -1,0 +1,10 @@
+{
+  "cardName": "rustam",
+  "description": "a HYBRID HERO, 55 HP and 7 AP",
+  "type": "HERO",
+  "price": 8000,
+  "HP": 55,
+  "AP": 7,
+  "unitType": "HYBRID",
+  "range" : 4
+}

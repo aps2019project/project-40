@@ -1,0 +1,45 @@
+{
+  "cardName": "terror_hood",
+  "description": " TODO",
+  "type": "USABLE_ITEM",
+  "price": 5000,
+  "spells ": [
+    {
+      "spellName": "th_add_buff",
+      "buff": {
+        "duration" : 1,
+        "lasts" : true,
+        "onStartUsable": true,
+        "itemSpell":{
+          "spellName": "th_weakness_buff",
+          "buff":{
+            "weaknessAP": 2 ,
+            "duration": 1
+          },
+          "target":{
+            "isRandom" : true,
+            "rowsAffected": 5,
+            "columnsAffected": 9,
+            "isTargetEnemy" : true,
+            "targetType": {
+              "isHybrid": true,
+              "isRanged": true,
+              "isMelee": true
+            },
+            "isAffectHero" : true,
+            "isAffectMinion" : true
+          },
+          "specialPowerType": "ON_ATTACK"
+        }
+      },
+      "target": {
+        "isForDeck" : true,
+        "targetType": {
+          "isHybrid": true,
+          "isRanged": true
+        },
+        "isAffectHero" : true
+      }
+    }
+  ]
+}

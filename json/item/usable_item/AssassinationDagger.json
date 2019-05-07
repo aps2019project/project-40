@@ -1,0 +1,45 @@
+{
+  "cardName": "assassination_dagger",
+  "description": " TODO",
+  "type": "USABLE_ITEM",
+  "price": 15000,
+  "spells ": [
+    {
+      "spellName": "ad_add_spell",
+      "buff": {
+        "duration" : 1,
+        "lasts" : true,
+        "onStartUsable": true,
+        "itemSpell":{
+          "spellName": "ad_damage",
+          "buff":{
+            "weaknessHP": 1 ,
+            "duration": 1,
+            "lasts": true
+          },
+          "target":{
+            "rowsAffected": 5,
+            "columnsAffected": 9,
+            "isTargetEnemy" : true,
+            "targetType": {
+              "isHybrid": true,
+              "isRanged": true,
+              "isMelee": true
+            },
+            "isAffectHero" : true
+          },
+          "specialPowerType": "ON_ATTACK"
+        }
+      },
+      "target": {
+        "isForDeck" : true,
+        "targetType": {
+          "isHybrid": true,
+          "isRanged": true,
+          "isMelee" : true
+        },
+        "isAffectMinion" : true
+      }
+    }
+  ]
+}

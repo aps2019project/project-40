@@ -19,6 +19,9 @@ public class Buff implements Serializable {
     private SpecialMinion specialMinion;
     private int waitingTime;
     private boolean isPositive;
+    private boolean continuous;
+    private int onStartUsable;
+    private Spell itemSpell;
 
     public void decrementDuration() {
         duration -= 1;
@@ -27,7 +30,9 @@ public class Buff implements Serializable {
     public Buff(int duration, int holy, int power, int poison, int weaknessAP,
                 int weaknessHP, boolean stun, boolean disarm,
                 int unholy, int cancelBuff, boolean applyWhenTurnEnds,
-                boolean lasts, int manaChange, SpecialMinion specialMinion, int waitingTime) {
+                boolean lasts, int manaChange,
+                SpecialMinion specialMinion, int waitingTime,
+                boolean continuous, int onStartUsable, Spell itemSpell) {
         this.duration = duration;
         this.holy = holy;
         this.power = power;
@@ -43,6 +48,9 @@ public class Buff implements Serializable {
         this.manaChange = manaChange;
         this.specialMinion = specialMinion;
         this.waitingTime = waitingTime;
+        this.itemSpell = itemSpell;
+        this.onStartUsable = onStartUsable;
+        this.continuous = continuous;
     }
 
     public int getUnholy() {
@@ -126,4 +134,17 @@ public class Buff implements Serializable {
             isPositive = false;
         }
     }
+
+    public boolean isContinuous() {
+        return continuous;
+    }
+
+    public int getOnStartUsable() {
+        return onStartUsable;
+    }
+
+    public Spell getItemSpell() {
+        return itemSpell;
+    }
+
 }

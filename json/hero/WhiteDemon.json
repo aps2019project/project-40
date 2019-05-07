@@ -1,0 +1,33 @@
+{
+  "cardName": "white_demon",
+  "description": "a MELEE HERO, 50 HP and 2 AP \n POWER buff on itself(4 point add to AP) ",
+  "type": "HERO",
+  "price": 8000,
+  "spells ": [
+    {
+      "spellName": "white_demon",
+      "buff": {
+        "weaknessAP" : -4,
+        "duration" : 1000000
+      },
+      "target": {
+        "isDependentToCardLocation" : true,
+        "rowsAffected": 1,
+        "columnsAffected": 1,
+        "targetType": {
+          "isHybrid": true,
+          "isRanged": true,
+          "isMelee": true
+        },
+        "isAffectMinion": true,
+        "isAffectHero" : true
+      },
+      "coolDown": 2,
+      "heroManaCost": 1
+    }
+  ],
+  "HP": 50,
+  "AP": 2,
+  "unitType": "MELEE",
+  "specialPowerType" : "SPECIAL_POWER"
+}

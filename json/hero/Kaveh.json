@@ -1,0 +1,27 @@
+{
+  "cardName": "kaveh",
+  "description": "a HYBRID HERO, 50 HP and 4 AP \n makes a cell HOLY for 3 rounds ",
+  "type": "HERO",
+  "price": 12000,
+  "spells ": [
+    {
+      "spellName": "kaveh",
+      "buff": {
+        "duration": 3,
+        "holy" : 1
+      },
+      "target": {
+        "rowsAffected": 1,
+        "columnsAffected": 1,
+        "isAffectCells" : true
+      },
+      "heroManaCost": 1,
+      "coolDown": 3
+    }
+  ],
+  "HP": 35,
+  "AP": 3,
+  "unitType": "HYBRID",
+  "specialPowerType" : "SPECIAL_POWER",
+  "range" : 3
+}

@@ -18,11 +18,16 @@ public class Unit extends Card implements Serializable {
     private boolean cantBeStunned;
     private boolean cantBeDisarmed;
     private boolean cantBePoisoned;
+    private boolean isDisarm;
+    private boolean isStunned;
 
     Unit(int manaCost, int price, int HP, int AP, UnitType unitType,
          String name, ArrayList<Spell> spells, String description, CardType type,
-         SpecialPowerType specialPowerType, boolean combo, int flag, int range) {
-        super(manaCost, price, name, spells, description, type);
+         SpecialPowerType specialPowerType,
+         boolean combo, int flag, int range, Cell cell, boolean canMove,
+         boolean canAttack, boolean cantBeStunned, boolean cantBeDisarmed,
+         boolean cantBePoisoned) {
+        super(manaCost, price, name, spells, description, type, cell);
         this.HP = HP;
         this.AP = AP;
         this.specialPowerType = specialPowerType;
@@ -30,6 +35,11 @@ public class Unit extends Card implements Serializable {
         this.unitType = unitType;
         this.flag = flag;
         this.range = range;
+        this.canMove = canMove;
+        this.canAttack = canAttack;
+        this.cantBeDisarmed = cantBeDisarmed;
+        this.cantBePoisoned = cantBePoisoned;
+        this.cantBeStunned = cantBeStunned;
     }
 
     public Spell getSpecialPower() {
@@ -139,5 +149,23 @@ public class Unit extends Card implements Serializable {
 
     public void setCantBeStunned(boolean cantBeStunned) {
         this.cantBeStunned = cantBeStunned;
+    }
+    public void removeBuff(Buff buff){
+        buffs.remove(buff);
+    }
+
+    public boolean isDisarm() {
+        return isDisarm;
+    }
+    public boolean isStunned(){
+        return isStunned;
+    }
+
+    public void setStunned(boolean stunned) {
+        isStunned = stunned;
+    }
+
+    public void setDisarm(boolean disarm) {
+        isDisarm = disarm;
     }
 }

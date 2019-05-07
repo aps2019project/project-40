@@ -1,0 +1,28 @@
+{
+  "cardName": "great_shield",
+  "description": "a USABLE_ITEM for hero, gives 12 holy buff to him",
+  "type": "USABLE_ITEM",
+  "price": 4000,
+  "spells ": [
+    {
+      "spellName": "great_shield_holy",
+      "buff": {
+        "holy":12,
+        "duration" : 1000000,
+        "onStartUsable": true
+      },
+      "target": {
+        "rowsAffected": 1,
+        "columnsAffected": 1,
+        "targetType": {
+          "isHybrid": true,
+          "isRanged": true,
+          "isMelee": true
+        },
+        "isAffectHero" : true
+      },
+      "HeroManaCost": 2,
+      "coolDown": 1
+    }
+  ]
+}

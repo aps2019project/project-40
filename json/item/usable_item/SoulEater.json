@@ -1,0 +1,46 @@
+{
+  "cardName": "soul_eater",
+  "description": " TODO",
+  "type": "USABLE_ITEM",
+  "price": 15000,
+  "spells ": [
+    {
+      "spellName": "se_add_spell",
+      "buff": {
+        "duration" : 1,
+        "lasts" : true,
+        "onStartUsable": true,
+        "itemSpell":{
+          "spellName": "se_power_buff",
+          "buff":{
+            "weaknessAP": -1 ,
+            "duration": 100000
+          },
+          "target":{
+            "isRandom" : true,
+            "rowsAffected": 5,
+            "columnsAffected": 9,
+            "targetType": {
+              "isHybrid": true,
+              "isRanged": true,
+              "isMelee": true
+            },
+            "isAffectHero" : true,
+            "isAffectMinion" : true
+          },
+          "specialPowerType": "ON_DEATH"
+        }
+      },
+      "target": {
+        "isForDeck" : true,
+        "targetType": {
+          "isHybrid": true,
+          "isRanged": true,
+          "isMelee" : true
+        },
+        "isAffectMinion" : true,
+        "isAffectHero" : true
+      }
+    }
+  ]
+}
