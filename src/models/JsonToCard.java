@@ -42,12 +42,12 @@ public class JsonToCard {
     }
 
     public static void saveUsableItemCards(Gson gson, Collection collection) {
-        File folder = new File("./json/item/usableItem");
+        File folder = new File("./json/item/usable_item");
         saveCards(gson, collection, folder);
     }
 
     public static void saveCollectibleItemCards(Gson gson, Collection collection) {
-        File folder = new File("./json/item/collectibleItem");
+        File folder = new File("./json/item/collectible_item");
         saveCards(gson, collection, folder);
     }
 
