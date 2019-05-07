@@ -7,6 +7,7 @@ public enum CollectionErrors {
     DECK_DOES_NOT_EXIST("deck with this name does not exist"),
     DECK_IS_NOT_VALID("Invalid deck"),
     EXCESSIVE_CARD("there is already 20 cards in deck"),
+    DECK_IS_VALID("deck is valid and you are ready to play"),
     ALREADY_A_DECK_WITH_THIS_USERNAME("there is already a deck with this name in collection");
 
     CollectionErrors(String errorMessage) {

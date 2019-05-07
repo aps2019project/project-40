@@ -81,8 +81,6 @@ public class Match {
         gameLogic.flagsNumber = flagsNumber;
     }
 
-    //todo code finds
-
     public Account findPlayerPlayingThisTurn() {
 
         if (turnNumber % 2 == 1) return player1;

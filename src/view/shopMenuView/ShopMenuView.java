@@ -55,12 +55,12 @@ public class ShopMenuView {
                     showMinion(number++, (Unit) card, showBuyCost);
                     break;
                 case SPELL:
-                    showSpell(number++, (Spell) card, showBuyCost);
+                    showSpell(number++,  card, showBuyCost);
                     break;
             }
     }
 
-    public void showSpell(int num, Spell spell, boolean showCost) {
+    public void showSpell(int num, Card spell, boolean showCost) {
         if (showCost)
             System.out.println(num + " : Type : Spell - Name : " + spell.getCardName()
                     + " - MP : " + spell.getManaCost()

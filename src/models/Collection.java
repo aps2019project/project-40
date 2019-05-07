@@ -89,11 +89,31 @@ public class Collection implements Serializable {
             return CollectionErrors.CARD_NOT_FOUND;
 
         chosenDeck.getCards().add(chosenCard);
+        cards.remove(chosenCard);
         return null;
     }
 
     public CollectionErrors removeFromDeck(String cardID, String deckName) {
+        Deck chosenDeck = null;
+        for (Deck deck : decks)
+            if (deck.getDeckName().equals(deckName)) {
+                chosenDeck = deck;
+                break;
+            }
+        if (chosenDeck == null)
+            return CollectionErrors.DECK_DOES_NOT_EXIST;
 
+        Card chosenCard = null;
+        for (Card card : chosenDeck.getCards())
+            if (card.getCardID().equals(cardID)) {
+                chosenCard = card;
+                break;
+            }
+        if (chosenCard == null)
+            return CollectionErrors.CARD_NOT_FOUND;
+
+        chosenDeck.getCards().remove(chosenCard);
+        cards.add(chosenCard);
         return null;
     }
 
