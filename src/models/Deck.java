@@ -64,4 +64,16 @@ public class Deck implements Serializable {
             return null;
         }
     }
+
+    public static Deck getDefaultMode1deck() {
+        return null;
+    }
+
+    public static Deck getDefaultMode2deck() {
+        return null;
+    }
+
+    public static Deck getDefaultMode3deck() {
+        return null;
+    }
 }
