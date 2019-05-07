@@ -2,7 +2,6 @@ package view.shopMenuView;
 
 import models.Card;
 import models.CardType;
-import models.Spell;
 import models.Unit;
 
 import java.util.ArrayList;
@@ -55,7 +54,7 @@ public class ShopMenuView {
                     showMinion(number++, (Unit) card, showBuyCost);
                     break;
                 case SPELL:
-                    showSpell(number++,  card, showBuyCost);
+                    showSpell(number++, card, showBuyCost);
                     break;
             }
     }

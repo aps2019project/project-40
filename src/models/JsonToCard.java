@@ -8,17 +8,18 @@ import java.io.IOException;
 import java.io.Reader;
 
 public class JsonToCard {
-    public static void collectibleToCollection(Collection collection){
+    public static void collectibleToCollection(Collection collection) {
         Gson gson = new Gson();
-        saveCollectibleItemCards(gson,collection);
+        saveCollectibleItemCards(gson, collection);
     }
+
     public static void moveToCollection(Collection collection) {
         Gson gson = new Gson();
         saveSpellCards(gson, collection);
-        saveHeroCards(gson,collection);
+        saveHeroCards(gson, collection);
         saveMinionCards(gson, collection);
-        saveUsableItemCards(gson,collection);
-        saveFlag(gson,collection);
+        saveUsableItemCards(gson, collection);
+        saveFlag(gson, collection);
     }
 
     public static void saveFlag(Gson gson, Collection collection) {

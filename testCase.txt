@@ -1,5 +1,21 @@
 create account erfan
 fara
 enter shop
-buy iraj
-buy big_giant
+buy total_disarm
+buy lighting_bolt
+buy all_disarm
+buy all_poison
+buy dispel
+buy sacrifice
+buy shock
+
+exit
+enter collection
+create deck mode1
+add erfan_total_disarm_1 to deck mode1
+add erfan_lighting_bolt_1 to deck mode1
+add erfan_all_disarm_1 to deck mode1
+add erfan_all_poison_1 to deck mode1
+add erfan_dispel_1 to deck mode1
+add erfan_sacrifice_1 to deck mode1
+add erfan_shock_1 to deck mode1

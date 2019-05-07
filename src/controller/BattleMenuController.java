@@ -40,17 +40,21 @@ public class BattleMenuController {
         battleMenuView.showBattleMenuPlayerType();
         BattleMenuRequest request = battleMenuRequest.getCommand();
 
-        if (battleMenuRequest instanceof RequestMatchType)
-            handelMatchType((RequestMatchType) battleMenuRequest);
+        if (request instanceof RequestMatchType)
+            handelMatchType((RequestMatchType) request);
 
     }
 
     public boolean checkValidateDeck() {
-        return account.getCollection().getSelectedDeck().isDeckValidate();
+        return true;
+        //return account.getCollection().getSelectedDeck().isDeckValidate();
     }
 
     public void handelMatchType(RequestMatchType requestMatchType) {
-
+        if (requestMatchType.getMatchType() == null) {
+            Controller.getInstance().addStack(StartMenuController.getInstance());
+            return;
+        }
         switch (requestMatchType.getMatchType()) {
 
             case MULTI_PLAYER:
@@ -74,7 +78,7 @@ public class BattleMenuController {
         battleMenuView.showUsers(getUsernameOfAllUsers(account));
         String name = battleMenuRequest.getUserName();
 
-        if (LoginMenu.getInstance().checkIfAccountExist(name)) {
+        if (LoginMenu.getInstance().checkIfAccountExist(name) && !name.equals(account.getUserName())) {
             Account opponent = LoginMenu.getInstance().getAccountByUserName(name);
             if (opponent.getCollection().getSelectedDeck().isDeckValidate())
                 startMultiPlayerGame(opponent);

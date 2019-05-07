@@ -8,8 +8,8 @@
       "spellName": "pl_holy",
       "buff": {
         "duration": 1,
-        "poison" : 1,
-        "lasts" : true,
+        "poison": 1,
+        "lasts": true,
         "specialMinion": "Predator_Lion"
       },
       "target": {
@@ -30,5 +30,5 @@
   "AP": 1,
   "manaCost": 2,
   "unitType": "MELEE",
-  "specialPowerType" : "ON_ATTACK"
+  "specialPowerType": "ON_ATTACK"
 }

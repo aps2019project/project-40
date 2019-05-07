@@ -7,10 +7,10 @@
     {
       "spellName": "zahak_poison",
       "buff": {
-        "weaknessHP" : 1,
+        "weaknessHP": 1,
         "poison": 1,
-        "lasts" : true,
-        "duration" : 3
+        "lasts": true,
+        "duration": 3
       },
       "target": {
         "rowsAffected": 1,
@@ -21,8 +21,8 @@
           "isMelee": true
         },
         "isAffectMinion": true,
-        "isAffectHero" : true,
-        "isTargetEnemy" : true
+        "isAffectHero": true,
+        "isTargetEnemy": true
       },
       "coolDown": 1
     }
@@ -30,5 +30,5 @@
   "HP": 50,
   "AP": 2,
   "unitType": "MELEE",
-  "specialPowerType" : "SPECIAL_POWER"
+  "specialPowerType": "SPECIAL_POWER"
 }

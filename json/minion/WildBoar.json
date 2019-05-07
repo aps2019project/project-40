@@ -9,10 +9,10 @@
       "buff": {
         "duration": 1,
         "notDisarmable": true,
-        "lasts": true 
+        "lasts": true
       },
       "target": {
-        "isDependentToCardLocation": true, 
+        "isDependentToCardLocation": true,
         "rowsAffected": 1,
         "columnsAffected": 1,
         "targetType": {
@@ -29,5 +29,5 @@
   "AP": 10,
   "manaCost": 6,
   "unitType": "MELEE",
-  "specialPowerType" : "ON_DEFEND"
+  "specialPowerType": "ON_DEFEND"
 }
