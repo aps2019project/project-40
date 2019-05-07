@@ -1,0 +1,16 @@
+{
+  "cardName": "mana_potion",
+  "description": " TODO",
+  "type": "COLLECTIBLE_ITEM",
+  "spells ": [
+    {
+      "spellName": "mp_add",
+      "buff": {
+        "manaChange" : 3,
+        "duration" : 1,
+        "lasts" : true,
+        "waitingTime" : 1
+      }
+    }
+  ]
+}

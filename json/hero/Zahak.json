@@ -1,0 +1,34 @@
+{
+  "cardName": "zahak",
+  "description": "a MELEE HERO, 50 HP and 2 AP \n POISON buff for 3 rounds ",
+  "type": "HERO",
+  "price": 8000,
+  "spells ": [
+    {
+      "spellName": "zahak_poison",
+      "buff": {
+        "weaknessHP" : 1,
+        "poison": 1,
+        "lasts" : true,
+        "duration" : 3
+      },
+      "target": {
+        "rowsAffected": 1,
+        "columnsAffected": 1,
+        "targetType": {
+          "isHybrid": true,
+          "isRanged": true,
+          "isMelee": true
+        },
+        "isAffectMinion": true,
+        "isAffectHero" : true,
+        "isTargetEnemy" : true
+      },
+      "coolDown": 1
+    }
+  ],
+  "HP": 50,
+  "AP": 2,
+  "unitType": "MELEE",
+  "specialPowerType" : "SPECIAL_POWER"
+}

@@ -1,0 +1,34 @@
+{
+  "cardName": "afsaaneh",
+  "description": "a RANGED HERO, 40 HP and 3 AP \n Dispels an enemy unit",
+  "type": "HERO",
+  "price": 11000,
+  "spells ": [
+    {
+      "spellName": "afsaaneh",
+      "buff": {
+        "duration": 1,
+        "cancelBuff" : 1,
+        "lasts": true
+      },
+      "target": {
+        "rowsAffected": 1,
+        "columnsAffected": 1,
+        "targetType": {
+          "isHybrid": true,
+          "isRanged": true,
+          "isMelee": true
+        },
+        "isAffectMinion": true,
+        "isAffectHero" : true,
+        "isTargetEnemy": true
+      },
+      "heroManaCost": 1,
+      "coolDown": 2
+    }
+  ],
+  "HP": 40,
+  "AP": 3,
+  "unitType": "MELEE",
+  "specialPowerType" : "SPECIAL_POWER"
+}

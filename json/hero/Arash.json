@@ -1,0 +1,36 @@
+{
+  "cardName": "arash",
+  "description": "a RANGED HERO, 30 HP and 3 AP \n 4 point attack on all enemies in Arash's column",
+  "type": "HERO",
+  "price": 10000,
+  "spells ": [
+    {
+      "spellName": "arash",
+      "buff": {
+        "duration": 1,
+        "weaknessHP" : 4,
+        "lasts": true
+      },
+      "target": {
+        "isDependentToCardLocation": true,
+        "rowsAffected": 1,
+        "columnsAffected": 9,
+        "targetType": {
+          "isHybrid": true,
+          "isRanged": true,
+          "isMelee": true
+        },
+        "isAffectMinion": true,
+        "isAffectHero" : true,
+        "isTargetEnemy": true
+      },
+      "heroManaCost": 2,
+      "coolDown": 2
+    }
+  ],
+  "HP": 30,
+  "AP": 3,
+  "unitType": "RANGED",
+  "specialPowerType" : "SPECIAL_POWER",
+  "range" : 6
+}

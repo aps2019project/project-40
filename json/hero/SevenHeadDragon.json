@@ -1,0 +1,32 @@
+{
+  "cardName": "seven_head_dragon",
+  "description": "a MELEE HERO, 50 HP and 4 AP \n DISARM buff for 1 round ",
+  "type": "HERO",
+  "price": 8000,
+  "spells ": [
+    {
+      "spellName": "seven_head_dragon_disarm",
+      "buff": {
+        "disarm": true,
+        "duration" : 1000000
+      },
+      "target": {
+        "rowsAffected": 1,
+        "columnsAffected": 1,
+        "targetType": {
+          "isHybrid": true,
+          "isRanged": true,
+          "isMelee": true
+        },
+        "isAffectMinion": true,
+        "isAffectHero" : true,
+        "isTargetEnemy" : true
+      },
+      "coolDown": 1
+    }
+  ],
+  "HP": 50,
+  "AP": 4,
+  "unitType": "MELEE",
+  "specialPowerType" : "SPECIAL_POWER"
+}

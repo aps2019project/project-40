@@ -1,0 +1,33 @@
+{
+  "cardName": "simurgh",
+  "description": "a MELEE HERO, 50 HP and 4 AP \n STUN buff all enemy units for 1 turn ",
+  "type": "HERO",
+  "price": 8000,
+  "spells ": [
+    {
+      "spellName": "simurgh_stun",
+      "buff": {
+        "stun" : true,
+        "duration" : 1
+      },
+      "target": {
+        "rowsAffected": 5,
+        "columnsAffected": 9,
+        "targetType": {
+          "isHybrid": true,
+          "isRanged": true,
+          "isMelee": true
+        },
+        "isAffectMinion": true,
+        "isAffectHero" : true,
+        "isTargetEnemy" : true
+      },
+      "coolDown": 8,
+      "heroManaCost": 5
+    }
+  ],
+  "HP": 50,
+  "AP": 4,
+  "unitType": "MELEE",
+  "specialPowerType" : "SPECIAL_POWER"
+}

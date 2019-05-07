@@ -1,0 +1,44 @@
+{
+  "cardName": "caman_damol",
+  "description": "a USABLE_ITEM for hero, if ranged or hybrid adds a DISARM spell to it",
+  "type": "USABLE_ITEM",
+  "price": 30000,
+  "spells ": [
+    {
+      "spellName": "damol_disram",
+      "buff": {
+        "duration" : 1,
+        "onStartUsable": true,
+        "lasts" : true,
+        "itemSpell":{
+          "spellName": "da_disarm",
+          "buff":{
+            "disarm": true,
+            "duration": 1
+          },
+          "target":{
+            "rowsAffected": 1,
+            "columnsAffected": 1,
+            "isTargetEnemy": true,
+            "targetType": {
+              "isHybrid": true,
+              "isRanged": true,
+              "isMelee": true
+            },
+            "isAffectHero" : true,
+            "isAffectMinion" : true
+          },
+          "specialPowerType": "ON_ATTACK"
+        }
+      },
+      "target": {
+        "isForDeck" : true,
+        "targetType": {
+          "isHybrid": true,
+          "isRanged": true
+        },
+        "isAffectHero" : true
+      }
+    }
+  ]
+}

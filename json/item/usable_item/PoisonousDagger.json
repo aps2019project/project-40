@@ -1,0 +1,46 @@
+{
+  "cardName": "poisonous_dagger",
+  "description": "a USABLE_ITEM for hero, if ranged or hybrid adds a DISARM spell to it",
+  "type": "USABLE_ITEM",
+  "price": 7000,
+  "spells ": [
+    {
+      "spellName": "poisonous_dagger",
+      "buff": {
+        "duration" : 1,
+        "lasts" : true,
+        "onStartUsable": true,
+        "itemSpell":{
+          "spellName": "pd_poison",
+          "buff":{
+            "poison": 1 ,
+            "weaknessHP" : 1,
+            "duration": 1,
+            "lasts" : true
+          },
+          "target":{
+            "isRandom" : true,
+            "rowsAffected": 5,
+            "columnsAffected": 9,
+            "targetType": {
+              "isHybrid": true,
+              "isRanged": true,
+              "isMelee": true
+            },
+            "isAffectHero" : true,
+            "isAffectMinion" : true
+          },
+          "specialPowerType": "ON_ATTACK"
+        }
+      },
+      "target": {
+        "isForDeck" : true,
+        "targetType": {
+          "isHybrid": true,
+          "isRanged": true
+        },
+        "isAffectHero" : true
+      }
+    }
+  ]
+}
