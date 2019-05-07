@@ -112,39 +112,45 @@ public class GameLogic {
 
         cell.setCard(unit);
         unit.setCell(cell);
+        decrementMana(unit.getManaCost());
     }
 
     public void insertProcess(Spell spell, Cell cell) {
 
         //todo
+        decrementMana(spell.getManaCost());
     }
 
-    public void useBuff(Buff buff, Unit victimUnit) {
-        if (buff.getDuration() <= 0) {
-            return;
-        }
-        victimUnit.setHP(victimUnit.getHP() - buff.getWeaknessHP());
-        victimUnit.setAP(victimUnit.getAP() - buff.getWeaknessAP());
-        if (buff.getCancelBuff() > 0) {
-            cancelPositiveBuffs(victimUnit);
-        } else {
-            cancelNegativeBuffs(victimUnit);
-        }
-        if (buff.isDisarm()) {
-            victimUnit.setDisarm(true);
-        }
-        if (buff.isStun()) {
-            victimUnit.setStunned(true);
-        }
-        //if (buff.getPoison() > 0 || buff.)
+    private void decrementMana(int mana) {
+
+        if (match.findPlayerPlayingThisTurn().equals(match.getPlayer1()))
+            match.player1Mana -= mana;
+        else
+            match.player2Mana -= mana;
     }
 
+    public void switchTurn() {
 
-    public void cancelNegativeBuffs(Unit unit) {
-        for (Buff buff : unit.getBuffs()) {
-            if (!buff.isPositive() && buff.getDuration() >= 0 && !buff.isLasts()) {
-                unit.removeBuff(buff);
+        match.turnNumber++;
+        manaHandler();
+        //todo fill hand
+    }
+
+    private void manaHandler() {
+
+        if (match.findPlayerPlayingThisTurn().equals(match.getPlayer1())) {
+
+            if (match.turnNumber <= 15) {
+                match.initialPlayer1Mana++;
             }
+            match.player1Mana = match.initialPlayer1Mana;
+
+        } else {
+
+            if (match.turnNumber <= 14) {
+                match.initialPlayer1Mana++;
+            }
+            match.player2Mana = match.initialPlayer2Mana;
         }
 
     }

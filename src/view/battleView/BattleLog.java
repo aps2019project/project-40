@@ -90,4 +90,9 @@ public class BattleLog {
 
         System.out.println("Invalid command");
     }
+
+    public static void errorInvalidItemName() {
+
+        System.out.println("Invalid item name");
+    }
 }

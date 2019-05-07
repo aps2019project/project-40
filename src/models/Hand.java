@@ -5,11 +5,22 @@ import java.util.ArrayList;
 
 public class Hand implements Serializable {
 
+    private ArrayList<Card> deck = new ArrayList<>(); //todo add main deck to this deck
     private ArrayList<Card> cards = new ArrayList<>();
     private Card reserveCard;
     private Card selectedCard;
     private ArrayList<Card> collectiblesItem = new ArrayList<>();
     private final int MAX_HANDS_CARD = 5;
+
+    public ArrayList<Card> getDeck() {
+
+        return deck;
+    }
+
+    public void setDeck(ArrayList<Card> deck) {
+
+        this.deck = deck;
+    }
 
     public Card getReserveCard() {
 
@@ -31,8 +42,20 @@ public class Hand implements Serializable {
         collectiblesItem.add(card);
     }
 
+    public void fillHandEmptyPlace() {
+
+        if (isThereEmptyPlace()) {
+            if (reserveCard != null) cards.add(reserveCard);
+            try {
+            reserveCard = deck.get(0);
+            deck.remove(0);
+            } catch (ArrayIndexOutOfBoundsException e) {
+            }
+        }
+    }
+
     private boolean isThereEmptyPlace() {
 
-        return cards.size() < MAX_HANDS_CARD;
+        return cards.size() <= MAX_HANDS_CARD;
     }
 }
