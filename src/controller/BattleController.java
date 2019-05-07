@@ -48,9 +48,6 @@ public class BattleController {
             if (request instanceof SelectAndUseCardRequest)
                 selectAndUseCardRequest((SelectAndUseCardRequest) request);
 
-            if (request instanceof UseSpecialPowerRequest)
-                useSpecialPowerRequest((UseSpecialPowerRequest) request);
-
             if (request instanceof ShowCardInfoRequest)
                 showCardInfoRequest((ShowCardInfoRequest) request);
 
@@ -72,12 +69,7 @@ public class BattleController {
         if (request.isForAttackCombo()) ;
         if (request.isForShowInfo()) ;
         if (request.isForUse()) ;
-
-    }
-
-    private void useSpecialPowerRequest(UseSpecialPowerRequest request) {
-
-
+        if (request.isForSpecialPower()) ;
     }
 
     private void showCardInfoRequest(ShowCardInfoRequest request) {
@@ -96,7 +88,7 @@ public class BattleController {
     }
 
     private void enterGraveYardRequest(EnterGraveYardRequest request) {
-        //todo
+        //todo help
         if (request.isForShowInfo())
             enterGraveYardRequestShowInfo(request.getCardID());
 
@@ -153,7 +145,7 @@ public class BattleController {
         coordination.setColumn(request.getColumn());
 
         if (isOutOfTable(coordination)) return;
-
+        //todo check mana
         Cell cell = match.getTable().getCellByCoordination(coordination);
 
 
