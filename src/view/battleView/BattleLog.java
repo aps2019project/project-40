@@ -95,4 +95,9 @@ public class BattleLog {
 
         System.out.println("Invalid item name");
     }
+
+    public static void errorUnitIsStun() {
+
+        System.out.println("Unit is stun");
+    }
 }

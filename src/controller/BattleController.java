@@ -3,6 +3,7 @@ package controller;
 import models.*;
 import models.GamePlay.GameLogic;
 import models.GamePlay.Match;
+import org.omg.CORBA.BAD_CONTEXT;
 import request.battleRequest.BattleRequest;
 import request.battleRequest.BattleRequestChilds.*;
 import view.battleView.*;
@@ -71,6 +72,61 @@ public class BattleController {
 
         else if (request.isForUse()) ;
         else if (request.isForSpecialPower()) ;
+    }
+
+    private void selectAndUseCardRequestMove(SelectAndUseCardRequest request) {
+
+        Card card = Collection.findCardByCardID(
+                match.findPlayerPlayingThisTurn().getHand().getCardsInTable(), request.getID());
+        if (card == null || !(card instanceof Unit)) {
+            BattleLog.errorInvalidCardID();
+            return;
+        }
+
+        Coordination destinationCoordination = new Coordination();
+        destinationCoordination.setRow(request.getRow());
+        destinationCoordination.setColumn(request.getColumn());
+        if (isOutOfTable(destinationCoordination)) return;
+
+        Cell destinationCell = match.getTable().getCellByCoordination(destinationCoordination);
+        if (!isCellAvailableForMove(card.getCell(), destinationCell)) return;
+
+        if (isUnitStun((Unit) card)) return;
+
+
+        //todo if attack or move
+        //todo check can move or not
+        //todo if there is flag in cell get that
+    }
+
+    private boolean isCellAvailableForMove(Cell originCell, Cell destinationCell) {
+
+        if (isCellFill(destinationCell)) return false;
+
+        int rowDifference = destinationCell.getCoordination().getRow() - originCell.getCoordination().getRow();
+        int columnDifference = destinationCell.getCoordination().getColumn() - originCell.getCoordination().getColumn();
+
+        if (Math.abs(rowDifference) + Math.abs(columnDifference) > 2) {
+            BattleLog.errorInvalidTarget();
+            return false;
+        }
+
+        return true;
+    }
+
+    private boolean isUnitStun(Unit unit) {
+
+        ArrayList<Buff> buffs = unit.getBuffs();
+
+        for (Buff buff : buffs) {
+
+            if (buff.isStun()) {
+                BattleLog.errorUnitIsStun();
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private void selectAndUseCardRequestShowInfo(SelectAndUseCardRequest request) {
@@ -150,7 +206,7 @@ public class BattleController {
     private void insertCardRequest(InsertCardRequest request) {
 
         Card card = Collection.findCardByCardName(
-                match.findPlayerPlayingThisTurn().getHand().getCards(), request.getCardName());
+                match.findPlayerPlayingThisTurn().getHand().getHandCards(), request.getCardName());
 
         if (card == null) {
             BattleLog.errorInvalidCardName();
@@ -444,7 +500,7 @@ public class BattleController {
 
     private void showHandRequest() {
 
-        ArrayList<Card> cards = match.findPlayerPlayingThisTurn().getHand().getCards();
+        ArrayList<Card> cards = match.findPlayerPlayingThisTurn().getHand().getHandCards();
         cards.add(match.findPlayerPlayingThisTurn().getHand().getReserveCard());
         ShowCardsBattleView showCardsBattleView = new ShowCardsBattleView();
 
