@@ -170,4 +170,9 @@ public class Unit extends Card implements Serializable {
     public void setDisarm(boolean disarm) {
         isDisarm = disarm;
     }
+
+    @Override
+    public String toString() {
+        return "" + AP + "\n" + HP;
+    }
 }

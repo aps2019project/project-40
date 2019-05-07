@@ -18,7 +18,7 @@ public class Target {
 
     public Target(boolean isAffectCells, boolean isAffectHero, boolean isTargetEnemy,
                   boolean isAffectMinion, boolean isDependentToHeroLocation, boolean isRandom,
-                  int rowsAffected, int columnsAffected, TargetType targetType) {
+                  int rowsAffected, int columnsAffected, TargetType targetType, boolean isForDeckCards) {
         this.isAffectCells = isAffectCells;
         this.isTargetEnemy = isTargetEnemy;
         this.isAffectHero = isAffectHero;
@@ -28,6 +28,7 @@ public class Target {
         this.rowsAffected = rowsAffected;
         this.columnsAffected = columnsAffected;
         this.targetType = targetType;
+        this.isForDeckCards = isForDeckCards;
     }
 
     public boolean isAffectCells() {
