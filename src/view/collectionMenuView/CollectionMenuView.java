@@ -94,27 +94,27 @@ public class CollectionMenuView extends View {
         String showMessage;
         if (!showCost)
             if (((Unit) unit).getSpecialPower() == null)
-                showMessage=num + " : Name : " + unit.getCardName()
-                    + " - AP : " + ((Unit) unit).getAttackPoint()
-                    + " - HP : " + ((Unit) unit).getHealthPoint()
-                    + " - Class : " + ((Unit) unit).getUnitType()
-                    + " - Special power : " + ((Unit) unit).getSpecialPower();
+                showMessage = num + " : Name : " + unit.getCardName()
+                        + " - AP : " + ((Unit) unit).getAttackPoint()
+                        + " - HP : " + ((Unit) unit).getHealthPoint()
+                        + " - Class : " + ((Unit) unit).getUnitType()
+                        + " - Special power : " + ((Unit) unit).getSpecialPower();
             else
-                showMessage=num + " : Name : " + unit.getCardName()
+                showMessage = num + " : Name : " + unit.getCardName()
                         + " - AP : " + ((Unit) unit).getAttackPoint()
                         + " - HP : " + ((Unit) unit).getHealthPoint()
                         + " - Class : " + ((Unit) unit).getUnitType()
                         + " - Special power : " + ((Unit) unit).getSpecialPower().getDescription();
         else {
             if (((Unit) unit).getSpecialPower() == null)
-                showMessage=num + " : Type : Minion - Name : " + unit.getCardName()
+                showMessage = num + " : Type : Minion - Name : " + unit.getCardName()
                         + " - Class : " + ((Unit) unit).getUnitType()
                         + " - AP : " + ((Unit) unit).getAttackPoint()
                         + " - HP : " + ((Unit) unit).getHealthPoint()
                         + " - Special power : " + ((Unit) unit).getSpecialPower()
                         + "- Sell Cost : " + unit.getSellCost();
             else
-                showMessage=num + " : Type : Minion - Name : " + unit.getCardName()
+                showMessage = num + " : Type : Minion - Name : " + unit.getCardName()
                         + " - Class : " + ((Unit) unit).getUnitType()
                         + " - AP : " + ((Unit) unit).getAttackPoint()
                         + " - HP : " + ((Unit) unit).getHealthPoint()
@@ -132,14 +132,14 @@ public class CollectionMenuView extends View {
                         + " - Class : " + ((Unit) unit).getUnitType()
                         + " - AP : " + ((Unit) unit).getAttackPoint()
                         + " - HP : " + ((Unit) unit).getHealthPoint()
-                        + " - MP : " + ((Unit) unit).getManaCost()
+                        + " - MP : " + unit.getManaCost()
                         + " - Special power : " + ((Unit) unit).getSpecialPower();
             else
                 showMessage = num + " : Type : Minion - Name : " + unit.getCardName()
                         + " - Class : " + ((Unit) unit).getUnitType()
                         + " - AP : " + ((Unit) unit).getAttackPoint()
                         + " - HP : " + ((Unit) unit).getHealthPoint()
-                        + " - MP : " + ((Unit) unit).getManaCost()
+                        + " - MP : " + unit.getManaCost()
                         + " - Special power : " + ((Unit) unit).getSpecialPower().getDescription();
         else {
             if (((Unit) unit).getSpecialPower() == null)

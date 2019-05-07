@@ -36,7 +36,7 @@ public class Buff implements Serializable {
                 boolean lasts, int manaChange,
                 SpecialMinion specialMinion, int waitingTime,
                 boolean continuous, int onStartUsable,
-                Spell itemSpell, boolean noDamageFromWeakers,boolean noBadEffect,
+                Spell itemSpell, boolean noDamageFromWeakers, boolean noBadEffect,
                 boolean noPoison) {
         this.duration = duration;
         this.holy = holy;

@@ -8,10 +8,11 @@ import java.io.IOException;
 import java.io.Reader;
 
 public class JsonToCard {
-    public static void main(String[] args){
+    public static void main(String[] args) {
         Collection a = new Collection();
         moveToCollection(a);
     }
+
     public static void collectibleToCollection(Collection collection) {
         Gson gson = new Gson();
         saveCollectibleItemCards(gson, collection);
@@ -68,12 +69,13 @@ public class JsonToCard {
             }
         }
     }
+
     private static void saveToSpellCards(Gson gson, Collection collection, File folder) {
         File[] listOfFiles = folder.listFiles();
         for (File listOfFile : listOfFiles) {
             try (Reader reader = new FileReader(listOfFile)) {
 
-                Card spell= gson.fromJson(reader, Spell.class);
+                Card spell = gson.fromJson(reader, Spell.class);
 
                 collection.addCardToCollection(spell);
             } catch (IOException e) {
@@ -81,6 +83,7 @@ public class JsonToCard {
             }
         }
     }
+
     private static void saveCards(Gson gson, Collection collection, File folder) {
         File[] listOfFiles = folder.listFiles();
         for (File listOfFile : listOfFiles) {
