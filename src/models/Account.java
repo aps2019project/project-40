@@ -24,12 +24,12 @@ public class Account implements Serializable {
         return matchHistories;
     }
 
-    public void AddMatchHistory(Account opponent, GameStatus gameStatus) {
-        History history = new History();
-        history.setLocalDateTime();
-        history.setOponnentUserName(opponent.getUserName());
-        history.setYourStatus(gameStatus);
+    public void addMatchHistory(History history) {
         matchHistories.add(history);
+    }
+
+    public boolean isAI() {
+        return isAI;
     }
 
     public int getMoney() {
@@ -83,6 +83,21 @@ public class Account implements Serializable {
 
     public static Account getAIAccount(MatchType matchType) {
         Account account = new Account();
+        account.isAI=true;
+        switch (matchType){
+            case KILL_THE_HERO:
+                account.getCollection().getDecks().add(Deck.getDefaultMode1deck());
+                account.getCollection().setSelectedDeck(Deck.getDefaultMode1deck());
+                break;
+            case HOLD_THE_FLAG:
+                account.getCollection().getDecks().add(Deck.getDefaultMode2deck());
+                account.getCollection().setSelectedDeck(Deck.getDefaultMode2deck());
+                break;
+            case COLLECT_THE_FLAGS:
+                account.getCollection().getDecks().add(Deck.getDefaultMode3deck());
+                account.getCollection().setSelectedDeck(Deck.getDefaultMode3deck());
+                break;
+        }
         return account;
     }
 
@@ -93,6 +108,7 @@ public class Account implements Serializable {
         } catch (NullPointerException e) {
         }
         card.setCardID(userName + "_" + card.getCardName() + "_" + (instanceNum + 1));
+        card.setSellCost();
     }
 
     public static void save(Account account) {

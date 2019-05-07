@@ -99,7 +99,7 @@ public class Card implements Serializable, Cloneable {
 
     public void setSellCost() {
         if (price > 0) {
-            sellCost = 4 * price / 5;
+            sellCost = 4 * price / 10;
         }
     }
 }

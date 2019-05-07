@@ -1,9 +1,7 @@
 package controller;
 
-import models.Account;
+import models.*;
 import models.GamePlay.Match;
-import models.LoginMenu;
-import models.MatchType;
 import request.battleMenuRequest.BattleMenuRequest;
 import request.battleMenuRequest.battleMenuRequestChilds.CustomGameRequest;
 import request.battleMenuRequest.battleMenuRequestChilds.MultiPlayerMenuRequest;
@@ -104,11 +102,13 @@ public class BattleMenuController {
                 playerAI = Account.getAIAccount(MatchType.COLLECT_THE_FLAGS);
                 Match match = new Match(customGameRequest.getFlagsNumber(), account, playerAI);
                 BattleController.getInstance().mainBattleController(match);
+                Controller.getInstance().addStack(StartMenuController.getInstance());
                 return;
             } else {
                 playerAI = Account.getAIAccount(customGameRequest.getMode());
                 Match match = new Match(customGameRequest.getMode(), account, playerAI);
                 BattleController.getInstance().mainBattleController(match);
+                Controller.getInstance().addStack(StartMenuController.getInstance());
                 return;
             }
 
@@ -124,16 +124,19 @@ public class BattleMenuController {
                 playerAI = Account.getAIAccount(MatchType.KILL_THE_HERO);
                 match = new Match(MatchType.KILL_THE_HERO, account, playerAI);
                 BattleController.getInstance().mainBattleController(match);
+                Controller.getInstance().addStack(StartMenuController.getInstance());
                 break;
             case 2:
                 playerAI = Account.getAIAccount(MatchType.HOLD_THE_FLAG);
                 match = new Match(MatchType.HOLD_THE_FLAG, account, playerAI);
                 BattleController.getInstance().mainBattleController(match);
+                Controller.getInstance().addStack(StartMenuController.getInstance());
                 break;
             case 3:
                 playerAI = Account.getAIAccount(MatchType.COLLECT_THE_FLAGS);
                 match = new Match(6, account, playerAI);
                 BattleController.getInstance().mainBattleController(match);
+                Controller.getInstance().addStack(StartMenuController.getInstance());
                 break;
             case 0:
                 battleMenuView.showError(BattleMenuError.INVALID_COMMAND);
@@ -161,15 +164,47 @@ public class BattleMenuController {
 
                 Match match = new Match(request.getNumberOfFlags(), account, player2);
                 BattleController.getInstance().mainBattleController(match);
+                Controller.getInstance().addStack(StartMenuController.getInstance());
                 return;
             } else {
-
                 Match match = new Match(request.getMode(), account, player2);
                 BattleController.getInstance().mainBattleController(match);
-                return;
+                Controller.getInstance().addStack(StartMenuController.getInstance());
+
             }
 
         }
+    }
+
+    public void matchIsFinished(Account player2, GameStatus gameStatus) {
+        History history = new History();
+        history.setYourStatus(gameStatus);
+        history.setLocalDateTime();
+        history.setOponnentUserName(player2.getUserName());
+        account.addMatchHistory(history);
+        if (gameStatus.equals(GameStatus.WIN))
+            account.incrementWinsNumber();
+
+        if (player2.isAI())
+            return;
+
+        History newHistory = new History();
+        history.setOponnentUserName(account.getUserName());
+        history.setLocalDateTime();
+        switch (gameStatus) {
+            case WIN:
+                history.setYourStatus(GameStatus.LOST);
+                break;
+            case DRAW:
+                history.setYourStatus(GameStatus.DRAW);
+                break;
+            case LOST:
+                history.setYourStatus(GameStatus.WIN);
+                player2.incrementWinsNumber();
+                break;
+        }
+        player2.addMatchHistory(newHistory);
+
     }
 
 }
