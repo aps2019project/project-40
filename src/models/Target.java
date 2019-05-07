@@ -1,4 +1,5 @@
 package models;
+//change setter getter
 
 public class Target {
     final int MAP_ROWS = 5;
@@ -11,6 +12,7 @@ public class Target {
     private boolean isRandom;
     private TargetType targetType;
     private boolean isDependentToCardLocation;
+    private boolean isForDeckCards;
 
     private boolean isTargetEnemy;
 
@@ -62,5 +64,9 @@ public class Target {
 
     public boolean isTargetEnemy() {
         return isTargetEnemy;
+    }
+
+    public boolean isForDeckCards() {
+        return isForDeckCards;
     }
 }

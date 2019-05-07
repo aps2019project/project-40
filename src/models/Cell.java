@@ -47,4 +47,12 @@ public class Cell {
         coordination.setRow(row);
         coordination.setColumn(column);
     }
+    public boolean isAdjacent(Cell cell){
+        return Math.abs(cell.coordination.getRow()- coordination.getRow()) < 2 &&
+                Math.abs(cell.coordination.getColumn() - coordination.getColumn()) < 2;
+    }
+    public int manhattanDistance(Cell cell){
+        return Math.abs(cell.coordination.getRow()- coordination.getRow()) +
+                Math.abs(cell.coordination.getColumn() - coordination.getColumn());
+    }
 }

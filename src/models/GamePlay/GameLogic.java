@@ -119,5 +119,64 @@ public class GameLogic {
         //todo
     }
 
-    public void useBuff(Buff buff, Unit victimUnit) {}
+    public void useBuff(Buff buff, Unit victimUnit) {
+        if (buff.getDuration() <= 0) {
+            return;
+        }
+        victimUnit.setHP(victimUnit.getHP() - buff.getWeaknessHP());
+        victimUnit.setAP(victimUnit.getAP() - buff.getWeaknessAP());
+        if (buff.getCancelBuff() > 0) {
+            cancelPositiveBuffs(victimUnit);
+        } else {
+            cancelNegativeBuffs(victimUnit);
+        }
+        if (buff.isDisarm()) {
+            victimUnit.setDisarm(true);
+        }
+        if (buff.isStun()) {
+            victimUnit.setStunned(true);
+        }
+        //if (buff.getPoison() > 0 || buff.)
+    }
+
+
+    public void cancelNegativeBuffs(Unit unit) {
+        for (Buff buff : unit.getBuffs()) {
+            if (!buff.isPositive() && buff.getDuration() >= 0 && !buff.isLasts()) {
+                unit.removeBuff(buff);
+            }
+        }
+
+    }
+
+    public void cancelPositiveBuffs(Unit unit) {
+        for (Buff buff : unit.getBuffs()) {
+            if (buff.isPositive() && buff.getDuration() >= 0 && !buff.isLasts()) {
+                unit.removeBuff(buff);
+            }
+        }
+    }
+    public void killUnit(Unit unit){
+
+    }
+    public void ActivateOnDeathSpells(Unit unit){
+
+    }
+    public void checkRangeForAttack(Unit attacker, Unit defender){
+        if (attacker.getUnitType() == UnitType.MELEE){
+            if(!attacker.getCell().isAdjacent(defender.getCell())){
+                throw new IllegalArgumentException("can't attack"); //
+            }
+        }
+        if (attacker.getUnitType() == UnitType.RANGED){
+            if(attacker.getCell().isAdjacent(defender.getCell())){
+                throw new IllegalArgumentException("can't attack"); //
+            }
+        }
+        if (attacker.getUnitType() == UnitType.HYBRID){
+            if(attacker.getCell().isAdjacent(defender.getCell())){
+                throw new IllegalArgumentException("can't attack"); //
+            }
+        }
+    }
 }
