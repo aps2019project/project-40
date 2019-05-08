@@ -15,7 +15,7 @@ public class BattleController {
     private BattleRequest battleRequest = BattleRequest.getInstance();
     private Match match;
     private GameLogic gameLogic;
-    private BattleLogicController battleLogicControler;
+    private BattleLogicController battleLogicController;
     private boolean isEndedGame = false;
 
     //TODO add coordination for show minion
@@ -34,9 +34,9 @@ public class BattleController {
 
         this.match = match;
         gameLogic = match.getGameLogic();
-        battleLogicControler = new BattleLogicController();
-        battleLogicControler.setGameLogic(gameLogic);
-        battleLogicControler.setMatch(match);
+        battleLogicController = new BattleLogicController();
+        battleLogicController.setGameLogic(gameLogic);
+        battleLogicController.setMatch(match);
         manageRequest();
     }
 
@@ -80,7 +80,7 @@ public class BattleController {
             Coordination destinationCoordination = new Coordination();
             destinationCoordination.setRow(request.getRow());
             destinationCoordination.setColumn(request.getColumn());
-            if (isOutOfTable(destinationCoordination)) return;
+            if (battleLogicController.isOutOfTable(destinationCoordination)) return;
 
             Cell destinationCell = match.getTable().getCellByCoordination(destinationCoordination);
 
@@ -112,14 +112,14 @@ public class BattleController {
 
     private void selectAndUseCardRequestAttack(Unit unit, Cell cell, Coordination coordination) {
 
-        if (!isCellFill(cell)) {
+        if (!battleLogicController.isCellFill(cell)) {
             BattleLog.errorCellIsNotFill();
             return;
         }
 
         if (unit.getUnitType() == UnitType.MELEE) {
 
-            if (!isCellAvailableForMelee(coordination)) {
+            if (!battleLogicController.isCellAvailableForMelee(coordination)) {
                 BattleLog.errorCellNotAvailable();
                 return;
             }
@@ -129,11 +129,7 @@ public class BattleController {
 
         else if (unit.getUnitType() == UnitType.RANGED) {
 
-            if (isCellAvailableForMelee(coordination)) {
-                //against the melee
-                BattleLog.errorCellNotAvailable();
-                return;
-            }
+
 
         }
         else if (unit.getUnitType() == UnitType.HYBRID);
@@ -141,14 +137,14 @@ public class BattleController {
 
     private void selectAndUseCardRequestMove(Card card, Cell destinationCell) {
 
-        if (!battleLogicControler.isCellAvailableForMove(card.getCell(), destinationCell)) return;
+        if (!battleLogicController.isCellAvailableForMove(card.getCell(), destinationCell)) return;
 
-        if (battleLogicControler.isUnitStun((Unit) card)) return;
-        if (battleLogicControler.isAttackedPreviously(card)) {
+        if (battleLogicController.isUnitStun((Unit) card)) return;
+        if (battleLogicController.isAttackedPreviously(card)) {
             BattleLog.errorUnitAttacked();
             return;
         }
-        if (battleLogicControler.isMovedPreviously(card)) {
+        if (battleLogicController.isMovedPreviously(card)) {
             BattleLog.errorUnitMovedPreviously();
             return;
         }
@@ -233,7 +229,7 @@ public class BattleController {
             return;
         }
 
-        if (!battleLogicControler.hasEnoughMana(card)) {
+        if (!battleLogicController.hasEnoughMana(card)) {
             BattleLog.errorNotEnoughMana();
             return;
         }
@@ -241,55 +237,23 @@ public class BattleController {
         Coordination coordination = new Coordination();
         coordination.setRow(request.getRow());
         coordination.setColumn(request.getColumn());
-        if (isOutOfTable(coordination)) return;
+        if (battleLogicController.isOutOfTable(coordination)) return;
 
         Cell cell = match.getTable().getCellByCoordination(coordination);
 
         if (card instanceof Unit) {
 
-            if (isCellFill(cell)) {
+            if (battleLogicController.isCellFill(cell)) {
                 BattleLog.errorCellIsFill();
                 return;
             }
-            if (!isCellAvailableForMelee(coordination)) return;
+            if (!battleLogicController.isCellAvailableForMelee(coordination)) return;
             gameLogic.insertProcess((Unit) card, cell);
 
         } else {
             //TODO isTargetValid?
             gameLogic.insertProcess((Spell) card, cell);
         }
-    }
-
-    private boolean isCellFill(Cell cell) {
-
-        if (cell.getCard() == null) return false;
-        BattleLog.errorCellIsFill();
-        return true;
-    }
-
-    private boolean isCellAvailableForMelee(Coordination coordination) {
-
-        Table table = match.getTable();
-        Coordination aroundCoordination = new Coordination();
-
-        for (int row = -1; row <= 1; row++) {
-            for (int column = -1; column <= 1; column++) {
-
-                if (row == 0 && column == 0) continue;
-
-                try {
-                    aroundCoordination.setRow(coordination.getRow() + row);
-                    aroundCoordination.setColumn(coordination.getColumn() + column);
-                    if (table.getCellByCoordination(aroundCoordination).getCard().getTeam().equals(
-                            match.findPlayerPlayingThisTurn().getUserName())) return true;
-
-                } catch (ArrayIndexOutOfBoundsException e) {
-                }
-            }
-        }
-
-        BattleLog.errorCellNotAvailable();
-        return false;
     }
 
     private void requestWithoutVariable(RequestWithoutVariable request) {

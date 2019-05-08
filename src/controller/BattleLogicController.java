@@ -92,7 +92,7 @@ public class BattleLogicController {
         }
     }
 
-    private boolean isOutOfTable(Coordination coordination) {
+    public boolean isOutOfTable(Coordination coordination) {
 
         if (coordination.getRow() >= Table.ROWS || coordination.getRow() < 0 ||
                 coordination.getColumn() >= Table.COLUMNS || coordination.getColumn() < 0) {
@@ -102,5 +102,45 @@ public class BattleLogicController {
         }
 
         return false;
+    }
+
+    public boolean isCellFill(Cell cell) {
+
+        if (cell.getCard() == null) return false;
+        BattleLog.errorCellIsFill();
+        return true;
+    }
+
+    public boolean isCellAvailableForMelee(Cell attackerCell, Cell victimCell) {
+
+        int manhattanDistance = getManhattanDistance(attackerCell, victimCell);
+
+        if ((manhattanDistance < 2 && manhattanDistance > 0) ||
+
+                (Math.abs(
+                        attackerCell.getCoordination().getRow() - victimCell.getCoordination().getRow()) == 1 &&
+                        Math.abs(attackerCell.getCoordination().getColumn() - victimCell.getCoordination().getColumn()) == 1))
+
+            return true;
+
+        BattleLog.errorInvalidTarget();
+        return false;
+    }
+
+    public boolean isCellAvailableForRanged(Cell attackerCell, Cell victimCell, int attackRange) {
+
+        int manhattanDistance = getManhattanDistance(attackerCell, victimCell);
+
+        if (manhattanDistance > 1 && manhattanDistance <= attackRange &&
+
+                !(Math.abs(
+                        attackerCell.getCoordination().getRow() - victimCell.getCoordination().getRow()) == 1 &&
+                        Math.abs(attackerCell.getCoordination().getColumn() - victimCell.getCoordination().getColumn()) == 1))
+
+            return true;
+
+        BattleLog.errorInvalidTarget();
+        return false;
+
     }
 }
