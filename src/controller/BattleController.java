@@ -118,12 +118,7 @@ public class BattleController {
         }
 
         if (unit.getUnitType() == UnitType.MELEE) {
-
-            if (!battleLogicController.isCellAvailableForMelee(coordination)) {
-                BattleLog.errorCellNotAvailable();
-                return;
-            }
-
+            //todo
             //todo f(unit, cell)
         }
 
@@ -247,7 +242,7 @@ public class BattleController {
                 BattleLog.errorCellIsFill();
                 return;
             }
-            if (!battleLogicController.isCellAvailableForMelee(coordination)) return;
+            //if (!battleLogicController.isCellAvailableForMelee() return;
             gameLogic.insertProcess((Unit) card, cell);
 
         } else {
