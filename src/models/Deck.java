@@ -8,7 +8,6 @@ public class Deck implements Serializable {
     private String deckName;
     private ArrayList<Card> cards = new ArrayList<>();
     private int maxCardNumber;
-    private Item item;
     private Hand hand = new Hand();
 
     public String getDeckName() {

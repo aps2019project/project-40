@@ -21,6 +21,7 @@ public class Table {
         for (int row = 0; row < ROWS; row++) {
             for (int column = 0; column < COLUMNS; column++) {
 
+                cells[row][column] = new Cell();
                 cells[row][column].setCoordination(row, column);
             }
         }
