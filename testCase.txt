@@ -1,5 +1,5 @@
-create account erfan
-fara
+create account ali
+ali
 enter shop
 buy total_disarm
 buy lighting_bolt
@@ -28,29 +28,29 @@ buy panther
 exit
 enter collection
 create deck mode1
-add erfan_total_disarm_1 to deck mode1
-add erfan_lighting_bolt_1 to deck mode1
-add erfan_all_disarm_1 to deck mode1
-add erfan_all_poison_1 to deck mode1
-add erfan_dispel_1 to deck mode1
-add erfan_sacrifice_1 to deck mode1
-add erfan_shock_1 to deck mode1
+add ali_total_disarm_1 to deck mode1
+add ali_lighting_bolt_1 to deck mode1
+add ali_all_disarm_1 to deck mode1
+add ali_all_poison_1 to deck mode1
+add ali_dispel_1 to deck mode1
+add ali_sacrifice_1 to deck mode1
+add ali_shock_1 to deck mode1
 
-add erfan_white_demon_1 to deck mode1
-add erfan_soul_eater_1 to deck mode1
+add ali_white_demon_1 to deck mode1
+add ali_soul_eater_1 to deck mode1
 
-add erfan_iraj_1 to deck mode1
-add erfan_iraj_2 to deck mode1
-add erfan_arjang_1 to deck mode1
-add erfan_big_giant_1 to deck mode1
-add erfan_panther_1 to deck mode1
-add erfan_siavash_1 to deck mode1
-add erfan_iraj_3 to deck mode1
-add erfan_iraj_4 to deck mode1
-add erfan_iraj_5 to deck mode1
-add erfan_big_giant_2 to deck mode1
-add erfan_panther_2 to deck mode1
-add erfan_big_giant_3 to deck mode1
-add erfan_panther_3 to deck mode1
+add ali_iraj_1 to deck mode1
+add ali_iraj_2 to deck mode1
+add ali_arjang_1 to deck mode1
+add ali_big_giant_1 to deck mode1
+add ali_panther_1 to deck mode1
+add ali_siavash_1 to deck mode1
+add ali_iraj_3 to deck mode1
+add ali_iraj_4 to deck mode1
+add ali_iraj_5 to deck mode1
+add ali_big_giant_2 to deck mode1
+add ali_panther_2 to deck mode1
+add ali_big_giant_3 to deck mode1
+add ali_panther_3 to deck mode1
 
 select deck mode1

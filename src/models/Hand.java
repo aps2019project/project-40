@@ -7,6 +7,7 @@ public class Hand implements Serializable {
 
     private ArrayList<Card> deck = new ArrayList<>(); //todo add main deck to this deck
     private ArrayList<Card> handCards = new ArrayList<>();
+    private Card hero;
     private Card reserveCard;
     private Card selectedCard;
     private ArrayList<Card> collectiblesItem = new ArrayList<>();
@@ -40,6 +41,29 @@ public class Hand implements Serializable {
     public void setItemToCollectiblesItem(Card card) {
 
         collectiblesItem.add(card);
+    }
+
+    public void initializeHand(Deck accountDeck) {
+        Deck newDeck = Deck.deepClone(accountDeck);
+        newDeck.shuffleCards();
+        deck = newDeck.getCards();
+
+        for (Card card : deck)
+            if (card.getType().equals(CardType.HERO))
+                hero = card;
+
+        deck.remove(hero);
+        handCards.add(deck.get(0));
+        handCards.add(deck.get(1));
+        handCards.add(deck.get(2));
+        handCards.add(deck.get(3));
+        handCards.add(deck.get(4));
+        reserveCard=deck.get(5);
+
+        for (Card card:handCards)
+            deck.remove(card);
+
+        deck.remove(reserveCard);
     }
 
     public void fillHandEmptyPlace() {

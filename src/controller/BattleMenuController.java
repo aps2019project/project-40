@@ -44,6 +44,7 @@ public class BattleMenuController {
     }
 
     public boolean checkValidateDeck() {
+
         return account.getCollection().getSelectedDeck().isDeckValidate();
     }
 
