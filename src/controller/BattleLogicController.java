@@ -111,6 +111,31 @@ public class BattleLogicController {
         return true;
     }
 
+    public boolean isCellAvailableForInsert(Coordination coordination) {
+
+        Table table = match.getTable();
+        Coordination aroundCoordination = new Coordination();
+
+        for (int row = -1; row <= 1; row++) {
+            for (int column = -1; column <= 1; column++) {
+
+                if (row == 0 && column == 0) continue;
+
+                try {
+                    aroundCoordination.setRow(coordination.getRow() + row);
+                    aroundCoordination.setColumn(coordination.getColumn() + column);
+                    if (table.getCellByCoordination(aroundCoordination).getCard().getTeam().equals(
+                            match.findPlayerPlayingThisTurn().getUserName())) return true;
+
+                } catch (ArrayIndexOutOfBoundsException e) {
+                }
+            }
+        }
+
+        BattleLog.errorCellNotAvailable();
+        return false;
+    }
+
     public boolean isCellAvailableForMelee(Cell attackerCell, Cell victimCell) {
 
         int manhattanDistance = getManhattanDistance(attackerCell, victimCell);

@@ -49,16 +49,16 @@ public class BattleController {
             if (request instanceof SelectAndUseCardRequest)
                 selectAndUseCardRequest((SelectAndUseCardRequest) request);
 
-            if (request instanceof ShowCardInfoRequest)
+            else if (request instanceof ShowCardInfoRequest)
                 showCardInfoRequest((ShowCardInfoRequest) request);
 
-            if (request instanceof EnterGraveYardRequest)
+            else if (request instanceof EnterGraveYardRequest)
                 enterGraveYardRequest((EnterGraveYardRequest) request);
 
-            if (request instanceof InsertCardRequest)
+            else if (request instanceof InsertCardRequest)
                 insertCardRequest((InsertCardRequest) request);
 
-            if (request instanceof RequestWithoutVariable)
+            else if (request instanceof RequestWithoutVariable)
                 requestWithoutVariable((RequestWithoutVariable) request);
 
             if (isEndedGame) break;
@@ -110,20 +110,22 @@ public class BattleController {
         }
     }
 
-    private void selectAndUseCardRequestAttack(Unit unit, Cell cell, Coordination coordination) {
+    private void selectAndUseCardRequestAttack(Unit unit, Cell targetCell, Coordination coordination) {
 
-        if (!battleLogicController.isCellFill(cell)) {
+        if (!battleLogicController.isCellFill(targetCell)) {
             BattleLog.errorCellIsNotFill();
             return;
         }
 
         if (unit.getUnitType() == UnitType.MELEE) {
-            //todo
+
+            if (!battleLogicController.isCellAvailableForMelee(unit.getCell(), targetCell)) return;
             //todo f(unit, cell)
         }
 
         else if (unit.getUnitType() == UnitType.RANGED) {
 
+            if (!battleLogicController.isCellAvailableForRanged(unit.getCell(), targetCell, unit.getRange())) return;
 
 
         }
@@ -242,7 +244,7 @@ public class BattleController {
                 BattleLog.errorCellIsFill();
                 return;
             }
-            //if (!battleLogicController.isCellAvailableForMelee() return;
+            if (!battleLogicController.isCellAvailableForInsert(coordination)) return;
             gameLogic.insertProcess((Unit) card, cell);
 
         } else {
