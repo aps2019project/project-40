@@ -15,6 +15,7 @@ public class BattleController {
     private BattleRequest battleRequest = BattleRequest.getInstance();
     private Match match;
     private GameLogic gameLogic;
+    private BattleLogicController battleLogicControler;
     private boolean isEndedGame = false;
 
     //TODO add coordination for show minion
@@ -33,6 +34,9 @@ public class BattleController {
 
         this.match = match;
         gameLogic = match.getGameLogic();
+        battleLogicControler = new BattleLogicController();
+        battleLogicControler.setGameLogic(gameLogic);
+        battleLogicControler.setMatch(match);
         manageRequest();
     }
 
@@ -66,8 +70,7 @@ public class BattleController {
         if (request.isForMove() || request.isForAttack() || request.isForAttackCombo() || request.isForUseSpecialPower()) {
 
             //check validity
-            Card card = Collection.findCardByCardID(
-                    match.findPlayerPlayingThisTurn().getHand().getCardsInTable(), request.getID());
+            Card card = Collection.findCardByCardID(gameLogic.getCardsInTablePlayerPlayingThisTurn(), request.getID());
 
             if (card == null || !(card instanceof Unit)) {
                 BattleLog.errorInvalidCardID();
@@ -138,78 +141,20 @@ public class BattleController {
 
     private void selectAndUseCardRequestMove(Card card, Cell destinationCell) {
 
-        if (!isCellAvailableForMove(card.getCell(), destinationCell)) return;
+        if (!battleLogicControler.isCellAvailableForMove(card.getCell(), destinationCell)) return;
 
-        if (isUnitStun((Unit) card)) return;
-        if (isAttackedPreviously(card)) {
+        if (battleLogicControler.isUnitStun((Unit) card)) return;
+        if (battleLogicControler.isAttackedPreviously(card)) {
             BattleLog.errorUnitAttacked();
             return;
         }
-        if (isMovedPreviously(card)) {
+        if (battleLogicControler.isMovedPreviously(card)) {
             BattleLog.errorUnitMovedPreviously();
             return;
         }
 
         gameLogic.moveProcess(card, destinationCell);
         //todo if there is flag in cell get that
-    }
-
-    private boolean isAttackedPreviously(Card card) {
-
-        ArrayList<Card> attackedCards = gameLogic.getAttackedCardsInATurn();
-
-        for (Card attackedCard : attackedCards) {
-
-            if (attackedCard.getCardName().equals(card.getCardName())) return true;
-        }
-
-        return false;
-    }
-
-    private boolean isMovedPreviously(Card card) {
-
-        ArrayList<Card> movedCards = gameLogic.getMovedCardsInATurn();
-
-        for (Card movedCard : movedCards) {
-
-            if (movedCard.getCardName().equals(card.getCardName())) return true;
-        }
-
-        return false;
-    }
-
-    private boolean isCellAvailableForMove(Cell originCell, Cell destinationCell) {
-
-        if (isCellFill(destinationCell)) return false;
-        if (getManhattanDistance(originCell, destinationCell) > 2) {
-            BattleLog.errorInvalidTarget();
-            return false;
-        }
-
-        return true;
-    }
-
-    private int getManhattanDistance(Cell start, Cell finish) {
-
-        int rowDifference = start.getCoordination().getRow() - finish.getCoordination().getRow();
-        int columnDifference = start.getCoordination().getColumn() - finish.getCoordination().getColumn();
-
-        return Math.abs(rowDifference) + Math.abs(columnDifference);
-    }
-
-    private boolean isUnitStun(Unit unit) {
-
-        ArrayList<Buff> buffs = unit.getBuffs();
-
-        for (Buff buff : buffs) {
-
-            if (buff.isStun()) {
-                BattleLog.errorUnitIsStun();
-                return true;
-            }
-        }
-
-        return false;
     }
 
     private void selectAndUseCardRequestShowInfo(SelectAndUseCardRequest request, Card item) {
@@ -288,7 +233,7 @@ public class BattleController {
             return;
         }
 
-        if (!hasEnoughMana(card)) {
+        if (!battleLogicControler.hasEnoughMana(card)) {
             BattleLog.errorNotEnoughMana();
             return;
         }
@@ -313,30 +258,6 @@ public class BattleController {
             //TODO isTargetValid?
             gameLogic.insertProcess((Spell) card, cell);
         }
-    }
-
-    private boolean hasEnoughMana(Card card) {
-
-        if (match.findPlayerPlayingThisTurn().equals(match.getPlayer1())) {
-
-            return card.getManaCost() <= match.getPlayer1Mana();
-
-        } else {
-
-            return card.getManaCost() <= match.getPlayer2Mana();
-        }
-    }
-
-    private boolean isOutOfTable(Coordination coordination) {
-
-        if (coordination.getRow() >= Table.ROWS || coordination.getRow() < 0 ||
-                coordination.getColumn() >= Table.COLUMNS || coordination.getColumn() < 0) {
-
-            BattleLog.errorInvalidTarget();
-            return true;
-        }
-
-        return false;
     }
 
     private boolean isCellFill(Cell cell) {

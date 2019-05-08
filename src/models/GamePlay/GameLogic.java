@@ -19,6 +19,14 @@ public class GameLogic {
     private ArrayList<Card> cardsInTablePlayer1 = new ArrayList<>(); //todo fill that in game and delete when minion die
     private ArrayList<Card> cardsInTablePlayer2 = new ArrayList<>();
 
+    public ArrayList<Card> getCardsInTablePlayerPlayingThisTurn() {
+
+        if (match.findPlayerPlayingThisTurn().equals(match.player1))
+            return getCardsInTablePlayer1();
+        else
+            return getCardsInTablePlayer2();
+    }
+
     public ArrayList<Card> getCardsInTablePlayer2() {
 
         return cardsInTablePlayer2;
