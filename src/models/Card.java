@@ -43,7 +43,7 @@ public class Card implements Serializable, Cloneable {
         return manaCost;
     }
 
-    Card(int manaCost, int price, String cardName, ArrayList<Spell> spells,
+    public Card(int manaCost, int price, String cardName, ArrayList<Spell> spells,
          String description, CardType type, Cell cell) {
         this.manaCost = manaCost;
         this.price = price;

@@ -1,12 +1,12 @@
 package models.GamePlay;
 
-import models.Account;
-import models.MatchType;
-import models.Table;
+import models.*;
+
+import java.util.Random;
 
 public class Match {
 
-    Table table=new Table();
+    Table table = new Table();
     Account player1, player2;
     GraveYard Player1GraveYard = new GraveYard();
     GraveYard Player2GraveYard = new GraveYard();
@@ -87,15 +87,49 @@ public class Match {
         return player2;
     }
 
-    public void intializeTableModeKillTheHero(){
+    public void intializeTableModeKillTheHero() {
+
+        Card hero1 = player1.getHand().getHero();
+        Card hero2 = player2.getHand().getHero();
+
+        table.getCells()[2][0].setCard(hero1);
+        table.getCells()[2][8].setCard(hero2);
 
     }
 
-    public void intializeTableModeHoldTheFlag(){
+    public void intializeTableModeHoldTheFlag() {
+
+        intializeTableModeKillTheHero();
+
+        Card flag = new Card(0, 0, "flag", null, "", CardType.FLAG, null);
+        table.getCells()[2][4].setCard(flag);
 
     }
 
-    public void intializeTableModeCollectTheFlag(){
+    public void intializeTableModeCollectTheFlag(int numberOfFlags) {
 
+        intializeTableModeKillTheHero();
+
+        Random random = new Random();
+
+        int[] randomRow = new int[numberOfFlags], randomColumn = new int[numberOfFlags];
+        for (int i = 0; i < numberOfFlags; i++) {
+            randomColumn[i] = random.nextInt(9);
+            randomRow[i] = random.nextInt(5);
+
+            for (int j = 0; j < i; j++)
+                if (randomColumn[i] == randomColumn[j] && randomRow[i] == randomRow[j]) {
+                    i--;
+                    break;
+                } else if ((randomColumn[i] == 8 || randomColumn[i] == 0) && randomRow[i] == 2){
+                    i--;
+                    break;
+                }
+        }
+
+        for (int i = 0; i < numberOfFlags; i++) {
+            Card flag = new Card(0, 0, "flag", null, "", CardType.FLAG, null);
+            table.getCells()[randomRow[i]][randomColumn[i]].setCard(flag);
+        }
     }
 }

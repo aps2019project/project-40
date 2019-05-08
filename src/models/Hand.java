@@ -23,6 +23,10 @@ public class Hand implements Serializable {
         this.deck = deck;
     }
 
+    public Card getHero() {
+        return hero;
+    }
+
     public Card getReserveCard() {
 
         return reserveCard;
