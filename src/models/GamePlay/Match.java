@@ -6,7 +6,7 @@ import models.Table;
 
 public class Match {
 
-    Table table;
+    Table table=new Table();
     Account player1, player2;
     GraveYard Player1GraveYard = new GraveYard();
     GraveYard Player2GraveYard = new GraveYard();
@@ -85,5 +85,17 @@ public class Match {
 
         if (turnNumber % 2 == 1) return player1;
         return player2;
+    }
+
+    public void intializeTableModeKillTheHero(){
+
+    }
+
+    public void intializeTableModeHoldTheFlag(){
+
+    }
+
+    public void intializeTableModeCollectTheFlag(){
+
     }
 }

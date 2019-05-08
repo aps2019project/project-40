@@ -402,7 +402,6 @@ public class BattleController {
     }
 
     private void gameInfoRequest() {
-
         Cell[][] cells = match.getTable().getCells();
 
         if (match.getMatchType() == MatchType.KILL_THE_HERO)
