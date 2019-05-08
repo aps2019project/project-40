@@ -2,9 +2,8 @@ package models;
 
 public class Cell {
 
-    private Coordination coordination;
+    private Coordination coordination=new Coordination();
     private Card card;
-    private Item item;
     private boolean isThereFlag = false;
 
     public Card getCard() {
@@ -15,16 +14,6 @@ public class Cell {
     public void setCard(Card card) {
 
         this.card = card;
-    }
-
-    public Item getItem() {
-
-        return item;
-    }
-
-    public void setItem(Item item) {
-
-        this.item = item;
     }
 
     public boolean isThereFlag() {
