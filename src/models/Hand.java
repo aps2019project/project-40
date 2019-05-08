@@ -7,7 +7,6 @@ public class Hand implements Serializable {
 
     private ArrayList<Card> deck = new ArrayList<>(); //todo add main deck to this deck
     private ArrayList<Card> handCards = new ArrayList<>();
-    private ArrayList<Card> cardsInTable = new ArrayList<>(); //todo fill that in game and delete when minion die
     private Card reserveCard;
     private Card selectedCard;
     private ArrayList<Card> collectiblesItem = new ArrayList<>();
@@ -21,16 +20,6 @@ public class Hand implements Serializable {
     public void setDeck(ArrayList<Card> deck) {
 
         this.deck = deck;
-    }
-
-    public ArrayList<Card> getCardsInTable() {
-
-        return cardsInTable;
-    }
-
-    public void setCardToCardsInTable(Card card) {
-
-        cardsInTable.add(card);
     }
 
     public Card getReserveCard() {

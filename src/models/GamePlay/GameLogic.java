@@ -16,6 +16,18 @@ public class GameLogic {
     int remainTurnToHoldingTheFlag; //todo initialize in dead and get
     private ArrayList<Card> attackedCardsInATurn = new ArrayList<>();      //todo add attacker to array
     private ArrayList<Card> movedCardsInATurn = new ArrayList<>();
+    private ArrayList<Card> cardsInTablePlayer1 = new ArrayList<>(); //todo fill that in game and delete when minion die
+    private ArrayList<Card> cardsInTablePlayer2 = new ArrayList<>();
+
+    public ArrayList<Card> getCardsInTablePlayer2() {
+
+        return cardsInTablePlayer2;
+    }
+
+    public ArrayList<Card> getCardsInTablePlayer1() {
+
+        return cardsInTablePlayer1;
+    }
 
     public ArrayList<Card> getAttackedCardsInATurn() {
 

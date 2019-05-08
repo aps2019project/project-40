@@ -25,7 +25,6 @@ buy big_giant
 buy panther
 buy big_giant
 buy panther
-
 exit
 enter collection
 create deck mode1

@@ -1,5 +1,7 @@
 package view.battleView;
 
+import java.sql.SQLOutput;
+
 public class BattleLog {
 
     public static void errorInvalidCardID() {
@@ -50,6 +52,11 @@ public class BattleLog {
     public static void errorCellIsFill() {
 
         System.out.println("This cell is fill and can not insert minion on this cell");
+    }
+
+    public static void errorCellIsNotFill() {
+
+        System.out.println("there is any unit on this cell");
     }
 
     public static void errorCellNotAvailable() {
