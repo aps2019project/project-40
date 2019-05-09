@@ -60,15 +60,17 @@ public class BattleLogicController {
     public boolean isUnitStun(Unit unit) {
 
         ArrayList<Buff> buffs = unit.getBuffs();
+        try {
+            for (Buff buff : buffs) {
 
-        for (Buff buff : buffs) {
-
-            if (buff.isStun()) {
-                BattleLog.errorUnitIsStun();
-                return true;
+                if (buff.isStun()) {
+                    BattleLog.errorUnitIsStun();
+                    return true;
+                }
             }
+        } catch (NullPointerException e) {
+            System.err.println("ArrayList of buff is null (BattleLogicController/isUnitStun)");
         }
-
         return false;
     }
 

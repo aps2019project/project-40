@@ -109,6 +109,7 @@ public class Account implements Serializable {
         } catch (NullPointerException e) {
         }
         card.setCardID(userName + "_" + card.getCardName() + "_" + (instanceNum + 1));
+        card.setTeam(userName);
         card.setSellCost();
     }
 

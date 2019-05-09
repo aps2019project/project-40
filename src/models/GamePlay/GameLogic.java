@@ -14,10 +14,10 @@ public class GameLogic {
     private Match match;
     int flagsNumber;
     int remainTurnToHoldingTheFlag; //todo initialize in dead and get
-    private ArrayList<Card> attackedCardsInATurn = new ArrayList<>();      //todo add attacker to array
-    private ArrayList<Card> movedCardsInATurn = new ArrayList<>();
-    private ArrayList<Card> cardsInTablePlayer1 = new ArrayList<>(); //todo fill that in game and delete when minion die
-    private ArrayList<Card> cardsInTablePlayer2 = new ArrayList<>();
+    ArrayList<Card> attackedCardsInATurn = new ArrayList<>();      //todo add attacker to array
+    ArrayList<Card> movedCardsInATurn = new ArrayList<>();
+    ArrayList<Card> cardsInTablePlayer1 = new ArrayList<>(); //todo fill that in game and delete when minion die
+    ArrayList<Card> cardsInTablePlayer2 = new ArrayList<>();
 
     public ArrayList<Card> getCardsInTablePlayerPlayingThisTurn() {
 

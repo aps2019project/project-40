@@ -4,6 +4,11 @@ import java.sql.SQLOutput;
 
 public class BattleLog {
 
+    public static void logCardSelected(String cardID) {
+
+        System.out.println(cardID + " selected");
+    }
+
     public static void errorInvalidCardID() {
 
         System.out.println("Invalid card id");
@@ -51,7 +56,7 @@ public class BattleLog {
 
     public static void errorCellIsFill() {
 
-        System.out.println("This cell is fill and can not insert minion on this cell");
+        System.out.println("This cell is fill");
     }
 
     public static void errorCellIsNotFill() {
@@ -116,5 +121,10 @@ public class BattleLog {
     public static void errorUnitMovedPreviously() {
 
         System.out.println("This unit moved previously");
+    }
+
+    public static void errorHasNotReserveCard() {
+
+        System.out.println("You don't have reserve card");
     }
 }

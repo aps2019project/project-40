@@ -18,8 +18,6 @@ public class BattleController {
     private BattleLogicController battleLogicController;
     private boolean isEndedGame = false;
 
-    //TODO add coordination for show minion
-
     public static BattleController getInstance() {
 
         if (battleController == null) {
@@ -145,6 +143,7 @@ public class BattleController {
 
         gameLogic.moveProcess(card, destinationCell);
         //todo if there is flag in cell get that
+        //todo check mane
     }
 
     private void selectAndUseCardRequestShowInfo(SelectAndUseCardRequest request, Card item) {
@@ -203,7 +202,6 @@ public class BattleController {
         ArrayList<Card> cards;
         if (match.findPlayerPlayingThisTurn().equals(match.getPlayer1()))
             cards = match.getPlayer1GraveYard().getCards();
-
         else
             cards = match.getPlayer2GraveYard().getCards();
 
@@ -310,7 +308,7 @@ public class BattleController {
 
                         Unit hero = (Unit) card;
 
-                        if (match.getPlayer1().getUserName().equals(card.getTeam()))
+                        if (match.getPlayer1().getUserName().equals(hero.getTeam()))
                             gameInfoBattleViewKillTheHero.setPlayer1HeroHP(hero.getHealthPoint());
                         else
                             gameInfoBattleViewKillTheHero.setPlayer2HeroHP(hero.getHealthPoint());
@@ -442,7 +440,7 @@ public class BattleController {
             showCardsBattleView.show(showCardsBattleView);
 
         } catch (NullPointerException e) {
-            System.out.println("You don't have reserve card");
+            BattleLog.errorHasNotReserveCard();
         }
     }
 

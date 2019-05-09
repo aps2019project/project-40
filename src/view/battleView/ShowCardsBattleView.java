@@ -1,9 +1,6 @@
 package view.battleView;
 
-import models.Card;
-import models.CardType;
-import models.Unit;
-import models.UnitType;
+import models.*;
 
 import java.util.ArrayList;
 
@@ -30,7 +27,7 @@ public class ShowCardsBattleView extends BattleView {
 
         } else if (card.getType() == CardType.SPELL) {
 
-            Unit spell = (Unit) card;
+            Spell spell = (Spell) card;
             setCardsForSpell(spell.getCardName(), spell.getPrice(), spell.getDescription(),
                     spell.getManaCost());
         }

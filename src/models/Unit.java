@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class Unit extends Card implements Serializable {
     private int HP;
     private int AP;
-    private ArrayList<Buff> buffs;
+    private ArrayList<Buff> buffs = new ArrayList<>();
     private SpecialPowerType specialPowerType;
     private Spell specialPower;
     private UnitType unitType;

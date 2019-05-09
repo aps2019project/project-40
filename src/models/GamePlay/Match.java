@@ -67,8 +67,10 @@ public class Match {
         this.player1 = player1;
         this.player2 = player2;
         gameLogic = new GameLogic(this);
-        if (matchType == MatchType.HOLD_THE_FLAG)
-            gameLogic.remainTurnToHoldingTheFlag = gameLogic.NUMBER_OF_TURNS_TO_HOLD_THE_FLAG;
+
+        initializePlayerVariables();
+        if (matchType == MatchType.KILL_THE_HERO) initializeTableModeKillTheHero();
+        else initializeTableModeHoldTheFlag();
     }
 
     public Match(int flagsNumber, Account player1, Account player2) {
@@ -79,6 +81,9 @@ public class Match {
         this.player2 = player2;
         gameLogic = new GameLogic(this);
         gameLogic.flagsNumber = flagsNumber;
+
+        initializePlayerVariables();
+        initializeTableModeCollectTheFlag(flagsNumber);
     }
 
     public Account findPlayerPlayingThisTurn() {
@@ -87,28 +92,39 @@ public class Match {
         return player2;
     }
 
-    public void intializeTableModeKillTheHero() {
+    private void initializeTableModeKillTheHero() {
 
         Card hero1 = player1.getHand().getHero();
         Card hero2 = player2.getHand().getHero();
 
-        table.getCells()[2][0].setCard(hero1);
-        table.getCells()[2][8].setCard(hero2);
+        Cell cellHero1 = table.getCells()[2][1];
+        Cell cellHero2 = table.getCells()[2][7];
+        cellHero1.setCard(hero1);
+        cellHero2.setCard(hero2);
+        hero1.setCell(cellHero1);
+        hero2.setCell(cellHero2);
 
+        gameLogic.cardsInTablePlayer1.add(hero1);
+        gameLogic.cardsInTablePlayer2.add(hero2);
     }
 
-    public void intializeTableModeHoldTheFlag() {
+    private void initializePlayerVariables() {
 
-        intializeTableModeKillTheHero();
+        player1.getHand().initializeHand(player1.getCollection().getSelectedDeck());
+        player2.getHand().initializeHand(player2.getCollection().getSelectedDeck());
+    }
+
+    private void initializeTableModeHoldTheFlag() {
+
+        initializeTableModeKillTheHero();
 
         Card flag = new Card(0, 0, "flag", null, "", CardType.FLAG, null);
         table.getCells()[2][4].setCard(flag);
-
     }
 
-    public void intializeTableModeCollectTheFlag(int numberOfFlags) {
+    private void initializeTableModeCollectTheFlag(int numberOfFlags) {
 
-        intializeTableModeKillTheHero();
+        initializeTableModeKillTheHero();
 
         Random random = new Random();
 

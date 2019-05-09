@@ -88,6 +88,7 @@ public class BattleRequest extends Request {
 
         SelectAndUseCardRequest selectAndUseCardRequest = new SelectAndUseCardRequest();
         selectAndUseCardRequest.setID(command.split("\\s")[1]);
+        BattleLog.logCardSelected(selectAndUseCardRequest.getID());
 
         while (true) {
 
