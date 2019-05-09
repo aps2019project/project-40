@@ -206,7 +206,7 @@ public class BattleController {
             cards = match.getPlayer2GraveYard().getCards();
 
         for (Card card : cards)
-            showCardsBattleView.setCard(card);
+             showCardsBattleView.setCard(card);
 
         showCardsBattleView.show(showCardsBattleView);
     }
