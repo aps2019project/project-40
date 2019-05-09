@@ -121,15 +121,12 @@ public class BattleController {
 
             if (!battleLogicController.isCellAvailableForMelee(unit.getCell(), targetCell)) return;
             //todo f(unit, cell)
-        }
-
-        else if (unit.getUnitType() == UnitType.RANGED) {
+        } else if (unit.getUnitType() == UnitType.RANGED) {
 
             if (!battleLogicController.isCellAvailableForRanged(unit.getCell(), targetCell, unit.getRange())) return;
 
 
-        }
-        else if (unit.getUnitType() == UnitType.HYBRID);
+        } else if (unit.getUnitType() == UnitType.HYBRID) ;
     }
 
     private void selectAndUseCardRequestMove(Card card, Cell destinationCell) {
@@ -416,26 +413,21 @@ public class BattleController {
     private void showMinionsRequestCommonCode(Account account) {
 
         ShowMinionsBattleView showMinionsBattleView = new ShowMinionsBattleView();
-        Cell[][] cells = match.getTable().getCells();
+        ArrayList<Card> cards;
 
-        for (Cell[] row : cells) {
-            for (Cell cell : row) {
-
-                try {
-                    Card card = cell.getCard();
-
-                    if (card.getType() == CardType.MINION &&
-                            account.getUserName().equals(card.getTeam())) {
-
-                        Unit unit = (Unit) card;
-                        showMinionsBattleView.setMinion(unit.getCardID(), unit.getCardName(),
-                                unit.getHealthPoint(), cell.getCoordination(), unit.getAttackPoint());
-                    }
-                } catch (NullPointerException e) {
-                    //there isn't my minion in this cell
-                }
-            }
+        if (account.equals(match.getPlayer1())) {
+            cards = gameLogic.getCardsInTablePlayer1();
+        } else {
+            cards = gameLogic.getCardsInTablePlayer2();
         }
+
+        for (Card card : cards) {
+
+            Unit unit = (Unit) card;
+            showMinionsBattleView.setMinion(unit.getCardID(), unit.getCardName(), unit.getHealthPoint(),
+                    unit.getCell().getCoordination(), unit.getAttackPoint());
+        }
+
         showMinionsBattleView.show(showMinionsBattleView);
     }
 
