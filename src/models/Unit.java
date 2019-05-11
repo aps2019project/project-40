@@ -20,6 +20,9 @@ public class Unit extends Card implements Serializable {
     private boolean cantBePoisoned;
     private boolean isDisarm;
     private boolean isStunned;
+    private int damageChange;
+    private boolean noDamageFromWeakers;
+    private boolean noBadEffect;
 
     Unit(int manaCost, int price, int HP, int AP, UnitType unitType,
          String name, ArrayList<Spell> spells, String description, CardType type,
@@ -155,6 +158,14 @@ public class Unit extends Card implements Serializable {
         buffs.remove(buff);
     }
 
+    public int getDamageChange() {
+        return damageChange;
+    }
+
+    public void setDamageChange(int damageChange) {
+        this.damageChange = damageChange;
+    }
+
     public boolean isDisarm() {
         return isDisarm;
     }
@@ -174,5 +185,17 @@ public class Unit extends Card implements Serializable {
     @Override
     public String toString() {
         return "" + AP + "\n" + HP;
+    }
+
+    public boolean isNoDamageFromWeakers() {
+        return noDamageFromWeakers;
+    }
+
+    public boolean isNoBadEffect() {
+        return noBadEffect;
+    }
+
+    public void setNoDamageFromWeakers(boolean noDamageFromWeakers) {
+        this.noDamageFromWeakers = noDamageFromWeakers;
     }
 }
