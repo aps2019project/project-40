@@ -62,9 +62,9 @@ public class Hand implements Serializable {
         handCards.add(deck.get(2));
         handCards.add(deck.get(3));
         handCards.add(deck.get(4));
-        reserveCard=deck.get(5);
+        reserveCard = deck.get(5);
 
-        for (Card card:handCards)
+        for (Card card : handCards)
             deck.remove(card);
 
         deck.remove(reserveCard);

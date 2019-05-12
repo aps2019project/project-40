@@ -166,7 +166,7 @@ public class BattleLogicController {
                     if (table.getCellByCoordination(aroundCoordination).getCard().getTeam().equals(
                             match.findPlayerPlayingThisTurn().getUserName())) return true;
 
-                } catch (ArrayIndexOutOfBoundsException|NullPointerException e) {
+                } catch (ArrayIndexOutOfBoundsException | NullPointerException e) {
                 }
             }
         }
@@ -202,7 +202,7 @@ public class BattleLogicController {
 
         return
                 Math.abs(
-                cell1.getCoordination().getRow() - cell2.getCoordination().getRow()) == 1 &&
-                Math.abs(cell1.getCoordination().getColumn() - cell2.getCoordination().getColumn()) == 1;
+                        cell1.getCoordination().getRow() - cell2.getCoordination().getRow()) == 1 &&
+                        Math.abs(cell1.getCoordination().getColumn() - cell2.getCoordination().getColumn()) == 1;
     }
 }

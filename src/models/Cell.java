@@ -2,7 +2,7 @@ package models;
 
 public class Cell {
 
-    private Coordination coordination=new Coordination();
+    private Coordination coordination = new Coordination();
     private Card card;
     private boolean isThereFlag = false;
 

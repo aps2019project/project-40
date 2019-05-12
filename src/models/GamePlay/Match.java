@@ -148,7 +148,7 @@ public class Match {
                 if (randomColumn[i] == randomColumn[j] && randomRow[i] == randomRow[j]) {
                     i--;
                     break;
-                } else if ((randomColumn[i] == 8 || randomColumn[i] == 0) && randomRow[i] == 2){
+                } else if ((randomColumn[i] == 8 || randomColumn[i] == 0) && randomRow[i] == 2) {
                     i--;
                     break;
                 }
