@@ -60,6 +60,11 @@ public class Match {
         return Player2GraveYard;
     }
 
+    public int getTurnNumber() {
+
+        return turnNumber;
+    }
+
     public Match(MatchType matchType, Account player1, Account player2) {
 
         //for "kill the hero" and "hold the flag"

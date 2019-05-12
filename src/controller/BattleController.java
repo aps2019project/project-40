@@ -65,35 +65,22 @@ public class BattleController {
 
     private void selectAndUseCardRequest(SelectAndUseCardRequest request) {
         //todo
-        if (request.isForMove() || request.isForAttack() || request.isForAttackCombo() || request.isForUseSpecialPower()) {
-
-            //check validity
-            Card card = Collection.findCardByCardID(gameLogic.getCardsInTablePlayerPlayingThisTurn(), request.getID());
-
-            if (card == null || !(card instanceof Unit)) {
-                BattleLog.errorInvalidCardID();
-                return;
-            }
-
-            Coordination destinationCoordination = new Coordination();
-            destinationCoordination.setRow(request.getRow());
-            destinationCoordination.setColumn(request.getColumn());
-            if (battleLogicController.isOutOfTable(destinationCoordination)) return;
-
-            Cell destinationCell = match.getTable().getCellByCoordination(destinationCoordination);
+        if (request.isForUnit()) {
 
             //doing request
             if (request.isForMove())
-                selectAndUseCardRequestMove(card, destinationCell);
+                selectAndUseCardRequestMove(request);
 
-            else if (request.isForAttack()) ;
+            else if (request.isForAttack())
+                selectAndUseCardRequestAttack(request);
+
             else if (request.isForAttackCombo()) ;
             else if (request.isForUseSpecialPower()) ;
 
-        } else {
+        } else if (request.isForItem()) {
 
             Card item = Collection.findCardByCardName(
-                    match.findPlayerPlayingThisTurn().getHand().getCollectiblesItem(), request.getID());
+                    match.findPlayerPlayingThisTurn().getHand().getCollectedItems(), request.getID());
 
             if (item == null) {
                 BattleLog.errorInvalidItemName();
@@ -108,26 +95,22 @@ public class BattleController {
         }
     }
 
-    private void selectAndUseCardRequestAttack(Unit unit, Cell targetCell, Coordination coordination) {
+    private void selectAndUseCardRequestMove(SelectAndUseCardRequest request) {
 
-        if (!battleLogicController.isCellFill(targetCell)) {
-            BattleLog.errorCellIsNotFill();
+        Card card = Collection.findCardByCardID(gameLogic.getCardsInTablePlayerPlayingThisTurn(), request.getID());
+        if (card == null) {
+            BattleLog.errorInvalidCardID();
             return;
         }
 
-        if (unit.getUnitType() == UnitType.MELEE) {
+        Coordination destinationCoordination = Coordination.getNewCoordination(
+                request.getRow(), request.getColumn());
 
-            if (!battleLogicController.isCellAvailableForMelee(unit.getCell(), targetCell)) return;
-            //todo f(unit, cell)
-        } else if (unit.getUnitType() == UnitType.RANGED) {
+        if (battleLogicController.isOutOfTable(destinationCoordination)) {
+            BattleLog.errorInvalidTarget();
+        }
 
-            if (!battleLogicController.isCellAvailableForRanged(unit.getCell(), targetCell, unit.getRange())) return;
-
-
-        } else if (unit.getUnitType() == UnitType.HYBRID) ;
-    }
-
-    private void selectAndUseCardRequestMove(Card card, Cell destinationCell) {
+        Cell destinationCell = match.getTable().getCellByCoordination(destinationCoordination);
 
         if (!battleLogicController.isCellAvailableForMove(card.getCell(), destinationCell)) {
             BattleLog.errorInvalidTarget();
@@ -145,7 +128,7 @@ public class BattleController {
             BattleLog.errorUnitMovedPreviously();
             return;
         }
-        if (!battleLogicController.isDirectionWithoutEnemy(card.getCell(), destinationCell)) {
+        if (!battleLogicController.isDirectionWithoutEnemyForMove(card.getCell(), destinationCell)) {
             BattleLog.errorCellNotAvailable();
             return;
         }
@@ -154,6 +137,51 @@ public class BattleController {
         BattleLog.logCardMoved(card.getCardID(),
                 destinationCell.getCoordination().getRow(), destinationCell.getCoordination().getColumn());
         //todo if there is flag in cell get that
+    }
+
+    private void selectAndUseCardRequestAttack(SelectAndUseCardRequest request) {
+
+        Card attacker = Collection.findCardByCardID(gameLogic.getCardsInTablePlayerPlayingThisTurn(), request.getID());
+        Card victim = Collection.findCardByCardID(
+                gameLogic.getCardsInTablePlayerDoesNotPlayingThisTurn(), request.getOpponentCardID());
+
+        if (attacker == null || victim == null) {
+            BattleLog.errorInvalidCardID();
+            return;
+        }
+
+        if (((Unit) attacker).getUnitType() == UnitType.MELEE)
+            selectAndUseCardRequestAttackMelee((Unit) attacker, (Unit) victim);
+
+        else if (((Unit) attacker).getUnitType() == UnitType.RANGED)
+            selectAndUseCardRequestAttackRanged((Unit) attacker, (Unit) victim);
+
+        else if (((Unit) attacker).getUnitType() == UnitType.HYBRID)
+            selectAndUseCardRequestAttackHybrid((Unit) attacker, (Unit) victim);
+    }
+
+    private void selectAndUseCardRequestAttackMelee(Unit attacker, Unit victim) {
+
+        if (!battleLogicController.isTargetCellAvailableForMeleeAttack(attacker.getCell(), victim.getCell())) {
+            BattleLog.errorInvalidTarget();
+            return;
+        }
+        //todo f(unit, cell)
+    }
+
+    private void selectAndUseCardRequestAttackRanged(Unit attacker, Unit victim) {
+
+        if (!battleLogicController.isTargetCellAvailableForRangedAttack(
+                attacker.getCell(), victim.getCell(), attacker.getRange())) {
+
+            BattleLog.errorInvalidTarget();
+            return;
+        }
+    }
+
+    private void selectAndUseCardRequestAttackHybrid(Unit attacker, Unit victim) {
+
+
     }
 
     private void selectAndUseCardRequestShowInfo(SelectAndUseCardRequest request, Card item) {
@@ -216,7 +244,7 @@ public class BattleController {
             cards = match.getPlayer2GraveYard().getCards();
 
         for (Card card : cards)
-             showCardsBattleView.setCard(card);
+            showCardsBattleView.setCard(card);
 
         showCardsBattleView.show(showCardsBattleView);
     }
@@ -235,10 +263,12 @@ public class BattleController {
             return;
         }
 
-        Coordination coordination = new Coordination();
-        coordination.setRow(request.getRow());
-        coordination.setColumn(request.getColumn());
-        if (battleLogicController.isOutOfTable(coordination)) return;
+        Coordination coordination = Coordination.getNewCoordination(request.getRow(), request.getColumn());
+
+        if (battleLogicController.isOutOfTable(coordination)) {
+            BattleLog.errorInvalidTarget();
+            return;
+        }
 
         Cell cell = match.getTable().getCellByCoordination(coordination);
 
@@ -471,16 +501,54 @@ public class BattleController {
 
         gameLogic.switchTurn();
         BattleLog.logTurnSwitched();
+
+        if (match.getPlayer2().isAI() && match.getTurnNumber() % 2 == 0) playAI();
     }
 
     private void showCollectedItemRequest() {
 
         ShowCollectedItemsBattleView showCollectedItemsBattleView = new ShowCollectedItemsBattleView();
-        ArrayList<Card> collectedItems = match.findPlayerPlayingThisTurn().getHand().getCollectiblesItem();
+        ArrayList<Card> collectedItems = match.findPlayerPlayingThisTurn().getHand().getCollectedItems();
 
         for (Card item : collectedItems)
             showCollectedItemsBattleView.setItemInfo(item.getCardName(), item.getDescription());
 
         showCollectedItemsBattleView.show(showCollectedItemsBattleView);
+    }
+
+    public void playAI() {
+
+        BattleLogicController battleLogicController = BattleLogicController.getBattleLogicController();
+        Card hero = match.getPlayer2().getHand().getHero();
+
+        for (int row = -2; row <= 2; row++) {
+            for (int column = -2 + Math.abs(row); column <= 2 - Math.abs(row); column++) {
+
+                if (row == 0 && column == 0) continue;
+
+                try {
+                    Coordination heroCoordination = hero.getCell().getCoordination();
+                    Coordination coordination = Coordination.getNewCoordination(
+                            heroCoordination.getRow() + row, heroCoordination.getColumn() + column);
+                    Cell destinationCell = match.getTable().getCellByCoordination(coordination);
+
+                    //check validity of destination
+                    if (!battleLogicController.isCellAvailableForMove(hero.getCell(), destinationCell)) continue;
+                    if (battleLogicController.isUnitStunned((Unit) hero)) continue;
+                    if (battleLogicController.isAttackedPreviously(hero)) continue;
+                    if (battleLogicController.isMovedPreviously(hero)) continue;
+                    if (!battleLogicController.isDirectionWithoutEnemyForMove(hero.getCell(), destinationCell))
+                        continue;
+
+                    //move
+                    gameLogic.moveProcess(hero, destinationCell);
+                    BattleLog.logCardMoved(hero.getCardID(),
+                            destinationCell.getCoordination().getRow(), destinationCell.getCoordination().getColumn());
+
+                } catch (NullPointerException | ArrayIndexOutOfBoundsException e) {
+                }
+            }
+        }
+        endTurnRequest();
     }
 }

@@ -102,14 +102,14 @@ public class BattleRequest extends Request {
             if (secondCommand.matches("attack combo \\w+( \\w+)+"))
                 return attackCombo(secondCommand, selectAndUseCardRequest);
 
+            if (command.matches("use special power \\(\\d+,\\d+\\)"))
+                return useSpecialPower(secondCommand, selectAndUseCardRequest);
+
             if (secondCommand.matches("show info"))
                 return showInfo(secondCommand, selectAndUseCardRequest);
 
             if (secondCommand.matches("use \\(\\d+,\\d+\\)"))
-                return use(secondCommand, selectAndUseCardRequest);
-
-            if (command.matches("use special power \\(\\d+,\\d+\\)"))
-                return useSpecialPower(secondCommand, selectAndUseCardRequest);
+                return useItem(secondCommand, selectAndUseCardRequest);
 
             if (secondCommand.matches("exit")) return null; //todo pay attention to null
         }
@@ -117,6 +117,7 @@ public class BattleRequest extends Request {
 
     private BattleRequest moveTo(String command, SelectAndUseCardRequest selectAndUseCardRequest) {
 
+        selectAndUseCardRequest.setForUnit(true);
         selectAndUseCardRequest.setForMove(true);
         selectAndUseCardRequest.setRow(
                 Integer.parseInt(
@@ -131,6 +132,7 @@ public class BattleRequest extends Request {
 
     private BattleRequest attack(String command, SelectAndUseCardRequest selectAndUseCardRequest) {
 
+        selectAndUseCardRequest.setForUnit(true);
         selectAndUseCardRequest.setForAttack(true);
         selectAndUseCardRequest.setOpponentCardID(command.split("\\s")[1]);
         return selectAndUseCardRequest;
@@ -139,6 +141,7 @@ public class BattleRequest extends Request {
     private BattleRequest attackCombo(String command, SelectAndUseCardRequest selectAndUseCardRequest) {
 
         String[] detailCommand = command.split("\\s");
+        selectAndUseCardRequest.setForUnit(true);
         selectAndUseCardRequest.setForAttackCombo(true);
         selectAndUseCardRequest.setOpponentCardID(detailCommand[2]);
 
@@ -155,13 +158,16 @@ public class BattleRequest extends Request {
 
     private BattleRequest showInfo(String command, SelectAndUseCardRequest selectAndUseCardRequest) {
 
+        selectAndUseCardRequest.setForItem(true);
         selectAndUseCardRequest.setForShowInfo(true);
         return selectAndUseCardRequest;
     }
 
-    private BattleRequest use(String command, SelectAndUseCardRequest selectAndUseCardRequest) {
+    private BattleRequest useItem(String command, SelectAndUseCardRequest selectAndUseCardRequest) {
 
+        selectAndUseCardRequest.setForItem(true);
         selectAndUseCardRequest.setForUseItem(true);
+
         selectAndUseCardRequest.setRow(
                 Integer.parseInt(
                         command.split("[\\(|\\)]")[1].split(",")[0]));
@@ -175,6 +181,9 @@ public class BattleRequest extends Request {
 
     private BattleRequest useSpecialPower(String command, SelectAndUseCardRequest selectAndUseCardRequest) {
 
+        selectAndUseCardRequest.setForUnit(true);
+        selectAndUseCardRequest.setForUseSpecialPower(true);
+
         selectAndUseCardRequest.setRow(
                 Integer.parseInt(
                         command.split("[\\(|\\)]")[1].split(",")[0]));
@@ -183,7 +192,6 @@ public class BattleRequest extends Request {
                 Integer.parseInt(
                         command.split("[\\(|\\)]")[1].split(",")[1]));
 
-        selectAndUseCardRequest.setForUseSpecialPower(true);
         return selectAndUseCardRequest;
     }
 
