@@ -10,6 +10,7 @@ public class Spell extends Card implements Serializable {
     private int coolDown;
     private int heroManaCost;
     private SpecialPowerType specialPowerType;
+    private int lastTimeCasted;
 
     public Spell(int manaCost, int price, String name,
                  ArrayList<Spell> spells, String description, CardType type,
@@ -50,5 +51,13 @@ public class Spell extends Card implements Serializable {
 
     public SpecialPowerType getSpecialPowerType() {
         return specialPowerType;
+    }
+
+    public int getLastTimeCasted() {
+        return lastTimeCasted;
+    }
+
+    public void setLastTimeCasted(int lastTimeCasted) {
+        this.lastTimeCasted = lastTimeCasted;
     }
 }

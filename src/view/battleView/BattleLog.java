@@ -126,8 +126,8 @@ public class BattleLog {
         System.out.println("You don't have reserve card");
     }
 
-    public static void logTurnSwitched() {
-
-        System.out.println("Turn switched");
+    public static void isDisarm(){
+        System.out.println("defender is disarm");
     }
+
 }

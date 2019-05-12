@@ -102,5 +102,8 @@ public class Card implements Serializable, Cloneable {
             sellCost = 4 * price / 10;
         }
     }
+    public void addSpell(Spell spell){
+        spells.add(spell);
+    }
 }
 
