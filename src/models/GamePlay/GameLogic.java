@@ -181,6 +181,7 @@ public class GameLogic {
         match.findPlayerPlayingThisTurn().getHand().fillHandEmptyPlace();
         attackedCardsInATurn = new ArrayList<>();
         movedCardsInATurn = new ArrayList<>();
+        if (match.getPlayer2().isAI() && match.turnNumber % 2 == 0) playAI();
     }
 
     private void manaHandler() {
@@ -358,4 +359,44 @@ public class GameLogic {
         return ap;
     }
 
+    public void playAI() {
+
+        //todo put this in controller
+
+        BattleLogicController battleLogicController = BattleLogicController.getBattleLogicController();
+        Card hero = match.getPlayer2().getHand().getHero();
+
+        for (int row = -2; row <= 2; row++) {
+            for (int column = -2 + Math.abs(row); column <= 2 - Math.abs(row); column++) {
+
+                if (row == 0 && column == 0) continue;
+
+                try {
+                    Coordination coordination = new Coordination();
+                    Coordination heroCoordination = hero.getCell().getCoordination();
+                    coordination.setRow(heroCoordination.getRow() + row);
+                    coordination.setColumn(heroCoordination.getColumn() + column);
+                    Cell destinationCell = match.getTable().getCellByCoordination(coordination);
+
+                    //check validity of destination
+                    if (!battleLogicController.isCellAvailableForMove(hero.getCell(), destinationCell)) continue;
+                    if (battleLogicController.isUnitStunned((Unit) hero)) continue;
+                    if (battleLogicController.isAttackedPreviously(hero)) continue;
+                    if (battleLogicController.isMovedPreviously(hero)) continue;
+                    if (!battleLogicController.isDirectionWithoutEnemy(hero.getCell(), destinationCell)) continue;
+
+                    //move
+                    moveProcess(hero, destinationCell);
+                    //todo no connection between view and model
+                    BattleLog.logCardMoved(hero.getCardID(),
+                            destinationCell.getCoordination().getRow(), destinationCell.getCoordination().getColumn());
+
+                } catch (NullPointerException|ArrayIndexOutOfBoundsException e) {
+                }
+            }
+        }
+
+        switchTurn();
+        BattleLog.logTurnSwitched();
+    }
 }

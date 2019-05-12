@@ -130,4 +130,8 @@ public class BattleLog {
         System.out.println("defender is disarm");
     }
 
+    public static void logTurnSwitched() {
+
+        System.out.println("Turn switched");
+    }
 }
