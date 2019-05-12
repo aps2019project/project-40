@@ -15,6 +15,7 @@ public class StartMenuController {
     }
 
     public void startMenuControllerMain() {
+        //CollectionController.getInstance().saveDeckToName("mode3",Controller.getInstance().getAccount());
         StartMenuView startMenuView = StartMenuView.getInstance();
         startMenuView.showOptions();
         StartMenuRequest startMenuRequest = StartMenuRequest.getInstance().getCommand();

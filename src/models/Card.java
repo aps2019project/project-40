@@ -44,7 +44,7 @@ public class Card implements Serializable, Cloneable {
     }
 
     public Card(int manaCost, int price, String cardName, ArrayList<Spell> spells,
-         String description, CardType type, Cell cell) {
+                String description, CardType type, Cell cell) {
         this.manaCost = manaCost;
         this.price = price;
         this.cardName = cardName;
@@ -102,7 +102,8 @@ public class Card implements Serializable, Cloneable {
             sellCost = 4 * price / 10;
         }
     }
-    public void addSpell(Spell spell){
+
+    public void addSpell(Spell spell) {
         spells.add(spell);
     }
 }

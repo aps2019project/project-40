@@ -1,11 +1,9 @@
 package models.GamePlay;
 
-import controller.BattleLogicController;
 import models.*;
 import view.battleView.BattleLog;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 import static models.SpecialPowerType.ON_DEFEND;
 
@@ -220,9 +218,9 @@ public class GameLogic {
         }
     }
 
-    public void cancelNegativeBuffs(Unit unit){
-        for (Buff buff: unit.getBuffs()){
-            if (!buff.isPositive() && buff.getDuration() >= 0){
+    public void cancelNegativeBuffs(Unit unit) {
+        for (Buff buff : unit.getBuffs()) {
+            if (!buff.isPositive() && buff.getDuration() >= 0) {
                 unit.removeBuff(buff);
             }
         }
@@ -233,8 +231,8 @@ public class GameLogic {
     }
 
     public void ActivateOnDeathSpells(Unit unit) {
-        if (unit.getSpecialPowerType() == ON_DEFEND){
-            for(Spell spell: unit.getSpells()){
+        if (unit.getSpecialPowerType() == ON_DEFEND) {
+            for (Spell spell : unit.getSpells()) {
 
             }
         }
@@ -258,40 +256,40 @@ public class GameLogic {
         }
     }
 
-    public void applySpell(Spell spell, Unit unit){
+    public void applySpell(Spell spell, Unit unit) {
         //spell.setLastTimeCasted();
         unit.addBuff(spell.getBuff());
         applyBuff(spell.getBuff(), unit);
     }
-    public void applyBuff(Buff buff, Unit unit){
+
+    public void applyBuff(Buff buff, Unit unit) {
 
         if (buff.getWaitingTime() > 0) {
-            buff.setWaitingTime(buff.getWaitingTime()-1);
+            buff.setWaitingTime(buff.getWaitingTime() - 1);
             return;
         }
 
-        castBuffOnCards(buff,unit);
-       // castBuffOnCells(buff,unit);
-        castBuffOnUnits(buff,unit);
+        castBuffOnCards(buff, unit);
+        // castBuffOnCells(buff,unit);
+        castBuffOnUnits(buff, unit);
         castBuffOnUsers(buff, unit);
 
         buff.decrementDuration();
     }
 
 
-    public void castBuffOnCards(Buff buff, Unit unit){
-        if (buff.getItemSpell() != null){
+    public void castBuffOnCards(Buff buff, Unit unit) {
+        if (buff.getItemSpell() != null) {
             unit.addSpell(buff.getItemSpell());
         }
     }
 
-    public void castBuffOnUsers(Buff buff, Unit unit){
+    public void castBuffOnUsers(Buff buff, Unit unit) {
         String name = unit.getTeam();
-        if (match.player1.getUserName().equals(name)){
-            match.player1Mana +=  buff.getManaChange();
-        }
-        else {
-            match.player2Mana +=  buff.getManaChange();
+        if (match.player1.getUserName().equals(name)) {
+            match.player1Mana += buff.getManaChange();
+        } else {
+            match.player2Mana += buff.getManaChange();
         }
     }
 
@@ -304,18 +302,18 @@ public class GameLogic {
         victimUnit.setAP(victimUnit.getAP() - buff.getWeaknessAP());
 
 
-        if (buff.getPoison() > 0 || !victimUnit.isCantBePoisoned()){
+        if (buff.getPoison() > 0 || !victimUnit.isCantBePoisoned()) {
             victimUnit.setHP(victimUnit.getHP() - buff.getWeaknessHP());
-            if(victimUnit.getHP() <= 0){
+            if (victimUnit.getHP() <= 0) {
                 killUnit(victimUnit);
             }
         }
 
-        if (buff.isStun() && !victimUnit.isCantBeStunned()){
+        if (buff.isStun() && !victimUnit.isCantBeStunned()) {
             victimUnit.setCanMove(false);
         }
 
-        if (buff.isDisarm() && !victimUnit.isCantBeDisarmed()){
+        if (buff.isDisarm() && !victimUnit.isCantBeDisarmed()) {
             victimUnit.setDisarm(true);
         }
         if (buff.getCancelBuff() > 0) {
@@ -329,38 +327,38 @@ public class GameLogic {
         if (buff.isStun()) {
             victimUnit.setStunned(true);
         }
-        if (buff.isNoDamageFromWeakers()){
+        if (buff.isNoDamageFromWeakers()) {
             victimUnit.setNoDamageFromWeakers(true);
         }
 
-        if (buff.getWeaknessAP() > 10000){
+        if (buff.getWeaknessAP() > 10000) {
             killUnit(victimUnit);
         }
 
     }
 
-    public void counterAttack(Unit attacker, Unit defender){
-        if (defender.isDisarm()){
+    public void counterAttack(Unit attacker, Unit defender) {
+        if (defender.isDisarm()) {
             BattleLog.isDisarm();
         }
-        checkRangeForAttack(defender,attacker);
-        if (!attacker.isNoBadEffect() && (attacker.isNoDamageFromWeakers() || defender.getAP() > attacker.getAP())){
+        checkRangeForAttack(defender, attacker);
+        if (!attacker.isNoBadEffect() && (attacker.isNoDamageFromWeakers() || defender.getAP() > attacker.getAP())) {
             damage(attacker, defender);
         }
     }
 
 
-    public void damage(Unit attacker, Unit defender){
-        int ap = apCompute(attacker,defender);
+    public void damage(Unit attacker, Unit defender) {
+        int ap = apCompute(attacker, defender);
         defender.setHP(defender.getHP() - ap);
-        if(defender.getHP() <= 0){
+        if (defender.getHP() <= 0) {
             killUnit(defender);
         }
     }
 
-    public int apCompute(Unit attacker, Unit defender){
+    public int apCompute(Unit attacker, Unit defender) {
         int ap = attacker.getAP();
-        if (defender.getDamageChange() > 0){
+        if (defender.getDamageChange() > 0) {
             ap += defender.getDamageChange();
         }
         return ap;
