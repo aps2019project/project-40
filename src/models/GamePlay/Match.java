@@ -97,6 +97,12 @@ public class Match {
         return player2;
     }
 
+    public Account findPlayerDoesNotPlayingThisTurn() {
+
+        if (turnNumber % 2 == 1) return player2;
+        return player1;
+    }
+
     private void initializeTableModeKillTheHero() {
 
         Card hero1 = player1.getHand().getHero();

@@ -184,6 +184,38 @@ public class BattleController {
 
     }
 
+    private void selectAndUseCardRequestAttackCombo(SelectAndUseCardRequest request) {
+
+        Card opponent = Collection.findCardByCardID(
+                gameLogic.getCardsInTablePlayerDoesNotPlayingThisTurn(), request.getOpponentCardID());
+        if (opponent == null) {
+            BattleLog.errorInvalidCardID();
+            return;
+        }
+
+        ArrayList<String> myCardsID = request.getMyCardsID();
+        ArrayList<Card> myCards = new ArrayList<>();
+
+        for (String myCardID : myCardsID) {
+
+            Card myCard = Collection.findCardByCardID(gameLogic.getCardsInTablePlayerPlayingThisTurn(), myCardID);
+            if (myCard == null) {
+                BattleLog.errorInvalidCardID();
+                return;
+            }
+            if (!((Unit) myCard).isCombo()) {
+                BattleLog.errorHasNotCombo();
+                return;
+            }
+            myCards.add(myCard);
+        }
+        //todo
+    }
+
+    private void selectAndUseCardRequestUseSpecialPower(SelectAndUseCardRequest request) {
+
+
+    }
     private void selectAndUseCardRequestShowInfo(SelectAndUseCardRequest request, Card item) {
 
         ShowSelectedItemInfoBattleView showSelectedItemInfoBattleView = new ShowSelectedItemInfoBattleView();
@@ -501,6 +533,7 @@ public class BattleController {
 
         gameLogic.switchTurn();
         BattleLog.logTurnSwitched();
+        BattleLog.logTurnForWho(match.findPlayerPlayingThisTurn().getUserName());
 
         if (match.getPlayer2().isAI() && match.getTurnNumber() % 2 == 0) playAI();
     }

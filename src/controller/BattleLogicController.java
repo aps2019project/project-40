@@ -180,7 +180,7 @@ public class BattleLogicController {
         int manhattanDistance = getManhattanDistance(attackerCell, victimCell);
 
         if ((manhattanDistance <= 1 && manhattanDistance > 0) ||
-                isCellsDiagonallyWith2ManhattanDistance(attackerCell, victimCell))
+                isCellsDiagonalWith2ManhattanDistance(attackerCell, victimCell))
 
             return true;
         return false;
@@ -191,14 +191,14 @@ public class BattleLogicController {
         int manhattanDistance = getManhattanDistance(attackerCell, victimCell);
 
         if (manhattanDistance > 1 && manhattanDistance <= attackRange &&
-                !isCellsDiagonallyWith2ManhattanDistance(attackerCell, victimCell))
+                !isCellsDiagonalWith2ManhattanDistance(attackerCell, victimCell))
 
             return true;
         return false;
 
     }
 
-    private boolean isCellsDiagonallyWith2ManhattanDistance(Cell cell1, Cell cell2) {
+    private boolean isCellsDiagonalWith2ManhattanDistance(Cell cell1, Cell cell2) {
 
         return
                 Math.abs(

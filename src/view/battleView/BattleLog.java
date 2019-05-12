@@ -134,4 +134,14 @@ public class BattleLog {
 
         System.out.println("Turn switched");
     }
+
+    public static void logTurnForWho(String userName) {
+
+        System.out.println("This turn for *** " + userName + " ***");
+    }
+
+    public static void errorHasNotCombo() {
+
+        System.out.println("card id you entered hasn't combo ability");
+    }
 }
