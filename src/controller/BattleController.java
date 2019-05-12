@@ -32,7 +32,7 @@ public class BattleController {
 
         this.match = match;
         gameLogic = match.getGameLogic();
-        battleLogicController = new BattleLogicController();
+        battleLogicController = BattleLogicController.getBattleLogicController();
         battleLogicController.setGameLogic(gameLogic);
         battleLogicController.setMatch(match);
         manageRequest();
@@ -129,9 +129,14 @@ public class BattleController {
 
     private void selectAndUseCardRequestMove(Card card, Cell destinationCell) {
 
-        if (!battleLogicController.isCellAvailableForMove(card.getCell(), destinationCell)) return;
-
-        if (battleLogicController.isUnitStun((Unit) card)) return;
+        if (!battleLogicController.isCellAvailableForMove(card.getCell(), destinationCell)) {
+            BattleLog.errorInvalidTarget();
+            return;
+        }
+        if (battleLogicController.isUnitStunned((Unit) card)) {
+            BattleLog.errorUnitIsStunned();
+            return;
+        }
         if (battleLogicController.isAttackedPreviously(card)) {
             BattleLog.errorUnitAttacked();
             return;
@@ -140,10 +145,15 @@ public class BattleController {
             BattleLog.errorUnitMovedPreviously();
             return;
         }
+        if (!battleLogicController.isDirectionWithoutEnemy(card.getCell(), destinationCell)) {
+            BattleLog.errorCellNotAvailable();
+            return;
+        }
 
         gameLogic.moveProcess(card, destinationCell);
+        BattleLog.logCardMoved(card.getCardID(),
+                destinationCell.getCoordination().getRow(), destinationCell.getCoordination().getColumn());
         //todo if there is flag in cell get that
-        //todo check mane
     }
 
     private void selectAndUseCardRequestShowInfo(SelectAndUseCardRequest request, Card item) {
@@ -220,7 +230,6 @@ public class BattleController {
             BattleLog.errorInvalidCardName();
             return;
         }
-
         if (!battleLogicController.hasEnoughMana(card)) {
             BattleLog.errorNotEnoughMana();
             return;
@@ -241,6 +250,8 @@ public class BattleController {
             }
             if (!battleLogicController.isCellAvailableForInsert(coordination)) return;
             gameLogic.insertProcess((Unit) card, cell);
+            BattleLog.logCardInserted(card.getCardName(), card.getCardID(),
+                    cell.getCoordination().getRow(), cell.getCoordination().getColumn());
 
         } else {
             //TODO isTargetValid?
@@ -459,6 +470,7 @@ public class BattleController {
     private void endTurnRequest() {
 
         gameLogic.switchTurn();
+        BattleLog.logTurnSwitched();
     }
 
     private void showCollectedItemRequest() {

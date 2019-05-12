@@ -1,8 +1,11 @@
 package models.GamePlay;
 
+import controller.BattleLogicController;
 import models.*;
+import view.battleView.BattleLog;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class GameLogic {
 
@@ -146,6 +149,8 @@ public class GameLogic {
         cell.setCard(unit);
         unit.setCell(cell);
         decrementMana(unit.getManaCost());
+        if (match.findPlayerPlayingThisTurn().equals(match.player1)) cardsInTablePlayer1.add(unit);
+        else cardsInTablePlayer2.add(unit);
     }
 
     public void insertProcess(Spell spell, Cell cell) {
@@ -181,16 +186,18 @@ public class GameLogic {
         if (match.findPlayerPlayingThisTurn().equals(match.getPlayer1())) {
 
             if (match.turnNumber <= 15) {
-                match.initialPlayer1Mana++;
+                match.initialPlayer1ManaInBeginningTurn++;
             }
-            match.player1Mana = match.initialPlayer1Mana;
+            System.err.println("mana player1 :" + match.initialPlayer1ManaInBeginningTurn);
+            match.player1Mana = match.initialPlayer1ManaInBeginningTurn;
 
         } else {
 
             if (match.turnNumber <= 14) {
-                match.initialPlayer1Mana++;
+                match.initialPlayer2ManaInBeginningTurn++;
             }
-            match.player2Mana = match.initialPlayer2Mana;
+            System.err.println("mana player2 :" + match.initialPlayer2ManaInBeginningTurn);
+            match.player2Mana = match.initialPlayer2ManaInBeginningTurn;
         }
 
     }

@@ -72,8 +72,7 @@ public class BattleRequest extends Request {
             if (command.matches("end game"))
                 return new RequestWithoutVariable(RequestWithoutVariableEnum.END_GAME_REQUEST);
 
-
-            //todo error
+            BattleLog.errorInvalidCommand();
         }
     }
 
@@ -113,8 +112,6 @@ public class BattleRequest extends Request {
                 return useSpecialPower(secondCommand, selectAndUseCardRequest);
 
             if (secondCommand.matches("exit")) return null; //todo pay attention to null
-
-            BattleLog.errorInvalidCommand();
         }
     }
 

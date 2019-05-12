@@ -12,8 +12,8 @@ public class Match {
     GraveYard Player2GraveYard = new GraveYard();
     private MatchType matchType;
     private GameLogic gameLogic;
-    int turnNumber = 0;  //todo 0 or 1?
-    int player1Mana = 2, player2Mana = 2, initialPlayer1Mana = 2, initialPlayer2Mana = 2;
+    int turnNumber = 1;  //todo 0 or 1?
+    int player1Mana = 2, player2Mana = 2, initialPlayer1ManaInBeginningTurn = 2, initialPlayer2ManaInBeginningTurn = 2;
 
     public Account getPlayer1() {
 

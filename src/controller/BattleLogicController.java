@@ -11,6 +11,15 @@ public class BattleLogicController {
 
     private GameLogic gameLogic;
     private Match match;
+    private static BattleLogicController battleLogicController;
+
+    public static BattleLogicController getBattleLogicController() {
+
+        if (battleLogicController == null) {
+            battleLogicController = new BattleLogicController();
+        }
+        return battleLogicController;
+    }
 
     public void setGameLogic(GameLogic gameLogic) {
 
@@ -46,31 +55,18 @@ public class BattleLogicController {
         return false;
     }
 
-    public boolean isCellAvailableForMove(Cell originCell, Cell destinationCell) {
+    public boolean isCellAvailableForMove(Cell origin, Cell destination) {
 
-        if (isCellFill(destinationCell)) return false;
-        if (getManhattanDistance(originCell, destinationCell) > 2) {
-            BattleLog.errorInvalidTarget();
+        if (isCellFill(destination)) return false;
+        if (getManhattanDistance(origin, destination) > 2)
             return false;
-        }
-
         return true;
     }
 
-    public boolean isUnitStun(Unit unit) {
+    public boolean isUnitStunned(Unit unit) {
 
-        ArrayList<Buff> buffs = unit.getBuffs();
-        try {
-            for (Buff buff : buffs) {
-
-                if (buff.isStun()) {
-                    BattleLog.errorUnitIsStun();
-                    return true;
-                }
-            }
-        } catch (NullPointerException e) {
-            System.err.println("ArrayList of buff is null (BattleLogicController/isUnitStun)");
-        }
+        if (unit.isCanMove())
+            return true;
         return false;
     }
 
@@ -92,6 +88,55 @@ public class BattleLogicController {
 
             return card.getManaCost() <= match.getPlayer2Mana();
         }
+    }
+
+    public boolean isDirectionWithoutEnemy(Cell origin, Cell destination) {
+
+        if (getManhattanDistance(origin, destination) == 2) {
+
+            if (Math.abs(origin.getCoordination().getRow() - destination.getCoordination().getRow()) == 1) {
+                //means direction is diagonal
+
+                Coordination coordination1 = new Coordination();
+                Coordination coordination2 = new Coordination();
+
+                coordination1.setRow(origin.getCoordination().getRow());
+                coordination1.setColumn(destination.getCoordination().getColumn());
+                coordination2.setRow(destination.getCoordination().getRow());
+                coordination2.setColumn(origin.getCoordination().getColumn());
+
+                Card card1InThisCoordination = match.getTable().getCellByCoordination(coordination1).getCard();
+                Card card2InThisCoordination = match.getTable().getCellByCoordination(coordination2).getCard();
+
+                try {
+                    if (!card1InThisCoordination.getTeam().equals(match.findPlayerPlayingThisTurn()))
+                        if (!card2InThisCoordination.getTeam().equals(match.findPlayerPlayingThisTurn()))
+                            return false;
+
+                } catch (NullPointerException e) {
+                    return true;
+                }
+                return true;
+
+            } else {
+
+                Coordination coordination = new Coordination();
+                coordination.setRow(
+                        (origin.getCoordination().getRow() + destination.getCoordination().getRow()) / 2);
+                coordination.setColumn(
+                        (origin.getCoordination().getColumn() + destination.getCoordination().getColumn()) / 2);
+
+                try {
+                    if (!match.getTable().getCellByCoordination(coordination).getCard()
+                            .getTeam().equals(match.findPlayerPlayingThisTurn().getUserName()))
+                        return false;
+
+                } catch (NullPointerException e) {
+                    return true;
+                }
+                return true;
+            }
+        } else return true;
     }
 
     public boolean isOutOfTable(Coordination coordination) {
@@ -129,7 +174,7 @@ public class BattleLogicController {
                     if (table.getCellByCoordination(aroundCoordination).getCard().getTeam().equals(
                             match.findPlayerPlayingThisTurn().getUserName())) return true;
 
-                } catch (ArrayIndexOutOfBoundsException e) {
+                } catch (ArrayIndexOutOfBoundsException|NullPointerException e) {
                 }
             }
         }
