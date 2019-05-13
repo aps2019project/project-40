@@ -1,0 +1,33 @@
+{
+  "cardName": "big_snake",
+  "description": " a ranged MINION with 14 HP, 7 AP, and inverse holy buff spell",
+  "type": "MINION",
+  "spells ": [
+    {
+      "spellName": "big_snake",
+      "buff": {
+        "damageChange" : 1,
+        "duration" : 1000000
+      },
+      "target": {
+        "isDependentToCardLocation":  true,
+        "rowsAffected": 3,
+        "columnsAffected": 3,
+        "isAffectMinion" : true,
+        "isTargetEnemy" : true,
+        "targetType": {
+          "isRanged": true,
+          "isMelee": true,
+          "isHybrid": true
+        }
+      }
+    }
+  ],
+  "HP" : 14,
+  "AP":  7,
+  "manaCost": 8,
+  "price": 500,
+  "unitType" : "RANGED",
+  "specialPowerType" : "ON_SPAWN",
+  "range": 5
+}

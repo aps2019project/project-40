@@ -1,0 +1,30 @@
+{
+  "cardName": "piran",
+  "description": " a MELEE minon with 20 HP, 12 AP \n ON_DEFEND: doesn't get poisoned",
+  "type": "MINION",
+  "spells ": [
+    {
+      "spellName": "piran_no_poison",
+      "buff": {
+        "noPoison": true,
+        "duration" : 1,
+        "lasts" : true
+      },
+      "target": {
+        "rowsAffected": 1,
+        "columnsAffected":  1,
+        "targetType": {
+          "isMelee": true
+        },
+        "isAffectMinion" : true,
+        "isDependentToCardLocation": true
+      }
+    }
+  ],
+  "HP": 20,
+  "AP": 12,
+  "manaCost": 8,
+  "price": 400,
+  "unitType" : "MELEE",
+  "specialPowerType" : "ON_DEFEND"
+}

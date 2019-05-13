@@ -1,0 +1,33 @@
+{
+  "cardName": "bahman",
+  "description": " a melee MINION with 16 HP, 9 AP, ON_SPAWN: decreases HP of a random enemy MINION 16 units",
+  "type": "MINION",
+  "spells ": [
+    {
+      "spellName": "bahman_random_hit",
+      "buff": {
+        "weaknessHP": 16,
+        "duration" : 1,
+        "lasts" : true
+      },
+      "target": {
+        "isRandom": true,
+        "rowsAffected": 10,
+        "columnsAffected": 18,
+        "isAffectMinion" : true,
+        "isTargetEnemy" : true,
+        "targetType": {
+          "isHybrid": true,
+          "isRanged": true,
+          "isMelee": true
+        }
+      }
+    }
+  ],
+  "HP": 16,
+  "AP": 9,
+  "manaCost": 8,
+  "price": 450,
+  "unitType" : "MELEE",
+  "specialPowerType" : "ON_SPAWN"
+}

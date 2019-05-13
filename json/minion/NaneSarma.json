@@ -1,0 +1,32 @@
+{
+  "cardName": "nane_sarma",
+  "description": " a ranged MINION with 3 HP, 4 AP, ON_SPAWN: stuns the 3*3 square near it",
+  "type": "MINION",
+  "spells ": [
+    {
+      "spellName": "nane_sarma_stun",
+      "buff": {
+        "stun" : true,
+        "duration" : 1
+      },
+      "target": {
+        "isDependentToCardLocation":  true,
+        "rowsAffected": 3,
+        "columnsAffected": 3,
+        "isAffectMinion" : true,
+        "targetType": {
+          "isHybrid": true,
+          "isRanged": true,
+          "isMelee": true
+        }
+      }
+    }
+  ],
+  "HP" : 3,
+  "AP":  4,
+  "manaCost": 3,
+  "price": 500,
+  "unitType" : "RANGED",
+  "specialPowerType" : "ON_SPAWN",
+  "range" : 5
+}

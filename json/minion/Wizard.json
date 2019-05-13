@@ -1,0 +1,54 @@
+{
+  "cardName": "wizard",
+  "description": " a RANGED minon with 5 HP, 4 AP and has passive AP and HP buff",
+  "type": "MINION",
+  "spells ": [
+    {
+      "spellName": "wizard_AP_add",
+      "buff": {
+        "weaknessAP": -2,
+        "duration" : 1,
+        "lasts" : true,
+        "continuous": true
+      },
+      "target": {
+        "rowsAffected": 3,
+        "columnsAffected":  3,
+        "targetType": {
+          "isHybrid": true,
+          "isRanged": true,
+          "isMelee": true
+        },
+        "isAffectMinion" : true,
+        "isDependentToCardLocation": true
+      }
+    },
+    {
+      "spellName": "wizard_HP_add",
+      "buff": {
+        "weaknessHP": 1,
+        "duration" : 1,
+        "lasts" : true,
+        "continuous": true
+      },
+      "target": {
+        "isDependentToCardLocation": true,
+        "rowsAffected": 3,
+        "columnsAffected":  3,
+        "targetType": {
+          "isHybrid": true,
+          "isRanged": true,
+          "isMelee": true
+        },
+        "isAffectMinion" : true
+      }
+    }
+  ],
+  "HP": 5,
+  "AP": 4,
+  "manaCost": 4,
+  "price": 550,
+  "unitType" : "RANGED",
+  "range": 3,
+  "specialPowerType" : "PASSIVE"
+}
