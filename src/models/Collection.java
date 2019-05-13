@@ -53,7 +53,7 @@ public class Collection implements Serializable {
 
         for (Card card : cards) {
 
-            if (card.getCardID().equals(cardName)) return card;
+            if (card.getCardName().equals(cardName)) return card;
         }
 
         return null;        //added by amirhossein todo pay attention return null

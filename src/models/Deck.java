@@ -65,14 +65,50 @@ public class Deck implements Serializable {
     }
 
     public static Deck getDefaultMode1deck() {
-        return null;
+        Deck deck = new Deck();
+        try {
+            FileInputStream is = new FileInputStream("defaultDecks/" + "mode1.ser");
+            ObjectInputStream ois = new ObjectInputStream(is);
+            deck = (Deck) ois.readObject();
+            ois.close();
+            is.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return deck;
     }
 
     public static Deck getDefaultMode2deck() {
-        return null;
+        Deck deck = new Deck();
+        try {
+            FileInputStream is = new FileInputStream("defaultDecks/" + "mode2.ser");
+            ObjectInputStream ois = new ObjectInputStream(is);
+            deck = (Deck) ois.readObject();
+            ois.close();
+            is.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return deck;
     }
 
     public static Deck getDefaultMode3deck() {
-        return null;
+        Deck deck = new Deck();
+        try {
+            FileInputStream is = new FileInputStream("defaultDecks/" + "mode3.ser");
+            ObjectInputStream ois = new ObjectInputStream(is);
+            deck = (Deck) ois.readObject();
+            ois.close();
+            is.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return deck;
     }
 }

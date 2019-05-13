@@ -11,6 +11,10 @@ import request.collectionMenuRequest.collectionRequestChilds.Remove;
 import request.collectionMenuRequest.collectionRequestChilds.SimpleRequest;
 import view.collectionMenuView.CollectionMenuView;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+
 public class CollectionController {
     private static CollectionController collectionController;
     private CollectionMenuView collectionMenuView = CollectionMenuView.getInstance();
@@ -71,7 +75,6 @@ public class CollectionController {
     }
 
     public void add(Add addRequst) {
-        System.out.println("add");
         String cardID = addRequst.getCardID();
         String deckName = addRequst.getDeckName();
         CollectionErrors collectionErrors;
@@ -155,6 +158,22 @@ public class CollectionController {
         collectionErrors = collection.removeFromDeck(cardID, deckName);
         if (collectionErrors != null)
             collectionMenuView.showError(collectionErrors);
+    }
+
+    public void saveDeckToName(String name, Account account) {
+        if (account.getUserName().isEmpty())
+            return;
+        try {
+            FileOutputStream fos = new FileOutputStream("defaultDecks/" + name + ".ser");
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            // write object to file
+            oos.writeObject(account.getCollection().getSelectedDeck());
+            // closing resources
+            oos.close();
+            fos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }

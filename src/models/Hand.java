@@ -10,7 +10,7 @@ public class Hand implements Serializable {
     private Card hero;
     private Card reserveCard;
     private Card selectedCard;
-    private ArrayList<Card> collectiblesItem = new ArrayList<>();
+    private ArrayList<Card> collectedItems = new ArrayList<>();
     private final int MAX_HANDS_CARD = 5;
 
     public ArrayList<Card> getDeck() {
@@ -37,14 +37,14 @@ public class Hand implements Serializable {
         return handCards;
     }
 
-    public ArrayList<Card> getCollectiblesItem() {
+    public ArrayList<Card> getCollectedItems() {
 
-        return collectiblesItem;
+        return collectedItems;
     }
 
     public void setItemToCollectiblesItem(Card card) {
 
-        collectiblesItem.add(card);
+        collectedItems.add(card);
     }
 
     public void initializeHand(Deck accountDeck) {
@@ -62,9 +62,9 @@ public class Hand implements Serializable {
         handCards.add(deck.get(2));
         handCards.add(deck.get(3));
         handCards.add(deck.get(4));
-        reserveCard=deck.get(5);
+        reserveCard = deck.get(5);
 
-        for (Card card:handCards)
+        for (Card card : handCards)
             deck.remove(card);
 
         deck.remove(reserveCard);

@@ -11,6 +11,15 @@ public class BattleLogicController {
 
     private GameLogic gameLogic;
     private Match match;
+    private static BattleLogicController battleLogicController;
+
+    public static BattleLogicController getBattleLogicController() {
+
+        if (battleLogicController == null) {
+            battleLogicController = new BattleLogicController();
+        }
+        return battleLogicController;
+    }
 
     public void setGameLogic(GameLogic gameLogic) {
 
@@ -46,31 +55,18 @@ public class BattleLogicController {
         return false;
     }
 
-    public boolean isCellAvailableForMove(Cell originCell, Cell destinationCell) {
+    public boolean isCellAvailableForMove(Cell origin, Cell destination) {
 
-        if (isCellFill(destinationCell)) return false;
-        if (getManhattanDistance(originCell, destinationCell) > 2) {
-            BattleLog.errorInvalidTarget();
+        if (isCellFill(destination)) return false;
+        if (getManhattanDistance(origin, destination) > 2)
             return false;
-        }
-
         return true;
     }
 
-    public boolean isUnitStun(Unit unit) {
+    public boolean isUnitStunned(Unit unit) {
 
-        ArrayList<Buff> buffs = unit.getBuffs();
-        try {
-            for (Buff buff : buffs) {
-
-                if (buff.isStun()) {
-                    BattleLog.errorUnitIsStun();
-                    return true;
-                }
-            }
-        } catch (NullPointerException e) {
-            System.err.println("ArrayList of buff is null (BattleLogicController/isUnitStun)");
-        }
+        if (unit.isCanMove())
+            return true;
         return false;
     }
 
@@ -97,12 +93,8 @@ public class BattleLogicController {
     public boolean isOutOfTable(Coordination coordination) {
 
         if (coordination.getRow() >= Table.ROWS || coordination.getRow() < 0 ||
-                coordination.getColumn() >= Table.COLUMNS || coordination.getColumn() < 0) {
-
-            BattleLog.errorInvalidTarget();
+                coordination.getColumn() >= Table.COLUMNS || coordination.getColumn() < 0)
             return true;
-        }
-
         return false;
     }
 
@@ -113,10 +105,54 @@ public class BattleLogicController {
         return true;
     }
 
+    public boolean isDirectionWithoutEnemyForMove(Cell origin, Cell destination) {
+
+        if (getManhattanDistance(origin, destination) == 2) {
+
+            if (Math.abs(origin.getCoordination().getRow() - destination.getCoordination().getRow()) == 1) {
+                //means direction is diagonal
+
+                Coordination coordination1 = Coordination.getNewCoordination(
+                        origin.getCoordination().getRow(), destination.getCoordination().getColumn());
+                Coordination coordination2 = Coordination.getNewCoordination(
+                        destination.getCoordination().getRow(), origin.getCoordination().getColumn());
+
+                Card card1InThisCoordination = match.getTable().getCellByCoordination(coordination1).getCard();
+                Card card2InThisCoordination = match.getTable().getCellByCoordination(coordination2).getCard();
+
+                try {
+                    if (!card1InThisCoordination.getTeam().equals(match.findPlayerPlayingThisTurn()))
+                        if (!card2InThisCoordination.getTeam().equals(match.findPlayerPlayingThisTurn()))
+                            return false;
+
+                } catch (NullPointerException e) {
+                    return true;
+                }
+                return true;
+
+            } else {
+
+                Coordination coordination = Coordination.getNewCoordination(
+                        (origin.getCoordination().getRow() + destination.getCoordination().getRow()) / 2,
+                        (origin.getCoordination().getColumn() + destination.getCoordination().getColumn()) / 2);
+
+                try {
+                    if (!match.getTable().getCellByCoordination(coordination).getCard()
+                            .getTeam().equals(match.findPlayerPlayingThisTurn().getUserName()))
+                        return false;
+
+                } catch (NullPointerException e) {
+                    return true;
+                }
+                return true;
+            }
+        } else return true;
+    }
+
     public boolean isCellAvailableForInsert(Coordination coordination) {
 
         Table table = match.getTable();
-        Coordination aroundCoordination = new Coordination();
+        Coordination aroundCoordination;
 
         for (int row = -1; row <= 1; row++) {
             for (int column = -1; column <= 1; column++) {
@@ -124,12 +160,13 @@ public class BattleLogicController {
                 if (row == 0 && column == 0) continue;
 
                 try {
-                    aroundCoordination.setRow(coordination.getRow() + row);
-                    aroundCoordination.setColumn(coordination.getColumn() + column);
+                    aroundCoordination = Coordination.getNewCoordination(
+                            coordination.getRow() + row, coordination.getColumn() + column);
+
                     if (table.getCellByCoordination(aroundCoordination).getCard().getTeam().equals(
                             match.findPlayerPlayingThisTurn().getUserName())) return true;
 
-                } catch (ArrayIndexOutOfBoundsException e) {
+                } catch (ArrayIndexOutOfBoundsException | NullPointerException e) {
                 }
             }
         }
@@ -138,36 +175,34 @@ public class BattleLogicController {
         return false;
     }
 
-    public boolean isCellAvailableForMelee(Cell attackerCell, Cell victimCell) {
+    public boolean isTargetCellAvailableForMeleeAttack(Cell attackerCell, Cell victimCell) {
 
         int manhattanDistance = getManhattanDistance(attackerCell, victimCell);
 
-        if ((manhattanDistance < 2 && manhattanDistance > 0) ||
-
-                (Math.abs(
-                        attackerCell.getCoordination().getRow() - victimCell.getCoordination().getRow()) == 1 &&
-                        Math.abs(attackerCell.getCoordination().getColumn() - victimCell.getCoordination().getColumn()) == 1))
+        if ((manhattanDistance <= 1 && manhattanDistance > 0) ||
+                isCellsDiagonalWith2ManhattanDistance(attackerCell, victimCell))
 
             return true;
-
-        BattleLog.errorInvalidTarget();
         return false;
     }
 
-    public boolean isCellAvailableForRanged(Cell attackerCell, Cell victimCell, int attackRange) {
+    public boolean isTargetCellAvailableForRangedAttack(Cell attackerCell, Cell victimCell, int attackRange) {
 
         int manhattanDistance = getManhattanDistance(attackerCell, victimCell);
 
         if (manhattanDistance > 1 && manhattanDistance <= attackRange &&
-
-                !(Math.abs(
-                        attackerCell.getCoordination().getRow() - victimCell.getCoordination().getRow()) == 1 &&
-                        Math.abs(attackerCell.getCoordination().getColumn() - victimCell.getCoordination().getColumn()) == 1))
+                !isCellsDiagonalWith2ManhattanDistance(attackerCell, victimCell))
 
             return true;
-
-        BattleLog.errorInvalidTarget();
         return false;
 
+    }
+
+    private boolean isCellsDiagonalWith2ManhattanDistance(Cell cell1, Cell cell2) {
+
+        return
+                Math.abs(
+                        cell1.getCoordination().getRow() - cell2.getCoordination().getRow()) == 1 &&
+                        Math.abs(cell1.getCoordination().getColumn() - cell2.getCoordination().getColumn()) == 1;
     }
 }

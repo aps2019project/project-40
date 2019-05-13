@@ -12,8 +12,8 @@ public class Match {
     GraveYard Player2GraveYard = new GraveYard();
     private MatchType matchType;
     private GameLogic gameLogic;
-    int turnNumber = 0;  //todo 0 or 1?
-    int player1Mana = 2, player2Mana = 2, initialPlayer1Mana = 2, initialPlayer2Mana = 2;
+    int turnNumber = 1;  //todo 0 or 1?
+    int player1Mana = 2, player2Mana = 2, initialPlayer1ManaInBeginningTurn = 2, initialPlayer2ManaInBeginningTurn = 2;
 
     public Account getPlayer1() {
 
@@ -60,6 +60,11 @@ public class Match {
         return Player2GraveYard;
     }
 
+    public int getTurnNumber() {
+
+        return turnNumber;
+    }
+
     public Match(MatchType matchType, Account player1, Account player2) {
 
         //for "kill the hero" and "hold the flag"
@@ -90,6 +95,12 @@ public class Match {
 
         if (turnNumber % 2 == 1) return player1;
         return player2;
+    }
+
+    public Account findPlayerDoesNotPlayingThisTurn() {
+
+        if (turnNumber % 2 == 1) return player2;
+        return player1;
     }
 
     private void initializeTableModeKillTheHero() {
@@ -137,7 +148,7 @@ public class Match {
                 if (randomColumn[i] == randomColumn[j] && randomRow[i] == randomRow[j]) {
                     i--;
                     break;
-                } else if ((randomColumn[i] == 8 || randomColumn[i] == 0) && randomRow[i] == 2){
+                } else if ((randomColumn[i] == 8 || randomColumn[i] == 0) && randomRow[i] == 2) {
                     i--;
                     break;
                 }

@@ -133,10 +133,10 @@ public class BattleView {
         for (int i = 0; i < cardsID.size(); i++) {
 
             System.out.println(cardsID.get(i) + " : " + cardsName.get(i) + ", ");
-            System.out.println("health : " + healthPoints.get(i) + ", ");
-            System.out.println("location : (row :" + locations.get(i).getRow() + ", " +
+            System.out.println("    health : " + healthPoints.get(i) + ", ");
+            System.out.println("    location : (row :" + locations.get(i).getRow() + ", " +
                     "column :" + locations.get(i).getColumn() + "), ");
-            System.out.println("power : " + attackPoints.get(i));
+            System.out.println("    power : " + attackPoints.get(i));
         }
     }
 
@@ -174,13 +174,13 @@ public class BattleView {
         HashMap<String, String> itemsInfo = collectedItem.getItemInfo();
 
         itemsInfo.forEach((name, description) ->
-                System.out.println("name: " + name + "\ndescription: " + description));
+                System.out.println("name: " + name + "\n    description: " + description));
     }
 
     private void showSelectedItemInfo(ShowSelectedItemInfoBattleView itemInfo) {
 
         System.out.println("Name: " + itemInfo.getName());
-        System.out.println("Desc: " + itemInfo.getDescription());
+        System.out.println("    Desc: " + itemInfo.getDescription());
     }
 
     private void showCards(ShowCardsBattleView showCards) {

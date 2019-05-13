@@ -1,7 +1,5 @@
 package view.battleView;
 
-import java.sql.SQLOutput;
-
 public class BattleLog {
 
     public static void logCardSelected(String cardID) {
@@ -108,7 +106,7 @@ public class BattleLog {
         System.out.println("Invalid item name");
     }
 
-    public static void errorUnitIsStun() {
+    public static void errorUnitIsStunned() {
 
         System.out.println("Unit is stun");
     }
@@ -127,8 +125,23 @@ public class BattleLog {
 
         System.out.println("You don't have reserve card");
     }
-    public static void isDisarm(){
+
+    public static void isDisarm() {
         System.out.println("defender is disarm");
     }
 
+    public static void logTurnSwitched() {
+
+        System.out.println("Turn switched");
+    }
+
+    public static void logTurnForWho(String userName) {
+
+        System.out.println("This turn for *** " + userName + " ***");
+    }
+
+    public static void errorHasNotCombo() {
+
+        System.out.println("card id you entered hasn't combo ability");
+    }
 }

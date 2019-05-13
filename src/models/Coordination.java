@@ -23,4 +23,12 @@ public class Coordination {
 
         this.column = column;
     }
+
+    public static Coordination getNewCoordination(int row, int column) {
+
+        Coordination coordination = new Coordination();
+        coordination.setRow(row);
+        coordination.setColumn(column);
+        return coordination;
+    }
 }
