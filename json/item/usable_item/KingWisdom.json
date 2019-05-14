@@ -1,0 +1,16 @@
+{
+  "cardName": "king_wisdom",
+  "description": " ...",
+  "type": "USABLE_ITEM",
+  "spells ": [
+    {
+      "spellName": "mp_add",
+      "buff": {
+        "manaChange": 1,
+        "duration": 1000000,
+        "lasts": true
+      }
+    }
+  ],
+  "price" : 9000
+}

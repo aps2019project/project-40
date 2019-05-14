@@ -1,0 +1,27 @@
+{
+  "cardName": "noosh_daroo",
+  "description": " a collectible ITEM that increases HP of a random unit 6 points  ",
+  "type": "COLLECTIBLE_ITEM",
+  "spells ": [
+    {
+      "spellName": "noosh_daroo_hp",
+      "buff": {
+        "weaknessHP": -6,
+        "duration": 1,
+        "lasts": true
+      },
+      "target": {
+        "rowsAffected": 5,
+        "columnsAffected": 9,
+        "targetType": {
+          "isHybrid": true,
+          "isRanged": true,
+          "isMelee": true
+        },
+        "isRandom": true,
+        "isAffectMinion": true,
+        "isAffectHero" : true
+      }
+    }
+  ]
+}

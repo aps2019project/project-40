@@ -1,5 +1,4 @@
 package models;
-//change setter getter
 
 public class Target {
     final int MAP_ROWS = 5;

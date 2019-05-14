@@ -1,0 +1,26 @@
+{
+  "cardName": "feather_of_simurgh",
+  "description": " a usable item that decreases AP of a ranged or hybrid 2 points",
+  "type": "USABLE_ITEM",
+  "spells ": [
+    {
+      "spellName": "feather_of_simurgh_decrement_ap",
+      "buff": {
+        "weaknessAP": -2,
+        "duration": 1,
+        "lasts": true
+      },
+      "target": {
+        "isForDeck": true,
+        "targetType": {
+          "isHybrid": true,
+          "isRanged": true
+        },
+        "isRandom": true,
+        "isTargetEnemy" : true,
+        "isAffectHero" : true
+      }
+    }
+  ],
+  "price" : 3500
+}

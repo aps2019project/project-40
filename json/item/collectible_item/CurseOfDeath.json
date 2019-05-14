@@ -1,0 +1,47 @@
+{
+  "cardName": "curse_of_death",
+  "description": " a COLLECTIBLE item that gives a random minion an ON_DEATH spell : damages 8 units to a random troop",
+  "type": "COLLECTIBLE_ITEM",
+  "spells ": [
+    {
+      "spellName": "curse_add_on_death",
+      "buff": {
+        "duration": 1,
+        "lasts": true,
+        "itemSpell": {
+          "spellName": "cod_on_death_minion",
+          "buff": {
+            "weaknessHP": 8,
+            "duration": 1,
+            "lasts": true
+          },
+          "target": {
+            "isRandom" : true,
+            "rowsAffected": 3,
+            "columnsAffected": 3,
+            "isTargetEnemy": true,
+            "targetType": {
+              "isHybrid": true,
+              "isRanged": true,
+              "isMelee": true
+            },
+            "isAffectHero": true,
+            "isAffectMinion" : true
+          },
+          "specialPowerType": "ON_DEATH"
+        }
+      },
+      "target": {
+        "isRandom" : true,
+        "rowsAffected": 5,
+        "columnsAffected": 9,
+        "targetType": {
+          "isHybrid": true,
+          "isRanged": true,
+          "isMelee": true
+        },
+        "isAffectMinion": true
+      }
+    }
+  ]
+}
