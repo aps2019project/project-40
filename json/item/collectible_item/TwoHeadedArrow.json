@@ -1,0 +1,27 @@
+{
+  "cardName": "two_headed_arrow",
+  "description": " .",
+  "type": "COLLECTIBLE_ITEM",
+  "spells ": [
+    {
+      "spellName": "two_headed_arrow_ap",
+      "buff": {
+        "weaknessHP": -2,
+        "duration": 1,
+        "lasts": true
+      },
+      "target": {
+        "rowsAffected": 5,
+        "columnsAffected": 9,
+        "targetType": {
+          "isHybrid": true,
+          "isRanged": true,
+          "isMelee": true
+        },
+        "isRandom": true,
+        "isAffectMinion": true,
+        "isAffectHero" : true
+      }
+    }
+  ]
+}

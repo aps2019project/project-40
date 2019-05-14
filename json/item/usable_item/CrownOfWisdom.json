@@ -1,0 +1,17 @@
+{
+  "cardName": "crown_of_wisdom",
+  "description": "a USABLE Item, increases mana 1 point in the first 3 rounds",
+  "type": "USABLE_ITEM",
+  "price": 300,
+  "spells ": [
+    {
+      "spellName": "cw_mana_add",
+      "buff": {
+        "manaChange" : 1,
+        "duration" : 3,
+        "lasts" : true,
+        "onStartUsable" : true
+      }
+    }
+  ]
+}

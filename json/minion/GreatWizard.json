@@ -1,0 +1,52 @@
+{
+  "cardName": "great_wizard",
+  "description": " a ranged MINION with 6 HP, 6 AP, PASSIVE : continuous ap power buff and holy buff",
+  "type": "MINION",
+  "spells ": [
+    {
+      "spellName": "great_wizard_power",
+      "buff": {
+        "weaknessAP" : -2,
+        "duration" : -1
+      },
+      "target": {
+        "isDependentToCardLocation":  true,
+        "rowsAffected": 3,
+        "columnsAffected": 3,
+        "isAffectMinion" : true,
+        "isTargetEnemy" : true,
+        "targetType": {
+          "isHybrid": true,
+          "isRanged": true,
+          "isMelee": true
+        }
+      }
+    },
+    {
+      "spellName": "great_wizard_holy",
+      "buff": {
+        "damageChange" : -1,
+        "duration" : -1
+      },
+      "target": {
+        "isDependentToCardLocation":  true,
+        "rowsAffected": 3,
+        "columnsAffected": 3,
+        "isAffectMinion" : true,
+        "targetType": {
+          "isHybrid": true,
+          "isRanged": true,
+          "isMelee": true
+        }
+      }
+    }
+
+  ],
+  "HP" : 6,
+  "AP":  6,
+  "manaCost": 6,
+  "price": 550,
+  "unitType" : "RANGED",
+  "specialPowerType" : "PASSIVE",
+  "range" : 5
+}

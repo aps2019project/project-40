@@ -1,0 +1,25 @@
+{
+  "cardName": "chinese_sword",
+  "description": " ...",
+  "type": "COLLECTIBLE_ITEM",
+  "spells ": [
+    {
+      "spellName": "sword_add_ap",
+      "buff": {
+        "weaknessAP": -5,
+        "duration": 1,
+        "lasts": true
+      },
+      "target": {
+        "rowsAffected": 1,
+        "columnsAffected": 1,
+        "targetType": {
+          "isMelee": true
+        },
+        "isRandom": true,
+        "isAffectMinion": true,
+        "isAffectHero": true
+      }
+    }
+  ]
+}

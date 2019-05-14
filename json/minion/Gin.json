@@ -1,0 +1,31 @@
+{
+  "cardName": "gin",
+  "description": " a ranged MINION with 10 HP, 4 AP, PASSIVE: continuous Ap buff for all friend minionsٔ",
+  "type": "MINION",
+  "spells ": [
+    {
+      "spellName": "gin_power",
+      "buff": {
+        "weaknessAP": -1,
+        "duration" : -1
+      },
+      "target": {
+        "rowsAffected": 10,
+        "columnsAffected": 18,
+        "isAffectMinion" : true,
+        "targetType": {
+          "isHybrid": true,
+          "isRanged": true,
+          "isMelee": true
+        }
+      }
+    }
+  ],
+  "HP": 10,
+  "AP": 4,
+  "manaCost": 5,
+  "price": 500,
+  "unitType" : "RANGED",
+  "specialPowerType" : "ON_SPAWN",
+  "range" : 4
+}

@@ -1,0 +1,44 @@
+{
+  "cardName": "shock_hammer",
+  "description": " ...",
+  "type": "USABLE_ITEM",
+  "spells ": [
+    {
+      "spellName": "shock_hammer_add",
+      "buff": {
+        "duration": 1,
+        "lasts": true,
+        "itemSpell": {
+          "spellName": "shock_hammer_disarm",
+          "buff": {
+            "disarm": true,
+            "duration": 1
+          },
+          "target": {
+            "rowsAffected": 1,
+            "columnsAffected": 1,
+            "targetType": {
+              "isHybrid": true,
+              "isRanged": true,
+              "isMelee": true
+            },
+            "isTargetEnemy": true,
+            "isAffectHero": true,
+            "isAffectMinion": true
+          },
+          "specialPowerType": "ON_ATTACK"
+        }
+      },
+      "target": {
+        "isForDeck": true,
+        "targetType": {
+          "isHybrid": true,
+          "isRanged": true,
+          "isMelee": true
+        },
+        "isAffectHero": true
+      }
+    }
+  ],
+  "price" : 15000
+}

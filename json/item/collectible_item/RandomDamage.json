@@ -1,0 +1,27 @@
+{
+  "cardName": "random_damage",
+  "description": " a collectible item that increases HP of a random unit 2 units   ",
+  "type": "COLLECTIBLE_ITEM",
+  "spells ": [
+    {
+      "spellName": "random_damage_hp",
+      "buff": {
+        "weaknessHP": -2,
+        "duration": 1,
+        "lasts": true
+      },
+      "target": {
+        "rowsAffected": 5,
+        "columnsAffected": 9,
+        "targetType": {
+          "isHybrid": true,
+          "isRanged": true,
+          "isMelee": true
+        },
+        "isRandom": true,
+        "isAffectMinion": true,
+        "isAffectHero" : true
+      }
+    }
+  ]
+}

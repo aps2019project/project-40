@@ -1,0 +1,45 @@
+{
+  "cardName": "baptism",
+  "description": "....",
+  "type": "USABLE_ITEM",
+  "price": 20000,
+  "spells ": [
+    {
+      "spellName": "baptism_add",
+      "buff": {
+        "duration": 1,
+        "onStartUsable": true,
+        "lasts": true,
+        "itemSpell": {
+          "spellName": "baptism_holy",
+          "buff": {
+            "damageChange": -2,
+            "duration": 2
+          },
+          "target": {
+            "isDependentToCardLocation": true,
+            "rowsAffected": 1,
+            "columnsAffected": 1,
+            "isTargetEnemy": true,
+            "targetType": {
+              "isHybrid": true,
+              "isRanged": true,
+              "isMelee": true
+            },
+            "isAffectHero": true,
+            "isAffectMinion": true
+          }
+        }
+      },
+      "target": {
+        "isForDeck": true,
+        "targetType": {
+          "isMelee" : true,
+          "isHybrid": true,
+          "isRanged": true
+        },
+        "isAffectHero": true
+      }
+    }
+  ]
+}

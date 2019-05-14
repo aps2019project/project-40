@@ -1,0 +1,30 @@
+{
+  "cardName": "eagle",
+  "description": " a melee MINION with 0 HP, 2 AP, PASSIVE: power buff with 10 points hp increment",
+  "type": "MINION",
+  "spells ": [
+    {
+      "spellName": "eagle_power_buff",
+      "buff": {
+        "weaknessHP": -10,
+        "duration" : 1,
+        "lasts" : true
+      },
+      "target": {
+        "isDependentToCardLocation":  true,
+        "rowsAffected": 1,
+        "columnsAffected": 1,
+        "isAffectMinion" : true,
+        "targetType": {
+          "isRanged": true
+        }
+      }
+    }
+  ],
+  "AP":  2,
+  "manaCost": 2,
+  "price": 200,
+  "unitType" : "RANGED",
+  "specialPowerType" : "PASSIVE",
+  "range" : 3
+}
