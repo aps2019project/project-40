@@ -1,5 +1,7 @@
 package models;
 
+import view.battleView.BattleLog;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -48,6 +50,7 @@ public class Hand implements Serializable {
     }
 
     public void initializeHand(Deck accountDeck) {
+
         Deck newDeck = Deck.deepClone(accountDeck);
         newDeck.shuffleCards();
         deck = newDeck.getCards();
@@ -73,17 +76,25 @@ public class Hand implements Serializable {
     public void fillHandEmptyPlace() {
 
         if (isThereEmptyPlace()) {
+            System.out.println("in fillHandEmptyPlace size of hand cards " + handCards.size());
             if (reserveCard != null) handCards.add(reserveCard);
+
             try {
                 reserveCard = deck.get(0);
                 deck.remove(0);
             } catch (ArrayIndexOutOfBoundsException e) {
+                BattleLog.errorDeckOut();
             }
         }
     }
 
     private boolean isThereEmptyPlace() {
 
-        return handCards.size() <= MAX_HANDS_CARD;
+        return handCards.size() < MAX_HANDS_CARD;
+    }
+
+    public void removeFromHand(Card card) {
+
+        handCards.remove(card);
     }
 }

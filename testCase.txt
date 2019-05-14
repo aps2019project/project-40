@@ -1,5 +1,5 @@
-create account ali
-ali
+create account amir
+amir
 enter shop
 buy total_disarm
 buy lighting_bolt
@@ -28,38 +28,38 @@ buy panther
 exit
 enter collection
 create deck mode1
-add ali_total_disarm_1 to deck mode1
-add ali_lighting_bolt_1 to deck mode1
-add ali_all_disarm_1 to deck mode1
-add ali_all_poison_1 to deck mode1
-add ali_dispel_1 to deck mode1
-add ali_sacrifice_1 to deck mode1
-add ali_shock_1 to deck mode1
+add amir_total_disarm_1 to deck mode1
+add amir_lighting_bolt_1 to deck mode1
+add amir_all_disarm_1 to deck mode1
+add amir_all_poison_1 to deck mode1
+add amir_dispel_1 to deck mode1
+add amir_sacrifice_1 to deck mode1
+add amir_shock_1 to deck mode1
 
-add ali_white_demon_1 to deck mode1
-add ali_soul_eater_1 to deck mode1
+add amir_white_demon_1 to deck mode1
+add amir_soul_eater_1 to deck mode1
 
-add ali_iraj_1 to deck mode1
-add ali_iraj_2 to deck mode1
-add ali_arjang_1 to deck mode1
-add ali_big_giant_1 to deck mode1
-add ali_panther_1 to deck mode1
-add ali_siavash_1 to deck mode1
-add ali_iraj_3 to deck mode1
-add ali_iraj_4 to deck mode1
-add ali_iraj_5 to deck mode1
-add ali_big_giant_2 to deck mode1
-add ali_panther_2 to deck mode1
-add ali_big_giant_3 to deck mode1
-add ali_panther_3 to deck mode1
+add amir_iraj_1 to deck mode1
+add amir_iraj_2 to deck mode1
+add amir_arjang_1 to deck mode1
+add amir_big_giant_1 to deck mode1
+add amir_panther_1 to deck mode1
+add amir_siavash_1 to deck mode1
+add amir_iraj_3 to deck mode1
+add amir_iraj_4 to deck mode1
+add amir_iraj_5 to deck mode1
+add amir_big_giant_2 to deck mode1
+add amir_panther_2 to deck mode1
+add amir_big_giant_3 to deck mode1
+add amir_panther_3 to deck mode1
 
 select deck mode1
 exit
 enter loginmenu
 save
 logout
-create account ali
-ali
+create account amir
+amir
 enter shop
 buy total_disarm
 buy lighting_bolt
@@ -88,33 +88,9 @@ buy panther
 exit
 enter collection
 create deck mode1
-add ali_total_disarm_1 to deck mode1
-add ali_lighting_bolt_1 to deck mode1
-add ali_all_disarm_1 to deck mode1
-add ali_all_poison_1 to deck mode1
-add ali_dispel_1 to deck mode1
-add ali_sacrifice_1 to deck mode1
-add ali_shock_1 to deck mode1
 
-add ali_white_demon_1 to deck mode1
-add ali_soul_eater_1 to deck mode1
 
-add ali_iraj_1 to deck mode1
-add ali_iraj_2 to deck mode1
-add ali_arjang_1 to deck mode1
-add ali_big_giant_1 to deck mode1
-add ali_panther_1 to deck mode1
-add ali_siavash_1 to deck mode1
-add ali_iraj_3 to deck mode1
-add ali_iraj_4 to deck mode1
-add ali_iraj_5 to deck mode1
-add ali_big_giant_2 to deck mode1
-add ali_panther_2 to deck mode1
-add ali_big_giant_3 to deck mode1
-add ali_panther_3 to deck mode1
-select deck mode1
-exit
 enter battle
 2
-select user ali
+select user amir
 start multiplayer game 1

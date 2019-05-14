@@ -101,7 +101,6 @@ public class BattleLogicController {
     public boolean isCellFill(Cell cell) {
 
         if (cell.getCard() == null) return false;
-        BattleLog.errorCellIsFill();
         return true;
     }
 
