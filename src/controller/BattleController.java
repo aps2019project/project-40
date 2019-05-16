@@ -174,6 +174,7 @@ public class BattleController {
             BattleLog.errorInvalidTarget();
             return;
         }
+
     }
 
     private void selectAndUseCardRequestAttackRanged(Unit attacker, Unit victim) {

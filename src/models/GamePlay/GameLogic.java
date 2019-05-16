@@ -484,7 +484,7 @@ public class GameLogic {
     }
 
 
-    private void attack(Unit attacker, Unit defender) {
+    public void attack(Unit attacker, Unit defender) {
         if (!attacker.isCanAttack()) {
             return;
         }
