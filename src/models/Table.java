@@ -26,4 +26,11 @@ public class Table {
             }
         }
     }
+    public boolean isInMap(int row, int column) {
+        return row >= 0 && row < 5 && column >= 0 && column < 9;
+    }
+
+    public boolean isInMap(Coordination position) {
+        return position.getRow() >= 0 && position.getRow() < 5 && position.getColumn() >= 0 && position.getColumn() < 9;
+    }
 }
