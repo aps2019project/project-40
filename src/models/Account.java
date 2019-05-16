@@ -135,4 +135,5 @@ public class Account implements Serializable {
     public boolean equals(Account account) {
         return this.getUserName().equals(account.getUserName());
     }
+
 }

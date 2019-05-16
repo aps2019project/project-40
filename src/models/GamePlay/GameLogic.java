@@ -4,6 +4,7 @@ import models.*;
 import view.battleView.BattleLog;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import static models.SpecialPowerType.ON_DEFEND;
 
@@ -164,7 +165,7 @@ public class GameLogic {
 
     public void insertProcess(Spell spell, Cell cell) {
 
-        //todo
+
         decrementMana(spell.getManaCost());
     }
 
@@ -228,13 +229,27 @@ public class GameLogic {
     }
 
     public void killUnit(Unit unit) {
-
+        ActivateOnDeathSpells(unit);
+        unit.getCell().setCard(null);
+        unit.setCell(null);
+        if (unit.getTeam().equals(match.player1.getUserName())) {
+            cardsInTablePlayer1.remove(unit);
+            match.getPlayer1GraveYard().addCardToGraveYard(unit);
+        } else {
+            cardsInTablePlayer2.remove(unit);
+            match.getPlayer2GraveYard().addCardToGraveYard(unit);
+        }
     }
 
     public void ActivateOnDeathSpells(Unit unit) {
+        Coordination coordination = new Coordination();
+        coordination.setColumn(0);
+        coordination.setRow(0);
         if (unit.getSpecialPowerType() == ON_DEFEND) {
             for (Spell spell : unit.getSpells()) {
-
+                applySpell(spell, findTarget(spell, unit.getCell(),
+                        match.table.getCellByCoordination(coordination),
+                        match.findPlayerDoesNotPlayingThisTurn().getHand().getHero().getCell()));
             }
         }
     }
@@ -257,36 +272,155 @@ public class GameLogic {
         }
     }
 
-    public void applySpell(Spell spell, Unit unit) {
-        //spell.setLastTimeCasted();
-        unit.addBuff(spell.getBuff());
-        applyBuff(spell.getBuff(), unit);
+    ///////Target
+    private TargetData findTarget(Spell spell, Cell cardCell, Cell clickCell, Cell heroCell) {
+        TargetData targetData = new TargetData();
+        Account account;
+        if (spell.getTarget().isTargetEnemy()) {
+            setTargetData(spell, cardCell, clickCell, heroCell, match.findPlayerDoesNotPlayingThisTurn(), targetData);
+        } else {
+            setTargetData(spell, cardCell, clickCell, heroCell, match.findPlayerPlayingThisTurn(), targetData);
+        }
+        if (spell.getTarget().isRandom()) {
+            if (targetData.getCards().size() > 0) {
+                Card card = targetData.getCards().get(new Random().nextInt(targetData.getCards().size()));
+                targetData.getCards().clear();
+                targetData.getCards().add(card);
+            }
+        }
+        return targetData;
     }
 
-    public void applyBuff(Buff buff, Unit unit) {
 
+    private void setTargetData(Spell spell, Cell cardCell, Cell clickCell, Cell heroCell, Account account, TargetData targetData) {
+
+
+        if (spell.getTarget().getRowsAffected() != 0 && spell.getTarget().getColumnsAffected() != 0) {
+            Coordination centerPosition = getCenter(spell, cardCell, clickCell);
+            Coordination coordination = new Coordination();
+            coordination.setRow(spell.getTarget().getRowsAffected());
+            coordination.setColumn(spell.getTarget().getColumnsAffected());
+            ArrayList<Cell> targetCells = detectCells(centerPosition, coordination); //to do
+            addUnitsAndCellsToTargetData(spell, targetData, account, targetCells);
+
+            if (spell.getTarget().isRandom()) {
+                randomizeList(targetData.getUnits());
+                randomizeList(targetData.getCells());
+                randomizeList(targetData.getAccounts());
+                randomizeList(targetData.getCards());
+            }
+        }
+    }
+
+
+    private void addUnitsAndCellsToTargetData(Spell spell, TargetData targetData, Account account, ArrayList<Cell> targetCells) {
+        for (Cell cell : targetCells) {
+            if (spell.getTarget().isAffectCells()) {
+                targetData.getCells().add(cell);
+            }
+            Card unit =  cell.getCard();
+            if (unit != null) {
+                if (spell.getTarget().getTargetType().isHybrid() && ((Unit) unit).getUnitType() == UnitType.HYBRID) {
+                    addUnitToTargetData(spell, targetData, (Unit) unit);
+                }
+                if (spell.getTarget().getTargetType().isMelee() &((Unit) unit).getUnitType() == UnitType.MELEE) {
+                    addUnitToTargetData(spell, targetData, (Unit) unit);
+                }
+                if (spell.getTarget().getTargetType().isRanged() && ((Unit) unit).getUnitType() == UnitType.RANGED) {
+                    addUnitToTargetData(spell, targetData, (Unit) unit);
+                }
+            }
+            if (spell.getTarget().isAffectCells()){
+                targetData.getCells().add(cell);
+            }
+        }
+    }
+
+    private void addUnitToTargetData(Spell spell, TargetData targetData, Unit unit) {
+        if (spell.getTarget().isAffectHero() && ((Card) unit).getType() == CardType.HERO) {
+            targetData.getUnits().add(unit);
+        }
+        if (spell.getTarget().isAffectMinion() && ((Card)unit).getType() == CardType.MINION) {
+            targetData.getUnits().add(unit);
+        }
+    }
+
+    private ArrayList<Cell> detectCells(Coordination centerPosition, Coordination dimensions) {
+        int firstRow = calculateFirstCoordinate(centerPosition.getRow(), dimensions.getRow());
+        int firstColumn = calculateFirstCoordinate(centerPosition.getColumn(), dimensions.getColumn());
+
+        int lastRow = calculateLastCoordinate(firstRow, dimensions.getRow(), 5);
+        int lastColumn = calculateLastCoordinate(firstColumn, dimensions.getColumn(), 9);
+
+        ArrayList<Cell> targetCells = new ArrayList<>();
+        for (int i = firstRow; i < lastRow; i++) {
+            for (int j = firstColumn; j < lastColumn; j++) {
+                if (match.table.isInMap(i, j))
+                    targetCells.add(match.table.getCells()[i][j]);
+            }
+        }
+        return targetCells;
+    }
+
+    private int calculateFirstCoordinate(int center, int dimension) {
+        int firstCoordinate = center - (dimension - 1) / 2;
+        if (firstCoordinate < 0)
+            firstCoordinate = 0;
+        return firstCoordinate;
+    }
+
+    private int calculateLastCoordinate(int first, int dimension, int maxNumber) {
+        int lastRow = first + dimension;
+        if (lastRow > maxNumber) {
+            lastRow = maxNumber;
+        }
+        return lastRow;
+    }
+
+
+    private Coordination getCenter(Spell spell, Cell cardCell, Cell clickCell) {
+        Coordination centerPosition;
+        if (spell.getTarget().isDependentToCardLocation()) {
+            centerPosition = new Coordination();
+            centerPosition.copyCoordination(cardCell);
+        }
+        else {
+            centerPosition = new Coordination();
+            centerPosition.copyCoordination(clickCell);
+        }
+        return centerPosition;
+    }
+
+    private <T> void randomizeList(ArrayList<T> list) {
+        if (list.size() == 0) return;
+
+        int random = new Random().nextInt(list.size());
+        T e = list.get(random);
+        list.clear();
+        list.add(e);
+    }
+
+
+    ///////////Target
+
+    public void applySpell(Spell spell, TargetData targetData) {
+        Buff buff = spell.getBuff();
         if (buff.getWaitingTime() > 0) {
             buff.setWaitingTime(buff.getWaitingTime() - 1);
             return;
         }
 
-        castBuffOnCards(buff, unit);
-        // castBuffOnCells(buff,unit);
-        castBuffOnUnits(buff, unit);
-        castBuffOnUsers(buff, unit);
+        castBuffOnCards(buff, targetData.getCards());
+      //  castBuffOnCells(buff, targetData.getCells());
+        castBuffOnUnits(buff, targetData.getUnits());
+        castBuffOnUsers(buff, targetData.getAccounts());
 
         buff.decrementDuration();
     }
 
 
-    public void castBuffOnCards(Buff buff, Unit unit) {
-        if (buff.getItemSpell() != null) {
-            unit.addSpell(buff.getItemSpell());
-        }
-    }
-
-    public void castBuffOnUsers(Buff buff, Unit unit) {
-        String name = unit.getTeam();
+    public void castBuffOnUsers(Buff buff, ArrayList<Account> accounts) {
+        String name = accounts.get(0).getUserName();
         if (match.player1.getUserName().equals(name)) {
             match.player1Mana += buff.getManaChange();
         } else {
@@ -294,53 +428,67 @@ public class GameLogic {
         }
     }
 
-    public void castBuffOnUnits(Buff buff, Unit victimUnit) {
-        if (!(buff.isPositive())) return;
-        if (buff.getDuration() <= 0) {
-            return;
+    public void castBuffOnCards(Buff buff, ArrayList<Card> cards) {
+        for (Card card:cards) {
+            if (buff.getItemSpell() != null) {
+                card.addSpell(buff.getItemSpell());
         }
-        victimUnit.setDamageChange(victimUnit.getDamageChange() + buff.getWeaknessHP());
-        victimUnit.setAP(victimUnit.getAP() - buff.getWeaknessAP());
+    }
+
+}
+
+//    public void castBuffOnCells(Buff buff, ArrayList<Cell> cells) {
+  //      ArrayList<Unit> inCellTroops = getIn
+    //}
 
 
-        if (buff.getPoison() > 0 || !victimUnit.isCantBePoisoned()) {
-            victimUnit.setHP(victimUnit.getHP() - buff.getWeaknessHP());
-            if (victimUnit.getHP() <= 0) {
+    public void castBuffOnUnits(Buff buff, ArrayList<Unit> units) {
+        for(Unit victimUnit: units){
+            if (buff.getDuration() <= 0) {
+                return;
+            }
+            victimUnit.setDamageChange(victimUnit.getDamageChange() + buff.getWeaknessHP());
+            victimUnit.setAP(victimUnit.getAP() - buff.getWeaknessAP());
+
+            if (buff.getPoison() > 0 || !victimUnit.isCantBePoisoned()) {
+                victimUnit.setHP(victimUnit.getHP() - buff.getWeaknessHP());
+                if (victimUnit.getHP() <= 0) {
+                    killUnit(victimUnit);
+                }
+            }
+
+            if (buff.isStun() && !victimUnit.isCantBeStunned()) {
+                victimUnit.setCanMove(false);
+            }
+
+            if (buff.isDisarm() && !victimUnit.isCantBeDisarmed()) {
+                victimUnit.setDisarm(true);
+            }
+            if (buff.getCancelBuff() > 0) {
+                cancelPositiveBuffs(victimUnit);
+            } else {
+                cancelNegativeBuffs(victimUnit);
+            }
+            if (buff.isDisarm()) {
+                victimUnit.setDisarm(true);
+            }
+            if (buff.isStun()) {
+                victimUnit.setStunned(true);
+            }
+            if (buff.isNoDamageFromWeakers()) {
+                victimUnit.setNoDamageFromWeakers(true);
+            }
+
+            if (buff.getWeaknessAP() > 10000) {
                 killUnit(victimUnit);
             }
-        }
-
-        if (buff.isStun() && !victimUnit.isCantBeStunned()) {
-            victimUnit.setCanMove(false);
-        }
-
-        if (buff.isDisarm() && !victimUnit.isCantBeDisarmed()) {
-            victimUnit.setDisarm(true);
-        }
-        if (buff.getCancelBuff() > 0) {
-            cancelPositiveBuffs(victimUnit);
-        } else {
-            cancelNegativeBuffs(victimUnit);
-        }
-        if (buff.isDisarm()) {
-            victimUnit.setDisarm(true);
-        }
-        if (buff.isStun()) {
-            victimUnit.setStunned(true);
-        }
-        if (buff.isNoDamageFromWeakers()) {
-            victimUnit.setNoDamageFromWeakers(true);
-        }
-
-        if (buff.getWeaknessAP() > 10000) {
-            killUnit(victimUnit);
         }
 
     }
 
     public void counterAttack(Unit attacker, Unit defender) {
         if (defender.isDisarm()) {
-            BattleLog.isDisarm();
+            return;
         }
         checkRangeForAttack(defender, attacker);
         if (!attacker.isNoBadEffect() && (attacker.isNoDamageFromWeakers() || defender.getAP() > attacker.getAP())) {
@@ -364,4 +512,5 @@ public class GameLogic {
         }
         return ap;
     }
+
 }
