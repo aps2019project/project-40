@@ -6,14 +6,14 @@
     {
       "spellName": "askhbous_weakers_no_damage",
       "buff": {
-        "duration" : 1,
-        "lasts" : true,
-        "noDamageFromWeakers" : true
+        "duration": 1,
+        "lasts": true,
+        "noDamageFromWeakers": true
       },
       "target": {
         "rowsAffected": 1,
         "columnsAffected": 1,
-        "isAffectMinion" : true
+        "isAffectMinion": true
       }
     }
   ],
@@ -21,6 +21,6 @@
   "AP": 8,
   "manaCost": 7,
   "price": 400,
-  "unitType" : "MELEE",
-  "specialPowerType" : "ON_DEFEND"
+  "unitType": "MELEE",
+  "specialPowerType": "ON_DEFEND"
 }

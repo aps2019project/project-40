@@ -7,13 +7,15 @@ public class TargetData {
     private ArrayList<Unit> units = new ArrayList<>();
     private ArrayList<Cell> cells = new ArrayList<>();
     private ArrayList<Account> accounts = new ArrayList<>();
+
     public TargetData(ArrayList<Unit> units) {
-        this.units= units;
+        this.units = units;
     }
 
-    public TargetData(){
+    public TargetData() {
 
     }
+
     public ArrayList<Card> getCards() {
         return cards;
     }

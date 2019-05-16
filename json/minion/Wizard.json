@@ -7,19 +7,19 @@
       "spellName": "wizard_AP_add",
       "buff": {
         "weaknessAP": -2,
-        "duration" : 1,
-        "lasts" : true,
+        "duration": 1,
+        "lasts": true,
         "continuous": true
       },
       "target": {
         "rowsAffected": 3,
-        "columnsAffected":  3,
+        "columnsAffected": 3,
         "targetType": {
           "isHybrid": true,
           "isRanged": true,
           "isMelee": true
         },
-        "isAffectMinion" : true,
+        "isAffectMinion": true,
         "isDependentToCardLocation": true
       }
     },
@@ -27,20 +27,20 @@
       "spellName": "wizard_HP_add",
       "buff": {
         "weaknessHP": 1,
-        "duration" : 1,
-        "lasts" : true,
+        "duration": 1,
+        "lasts": true,
         "continuous": true
       },
       "target": {
         "isDependentToCardLocation": true,
         "rowsAffected": 3,
-        "columnsAffected":  3,
+        "columnsAffected": 3,
         "targetType": {
           "isHybrid": true,
           "isRanged": true,
           "isMelee": true
         },
-        "isAffectMinion" : true
+        "isAffectMinion": true
       }
     }
   ],
@@ -48,7 +48,7 @@
   "AP": 4,
   "manaCost": 4,
   "price": 550,
-  "unitType" : "RANGED",
+  "unitType": "RANGED",
   "range": 3,
-  "specialPowerType" : "PASSIVE"
+  "specialPowerType": "PASSIVE"
 }

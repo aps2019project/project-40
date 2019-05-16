@@ -6,14 +6,14 @@
     {
       "spellName": "nane_sarma_stun",
       "buff": {
-        "stun" : true,
-        "duration" : 1
+        "stun": true,
+        "duration": 1
       },
       "target": {
-        "isDependentToCardLocation":  true,
+        "isDependentToCardLocation": true,
         "rowsAffected": 3,
         "columnsAffected": 3,
-        "isAffectMinion" : true,
+        "isAffectMinion": true,
         "targetType": {
           "isHybrid": true,
           "isRanged": true,
@@ -22,11 +22,11 @@
       }
     }
   ],
-  "HP" : 3,
-  "AP":  4,
+  "HP": 3,
+  "AP": 4,
   "manaCost": 3,
   "price": 500,
-  "unitType" : "RANGED",
-  "specialPowerType" : "ON_SPAWN",
-  "range" : 5
+  "unitType": "RANGED",
+  "specialPowerType": "ON_SPAWN",
+  "range": 5
 }
