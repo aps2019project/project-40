@@ -4,30 +4,34 @@ public class Cell {
 
     private Coordination coordination = new Coordination();
     private Card card;
+    private Card flag;
     private boolean isThereFlag = false;
 
-    public Card getCard() {
+    public Card getFlag() {
+        return flag;
+    }
 
+    public void setFlag(Card flag) {
+        this.flag = flag;
+    }
+
+    public Card getCard() {
         return card;
     }
 
     public void setCard(Card card) {
-
         this.card = card;
     }
 
     public boolean isThereFlag() {
-
         return isThereFlag;
     }
 
-    public void setThereFlag(boolean thereFlag) {
-
+    public void setThereIsFlag(boolean thereFlag) {
         isThereFlag = thereFlag;
     }
 
     public Coordination getCoordination() {
-
         return coordination;
     }
 

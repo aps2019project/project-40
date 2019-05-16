@@ -138,7 +138,7 @@ public class BattleController {
             return;
         }
 
-        //todo flag
+        //todo check flag
 
         gameLogic.moveProcess(card, destinationCell);
         BattleLog.logCardMoved(card.getCardID(),
@@ -320,7 +320,7 @@ public class BattleController {
                 return;
             }
             if (!battleLogicController.isCellAvailableForInsert(coordination)) return;
-            gameLogic.insertProcess(card, cell);
+            gameLogic.insertProcess((Unit) card, cell);
             BattleLog.logCardInserted(card.getCardName(), card.getCardID(),
                     cell.getCoordination().getRow(), cell.getCoordination().getColumn());
 
