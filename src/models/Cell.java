@@ -23,10 +23,6 @@ public class Cell {
         this.card = card;
     }
 
-    public boolean isThereFlag() {
-        return isThereFlag;
-    }
-
     public void setThereIsFlag(boolean thereFlag) {
         isThereFlag = thereFlag;
     }

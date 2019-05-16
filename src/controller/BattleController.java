@@ -174,7 +174,6 @@ public class BattleController {
             BattleLog.errorInvalidTarget();
             return;
         }
-        //todo f(unit, cell)
     }
 
     private void selectAndUseCardRequestAttackRanged(Unit attacker, Unit victim) {
@@ -410,38 +409,18 @@ public class BattleController {
         for (Cell[] row : cells) {
             for (Cell cell : row) {
 
-                try {
-                    Card card = cell.getCard();
-                    if (card.getType() == CardType.FLAG) {
+                if (cell.getFlag() != null) {
+
+                    if (cell.getCard() == null) {
 
                         gameInfoBattleViewHoldTheFlag.setFlagCoordination(cell.getCoordination());
+
+                    } else {
+
+                        gameInfoBattleViewHoldTheFlag.setFlagHolderName(cell.getCard().getCardName());
+                        gameInfoBattleViewHoldTheFlag.setFlagHolderTeam(cell.getCard().getTeam());
                         gameInfoBattleViewHoldTheFlag.show(gameInfoBattleViewHoldTheFlag);
-                        return;
                     }
-                } catch (NullPointerException e) {
-                    //there isn't flag in this cell
-                }
-            }
-        }
-
-        for (Cell[] row : cells) {
-            for (Cell cell : row) {
-
-                try {
-                    Card card = cell.getCard();
-
-                    if (card.getType() == CardType.HERO || card.getType() == CardType.MINION) {
-
-                        Unit unit = (Unit) card;
-                        if (unit.getFlag() > 0) {
-                            gameInfoBattleViewHoldTheFlag.setFlagHolderName(unit.getCardName());
-                            gameInfoBattleViewHoldTheFlag.setFlagHolderTeam(card.getTeam());
-                            gameInfoBattleViewHoldTheFlag.show(gameInfoBattleViewHoldTheFlag);
-                            return;
-                        }
-                    }
-                } catch (NullPointerException e) {
-                    //there isn't unit in this cell
                 }
             }
         }
@@ -454,23 +433,7 @@ public class BattleController {
         for (Cell[] row : cells) {
             for (Cell cell : row) {
 
-                try {
-                    Card card = cell.getCard();
 
-                    if (card.getType() == CardType.FLAG)
-                        gameInfoBattleViewCollectTheFlags.setFlagCoordination(cell.getCoordination());
-
-                    else if (card.getType() == CardType.MINION || card.getType() == CardType.HERO) {
-
-                        Unit unit = (Unit) card;
-
-                        if (unit.getFlag() > 0)
-                            gameInfoBattleViewCollectTheFlags.setFlagHolder(
-                                    unit.getCardName(), unit.getTeam(), unit.getFlag());
-                    }
-                } catch (NullPointerException e) {
-                    //there is any flag in this cell
-                }
             }
         }
         gameInfoBattleViewCollectTheFlags.show(gameInfoBattleViewCollectTheFlags);

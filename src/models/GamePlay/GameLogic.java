@@ -12,6 +12,7 @@ public class GameLogic {
 
     public final int PLAYER1_WINS = 1;
     public final int PLAYER2_WINS = 2;
+    public final int DRAW = 3;
     public final int MATCH_HAS_NOT_ENDED = 0;
     public final int NUMBER_OF_TURNS_TO_HOLD_THE_FLAG = 6;
 
@@ -69,10 +70,10 @@ public class GameLogic {
 
         Cell originCell = card.getCell();
 
-        if (match.getMatchType() == MatchType.HOLD_THE_FLAG && originCell.isThereFlag()) {
+        if (match.getMatchType() == MatchType.HOLD_THE_FLAG && originCell.getFlag() != null) {
 
-            originCell.setThereIsFlag(false);
-            destinationCell.setThereIsFlag(true);
+            destinationCell.setFlag(originCell.getFlag());
+            originCell.setFlag(null);
         }
 
         card.getCell().setCard(null);
@@ -98,33 +99,25 @@ public class GameLogic {
 
 
         if (match.getMatchType() == MatchType.KILL_THE_HERO)
-            return getMatchResultForKillTheHero(player1Units, player2Units);
+            return getMatchResultForKillTheHero();
 
         else if (match.getMatchType() == MatchType.HOLD_THE_FLAG)
-            return getMatchResultForHoldTheFlag(player1Units, player2Units);
+            return getMatchResultForHoldTheFlag();
 
         else if (match.getMatchType() == MatchType.COLLECT_THE_FLAGS)
-            return getMatchResultForCollectTheFlags(player1Units, player2Units);
+            return getMatchResultForCollectTheFlags();
 
         return MATCH_HAS_NOT_ENDED;
     }
 
-    private int getMatchResultForKillTheHero(ArrayList<Unit> player1Units, ArrayList<Unit> player2Units) {
+    private int getMatchResultForKillTheHero() {
 
-        for (Unit unit : player1Units) {
-            if (unit.getType() == CardType.HERO) {
+        int player1HeroHP = ((Unit) match.getPlayer1().getHand().getHero()).getHP();
+        int player2HeroHP = ((Unit) match.getPlayer2().getHand().getHero()).getHP();
 
-                if (unit.getHealthPoint() <= 0) return PLAYER2_WINS;
-                break;
-            }
-        }
-        for (Unit unit : player2Units) {
-            if (unit.getType() == CardType.HERO) {
-
-                if (unit.getHealthPoint() <= 0) return PLAYER1_WINS;
-                break;
-            }
-        }
+        if (player1HeroHP <= 0 && player2HeroHP <= 0)  return DRAW;
+        if (player1HeroHP <= 0) return PLAYER2_WINS;
+        if (player2HeroHP <= 0) return PLAYER1_WINS;
 
         return MATCH_HAS_NOT_ENDED;
     }
