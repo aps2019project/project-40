@@ -174,6 +174,7 @@ public class BattleController {
             BattleLog.errorInvalidTarget();
             return;
         }
+        gameLogic.attack(attacker, victim);
     }
 
     private void selectAndUseCardRequestAttackRanged(Unit attacker, Unit victim) {
@@ -184,11 +185,12 @@ public class BattleController {
             BattleLog.errorInvalidTarget();
             return;
         }
+        gameLogic.attack(attacker, victim);
     }
 
     private void selectAndUseCardRequestAttackHybrid(Unit attacker, Unit victim) {
 
-
+        gameLogic.attack(attacker, victim);
     }
 
     private void selectAndUseCardRequestAttackCombo(SelectAndUseCardRequest request) {
