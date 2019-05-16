@@ -42,8 +42,42 @@ public class Cell {
                 Math.abs(cell.coordination.getColumn() - coordination.getColumn()) < 2;
     }
 
-    public int manhattanDistance(Cell cell) {
-        return Math.abs(cell.coordination.getRow() - coordination.getRow()) +
-                Math.abs(cell.coordination.getColumn() - coordination.getColumn());
+    public static int getManhattanDistance(Cell start, Cell finish) {
+
+        int rowDifference = start.getCoordination().getRow() - finish.getCoordination().getRow();
+        int columnDifference = start.getCoordination().getColumn() - finish.getCoordination().getColumn();
+
+        return Math.abs(rowDifference) + Math.abs(columnDifference);
+    }
+
+    public static boolean isTargetCellAvailableForMeleeAttack(Cell attackerCell, Cell victimCell) {
+
+        int manhattanDistance = getManhattanDistance(attackerCell, victimCell);
+
+        if ((manhattanDistance <= 1 && manhattanDistance > 0) ||
+                isCellsDiagonalWith2ManhattanDistance(attackerCell, victimCell))
+
+            return true;
+        return false;
+    }
+
+    public static boolean isTargetCellAvailableForRangedAttack(Cell attackerCell, Cell victimCell, int attackRange) {
+
+        int manhattanDistance = getManhattanDistance(attackerCell, victimCell);
+
+        if (manhattanDistance > 1 && manhattanDistance <= attackRange &&
+                !isCellsDiagonalWith2ManhattanDistance(attackerCell, victimCell))
+
+            return true;
+        return false;
+
+    }
+
+    private static boolean isCellsDiagonalWith2ManhattanDistance(Cell cell1, Cell cell2) {
+
+        return
+                Math.abs(
+                        cell1.getCoordination().getRow() - cell2.getCoordination().getRow()) == 1 &&
+                        Math.abs(cell1.getCoordination().getColumn() - cell2.getCoordination().getColumn()) == 1;
     }
 }

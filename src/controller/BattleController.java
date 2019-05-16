@@ -77,7 +77,9 @@ public class BattleController {
             else if (request.isForAttack())
                 selectAndUseCardRequestAttack(request);
 
-            else if (request.isForAttackCombo()) ;
+            else if (request.isForAttackCombo())
+                selectAndUseCardRequestAttackCombo(request);
+
             else if (request.isForUseSpecialPower()) ;
 
         } else if (request.isForItem()) {
@@ -136,10 +138,13 @@ public class BattleController {
             return;
         }
 
+        //todo flag
+
         gameLogic.moveProcess(card, destinationCell);
         BattleLog.logCardMoved(card.getCardID(),
                 destinationCell.getCoordination().getRow(), destinationCell.getCoordination().getColumn());
-        //todo if there is flag in cell get that
+
+
     }
 
     private void selectAndUseCardRequestAttack(SelectAndUseCardRequest request) {
@@ -148,7 +153,7 @@ public class BattleController {
         Card victim = Collection.findCardByCardID(
                 gameLogic.getCardsInTablePlayerDoesNotPlayingThisTurn(), request.getOpponentCardID());
 
-        if (attacker == null || victim == null) {
+        if (attacker == null || victim == null || attacker.getTeam().equals(victim.getTeam())) {
             BattleLog.errorInvalidCardID();
             return;
         }
@@ -165,7 +170,7 @@ public class BattleController {
 
     private void selectAndUseCardRequestAttackMelee(Unit attacker, Unit victim) {
 
-        if (!battleLogicController.isTargetCellAvailableForMeleeAttack(attacker.getCell(), victim.getCell())) {
+        if (!Cell.isTargetCellAvailableForMeleeAttack(attacker.getCell(), victim.getCell())) {
             BattleLog.errorInvalidTarget();
             return;
         }
@@ -174,7 +179,7 @@ public class BattleController {
 
     private void selectAndUseCardRequestAttackRanged(Unit attacker, Unit victim) {
 
-        if (!battleLogicController.isTargetCellAvailableForRangedAttack(
+        if (!Cell.isTargetCellAvailableForRangedAttack(
                 attacker.getCell(), victim.getCell(), attacker.getRange())) {
 
             BattleLog.errorInvalidTarget();
