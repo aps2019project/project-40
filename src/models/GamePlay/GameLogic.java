@@ -219,7 +219,7 @@ public class GameLogic {
 
     }
 
-    public void cancelPositiveBuffs(Unit unit) {
+    private void cancelPositiveBuffs(Unit unit) {
         for (Buff buff : unit.getBuffs()) {
             if (buff.isPositive() && buff.getDuration() >= 0 && !buff.isLasts()) {
                 unit.removeBuff(buff);
@@ -227,7 +227,7 @@ public class GameLogic {
         }
     }
 
-    public void cancelNegativeBuffs(Unit unit) {
+    private void cancelNegativeBuffs(Unit unit) {
         for (Buff buff : unit.getBuffs()) {
             if (!buff.isPositive() && buff.getDuration() >= 0) {
                 unit.removeBuff(buff);
@@ -235,7 +235,7 @@ public class GameLogic {
         }
     }
 
-    public void killUnit(Unit unit) {
+    private void killUnit(Unit unit) {
         ActivateOnDeathSpells(unit);
         unit.getCell().setCard(null);
         unit.setCell(null);
@@ -248,7 +248,7 @@ public class GameLogic {
         }
     }
 
-    public void ActivateOnDeathSpells(Unit unit) {
+    private void ActivateOnDeathSpells(Unit unit) {
         Coordination coordination = new Coordination();
         coordination.setColumn(0);
         coordination.setRow(0);
@@ -261,7 +261,7 @@ public class GameLogic {
         }
     }
 
-    public void checkRangeForAttack(Unit attacker, Unit defender) {
+    private void checkRangeForAttack(Unit attacker, Unit defender) {
         if (attacker.getUnitType() == UnitType.MELEE) {
             if (!attacker.getCell().isAdjacent(defender.getCell())) {
                 throw new IllegalArgumentException("can't attack"); //
@@ -325,29 +325,29 @@ public class GameLogic {
             if (spell.getTarget().isAffectCells()) {
                 targetData.getCells().add(cell);
             }
-            Card unit =  cell.getCard();
+            Card unit = cell.getCard();
             if (unit != null) {
                 if (spell.getTarget().getTargetType().isHybrid() && ((Unit) unit).getUnitType() == UnitType.HYBRID) {
                     addUnitToTargetData(spell, targetData, (Unit) unit);
                 }
-                if (spell.getTarget().getTargetType().isMelee() &((Unit) unit).getUnitType() == UnitType.MELEE) {
+                if (spell.getTarget().getTargetType().isMelee() & ((Unit) unit).getUnitType() == UnitType.MELEE) {
                     addUnitToTargetData(spell, targetData, (Unit) unit);
                 }
                 if (spell.getTarget().getTargetType().isRanged() && ((Unit) unit).getUnitType() == UnitType.RANGED) {
                     addUnitToTargetData(spell, targetData, (Unit) unit);
                 }
             }
-            if (spell.getTarget().isAffectCells()){
+            if (spell.getTarget().isAffectCells()) {
                 targetData.getCells().add(cell);
             }
         }
     }
 
     private void addUnitToTargetData(Spell spell, TargetData targetData, Unit unit) {
-        if (spell.getTarget().isAffectHero() && ((Card) unit).getType() == CardType.HERO) {
+        if (spell.getTarget().isAffectHero() && unit.getType() == CardType.HERO) {
             targetData.getUnits().add(unit);
         }
-        if (spell.getTarget().isAffectMinion() && ((Card)unit).getType() == CardType.MINION) {
+        if (spell.getTarget().isAffectMinion() && unit.getType() == CardType.MINION) {
             targetData.getUnits().add(unit);
         }
     }
@@ -390,8 +390,7 @@ public class GameLogic {
         if (spell.getTarget().isDependentToCardLocation()) {
             centerPosition = new Coordination();
             centerPosition.copyCoordination(cardCell);
-        }
-        else {
+        } else {
             centerPosition = new Coordination();
             centerPosition.copyCoordination(clickCell);
         }
@@ -410,7 +409,7 @@ public class GameLogic {
 
     ///////////Target
 
-    public void applySpell(Spell spell, TargetData targetData) {
+    private void applySpell(Spell spell, TargetData targetData) {
         Buff buff = spell.getBuff();
         if (buff.getWaitingTime() > 0) {
             buff.setWaitingTime(buff.getWaitingTime() - 1);
@@ -418,7 +417,7 @@ public class GameLogic {
         }
 
         castBuffOnCards(buff, targetData.getCards());
-      //  castBuffOnCells(buff, targetData.getCells());
+        //  castBuffOnCells(buff, targetData.getCells());
         castBuffOnUnits(buff, targetData.getUnits());
         castBuffOnUsers(buff, targetData.getAccounts());
 
@@ -426,7 +425,7 @@ public class GameLogic {
     }
 
 
-    public void castBuffOnUsers(Buff buff, ArrayList<Account> accounts) {
+    private void castBuffOnUsers(Buff buff, ArrayList<Account> accounts) {
         String name = accounts.get(0).getUserName();
         if (match.player1.getUserName().equals(name)) {
             match.player1Mana += buff.getManaChange();
@@ -435,22 +434,77 @@ public class GameLogic {
         }
     }
 
-    public void castBuffOnCards(Buff buff, ArrayList<Card> cards) {
-        for (Card card:cards) {
+    private void castBuffOnCards(Buff buff, ArrayList<Card> cards) {
+        for (Card card : cards) {
             if (buff.getItemSpell() != null) {
                 card.addSpell(buff.getItemSpell());
+            }
         }
+
     }
 
-}
-
 //    public void castBuffOnCells(Buff buff, ArrayList<Cell> cells) {
-  //      ArrayList<Unit> inCellTroops = getIn
+    //      ArrayList<Unit> inCellTroops = getIn
     //}
 
 
-    public void castBuffOnUnits(Buff buff, ArrayList<Unit> units) {
-        for(Unit victimUnit: units){
+    private void useOnAttackSpells(Unit attacker, Unit defender) {
+        if (attacker.getSpecialPowerType() == SpecialPowerType.ON_ATTACK) {
+            for (Spell spell : attacker.getSpells()) {
+                if (spell.getSpecialPowerType() == null || spell.getSpecialPowerType() == SpecialPowerType.ON_ATTACK) {
+                    applySpell(spell, findTarget(spell, attacker.getCell(), attacker.getCell()
+                            , match.findPlayerDoesNotPlayingThisTurn().getHand().getHero().getCell()));
+                }
+            }
+        } else {
+            for (Spell spell : attacker.getSpells()) {
+                if (spell.getSpecialPowerType() == SpecialPowerType.ON_ATTACK) {
+                    applySpell(spell, findTarget(spell, attacker.getCell(), attacker.getCell()
+                            , match.findPlayerDoesNotPlayingThisTurn().getHand().getHero().getCell()));
+                }
+            }
+        }
+    }
+
+
+    private void useOnDefendSpells(Unit defender, Unit attacker) {
+        if (defender.getSpecialPowerType() == ON_DEFEND) {
+            for (Spell spell : attacker.getSpells()) {
+                if (spell.getSpecialPowerType() == null || spell.getSpecialPowerType() == ON_DEFEND) {
+                    applySpell(spell, findTarget(spell, attacker.getCell(), attacker.getCell()
+                            , match.findPlayerDoesNotPlayingThisTurn().getHand().getHero().getCell()));
+                }
+            }
+        } else {
+            for (Spell spell : attacker.getSpells()) {
+                if (spell.getSpecialPowerType() == ON_DEFEND) {
+                    applySpell(spell, findTarget(spell, attacker.getCell(), attacker.getCell()
+                            , match.findPlayerDoesNotPlayingThisTurn().getHand().getHero().getCell()));
+                }
+            }
+        }
+    }
+
+
+    private void attack(Unit attacker, Unit defender) {
+        if (!attacker.isCanAttack()) {
+            return;
+        }
+
+        if (!defender.isNoDamageFromWeakers() || attacker.getAP() > defender.getAP()) {
+            damage(attacker, defender);
+
+            attacker.setCanAttack(false);
+            attacker.setCanMove(false);
+
+            useOnAttackSpells(attacker, defender);
+            useOnDefendSpells(defender, attacker);
+            counterAttack(defender, attacker);
+        }    }
+
+
+    private void castBuffOnUnits(Buff buff, ArrayList<Unit> units) {
+        for (Unit victimUnit : units) {
             if (buff.getDuration() <= 0) {
                 return;
             }
@@ -493,7 +547,7 @@ public class GameLogic {
 
     }
 
-    public void counterAttack(Unit attacker, Unit defender) {
+    public void counterAttack(Unit defender, Unit attacker) {
         if (defender.isDisarm()) {
             return;
         }
@@ -504,7 +558,7 @@ public class GameLogic {
     }
 
 
-    public void damage(Unit attacker, Unit defender) {
+    private void damage(Unit attacker, Unit defender) {
         int ap = apCompute(attacker, defender);
         defender.setHP(defender.getHP() - ap);
         if (defender.getHP() <= 0) {
@@ -512,7 +566,7 @@ public class GameLogic {
         }
     }
 
-    public int apCompute(Unit attacker, Unit defender) {
+    private int apCompute(Unit attacker, Unit defender) {
         int ap = attacker.getAP();
         if (defender.getDamageChange() > 0) {
             ap += defender.getDamageChange();
