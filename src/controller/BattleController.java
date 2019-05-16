@@ -8,6 +8,9 @@ import request.battleRequest.BattleRequestChilds.*;
 import view.battleView.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
 
 public class BattleController {
 
@@ -74,7 +77,9 @@ public class BattleController {
             else if (request.isForAttack())
                 selectAndUseCardRequestAttack(request);
 
-            else if (request.isForAttackCombo()) ;
+            else if (request.isForAttackCombo())
+                selectAndUseCardRequestAttackCombo(request);
+
             else if (request.isForUseSpecialPower()) ;
 
         } else if (request.isForItem()) {
@@ -133,10 +138,13 @@ public class BattleController {
             return;
         }
 
+        //todo flag
+
         gameLogic.moveProcess(card, destinationCell);
         BattleLog.logCardMoved(card.getCardID(),
                 destinationCell.getCoordination().getRow(), destinationCell.getCoordination().getColumn());
-        //todo if there is flag in cell get that
+
+
     }
 
     private void selectAndUseCardRequestAttack(SelectAndUseCardRequest request) {
@@ -145,7 +153,7 @@ public class BattleController {
         Card victim = Collection.findCardByCardID(
                 gameLogic.getCardsInTablePlayerDoesNotPlayingThisTurn(), request.getOpponentCardID());
 
-        if (attacker == null || victim == null) {
+        if (attacker == null || victim == null || attacker.getTeam().equals(victim.getTeam())) {
             BattleLog.errorInvalidCardID();
             return;
         }
@@ -162,7 +170,7 @@ public class BattleController {
 
     private void selectAndUseCardRequestAttackMelee(Unit attacker, Unit victim) {
 
-        if (!battleLogicController.isTargetCellAvailableForMeleeAttack(attacker.getCell(), victim.getCell())) {
+        if (!Cell.isTargetCellAvailableForMeleeAttack(attacker.getCell(), victim.getCell())) {
             BattleLog.errorInvalidTarget();
             return;
         }
@@ -171,7 +179,7 @@ public class BattleController {
 
     private void selectAndUseCardRequestAttackRanged(Unit attacker, Unit victim) {
 
-        if (!battleLogicController.isTargetCellAvailableForRangedAttack(
+        if (!Cell.isTargetCellAvailableForRangedAttack(
                 attacker.getCell(), victim.getCell(), attacker.getRange())) {
 
             BattleLog.errorInvalidTarget();
@@ -216,6 +224,7 @@ public class BattleController {
 
 
     }
+
     private void selectAndUseCardRequestShowInfo(SelectAndUseCardRequest request, Card item) {
 
         ShowSelectedItemInfoBattleView showSelectedItemInfoBattleView = new ShowSelectedItemInfoBattleView();
@@ -311,7 +320,7 @@ public class BattleController {
                 return;
             }
             if (!battleLogicController.isCellAvailableForInsert(coordination)) return;
-            gameLogic.insertProcess((Unit) card, cell);
+            gameLogic.insertProcess(card, cell);
             BattleLog.logCardInserted(card.getCardName(), card.getCardID(),
                     cell.getCoordination().getRow(), cell.getCoordination().getColumn());
 
@@ -474,11 +483,7 @@ public class BattleController {
 
     private void showOpponentMinionsRequest() {
 
-        if (match.findPlayerPlayingThisTurn().equals(match.getPlayer1()))
-            showMinionsRequestCommonCode(match.getPlayer2());
-
-        else
-            showMinionsRequestCommonCode(match.getPlayer1());
+        showMinionsRequestCommonCode(match.findPlayerDoesNotPlayingThisTurn());
     }
 
     private void showMinionsRequestCommonCode(Account account) {
@@ -520,7 +525,8 @@ public class BattleController {
     private void showHandRequest() {
 
         ArrayList<Card> cards = match.findPlayerPlayingThisTurn().getHand().getHandCards();
-        cards.add(match.findPlayerPlayingThisTurn().getHand().getReserveCard());
+        if (match.findPlayerPlayingThisTurn().getHand().getReserveCard() != null)
+            cards.add(match.findPlayerPlayingThisTurn().getHand().getReserveCard());
         ShowCardsBattleView showCardsBattleView = new ShowCardsBattleView();
 
         for (Card card : cards)
@@ -532,7 +538,6 @@ public class BattleController {
     private void endTurnRequest() {
 
         gameLogic.switchTurn();
-        BattleLog.logTurnSwitched();
         BattleLog.logTurnForWho(match.findPlayerPlayingThisTurn().getUserName());
 
         if (match.getPlayer2().isAI() && match.getTurnNumber() % 2 == 0) playAI();
@@ -554,7 +559,15 @@ public class BattleController {
         BattleLogicController battleLogicController = BattleLogicController.getBattleLogicController();
         Card hero = match.getPlayer2().getHand().getHero();
 
-        for (int row = -2; row <= 2; row++) {
+        ArrayList<Integer> rows = new ArrayList<>();
+        rows.add(-2);
+        rows.add(-1);
+        rows.add(0);
+        rows.add(1);
+        rows.add(2);
+        Collections.shuffle(rows);
+
+        for (Integer row : rows) {
             for (int column = -2 + Math.abs(row); column <= 2 - Math.abs(row); column++) {
 
                 if (row == 0 && column == 0) continue;

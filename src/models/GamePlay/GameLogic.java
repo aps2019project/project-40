@@ -18,8 +18,7 @@ public class GameLogic {
     private Match match;
     int flagsNumber;
     int remainTurnToHoldingTheFlag; //todo initialize in dead and get
-    ArrayList<
-            Card> attackedCardsInATurn = new ArrayList<>();      //todo add attacker to array
+    ArrayList<Card> attackedCardsInATurn = new ArrayList<>();      //todo add attacker to array
     ArrayList<Card> movedCardsInATurn = new ArrayList<>();
     ArrayList<Card> cardsInTablePlayer1 = new ArrayList<>(); //todo fill that in game and delete when minion die
     ArrayList<Card> cardsInTablePlayer2 = new ArrayList<>();
@@ -154,18 +153,28 @@ public class GameLogic {
         return MATCH_HAS_NOT_ENDED;
     }
 
-    public void insertProcess(Unit unit, Cell cell) {
+    public void insertProcess(Card card, Cell cell) {
 
-        cell.setCard(unit);
-        unit.setCell(cell);
-        decrementMana(unit.getManaCost());
-        if (match.findPlayerPlayingThisTurn().equals(match.player1)) cardsInTablePlayer1.add(unit);
-        else cardsInTablePlayer2.add(unit);
+        cell.setCard(card);
+        card.setCell(cell);
+        decrementMana(card.getManaCost());
+
+        if (match.findPlayerPlayingThisTurn().equals(match.player1)) {
+
+            match.getPlayer1().getHand().removeFromHand(card);
+            cardsInTablePlayer1.add(card);
+        } else {
+
+            match.getPlayer2().getHand().removeFromHand(card);
+            cardsInTablePlayer2.add(card);
+        }
     }
 
     public void insertProcess(Spell spell, Cell cell) {
 
 
+        //todo
+        //todo some cell must fill and some cell must empty for poison
         decrementMana(spell.getManaCost());
     }
 
@@ -186,7 +195,7 @@ public class GameLogic {
 
         match.turnNumber++;
         manaHandler();
-        match.findPlayerPlayingThisTurn().getHand().fillHandEmptyPlace();
+        //match.findPlayerPlayingThisTurn().getHand().fillHandEmptyPlace();
         attackedCardsInATurn = new ArrayList<>();
         movedCardsInATurn = new ArrayList<>();
     }
@@ -198,7 +207,6 @@ public class GameLogic {
             if (match.turnNumber <= 15) {
                 match.initialPlayer1ManaInBeginningTurn++;
             }
-            System.err.println("mana player1 :" + match.initialPlayer1ManaInBeginningTurn);
             match.player1Mana = match.initialPlayer1ManaInBeginningTurn;
 
         } else {
@@ -206,7 +214,6 @@ public class GameLogic {
             if (match.turnNumber <= 14) {
                 match.initialPlayer2ManaInBeginningTurn++;
             }
-            System.err.println("mana player2 :" + match.initialPlayer2ManaInBeginningTurn);
             match.player2Mana = match.initialPlayer2ManaInBeginningTurn;
         }
 
