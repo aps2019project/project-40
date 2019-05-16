@@ -7,16 +7,16 @@
       "spellName": "piran_no_poison",
       "buff": {
         "noPoison": true,
-        "duration" : 1,
-        "lasts" : true
+        "duration": 1,
+        "lasts": true
       },
       "target": {
         "rowsAffected": 1,
-        "columnsAffected":  1,
+        "columnsAffected": 1,
         "targetType": {
           "isMelee": true
         },
-        "isAffectMinion" : true,
+        "isAffectMinion": true,
         "isDependentToCardLocation": true
       }
     }
@@ -25,6 +25,6 @@
   "AP": 12,
   "manaCost": 8,
   "price": 400,
-  "unitType" : "MELEE",
-  "specialPowerType" : "ON_DEFEND"
+  "unitType": "MELEE",
+  "specialPowerType": "ON_DEFEND"
 }

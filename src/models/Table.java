@@ -26,6 +26,7 @@ public class Table {
             }
         }
     }
+
     public boolean isInMap(int row, int column) {
         return row >= 0 && row < 5 && column >= 0 && column < 9;
     }

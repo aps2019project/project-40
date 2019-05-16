@@ -20,7 +20,7 @@
         },
         "isRandom": true,
         "isAffectMinion": true,
-        "isAffectHero" : true
+        "isAffectHero": true
       }
     }
   ]

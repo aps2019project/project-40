@@ -7,12 +7,12 @@
       "spellName": "gin_power",
       "buff": {
         "weaknessAP": -1,
-        "duration" : -1
+        "duration": -1
       },
       "target": {
         "rowsAffected": 10,
         "columnsAffected": 18,
-        "isAffectMinion" : true,
+        "isAffectMinion": true,
         "targetType": {
           "isHybrid": true,
           "isRanged": true,
@@ -25,7 +25,7 @@
   "AP": 4,
   "manaCost": 5,
   "price": 500,
-  "unitType" : "RANGED",
-  "specialPowerType" : "ON_SPAWN",
-  "range" : 4
+  "unitType": "RANGED",
+  "specialPowerType": "ON_SPAWN",
+  "range": 4
 }

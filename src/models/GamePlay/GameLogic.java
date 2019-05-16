@@ -1,7 +1,6 @@
 package models.GamePlay;
 
 import models.*;
-import view.battleView.BattleLog;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -115,7 +114,7 @@ public class GameLogic {
         int player1HeroHP = ((Unit) match.getPlayer1().getHand().getHero()).getHP();
         int player2HeroHP = ((Unit) match.getPlayer2().getHand().getHero()).getHP();
 
-        if (player1HeroHP <= 0 && player2HeroHP <= 0)  return DRAW;
+        if (player1HeroHP <= 0 && player2HeroHP <= 0) return DRAW;
         if (player1HeroHP <= 0) return PLAYER2_WINS;
         if (player2HeroHP <= 0) return PLAYER1_WINS;
 
@@ -498,7 +497,8 @@ public class GameLogic {
             useOnAttackSpells(attacker, defender);
             useOnDefendSpells(defender, attacker);
             counterAttack(defender, attacker);
-        }    }
+        }
+    }
 
 
     private void castBuffOnUnits(Buff buff, ArrayList<Unit> units) {

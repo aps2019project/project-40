@@ -34,7 +34,7 @@
       "target": {
         "isForDeck": true,
         "targetType": {
-          "isMelee" : true,
+          "isMelee": true,
           "isHybrid": true,
           "isRanged": true
         },

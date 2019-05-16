@@ -6,15 +6,15 @@
     {
       "spellName": "great_wizard_power",
       "buff": {
-        "weaknessAP" : -2,
-        "duration" : -1
+        "weaknessAP": -2,
+        "duration": -1
       },
       "target": {
-        "isDependentToCardLocation":  true,
+        "isDependentToCardLocation": true,
         "rowsAffected": 3,
         "columnsAffected": 3,
-        "isAffectMinion" : true,
-        "isTargetEnemy" : true,
+        "isAffectMinion": true,
+        "isTargetEnemy": true,
         "targetType": {
           "isHybrid": true,
           "isRanged": true,
@@ -25,14 +25,14 @@
     {
       "spellName": "great_wizard_holy",
       "buff": {
-        "damageChange" : -1,
-        "duration" : -1
+        "damageChange": -1,
+        "duration": -1
       },
       "target": {
-        "isDependentToCardLocation":  true,
+        "isDependentToCardLocation": true,
         "rowsAffected": 3,
         "columnsAffected": 3,
-        "isAffectMinion" : true,
+        "isAffectMinion": true,
         "targetType": {
           "isHybrid": true,
           "isRanged": true,
@@ -40,13 +40,12 @@
         }
       }
     }
-
   ],
-  "HP" : 6,
-  "AP":  6,
+  "HP": 6,
+  "AP": 6,
   "manaCost": 6,
   "price": 550,
-  "unitType" : "RANGED",
-  "specialPowerType" : "PASSIVE",
-  "range" : 5
+  "unitType": "RANGED",
+  "specialPowerType": "PASSIVE",
+  "range": 5
 }
