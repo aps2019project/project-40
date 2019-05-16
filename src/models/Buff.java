@@ -5,7 +5,6 @@ import java.io.Serializable;
 public class Buff implements Serializable {
     private int duration;
     private int holy;
-    private int power;
     private int poison;
     private int weaknessAP;
     private int weaknessHP;
@@ -29,7 +28,7 @@ public class Buff implements Serializable {
         duration -= 1;
     }
 
-    public Buff(int duration, int holy, int power, int poison, int weaknessAP,
+    public Buff(int duration, int holy, int poison, int weaknessAP,
                 int weaknessHP, boolean stun, boolean disarm,
                 int unholy, int cancelBuff, boolean applyWhenTurnEnds,
                 boolean lasts, int manaChange,
@@ -39,7 +38,6 @@ public class Buff implements Serializable {
                 boolean noPoison) {
         this.duration = duration;
         this.holy = holy;
-        this.power = power;
         this.poison = poison;
         this.weaknessAP = weaknessAP;
         this.weaknessHP = weaknessHP;
@@ -81,10 +79,6 @@ public class Buff implements Serializable {
 
     public int getHoly() {
         return holy;
-    }
-
-    public int getPower() {
-        return power;
     }
 
     public int getWeaknessHP() {

@@ -58,7 +58,7 @@ public class BattleLogicController {
     public boolean isCellAvailableForMove(Cell origin, Cell destination) {
 
         if (isCellFill(destination)) return false;
-        if (getManhattanDistance(origin, destination) > 2)
+        if (Cell.getManhattanDistance(origin, destination) > 2)
             return false;
         return true;
     }
@@ -68,14 +68,6 @@ public class BattleLogicController {
         if (unit.isCanMove())
             return true;
         return false;
-    }
-
-    public int getManhattanDistance(Cell start, Cell finish) {
-
-        int rowDifference = start.getCoordination().getRow() - finish.getCoordination().getRow();
-        int columnDifference = start.getCoordination().getColumn() - finish.getCoordination().getColumn();
-
-        return Math.abs(rowDifference) + Math.abs(columnDifference);
     }
 
     public boolean hasEnoughMana(Card card) {
@@ -106,7 +98,7 @@ public class BattleLogicController {
 
     public boolean isDirectionWithoutEnemyForMove(Cell origin, Cell destination) {
 
-        if (getManhattanDistance(origin, destination) == 2) {
+        if (Cell.getManhattanDistance(origin, destination) == 2) {
 
             if (Math.abs(origin.getCoordination().getRow() - destination.getCoordination().getRow()) == 1) {
                 //means direction is diagonal
@@ -172,36 +164,5 @@ public class BattleLogicController {
 
         BattleLog.errorCellNotAvailable();
         return false;
-    }
-
-    public boolean isTargetCellAvailableForMeleeAttack(Cell attackerCell, Cell victimCell) {
-
-        int manhattanDistance = getManhattanDistance(attackerCell, victimCell);
-
-        if ((manhattanDistance <= 1 && manhattanDistance > 0) ||
-                isCellsDiagonalWith2ManhattanDistance(attackerCell, victimCell))
-
-            return true;
-        return false;
-    }
-
-    public boolean isTargetCellAvailableForRangedAttack(Cell attackerCell, Cell victimCell, int attackRange) {
-
-        int manhattanDistance = getManhattanDistance(attackerCell, victimCell);
-
-        if (manhattanDistance > 1 && manhattanDistance <= attackRange &&
-                !isCellsDiagonalWith2ManhattanDistance(attackerCell, victimCell))
-
-            return true;
-        return false;
-
-    }
-
-    private boolean isCellsDiagonalWith2ManhattanDistance(Cell cell1, Cell cell2) {
-
-        return
-                Math.abs(
-                        cell1.getCoordination().getRow() - cell2.getCoordination().getRow()) == 1 &&
-                        Math.abs(cell1.getCoordination().getColumn() - cell2.getCoordination().getColumn()) == 1;
     }
 }

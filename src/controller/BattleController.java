@@ -77,7 +77,9 @@ public class BattleController {
             else if (request.isForAttack())
                 selectAndUseCardRequestAttack(request);
 
-            else if (request.isForAttackCombo()) ;
+            else if (request.isForAttackCombo())
+                selectAndUseCardRequestAttackCombo(request);
+
             else if (request.isForUseSpecialPower()) ;
 
         } else if (request.isForItem()) {
@@ -136,10 +138,13 @@ public class BattleController {
             return;
         }
 
+        //todo check flag
+
         gameLogic.moveProcess(card, destinationCell);
         BattleLog.logCardMoved(card.getCardID(),
                 destinationCell.getCoordination().getRow(), destinationCell.getCoordination().getColumn());
-        //todo if there is flag in cell get that
+
+
     }
 
     private void selectAndUseCardRequestAttack(SelectAndUseCardRequest request) {
@@ -148,7 +153,7 @@ public class BattleController {
         Card victim = Collection.findCardByCardID(
                 gameLogic.getCardsInTablePlayerDoesNotPlayingThisTurn(), request.getOpponentCardID());
 
-        if (attacker == null || victim == null) {
+        if (attacker == null || victim == null || attacker.getTeam().equals(victim.getTeam())) {
             BattleLog.errorInvalidCardID();
             return;
         }
@@ -165,26 +170,27 @@ public class BattleController {
 
     private void selectAndUseCardRequestAttackMelee(Unit attacker, Unit victim) {
 
-        if (!battleLogicController.isTargetCellAvailableForMeleeAttack(attacker.getCell(), victim.getCell())) {
+        if (!Cell.isTargetCellAvailableForMeleeAttack(attacker.getCell(), victim.getCell())) {
             BattleLog.errorInvalidTarget();
             return;
         }
-        //todo f(unit, cell)
+        gameLogic.attack(attacker, victim);
     }
 
     private void selectAndUseCardRequestAttackRanged(Unit attacker, Unit victim) {
 
-        if (!battleLogicController.isTargetCellAvailableForRangedAttack(
+        if (!Cell.isTargetCellAvailableForRangedAttack(
                 attacker.getCell(), victim.getCell(), attacker.getRange())) {
 
             BattleLog.errorInvalidTarget();
             return;
         }
+        gameLogic.attack(attacker, victim);
     }
 
     private void selectAndUseCardRequestAttackHybrid(Unit attacker, Unit victim) {
 
-
+        gameLogic.attack(attacker, victim);
     }
 
     private void selectAndUseCardRequestAttackCombo(SelectAndUseCardRequest request) {
@@ -315,7 +321,7 @@ public class BattleController {
                 return;
             }
             if (!battleLogicController.isCellAvailableForInsert(coordination)) return;
-            gameLogic.insertProcess(card, cell);
+            gameLogic.insertProcess((Unit) card, cell);
             BattleLog.logCardInserted(card.getCardName(), card.getCardID(),
                     cell.getCoordination().getRow(), cell.getCoordination().getColumn());
 
@@ -405,38 +411,18 @@ public class BattleController {
         for (Cell[] row : cells) {
             for (Cell cell : row) {
 
-                try {
-                    Card card = cell.getCard();
-                    if (card.getType() == CardType.FLAG) {
+                if (cell.getFlag() != null) {
+
+                    if (cell.getCard() == null) {
 
                         gameInfoBattleViewHoldTheFlag.setFlagCoordination(cell.getCoordination());
+
+                    } else {
+
+                        gameInfoBattleViewHoldTheFlag.setFlagHolderName(cell.getCard().getCardName());
+                        gameInfoBattleViewHoldTheFlag.setFlagHolderTeam(cell.getCard().getTeam());
                         gameInfoBattleViewHoldTheFlag.show(gameInfoBattleViewHoldTheFlag);
-                        return;
                     }
-                } catch (NullPointerException e) {
-                    //there isn't flag in this cell
-                }
-            }
-        }
-
-        for (Cell[] row : cells) {
-            for (Cell cell : row) {
-
-                try {
-                    Card card = cell.getCard();
-
-                    if (card.getType() == CardType.HERO || card.getType() == CardType.MINION) {
-
-                        Unit unit = (Unit) card;
-                        if (unit.getFlag() > 0) {
-                            gameInfoBattleViewHoldTheFlag.setFlagHolderName(unit.getCardName());
-                            gameInfoBattleViewHoldTheFlag.setFlagHolderTeam(card.getTeam());
-                            gameInfoBattleViewHoldTheFlag.show(gameInfoBattleViewHoldTheFlag);
-                            return;
-                        }
-                    }
-                } catch (NullPointerException e) {
-                    //there isn't unit in this cell
                 }
             }
         }
@@ -449,23 +435,7 @@ public class BattleController {
         for (Cell[] row : cells) {
             for (Cell cell : row) {
 
-                try {
-                    Card card = cell.getCard();
 
-                    if (card.getType() == CardType.FLAG)
-                        gameInfoBattleViewCollectTheFlags.setFlagCoordination(cell.getCoordination());
-
-                    else if (card.getType() == CardType.MINION || card.getType() == CardType.HERO) {
-
-                        Unit unit = (Unit) card;
-
-                        if (unit.getFlag() > 0)
-                            gameInfoBattleViewCollectTheFlags.setFlagHolder(
-                                    unit.getCardName(), unit.getTeam(), unit.getFlag());
-                    }
-                } catch (NullPointerException e) {
-                    //there is any flag in this cell
-                }
             }
         }
         gameInfoBattleViewCollectTheFlags.show(gameInfoBattleViewCollectTheFlags);

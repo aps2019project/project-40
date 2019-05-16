@@ -54,6 +54,8 @@ public class Target {
         return targetType;
     }
 
+
+
     public boolean isAffectHero() {
         return isAffectHero;
     }

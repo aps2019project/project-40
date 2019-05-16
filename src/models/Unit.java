@@ -11,7 +11,6 @@ public class Unit extends Card implements Serializable {
     private Spell specialPower;
     private UnitType unitType;
     private boolean combo;
-    private int flag;
     private int range;
     private boolean canMove;
     private boolean canAttack;
@@ -27,7 +26,7 @@ public class Unit extends Card implements Serializable {
     Unit(int manaCost, int price, int HP, int AP, UnitType unitType,
          String name, ArrayList<Spell> spells, String description, CardType type,
          SpecialPowerType specialPowerType,
-         boolean combo, int flag, int range, Cell cell, boolean canMove,
+         boolean combo, int range, Cell cell, boolean canMove,
          boolean canAttack, boolean cantBeStunned, boolean cantBeDisarmed,
          boolean cantBePoisoned) {
         super(manaCost, price, name, spells, description, type, cell);
@@ -36,7 +35,6 @@ public class Unit extends Card implements Serializable {
         this.specialPowerType = specialPowerType;
         this.combo = combo;
         this.unitType = unitType;
-        this.flag = flag;
         this.range = range;
         this.canMove = canMove;
         this.canAttack = canAttack;
@@ -71,10 +69,6 @@ public class Unit extends Card implements Serializable {
 
     public void addBuff(Buff buff) {
         this.buffs.add(buff);
-    }
-
-    public int getFlag() {
-        return flag;
     }
 
     public int getRange() {

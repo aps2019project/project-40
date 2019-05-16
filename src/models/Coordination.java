@@ -31,4 +31,8 @@ public class Coordination {
         coordination.setColumn(column);
         return coordination;
     }
+    public void copyCoordination(Cell cell){
+        row = cell.getCoordination().row;
+        column = cell.getCoordination().column;
+    }
 }

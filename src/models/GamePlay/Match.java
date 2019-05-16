@@ -129,8 +129,9 @@ public class Match {
 
         initializeTableModeKillTheHero();
 
-        Card flag = new Card(0, 0, "flag", null, "", CardType.FLAG, null);
-        table.getCells()[2][4].setCard(flag);
+        Card flag = new Card(
+                0, 0, "flag", null, "", CardType.FLAG, table.getCells()[2][4]);
+        table.getCells()[2][4].setFlag(flag);
     }
 
     private void initializeTableModeCollectTheFlag(int numberOfFlags) {
@@ -155,8 +156,9 @@ public class Match {
         }
 
         for (int i = 0; i < numberOfFlags; i++) {
-            Card flag = new Card(0, 0, "flag", null, "", CardType.FLAG, null);
-            table.getCells()[randomRow[i]][randomColumn[i]].setCard(flag);
+            Card flag = new Card(0, 0, "flag_" + i + 1, null,
+                    "", CardType.FLAG, table.getCells()[randomRow[i]][randomColumn[i]]);
+            table.getCells()[randomRow[i]][randomColumn[i]].setFlag(flag);
         }
     }
 }
