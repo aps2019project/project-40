@@ -17,6 +17,7 @@ public class GameLogic {
     private Match match;
     int flagsNumber;
     int remainTurnToHoldingTheFlag; //todo initialize in dead and get
+
     ArrayList<Card> attackedCardsInATurn = new ArrayList<>();      //todo add attacker to array
     ArrayList<Card> movedCardsInATurn = new ArrayList<>();
     ArrayList<Card> cardsInTablePlayer1 = new ArrayList<>(); //todo fill that in game and delete when minion die
@@ -63,11 +64,19 @@ public class GameLogic {
         this.match = match;
     }
 
-    public void moveProcess(Card card, Cell cell) {
+    public void moveProcess(Card card, Cell destinationCell) {
+
+        Cell originCell = card.getCell();
+
+        if (match.getMatchType() == MatchType.HOLD_THE_FLAG && originCell.isThereFlag()) {
+
+            originCell.setThereIsFlag(false);
+            destinationCell.setThereIsFlag(true);
+        }
 
         card.getCell().setCard(null);
-        cell.setCard(card);
-        card.setCell(cell);
+        destinationCell.setCard(card);
+        card.setCell(destinationCell);
         movedCardsInATurn.add(card);
     }
 
@@ -119,53 +128,49 @@ public class GameLogic {
         return MATCH_HAS_NOT_ENDED;
     }
 
-    private int getMatchResultForHoldTheFlag(ArrayList<Unit> player1Units, ArrayList<Unit> player2Units) {
+    private int getMatchResultForHoldTheFlag() {
 
-        if (remainTurnToHoldingTheFlag <= 0) {
-            //todo refactor it
-            for (Unit unit : player1Units)
-                if (unit.getFlag() > 0)
-                    return PLAYER1_WINS;
+        //todo benevis bere
+        return MATCH_HAS_NOT_ENDED;
+    }
 
-            for (Unit unit : player2Units)
-                if (unit.getFlag() > 0)
-                    return PLAYER2_WINS;
+    private int getMatchResultForCollectTheFlags() {
 
+        Cell[][] cells = match.getTable().getCells();
+        int player1Flag = 0, player2Flag = 0;
+
+        for (Cell[] row : cells) {
+            for (Cell cell : row) {
+
+                if (cell.getFlag() != null && cell.getCard() != null) {
+
+                    if (cell.getCard().getTeam().equals(match.player1.getUserName()))
+                        player1Flag++;
+
+                    else player2Flag++;
+                }
+            }
         }
 
+        if (player1Flag >= Math.ceil(NUMBER_OF_TURNS_TO_HOLD_THE_FLAG / 2)) return PLAYER1_WINS;
+        if (player2Flag >= Math.ceil(NUMBER_OF_TURNS_TO_HOLD_THE_FLAG / 2)) return PLAYER2_WINS;
         return MATCH_HAS_NOT_ENDED;
     }
 
-    private int getMatchResultForCollectTheFlags(ArrayList<Unit> player1Units, ArrayList<Unit> player2Units) {
+    public void insertProcess(Unit unit, Cell cell) {
 
-        int sumOfPlayer1Flag = 0, sumOfPlayer2Flag = 0;
-
-        for (Unit unit : player1Units)
-            sumOfPlayer1Flag += unit.getFlag();
-
-        for (Unit unit : player2Units)
-            sumOfPlayer2Flag += unit.getFlag();
-
-        if (sumOfPlayer1Flag >= Math.ceil(flagsNumber / 2)) return PLAYER1_WINS;
-        if (sumOfPlayer2Flag >= Math.ceil(flagsNumber / 2)) return PLAYER2_WINS;
-
-        return MATCH_HAS_NOT_ENDED;
-    }
-
-    public void insertProcess(Card card, Cell cell) {
-
-        cell.setCard(card);
-        card.setCell(cell);
-        decrementMana(card.getManaCost());
+        cell.setCard(unit);
+        unit.setCell(cell);
+        decrementMana(unit.getManaCost());
 
         if (match.findPlayerPlayingThisTurn().equals(match.player1)) {
 
-            match.getPlayer1().getHand().removeFromHand(card);
-            cardsInTablePlayer1.add(card);
+            match.getPlayer1().getHand().removeFromHand(unit);
+            cardsInTablePlayer1.add(unit);
         } else {
 
-            match.getPlayer2().getHand().removeFromHand(card);
-            cardsInTablePlayer2.add(card);
+            match.getPlayer2().getHand().removeFromHand(unit);
+            cardsInTablePlayer2.add(unit);
         }
     }
 
