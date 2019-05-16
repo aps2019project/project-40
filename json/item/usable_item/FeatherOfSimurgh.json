@@ -17,10 +17,10 @@
           "isRanged": true
         },
         "isRandom": true,
-        "isTargetEnemy" : true,
-        "isAffectHero" : true
+        "isTargetEnemy": true,
+        "isAffectHero": true
       }
     }
   ],
-  "price" : 3500
+  "price": 3500
 }

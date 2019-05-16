@@ -6,24 +6,24 @@
     {
       "spellName": "steel_armored_holy",
       "buff": {
-        "damageChange" : -12,
-        "duration" : -1
+        "damageChange": -12,
+        "duration": -1
       },
       "target": {
-        "isDependentToCardLocation":  true,
+        "isDependentToCardLocation": true,
         "rowsAffected": 3,
         "columnsAffected": 3,
-        "isAffectMinion" : true,
+        "isAffectMinion": true,
         "targetType": {
           "isMelee": true
         }
       }
     }
   ],
-  "HP" : 1,
-  "AP":  1,
+  "HP": 1,
+  "AP": 1,
   "manaCost": 3,
   "price": 650,
-  "unitType" : "MELEE",
-  "specialPowerType" : "PASSIVE "
+  "unitType": "MELEE",
+  "specialPowerType": "PASSIVE "
 }

@@ -7,15 +7,15 @@
       "spellName": "one_eye_ghool_on_death",
       "buff": {
         "weaknessHP": 2,
-        "duration" : 1,
-        "lasts" : true
+        "duration": 1,
+        "lasts": true
       },
       "target": {
-        "isDependentToCardLocation":  true,
+        "isDependentToCardLocation": true,
         "rowsAffected": 3,
         "columnsAffected": 3,
-        "isTargetEnemy" : true,
-        "isAffectMinion" : true,
+        "isTargetEnemy": true,
+        "isAffectMinion": true,
         "targetType": {
           "isHybrid": true,
           "isRanged": true,
@@ -28,7 +28,7 @@
   "AP": 11,
   "manaCost": 7,
   "price": 500,
-  "unitType" : "HYBRID",
-  "specialPowerType" : "ON_DEATH",
-  "range" : 3
+  "unitType": "HYBRID",
+  "specialPowerType": "ON_DEATH",
+  "range": 3
 }

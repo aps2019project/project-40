@@ -16,7 +16,7 @@
             "lasts": true
           },
           "target": {
-            "isRandom" : true,
+            "isRandom": true,
             "rowsAffected": 3,
             "columnsAffected": 3,
             "isTargetEnemy": true,
@@ -26,13 +26,13 @@
               "isMelee": true
             },
             "isAffectHero": true,
-            "isAffectMinion" : true
+            "isAffectMinion": true
           },
           "specialPowerType": "ON_DEATH"
         }
       },
       "target": {
-        "isRandom" : true,
+        "isRandom": true,
         "rowsAffected": 5,
         "columnsAffected": 9,
         "targetType": {
