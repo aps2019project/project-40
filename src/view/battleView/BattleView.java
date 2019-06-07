@@ -88,8 +88,8 @@ public class BattleView {
 
     private void showGameInfoModeHoldTheFlag(GameInfoBattleViewHoldTheFlag gameInfo) {
 
-        System.out.println("There is a flag in row : " + gameInfo.getFlagCoordination().getRow() +
-                " and column : " + gameInfo.getFlagCoordination().getColumn());
+        System.out.println("There is a flag in (" + gameInfo.getFlagCoordination().getRow() +
+                "," + gameInfo.getFlagCoordination().getColumn() + ")");
 
         if (gameInfo.getFlagHolderTeam() != null || gameInfo.getFlagHolderName() != null) {
 

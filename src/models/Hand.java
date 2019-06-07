@@ -7,13 +7,12 @@ import java.util.ArrayList;
 
 public class Hand implements Serializable {
 
-    private ArrayList<Card> deck = new ArrayList<>(); //todo add main deck to this deck
+    private ArrayList<Card> deck = new ArrayList<>();
     private ArrayList<Card> handCards = new ArrayList<>();
     private Card hero;
     private Card reserveCard;
     private Card selectedCard;
     private ArrayList<Card> collectedItems = new ArrayList<>();
-    private final int MAX_HANDS_CARD = 5;
 
     public ArrayList<Card> getDeck() {
 
@@ -84,13 +83,13 @@ public class Hand implements Serializable {
                 deck.remove(0);
             } catch (ArrayIndexOutOfBoundsException e) {
                 BattleLog.errorDeckOut();
+                reserveCard = null;
             }
         }
     }
 
     private boolean isThereEmptyPlace() {
-
-        return handCards.size() < MAX_HANDS_CARD;
+        return handCards.size() < 5 ;   //maximum of the hand's card
     }
 
     public void removeFromHand(Card card) {

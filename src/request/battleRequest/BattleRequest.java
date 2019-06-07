@@ -37,7 +37,7 @@ public class BattleRequest extends Request {
             if (command.matches("show card info \\w+"))
                 return showCardInfo(command);
 
-            if (command.matches("select \\.+")) {
+            if (command.matches("select .+")) {
 
                 BattleRequest request = select(command);
                 if (request != null) return request;
@@ -96,10 +96,10 @@ public class BattleRequest extends Request {
             if (secondCommand.matches("move to \\(\\d+,\\d+\\)"))
                 return moveTo(secondCommand, selectAndUseCardRequest);
 
-            if (secondCommand.matches("attack \\.+"))
+            if (secondCommand.matches("attack .+"))
                 return attack(secondCommand, selectAndUseCardRequest);
 
-            if (secondCommand.matches("attack combo \\.+( \\.+)+"))
+            if (secondCommand.matches("attack combo .+( .+)+"))
                 return attackCombo(secondCommand, selectAndUseCardRequest);
 
             if (command.matches("use special power \\(\\d+,\\d+\\)"))

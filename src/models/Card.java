@@ -10,7 +10,7 @@ public class Card implements Serializable, Cloneable {
     private String cardID;
     private String cardName;
     private String team;
-    private ArrayList<Spell> spells = new ArrayList<>();
+    private ArrayList<Spell> spells;
     private String description;
     private CardType type;
     private Cell cell;

@@ -62,7 +62,10 @@ public class JsonToCard {
         for (File listOfFile : listOfFiles) {
             try (Reader reader = new FileReader(listOfFile)) {
 
-                Card unit = gson.fromJson(reader, Unit.class);
+                Unit unit = gson.fromJson(reader, Unit.class);
+                Card card = unit;
+                System.out.println(unit.getCardName());
+                System.out.println( card.getSpells());
                 collection.addCardToCollection(unit);
             } catch (IOException e) {
                 e.printStackTrace();
