@@ -65,7 +65,8 @@ public class Spell extends Card implements Serializable {
     public String toString() {
         return super.toString();
     }
-    public Spell(){
+
+    public Spell() {
 
     }
 }

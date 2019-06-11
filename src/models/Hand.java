@@ -89,7 +89,7 @@ public class Hand implements Serializable {
     }
 
     private boolean isThereEmptyPlace() {
-        return handCards.size() < 5 ;   //maximum of the hand's card
+        return handCards.size() < 5;   //maximum of the hand's card
     }
 
     public void removeFromHand(Card card) {

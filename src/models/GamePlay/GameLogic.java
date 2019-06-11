@@ -497,9 +497,9 @@ public class GameLogic {
 
 
     public void attack(Unit attacker, Unit defender) {
-    //    if (!attacker.isCanAttack()) {
-      //      return;
-       // }
+        //    if (!attacker.isCanAttack()) {
+        //      return;
+        // }
 
         if (!(defender.isNoDamageFromWeakers() || attacker.getAP() > defender.getAP())) {
             damage(attacker, defender);

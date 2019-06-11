@@ -1,6 +1,8 @@
 package models;
 
-public class TargetType {
+import java.io.Serializable;
+
+public class TargetType  implements Serializable {
     private boolean isHybrid;
     private boolean isRanged;
     private boolean isMelee;

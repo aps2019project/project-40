@@ -1,8 +1,9 @@
 package models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class TargetData {
+public class TargetData  implements Serializable {
     private ArrayList<Card> cards = new ArrayList<>();
     private ArrayList<Unit> units = new ArrayList<>();
     private ArrayList<Cell> cells = new ArrayList<>();

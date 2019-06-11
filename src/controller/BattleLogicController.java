@@ -58,16 +58,12 @@ public class BattleLogicController {
     public boolean isCellAvailableForMove(Cell origin, Cell destination) {
 
         if (isCellFill(destination)) return false;
-        if (Cell.getManhattanDistance(origin, destination) > 2)
-            return false;
-        return true;
+        return Cell.getManhattanDistance(origin, destination) <= 2;
     }
 
     public boolean isUnitStunned(Unit unit) {
 
-        if (unit.isCanMove())
-            return true;
-        return false;
+        return unit.isCanMove();
     }
 
     public boolean hasEnoughMana(Card card) {
@@ -84,16 +80,13 @@ public class BattleLogicController {
 
     public boolean isOutOfTable(Coordination coordination) {
 
-        if (coordination.getRow() >= Table.ROWS || coordination.getRow() < 0 ||
-                coordination.getColumn() >= Table.COLUMNS || coordination.getColumn() < 0)
-            return true;
-        return false;
+        return coordination.getRow() >= Table.ROWS || coordination.getRow() < 0 ||
+                coordination.getColumn() >= Table.COLUMNS || coordination.getColumn() < 0;
     }
 
     public boolean isCellFill(Cell cell) {
 
-        if (cell.getCard() == null) return false;
-        return true;
+        return cell.getCard() != null;
     }
 
     public boolean isDirectionWithoutEnemyForMove(Cell origin, Cell destination) {

@@ -1,6 +1,8 @@
 package models;
 
-public class Target {
+import java.io.Serializable;
+
+public class Target  implements Serializable {
     final int MAP_ROWS = 5;
     final int MAP_Columns = 9;
     private int rowsAffected;

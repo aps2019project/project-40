@@ -82,6 +82,7 @@ public class JsonToCard {
             }
         }
     }
+
     private static void saveCards(Gson gson, Collection collection, File folder) {
         File[] listOfFiles = folder.listFiles();
         for (File listOfFile : listOfFiles) {

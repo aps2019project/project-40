@@ -54,22 +54,16 @@ public class Cell {
 
         int manhattanDistance = getManhattanDistance(attackerCell, victimCell);
 
-        if ((manhattanDistance <= 1 && manhattanDistance > 0) ||
-                isCellsDiagonalWith2ManhattanDistance(attackerCell, victimCell))
-
-            return true;
-        return false;
+        return (manhattanDistance <= 1 && manhattanDistance > 0) ||
+                isCellsDiagonalWith2ManhattanDistance(attackerCell, victimCell);
     }
 
     public static boolean isTargetCellAvailableForRangedAttack(Cell attackerCell, Cell victimCell, int attackRange) {
 
         int manhattanDistance = getManhattanDistance(attackerCell, victimCell);
 
-        if (manhattanDistance > 1 && manhattanDistance <= attackRange &&
-                !isCellsDiagonalWith2ManhattanDistance(attackerCell, victimCell))
-
-            return true;
-        return false;
+        return manhattanDistance > 1 && manhattanDistance <= attackRange &&
+                !isCellsDiagonalWith2ManhattanDistance(attackerCell, victimCell);
 
     }
 

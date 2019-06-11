@@ -42,7 +42,8 @@ public class Card implements Serializable, Cloneable {
     public int getManaCost() {
         return manaCost;
     }
-    public Card(){
+
+    public Card() {
 
     }
 
