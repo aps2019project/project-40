@@ -13,61 +13,52 @@ public class Match {
     private MatchType matchType;
     private GameLogic gameLogic;
     int turnNumber = 1;
-    int player1Mana = 2, player2Mana = 2, initialPlayer1ManaInBeginningTurn = 2, initialPlayer2ManaInBeginningTurn = 2;
+    int player1Mana = 2, player2Mana = 2;
+    int initialPlayer1ManaInBeginningOfEachTurn = 2, initialPlayer2ManaInBeginningOfEachTurn = 2;
 
     public Account getPlayer1() {
-
         return player1;
     }
 
     public Account getPlayer2() {
-
         return player2;
     }
 
     public Table getTable() {
-
         return table;
     }
 
     public MatchType getMatchType() {
-
         return matchType;
     }
 
     public GameLogic getGameLogic() {
-
         return gameLogic;
     }
 
     public int getPlayer1Mana() {
-
         return player1Mana;
     }
 
     public int getPlayer2Mana() {
-
         return player2Mana;
     }
 
     public GraveYard getPlayer1GraveYard() {
-
         return Player1GraveYard;
     }
 
     public GraveYard getPlayer2GraveYard() {
-
         return Player2GraveYard;
     }
 
     public int getTurnNumber() {
-
         return turnNumber;
     }
 
     public Match(MatchType matchType, Account player1, Account player2) {
 
-        //for "kill the hero" and "hold the flag"
+        //Constructor for "kill the hero" and "hold the flag"
         this.matchType = matchType;
         this.player1 = player1;
         this.player2 = player2;
@@ -80,7 +71,7 @@ public class Match {
 
     public Match(int flagsNumber, Account player1, Account player2) {
 
-        //for "collect the flag"
+        //Constructor for "collect the flag"
         matchType = MatchType.COLLECT_THE_FLAGS;
         this.player1 = player1;
         this.player2 = player2;
@@ -127,6 +118,7 @@ public class Match {
 
     private void initializeTableModeHoldTheFlag() {
 
+        //for put hero on table
         initializeTableModeKillTheHero();
 
         Card flag = new Card(
@@ -136,16 +128,19 @@ public class Match {
 
     private void initializeTableModeCollectTheFlag(int numberOfFlags) {
 
+        //for put hero on table
         initializeTableModeKillTheHero();
 
         Random random = new Random();
 
         int[] randomRow = new int[numberOfFlags], randomColumn = new int[numberOfFlags];
+
         for (int i = 0; i < numberOfFlags; i++) {
+
             randomColumn[i] = random.nextInt(9);
             randomRow[i] = random.nextInt(5);
 
-            for (int j = 0; j < i; j++)
+            for (int j = 0; j < i; j++) {
                 if (randomColumn[i] == randomColumn[j] && randomRow[i] == randomRow[j]) {
                     i--;
                     break;
@@ -153,6 +148,7 @@ public class Match {
                     i--;
                     break;
                 }
+            }
         }
 
         for (int i = 0; i < numberOfFlags; i++) {

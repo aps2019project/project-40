@@ -36,6 +36,7 @@ public class BattleController {
         battleLogicController = BattleLogicController.getBattleLogicController();
         battleLogicController.setGameLogic(gameLogic);
         battleLogicController.setMatch(match);
+        BattleLog.logTurnForWho(match.findPlayerPlayingThisTurn().getUserName());
         manageRequest();
     }
 
@@ -172,6 +173,7 @@ public class BattleController {
             BattleLog.errorInvalidTarget();
             return;
         }
+        System.err.println(attacker.getTeam() + " " + victim.getTeam());
         gameLogic.attack(attacker, victim);
     }
 
@@ -322,7 +324,6 @@ public class BattleController {
             gameLogic.insertProcess((Unit) card, cell);
             BattleLog.logCardInserted(card.getCardName(), card.getCardID(),
                     cell.getCoordination().getRow(), cell.getCoordination().getColumn());
-
         } else {
             //TODO isTargetValid?
             gameLogic.insertProcess((Spell) card, cell);
@@ -353,7 +354,7 @@ public class BattleController {
             showCollectedItemRequest();
 
         else if (request.getEnumRequest() == RequestWithoutVariableEnum.END_GAME_REQUEST)
-            isEndedGame = true;
+            isEndedGame = false;
 
         else if (request.getEnumRequest() == RequestWithoutVariableEnum.HELP_REQUEST)
             BattleLog.showHelp();
@@ -405,6 +406,8 @@ public class BattleController {
     private void gameInfoRequestHoldTheFlagMode(Cell[][] cells) {
 
         GameInfoBattleViewHoldTheFlag gameInfoBattleViewHoldTheFlag = new GameInfoBattleViewHoldTheFlag();
+        gameInfoBattleViewHoldTheFlag.setPlayer1Mana(match.getPlayer1Mana());
+        gameInfoBattleViewHoldTheFlag.setPlayer2Mana(match.getPlayer2Mana());
 
         for (Cell[] row : cells) {
             for (Cell cell : row) {
@@ -424,6 +427,7 @@ public class BattleController {
                 }
             }
         }
+        gameInfoBattleViewHoldTheFlag.show(gameInfoBattleViewHoldTheFlag);
     }
 
     private void gameInfoRequestCollectTheFlagsMode(Cell[][] cells) {
@@ -488,12 +492,12 @@ public class BattleController {
     private void showHandRequest() {
 
         ArrayList<Card> cards = match.findPlayerPlayingThisTurn().getHand().getHandCards();
-        if (match.findPlayerPlayingThisTurn().getHand().getReserveCard() != null)
-            cards.add(match.findPlayerPlayingThisTurn().getHand().getReserveCard());
         ShowCardsBattleView showCardsBattleView = new ShowCardsBattleView();
 
-        for (Card card : cards)
-            showCardsBattleView.setCard(card);
+        for (Card card : cards) showCardsBattleView.setCard(card);
+        if (match.findPlayerPlayingThisTurn().getHand().getReserveCard() != null)
+            showCardsBattleView.setCard(match.findPlayerPlayingThisTurn().getHand().getReserveCard());
+        else System.err.println("haji nulle &&&");
 
         showCardsBattleView.show(showCardsBattleView);
     }
@@ -517,7 +521,7 @@ public class BattleController {
         showCollectedItemsBattleView.show(showCollectedItemsBattleView);
     }
 
-    public void playAI() {
+    private void playAI() {
 
         BattleLogicController battleLogicController = BattleLogicController.getBattleLogicController();
         Card hero = match.getPlayer2().getHand().getHero();

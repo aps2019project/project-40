@@ -192,7 +192,7 @@ public class GameLogic {
 
         match.turnNumber++;
         manaHandler();
-        //match.findPlayerPlayingThisTurn().getHand().fillHandEmptyPlace();
+        match.findPlayerPlayingThisTurn().getHand().fillHandEmptyPlace();
         attackedCardsInATurn = new ArrayList<>();
         movedCardsInATurn = new ArrayList<>();
     }
@@ -202,21 +202,22 @@ public class GameLogic {
         if (match.findPlayerPlayingThisTurn().equals(match.getPlayer1())) {
 
             if (match.turnNumber <= 15) {
-                match.initialPlayer1ManaInBeginningTurn++;
+                match.initialPlayer1ManaInBeginningOfEachTurn++;
             }
-            match.player1Mana = match.initialPlayer1ManaInBeginningTurn;
+            match.player1Mana = match.initialPlayer1ManaInBeginningOfEachTurn;
 
         } else {
 
             if (match.turnNumber <= 14) {
-                match.initialPlayer2ManaInBeginningTurn++;
+                match.initialPlayer2ManaInBeginningOfEachTurn++;
             }
-            match.player2Mana = match.initialPlayer2ManaInBeginningTurn;
+            match.player2Mana = match.initialPlayer2ManaInBeginningOfEachTurn;
         }
 
     }
 
     private void cancelPositiveBuffs(Unit unit) {
+
         for (Buff buff : unit.getBuffs()) {
             if (buff.isPositive() && buff.getDuration() >= 0 && !buff.isLasts()) {
                 unit.removeBuff(buff);
@@ -225,6 +226,7 @@ public class GameLogic {
     }
 
     private void cancelNegativeBuffs(Unit unit) {
+
         for (Buff buff : unit.getBuffs()) {
             if (!buff.isPositive() && buff.getDuration() >= 0) {
                 unit.removeBuff(buff);
@@ -233,6 +235,7 @@ public class GameLogic {
     }
 
     private void killUnit(Unit unit) {
+
         ActivateOnDeathSpells(unit);
         unit.getCell().setCard(null);
         unit.setCell(null);
@@ -246,6 +249,7 @@ public class GameLogic {
     }
 
     private void ActivateOnDeathSpells(Unit unit) {
+
         Coordination coordination = new Coordination();
         coordination.setColumn(0);
         coordination.setRow(0);
@@ -259,6 +263,7 @@ public class GameLogic {
     }
 
     private void checkRangeForAttack(Unit attacker, Unit defender) {
+
         if (attacker.getUnitType() == UnitType.MELEE) {
             if (!attacker.getCell().isAdjacent(defender.getCell())) {
                 throw new IllegalArgumentException("can't attack"); //
@@ -278,6 +283,7 @@ public class GameLogic {
 
     ///////Target
     private TargetData findTarget(Spell spell, Cell cardCell, Cell clickCell, Cell heroCell) {
+
         TargetData targetData = new TargetData();
         Account account;
         if (spell.getTarget().isTargetEnemy()) {
@@ -298,7 +304,6 @@ public class GameLogic {
 
     private void setTargetData(Spell spell, Cell cardCell, Cell clickCell, Cell heroCell, Account account, TargetData targetData) {
 
-
         if (spell.getTarget().getRowsAffected() != 0 && spell.getTarget().getColumnsAffected() != 0) {
             Coordination centerPosition = getCenter(spell, cardCell, clickCell);
             Coordination coordination = new Coordination();
@@ -318,6 +323,7 @@ public class GameLogic {
 
 
     private void addUnitsAndCellsToTargetData(Spell spell, TargetData targetData, Account account, ArrayList<Cell> targetCells) {
+
         for (Cell cell : targetCells) {
             if (spell.getTarget().isAffectCells()) {
                 targetData.getCells().add(cell);
@@ -341,6 +347,7 @@ public class GameLogic {
     }
 
     private void addUnitToTargetData(Spell spell, TargetData targetData, Unit unit) {
+
         if (spell.getTarget().isAffectHero() && unit.getType() == CardType.HERO) {
             targetData.getUnits().add(unit);
         }
@@ -350,6 +357,7 @@ public class GameLogic {
     }
 
     private ArrayList<Cell> detectCells(Coordination centerPosition, Coordination dimensions) {
+
         int firstRow = calculateFirstCoordinate(centerPosition.getRow(), dimensions.getRow());
         int firstColumn = calculateFirstCoordinate(centerPosition.getColumn(), dimensions.getColumn());
 
@@ -367,6 +375,7 @@ public class GameLogic {
     }
 
     private int calculateFirstCoordinate(int center, int dimension) {
+
         int firstCoordinate = center - (dimension - 1) / 2;
         if (firstCoordinate < 0)
             firstCoordinate = 0;
@@ -374,6 +383,7 @@ public class GameLogic {
     }
 
     private int calculateLastCoordinate(int first, int dimension, int maxNumber) {
+
         int lastRow = first + dimension;
         if (lastRow > maxNumber) {
             lastRow = maxNumber;
@@ -383,6 +393,7 @@ public class GameLogic {
 
 
     private Coordination getCenter(Spell spell, Cell cardCell, Cell clickCell) {
+
         Coordination centerPosition;
         if (spell.getTarget().isDependentToCardLocation()) {
             centerPosition = new Coordination();
@@ -395,6 +406,7 @@ public class GameLogic {
     }
 
     private <T> void randomizeList(ArrayList<T> list) {
+
         if (list.size() == 0) return;
 
         int random = new Random().nextInt(list.size());
@@ -407,6 +419,7 @@ public class GameLogic {
     ///////////Target
 
     private void applySpell(Spell spell, TargetData targetData) {
+
         Buff buff = spell.getBuff();
         if (buff.getWaitingTime() > 0) {
             buff.setWaitingTime(buff.getWaitingTime() - 1);
@@ -484,11 +497,11 @@ public class GameLogic {
 
 
     public void attack(Unit attacker, Unit defender) {
-//        if (!attacker.isCanAttack()) {
-  //          return;
-    //    }
+    //    if (!attacker.isCanAttack()) {
+      //      return;
+       // }
 
-        if (!(defender.isNoDamageFromWeakers() && attacker.getAP() > defender.getAP())) {
+        if (!(defender.isNoDamageFromWeakers() || attacker.getAP() > defender.getAP())) {
             damage(attacker, defender);
 
             attacker.setCanAttack(false);
@@ -571,5 +584,4 @@ public class GameLogic {
         }
         return ap;
     }
-
 }
