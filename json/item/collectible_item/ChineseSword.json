@@ -2,7 +2,7 @@
   "cardName": "chinese_sword",
   "description": " ...",
   "type": "COLLECTIBLE_ITEM",
-  "spells ": [
+  "spells": [
     {
       "spellName": "sword_add_ap",
       "buff": {

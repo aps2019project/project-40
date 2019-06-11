@@ -2,7 +2,7 @@
   "cardName": "big_snake",
   "description": " a ranged MINION with 14 HP, 7 AP, and inverse holy buff spell",
   "type": "MINION",
-  "spells ": [
+  "spells": [
     {
       "spellName": "big_snake",
       "buff": {

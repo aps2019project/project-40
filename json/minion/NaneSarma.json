@@ -2,7 +2,7 @@
   "cardName": "nane_sarma",
   "description": " a ranged MINION with 3 HP, 4 AP, ON_SPAWN: stuns the 3*3 square near it",
   "type": "MINION",
-  "spells ": [
+  "spells": [
     {
       "spellName": "nane_sarma_stun",
       "buff": {

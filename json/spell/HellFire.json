@@ -3,7 +3,7 @@
   "description": "fire effect on a 2*2 square for 2 rounds",
   "type": "SPELL",
   "price": 600,
-  "spells ": [
+  "spells": [
     {
       "spellName": "hellfire",
       "buff": {

@@ -2,7 +2,7 @@
   "cardName": "curse_of_death",
   "description": " a COLLECTIBLE item that gives a random minion an ON_DEATH spell : damages 8 units to a random troop",
   "type": "COLLECTIBLE_ITEM",
-  "spells ": [
+  "spells": [
     {
       "spellName": "curse_add_on_death",
       "buff": {

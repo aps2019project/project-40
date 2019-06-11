@@ -60,4 +60,12 @@ public class Spell extends Card implements Serializable {
     public void setLastTimeCasted(int lastTimeCasted) {
         this.lastTimeCasted = lastTimeCasted;
     }
+
+    @Override
+    public String toString() {
+        return super.toString();
+    }
+    public Spell(){
+
+    }
 }

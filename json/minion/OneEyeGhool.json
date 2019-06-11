@@ -2,7 +2,7 @@
   "cardName": "one_eye_ghool",
   "description": " a hybrid MINION with 12 HP, 11 AP, ON_DEATH: 2 points hp decrement to enemies in a 3*3 square near itٔ",
   "type": "MINION",
-  "spells ": [
+  "spells": [
     {
       "spellName": "one_eye_ghool_on_death",
       "buff": {

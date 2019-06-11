@@ -3,7 +3,7 @@
   "description": "a MELEE minion, 6 HP and 4 AP with stun ON_ATTACK",
   "type": "MINION",
   "price": 400,
-  "spells ": [
+  "spells": [
     {
       "spellName": "psm_on_attack_stun",
       "buff": {

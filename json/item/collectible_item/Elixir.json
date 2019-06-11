@@ -2,7 +2,7 @@
   "cardName": "exilir",
   "description": " TODO",
   "type": "COLLECTIBLE_ITEM",
-  "spells ": [
+  "spells": [
     {
       "spellName": "ex_add_hp",
       "buff": {

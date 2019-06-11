@@ -2,7 +2,7 @@
   "cardName": "king_wisdom",
   "description": " ...",
   "type": "USABLE_ITEM",
-  "spells ": [
+  "spells": [
     {
       "spellName": "mp_add",
       "buff": {

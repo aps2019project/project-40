@@ -3,7 +3,7 @@
   "description": "a MELEE minion, 6 HP and 2 AP, \n with ON_ATTACK: decreases 8 points HP next round",
   "type": "MINION",
   "price": 400,
-  "spells ": [
+  "spells": [
     {
       "spellName": "panther_on_attack",
       "buff": {

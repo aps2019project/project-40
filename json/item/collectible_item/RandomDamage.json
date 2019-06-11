@@ -2,7 +2,7 @@
   "cardName": "random_damage",
   "description": " a collectible item that increases HP of a random unit 2 units   ",
   "type": "COLLECTIBLE_ITEM",
-  "spells ": [
+  "spells": [
     {
       "spellName": "random_damage_hp",
       "buff": {

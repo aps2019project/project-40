@@ -3,7 +3,7 @@
   "description": "gives a Weakness Buff with -6 HP change, but two Holy Buff for 3 rounds to a unit",
   "type": "SPELL",
   "price": 2250,
-  "spells ": [
+  "spells": [
     {
       "spellName": "hwp_weakness_hp_6_points",
       "buff": {

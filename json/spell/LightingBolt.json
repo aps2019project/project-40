@@ -3,7 +3,7 @@
   "description": "8 unit damage to enemy hero",
   "type": "SPELL",
   "price": 1250,
-  "spells ": [
+  "spells": [
     {
       "spellName": "lighting_bolt",
       "buff": {

@@ -10,7 +10,7 @@ public class Card implements Serializable, Cloneable {
     private String cardID;
     private String cardName;
     private String team;
-    private ArrayList<Spell> spells;
+    private ArrayList<Spell> spells = new ArrayList<>();
     private String description;
     private CardType type;
     private Cell cell;
@@ -41,6 +41,9 @@ public class Card implements Serializable, Cloneable {
 
     public int getManaCost() {
         return manaCost;
+    }
+    public Card(){
+
     }
 
     public Card(int manaCost, int price, String cardName, ArrayList<Spell> spells,

@@ -3,7 +3,7 @@
   "description": "a HYBRID HERO, 50 HP and 4 AP \n makes a cell HOLY for 3 rounds ",
   "type": "HERO",
   "price": 12000,
-  "spells ": [
+  "spells": [
     {
       "spellName": "kaveh",
       "buff": {

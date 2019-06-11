@@ -2,7 +2,7 @@
   "cardName": "two_headed_arrow",
   "description": " .",
   "type": "COLLECTIBLE_ITEM",
-  "spells ": [
+  "spells": [
     {
       "spellName": "two_headed_arrow_ap",
       "buff": {

@@ -3,7 +3,7 @@
   "description": "1 turn disarm for all enemy units",
   "type": "SPELL",
   "price": 2000,
-  "spells ": [
+  "spells": [
     {
       "spellName": "all_disarm",
       "buff": {

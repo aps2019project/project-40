@@ -3,7 +3,7 @@
   "description": "a RANGED HERO, 40 HP and 3 AP \n Dispels an enemy unit",
   "type": "HERO",
   "price": 11000,
-  "spells ": [
+  "spells": [
     {
       "spellName": "afsaaneh",
       "buff": {

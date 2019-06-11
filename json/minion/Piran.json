@@ -2,7 +2,7 @@
   "cardName": "piran",
   "description": " a MELEE minon with 20 HP, 12 AP \n ON_DEFEND: doesn't get poisoned",
   "type": "MINION",
-  "spells ": [
+  "spells": [
     {
       "spellName": "piran_no_poison",
       "buff": {

@@ -2,7 +2,7 @@
   "cardName": "mana_potion",
   "description": " TODO",
   "type": "COLLECTIBLE_ITEM",
-  "spells ": [
+  "spells": [
     {
       "spellName": "mp_add",
       "buff": {

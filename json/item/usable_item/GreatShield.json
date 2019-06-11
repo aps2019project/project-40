@@ -3,7 +3,7 @@
   "description": "a USABLE_ITEM for hero, gives 12 holy buff to him",
   "type": "USABLE_ITEM",
   "price": 4000,
-  "spells ": [
+  "spells": [
     {
       "spellName": "great_shield_holy",
       "buff": {

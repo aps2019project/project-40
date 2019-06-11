@@ -3,7 +3,7 @@
   "description": "a USABLE_ITEM for hero, if ranged or hybrid adds a DISARM spell to it",
   "type": "USABLE_ITEM",
   "price": 7000,
-  "spells ": [
+  "spells": [
     {
       "spellName": "poisonous_dagger",
       "buff": {

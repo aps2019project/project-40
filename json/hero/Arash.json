@@ -3,7 +3,7 @@
   "description": "a RANGED HERO, 30 HP and 3 AP \n 4 point attack on all enemies in Arash's column",
   "type": "HERO",
   "price": 10000,
-  "spells ": [
+  "spells": [
     {
       "spellName": "arash",
       "buff": {

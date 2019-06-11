@@ -2,7 +2,7 @@
   "cardName": "noosh_daroo",
   "description": " a collectible ITEM that increases HP of a random unit 6 points  ",
   "type": "COLLECTIBLE_ITEM",
-  "spells ": [
+  "spells": [
     {
       "spellName": "noosh_daroo_hp",
       "buff": {

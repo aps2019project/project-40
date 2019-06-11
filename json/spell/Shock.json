@@ -3,7 +3,7 @@
   "description": "STUN s an enemy for 2 rounds",
   "type": "SPELL",
   "price": "1200",
-  "spells ": [
+  "spells": [
     {
       "spellName": "shock",
       "buff": {

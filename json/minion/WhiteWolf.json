@@ -3,7 +3,7 @@
   "description": "a MELEE minion, 8 HP and 2 AP, \n with ON_ATTACK: 4 and 3 points hp decrement respectively  \n in the next 2 rounds when attacking a minion",
   "type": "MINION",
   "price": 400,
-  "spells ": [
+  "spells": [
     {
       "spellName": "white_wolf_on_attack_round_1",
       "buff": {

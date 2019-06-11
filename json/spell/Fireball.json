@@ -3,7 +3,7 @@
   "description": " deals 4 damage to an enemy unit",
   "type": "SPELL",
   "price": 400,
-  "spells ": [
+  "spells": [
     {
       "spellName": "fireball",
       "buff": {
