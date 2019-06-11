@@ -2,7 +2,7 @@
   "cardName": "all_attack",
   "description": "damage 6 points to all enemy units in one column",
   "type": "SPELL",
-  "spells ": [
+  "spells": [
     {
       "spellName": "all_attack",
       "buff": {

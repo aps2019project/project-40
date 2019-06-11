@@ -3,7 +3,7 @@
   "description": "a RANGED minion, 5 HP and 6 AP, with ON_ATTACK: 3 turn poison buff",
   "type": "MINION",
   "price": 300,
-  "spells ": [
+  "spells": [
     {
       "spellName": "ps_poison",
       "buff": {

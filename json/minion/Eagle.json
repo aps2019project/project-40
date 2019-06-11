@@ -2,7 +2,7 @@
   "cardName": "eagle",
   "description": " a melee MINION with 0 HP, 2 AP, PASSIVE: power buff with 10 points hp increment",
   "type": "MINION",
-  "spells ": [
+  "spells": [
     {
       "spellName": "eagle_power_buff",
       "buff": {

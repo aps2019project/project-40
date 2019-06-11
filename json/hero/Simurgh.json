@@ -3,7 +3,7 @@
   "description": "a MELEE HERO, 50 HP and 4 AP \n STUN buff all enemy units for 1 turn ",
   "type": "HERO",
   "price": 8000,
-  "spells ": [
+  "spells": [
     {
       "spellName": "simurgh_stun",
       "buff": {

@@ -3,7 +3,7 @@
   "description": "a MINION gets a power BUFF that adds 8 point AP increment and a weakness BUFF with 6 points HP decrement",
   "type": "SPELL",
   "price": 1600,
-  "spells ": [
+  "spells": [
     {
       "spellName": "sacrifice_power",
       "buff": {

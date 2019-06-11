@@ -3,7 +3,7 @@
   "description": "for 4 turn all enemy units are poisoned",
   "type": "SPELL",
   "price": 1500,
-  "spells ": [
+  "spells": [
     {
       "spellName": "all_poison",
       "buff": {

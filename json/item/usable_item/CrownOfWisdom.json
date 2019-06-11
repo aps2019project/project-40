@@ -3,7 +3,7 @@
   "description": "a USABLE Item, increases mana 1 point in the first 3 rounds",
   "type": "USABLE_ITEM",
   "price": 300,
-  "spells ": [
+  "spells": [
     {
       "spellName": "cw_mana_add",
       "buff": {

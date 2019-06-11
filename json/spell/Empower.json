@@ -3,7 +3,7 @@
   "description": "adds 2 point AP to a friend unit",
   "type": "SPELL",
   "price": 250,
-  "spells ": [
+  "spells": [
     {
       "spellName": "empower",
       "buff": {

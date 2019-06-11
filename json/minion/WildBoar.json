@@ -3,7 +3,7 @@
   "description": "a HYBRID minion, 8 HP and 5 AP \n ON_DEATH : 6 point hp decrement to enemy hero",
   "type": "MINION",
   "price": 500,
-  "spells ": [
+  "spells": [
     {
       "spellName": "wild_boar_on_defend",
       "buff": {

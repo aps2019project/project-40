@@ -3,7 +3,7 @@
   "description": "gives a power BUFF that adds 6 point AP to a friend unit",
   "type": "SPELL",
   "price": 2500,
-  "spells ": [
+  "spells": [
     {
       "spellName": "power_up",
       "buff": {

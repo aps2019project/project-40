@@ -2,7 +2,7 @@
   "cardName": "gin",
   "description": " a ranged MINION with 10 HP, 4 AP, PASSIVE: continuous Ap buff for all friend minionsٔ",
   "type": "MINION",
-  "spells ": [
+  "spells": [
     {
       "spellName": "gin_power",
       "buff": {

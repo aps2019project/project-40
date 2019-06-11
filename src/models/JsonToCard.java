@@ -1,6 +1,7 @@
 package models;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.io.File;
 import java.io.FileReader;
@@ -61,12 +62,9 @@ public class JsonToCard {
         File[] listOfFiles = folder.listFiles();
         for (File listOfFile : listOfFiles) {
             try (Reader reader = new FileReader(listOfFile)) {
-
-                Unit unit = gson.fromJson(reader, Unit.class);
-                Card card = unit;
-                System.out.println(unit.getCardName());
-                System.out.println( card.getSpells());
-                collection.addCardToCollection(unit);
+                Unit card = gson.fromJson(reader, Unit.class);
+                GsonBuilder builder = new GsonBuilder();
+                collection.addCardToCollection(card);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -77,23 +75,18 @@ public class JsonToCard {
         File[] listOfFiles = folder.listFiles();
         for (File listOfFile : listOfFiles) {
             try (Reader reader = new FileReader(listOfFile)) {
-
-                Card spell = gson.fromJson(reader, Spell.class);
-
-                collection.addCardToCollection(spell);
+                Spell card = gson.fromJson(reader, Spell.class);
+                collection.addCardToCollection(card);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
     }
-
     private static void saveCards(Gson gson, Collection collection, File folder) {
         File[] listOfFiles = folder.listFiles();
         for (File listOfFile : listOfFiles) {
             try (Reader reader = new FileReader(listOfFile)) {
-
                 Card card = gson.fromJson(reader, Card.class);
-
                 collection.addCardToCollection(card);
             } catch (IOException e) {
                 e.printStackTrace();

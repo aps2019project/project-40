@@ -3,7 +3,7 @@
   "description": "an enemy MINION gets a weakness BUFF with 4 units AP reduction",
   "type": "SPELL",
   "price": "1000",
-  "spells ": [
+  "spells": [
     {
       "spellName": "weakening",
       "buff": {

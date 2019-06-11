@@ -3,7 +3,7 @@
   "description": "a MELEE minion, 6 HP and 6 AP, with ON_ATTACK: 1 turn disarm, 4 turn poison",
   "type": "MINION",
   "price": 600,
-  "spells ": [
+  "spells": [
     {
       "spellName": "ts_on_attack_disarm",
       "buff": {

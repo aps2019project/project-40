@@ -2,7 +2,7 @@
   "cardName": "wizard",
   "description": " a RANGED minon with 5 HP, 4 AP and has passive AP and HP buff",
   "type": "MINION",
-  "spells ": [
+  "spells": [
     {
       "spellName": "wizard_AP_add",
       "buff": {

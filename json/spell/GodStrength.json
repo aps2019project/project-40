@@ -3,7 +3,7 @@
   "description": "adds 4 units AP to our hero",
   "type": "SPELL",
   "price": 450,
-  "spells ": [
+  "spells": [
     {
       "spellName": "god_strength",
       "buff": {

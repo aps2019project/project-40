@@ -2,7 +2,7 @@
   "cardName": "geev",
   "description": " a RANGED minon with 5 HP, 7 AP and does not get negative effect",
   "type": "MINION",
-  "spells ": [
+  "spells": [
     {
       "spellName": "geev_no_negative_effect",
       "buff": {

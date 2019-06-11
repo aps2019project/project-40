@@ -2,7 +2,7 @@
   "cardName": "feather_of_simurgh",
   "description": " a usable item that decreases AP of a ranged or hybrid 2 points",
   "type": "USABLE_ITEM",
-  "spells ": [
+  "spells": [
     {
       "spellName": "feather_of_simurgh_decrement_ap",
       "buff": {

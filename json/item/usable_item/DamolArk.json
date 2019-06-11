@@ -3,7 +3,7 @@
   "description": "a USABLE_ITEM for hero, if ranged or hybrid adds a DISARM spell to it",
   "type": "USABLE_ITEM",
   "price": 30000,
-  "spells ": [
+  "spells": [
     {
       "spellName": "damol_disram",
       "buff": {

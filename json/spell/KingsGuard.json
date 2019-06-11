@@ -3,7 +3,7 @@
   "description": "a random enemy minion adjacent to our hero is killed",
   "type": "SPELL",
   "price": 1750,
-  "spells ": [
+  "spells": [
     {
       "spellName": "kings_guard",
       "buff": {

@@ -3,7 +3,7 @@
   "description": " deletes positive buffs for enemy and negative buffs of friends in a 2*2 square",
   "type": "SPELL",
   "price": 1500,
-  "spells ": [
+  "spells": [
     {
       "spellName": "area_dispel_enemy",
       "buff": {

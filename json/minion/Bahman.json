@@ -2,7 +2,7 @@
   "cardName": "bahman",
   "description": " a melee MINION with 16 HP, 9 AP, ON_SPAWN: decreases HP of a random enemy MINION 16 units",
   "type": "MINION",
-  "spells ": [
+  "spells": [
     {
       "spellName": "bahman_random_hit",
       "buff": {

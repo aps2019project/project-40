@@ -3,7 +3,7 @@
   "description": "a MELEE HERO, 50 HP and 2 AP \n POISON buff for 3 rounds ",
   "type": "HERO",
   "price": 8000,
-  "spells ": [
+  "spells": [
     {
       "spellName": "zahak_poison",
       "buff": {

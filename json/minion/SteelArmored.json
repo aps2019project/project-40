@@ -2,7 +2,7 @@
   "cardName": "steel_armored",
   "description": " a melee MINION with 1 HP, 1 AP, PASSIVE: has 12 continuous holy buff",
   "type": "MINION",
-  "spells ": [
+  "spells": [
     {
       "spellName": "steel_armored_holy",
       "buff": {

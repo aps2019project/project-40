@@ -3,7 +3,7 @@
   "description": "add 2 AP by a power buff to all friend units ",
   "type": "SPELL",
   "price": 2000,
-  "spells ": [
+  "spells": [
     {
       "spellName": "all_power",
       "buff": {

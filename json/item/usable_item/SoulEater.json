@@ -3,7 +3,7 @@
   "description": " TODO",
   "type": "USABLE_ITEM",
   "price": 15000,
-  "spells ": [
+  "spells": [
     {
       "spellName": "se_add_spell",
       "buff": {

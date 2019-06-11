@@ -2,7 +2,7 @@
   "cardName": "blades_of_agility",
   "description": " TODO",
   "type": "COLLECTIBLE_ITEM",
-  "spells ": [
+  "spells": [
     {
       "spellName": "boa_add_ap",
       "buff": {

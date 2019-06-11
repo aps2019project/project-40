@@ -3,7 +3,7 @@
   "description": "adds 4 AP, but disarms a unit for 3 turns,",
   "type": "SPELL",
   "price": 1250,
-  "spells ": [
+  "spells": [
     {
       "spellName": "madness_power_buff_AP",
       "buff": {

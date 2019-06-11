@@ -2,7 +2,7 @@
   "cardName": "great_wizard",
   "description": " a ranged MINION with 6 HP, 6 AP, PASSIVE : continuous ap power buff and holy buff",
   "type": "MINION",
-  "spells ": [
+  "spells": [
     {
       "spellName": "great_wizard_power",
       "buff": {

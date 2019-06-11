@@ -3,7 +3,7 @@
   "description": "a MELEE minion, 24 HP and 6 AP \n ON_ATTACK: 5 points more AP than number of times attacked to some unit",
   "type": "MINION",
   "price": 600,
-  "spells ": [
+  "spells": [
     {
       "spellName": "pa_on_attack",
       "buff": {

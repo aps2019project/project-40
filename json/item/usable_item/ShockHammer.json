@@ -2,7 +2,7 @@
   "cardName": "shock_hammer",
   "description": " ...",
   "type": "USABLE_ITEM",
-  "spells ": [
+  "spells": [
     {
       "spellName": "shock_hammer_add",
       "buff": {

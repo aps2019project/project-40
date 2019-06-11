@@ -3,7 +3,7 @@
   "description": "an enemy is DISARM ed until end game",
   "type": "SPELL",
   "price": "1000",
-  "spells ": [
+  "spells": [
     {
       "spellName": "total_disarm",
       "buff": {

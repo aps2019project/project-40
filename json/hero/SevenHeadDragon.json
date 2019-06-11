@@ -3,7 +3,7 @@
   "description": "a MELEE HERO, 50 HP and 4 AP \n DISARM buff for 1 round ",
   "type": "HERO",
   "price": 8000,
-  "spells ": [
+  "spells": [
     {
       "spellName": "seven_head_dragon_disarm",
       "buff": {
