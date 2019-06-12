@@ -1,5 +1,10 @@
 package controller;
 
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import models.Account;
 import models.LoginMenu;
 import request.accountMenuRequest.AccountError;
@@ -9,19 +14,40 @@ import request.accountMenuRequest.accountMenuRequestChilds.AccountLoginRequest;
 import request.accountMenuRequest.accountMenuRequestChilds.AccountSimpleRequest;
 import view.AccountMenuView;
 
+
 import java.util.Collections;
 import java.util.Comparator;
 
 public class AccountMenuController {
     private static AccountMenuController accountMenuController;
     private Account account;
+    @FXML
+    private TextField txt;
+
+    @FXML
+    private Label loginError;
+
+    @FXML
+    private PasswordField txtPassword;
+
+    @FXML
+    void signIn(ActionEvent event) {
+
+    }
+
+    @FXML
+    void signUp(ActionEvent event) {
+
+    }
+
+    @FXML
+    void exit(ActionEvent event) {
+
+    }
 
     public static AccountMenuController getInstance() {
-
-        if (accountMenuController == null) {
-            accountMenuController = new AccountMenuController();
-        }
-
+        if(accountMenuController==null)
+            accountMenuController=new AccountMenuController();
         return accountMenuController;
     }
 
