@@ -1,5 +1,9 @@
 package controller;
 
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 import models.*;
 import request.shopMenuRequest.ShopRequest;
 import request.shopMenuRequest.shopRequestChilds.ShopRequestVariable;
@@ -15,7 +19,39 @@ public class ShopController {
     private Account account;
     private static Collection shopCollection = initializeShopCollection();
     private ShopMenuView shopMenuView = ShopMenuView.getInstance();
+    @FXML
+    private Label labelErroInShop;
 
+    @FXML
+    private Label money;
+
+    @FXML
+    private AnchorPane cardPane;
+
+    @FXML
+    void showShop(ActionEvent event) {
+
+    }
+
+    @FXML
+    void showCollection(ActionEvent event) {
+
+    }
+
+    @FXML
+    void mouseEnter(ActionEvent event) {
+
+    }
+
+    @FXML
+    void mouseExit(ActionEvent event) {
+
+    }
+
+    @FXML
+    void gotoStartMenu(ActionEvent event) {
+
+    }
     public static ShopController getInstance() {
 
         if (shopController == null) {

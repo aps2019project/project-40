@@ -1,5 +1,9 @@
 package controller;
 
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import models.Account;
 import models.Card;
 import models.Collection;
@@ -21,6 +25,27 @@ public class CollectionController {
     private boolean isCollectionClosed = false;
     private Account account;
     private Collection collection;
+
+    @FXML
+    private AnchorPane cardPane;
+
+    @FXML
+    private VBox deckVBox;
+
+    @FXML
+    void mouseEnter(ActionEvent event) {
+
+    }
+
+    @FXML
+    void mouseExit(ActionEvent event) {
+
+    }
+
+    @FXML
+    void gotoStartMenu(ActionEvent event) {
+
+    }
 
     public static CollectionController getInstance() {
 

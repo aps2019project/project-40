@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ShopController">
+   <children>
+      <ImageView fitHeight="720.0" fitWidth="1280.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <image>
+            <Image url="@../../../resources/scenes/backgrounds/chapter2_background@2x.jpg" />
+         </image>
+      </ImageView>
+      <ScrollPane layoutX="51.0" layoutY="67.0" prefHeight="591.0" prefWidth="935.0" style="-fx-background-color: #215272;">
+        <content>
+          <AnchorPane fx:id="cardPane" minHeight="0.0" minWidth="0.0" prefHeight="589.0" prefWidth="933.0" style="-fx-background-color: #215272;" />
+        </content>
+      </ScrollPane>
+      <ImageView fitHeight="62.0" fitWidth="211.0" layoutX="1028.0" layoutY="67.0" onMouseClicked="#showShop" onMouseEntered="#mouseEnter" onMouseExited="#mouseExit" opacity="0.6" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../resources/ui/button_primary@2x.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="1028.0" layoutY="129.0" onMouseClicked="#showCollection" onMouseEntered="#mouseEnter" onMouseExited="#mouseExit" opacity="0.6" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../resources/ui/button_primary@2x.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="1066.0" layoutY="88.0" text="Shop Collection" textFill="WHITE">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="1089.0" layoutY="150.0" text="Collection" textFill="WHITE">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="88.0" fitWidth="108.0" onMouseClicked="#gotoStartMenu" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../resources/ui/button_back_corner@2x.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="88.0" fitWidth="230.0" layoutX="1028.0" layoutY="570.0" opacity="0.6" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../resources/ui/gold_main_menu_container@2x.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="money" layoutX="1103.0" layoutY="608.0" prefHeight="20.0" prefWidth="119.0" text="Money" textFill="WHITE" wrapText="true">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="51.0" fitWidth="66.0" layoutX="1046.0" layoutY="592.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../resources/ui/icon_gold@2x.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="labelErroInShop" alignment="CENTER" layoutX="1033.0" layoutY="469.0" prefHeight="77.0" prefWidth="207.0" textFill="RED" wrapText="true">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
