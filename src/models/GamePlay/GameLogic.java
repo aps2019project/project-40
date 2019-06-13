@@ -167,9 +167,11 @@ public class GameLogic {
             cardsInTablePlayer2.add(unit);
         }
         if (unit.getSpecialPowerType() == SpecialPowerType.ON_SPAWN) {
-            applySpell(unit.getSpells().get(0),
-                    findTarget(unit.getSpells().get(0),cell, cell,
-                            match.findPlayerPlayingThisTurn().getHand().getHero().getCell()));
+            if (unit.getSpells() != null) {
+                applySpell(unit.getSpells().get(0),
+                        findTarget(unit.getSpells().get(0), cell, cell,
+                                match.findPlayerPlayingThisTurn().getHand().getHero().getCell()));
+            }
         }
     }
 
@@ -483,18 +485,20 @@ public class GameLogic {
 
 
     private void useOnAttackSpells(Unit attacker, Unit defender) {
-        if (attacker.getSpecialPowerType() == SpecialPowerType.ON_ATTACK) {
-            for (Spell spell : attacker.getSpells()) {
-                if (spell.getSpecialPowerType() == null || spell.getSpecialPowerType() == SpecialPowerType.ON_ATTACK) {
-                    applySpell(spell, findTarget(spell, attacker.getCell(), attacker.getCell()
-                            , match.findPlayerDoesNotPlayingThisTurn().getHand().getHero().getCell()));
+        if (attacker.getSpells() != null) {
+            if (attacker.getSpecialPowerType() == SpecialPowerType.ON_ATTACK) {
+                for (Spell spell : attacker.getSpells()) {
+                    if (spell.getSpecialPowerType() == null || spell.getSpecialPowerType() == SpecialPowerType.ON_ATTACK) {
+                        applySpell(spell, findTarget(spell, defender.getCell(), defender.getCell()
+                                , match.findPlayerPlayingThisTurn().getHand().getHero().getCell()));
+                    }
                 }
-            }
-        } else {
-            for (Spell spell : attacker.getSpells()) {
-                if (spell.getSpecialPowerType() == SpecialPowerType.ON_ATTACK) {
-                    applySpell(spell, findTarget(spell, attacker.getCell(), attacker.getCell()
-                            , match.findPlayerDoesNotPlayingThisTurn().getHand().getHero().getCell()));
+            } else {
+                for (Spell spell : attacker.getSpells()) {
+                    if (spell.getSpecialPowerType() == SpecialPowerType.ON_ATTACK) {
+                        applySpell(spell, findTarget(spell, defender.getCell(), defender.getCell()
+                                , match.findPlayerPlayingThisTurn().getHand().getHero().getCell()));
+                    }
                 }
             }
         }
@@ -502,18 +506,20 @@ public class GameLogic {
 
 
     private void useOnDefendSpells(Unit defender, Unit attacker) {
-        if (defender.getSpecialPowerType() == ON_DEFEND) {
-            for (Spell spell : attacker.getSpells()) {
-                if (spell.getSpecialPowerType() == null || spell.getSpecialPowerType() == ON_DEFEND) {
-                    applySpell(spell, findTarget(spell, attacker.getCell(), attacker.getCell()
-                            , match.findPlayerDoesNotPlayingThisTurn().getHand().getHero().getCell()));
+        if (defender.getSpells() != null) {
+            if (defender.getSpecialPowerType() == ON_DEFEND) {
+                for (Spell spell : attacker.getSpells()) {
+                    if (spell.getSpecialPowerType() == null || spell.getSpecialPowerType() == ON_DEFEND) {
+                        applySpell(spell, findTarget(spell, attacker.getCell(), attacker.getCell()
+                                , match.findPlayerDoesNotPlayingThisTurn().getHand().getHero().getCell()));
+                    }
                 }
-            }
-        } else {
-            for (Spell spell : attacker.getSpells()) {
-                if (spell.getSpecialPowerType() == ON_DEFEND) {
-                    applySpell(spell, findTarget(spell, attacker.getCell(), attacker.getCell()
-                            , match.findPlayerDoesNotPlayingThisTurn().getHand().getHero().getCell()));
+            } else {
+                for (Spell spell : attacker.getSpells()) {
+                    if (spell.getSpecialPowerType() == ON_DEFEND) {
+                        applySpell(spell, findTarget(spell, attacker.getCell(), attacker.getCell()
+                                , match.findPlayerDoesNotPlayingThisTurn().getHand().getHero().getCell()));
+                    }
                 }
             }
         }
@@ -591,12 +597,13 @@ public class GameLogic {
         return ap;
     }
 
-    public void useSpecialPower(Unit hero){
+    public void useSpecialPower(Unit hero) {
+        if (hero.getSpells() != null) {
+            Spell specialPower = hero.getSpells().get(0);
 
-        Spell specialPower = hero.getSpells().get(0);
-
-        applySpell(
-                specialPower, findTarget(specialPower, hero.getCell(), hero.getCell(),hero.getCell()) );
+            applySpell(
+                    specialPower, findTarget(specialPower, hero.getCell(), hero.getCell(), hero.getCell()));
+        }
     }
 
 

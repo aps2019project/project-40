@@ -23,7 +23,7 @@
       }
     },
     {
-      "spellId": "hwp_holy_buff",
+      "spellName": "hwp_holy_buff",
       "action": {
         "duration": 3,
         "holy": 2

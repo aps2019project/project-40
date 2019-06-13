@@ -42,7 +42,9 @@ public class Unit extends Card implements Serializable {
         this.cantBePoisoned = cantBePoisoned;
         this.cantBeStunned = cantBeStunned;
     }
+    Unit(){
 
+    }
     public Spell getSpecialPower() {
         return specialPower;
     }
