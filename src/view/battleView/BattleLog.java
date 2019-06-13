@@ -144,4 +144,9 @@ public class BattleLog {
 
         System.out.println("Deck has any card");
     }
+
+    public static void logAttacked() {
+
+        System.out.println("Unit attacked");
+    }
 }

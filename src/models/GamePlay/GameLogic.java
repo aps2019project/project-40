@@ -81,6 +81,7 @@ public class GameLogic {
         movedCardsInATurn.add(card);
     }
 
+
     public int getMatchResult() {
 
         ArrayList<Card> player1Cards = match.player1.getCollection().getSelectedDeck().getCards();
@@ -165,6 +166,7 @@ public class GameLogic {
             match.getPlayer2().getHand().removeFromHand(unit);
             cardsInTablePlayer2.add(unit);
         }
+        //todo apply special power on spawn
     }
 
     public void insertProcess(Spell spell, Cell cell) {
@@ -213,8 +215,23 @@ public class GameLogic {
             }
             match.player2Mana = match.initialPlayer2ManaInBeginningOfEachTurn;
         }
-
     }
+
+
+    public void attack(Unit attacker, Unit defender) {
+
+        if (!(defender.isNoDamageFromWeakers() || attacker.getAP() > defender.getAP())) {
+            damage(attacker, defender);
+
+            attacker.setCanAttack(false);
+            attacker.setCanMove(false);     //todo delete this for stun no for move each turn
+
+            useOnAttackSpells(attacker, defender);
+            useOnDefendSpells(defender, attacker);
+            counterAttack(defender, attacker);
+        }
+    }
+
 
     private void cancelPositiveBuffs(Unit unit) {
 
@@ -285,11 +302,11 @@ public class GameLogic {
     private TargetData findTarget(Spell spell, Cell cardCell, Cell clickCell, Cell heroCell) {
 
         TargetData targetData = new TargetData();
-        Account account;
+
         if (spell.getTarget().isTargetEnemy()) {
-            setTargetData(spell, cardCell, clickCell, heroCell, match.findPlayerDoesNotPlayingThisTurn(), targetData);
+            setTargetData(spell, cardCell, clickCell, targetData);
         } else {
-            setTargetData(spell, cardCell, clickCell, heroCell, match.findPlayerPlayingThisTurn(), targetData);
+            setTargetData(spell, cardCell, heroCell, targetData);
         }
         if (spell.getTarget().isRandom()) {
             if (targetData.getCards().size() > 0) {
@@ -302,15 +319,16 @@ public class GameLogic {
     }
 
 
-    private void setTargetData(Spell spell, Cell cardCell, Cell clickCell, Cell heroCell, Account account, TargetData targetData) {
+    private void setTargetData(Spell spell, Cell cardCell, Cell clickCell, TargetData targetData) {
 
         if (spell.getTarget().getRowsAffected() != 0 && spell.getTarget().getColumnsAffected() != 0) {
+
             Coordination centerPosition = getCenter(spell, cardCell, clickCell);
             Coordination coordination = new Coordination();
             coordination.setRow(spell.getTarget().getRowsAffected());
             coordination.setColumn(spell.getTarget().getColumnsAffected());
-            ArrayList<Cell> targetCells = detectCells(centerPosition, coordination); //to do
-            addUnitsAndCellsToTargetData(spell, targetData, account, targetCells);
+            ArrayList<Cell> targetCells = detectCells(centerPosition, coordination); //todo
+            addUnitsAndCellsToTargetData(spell, targetData, targetCells);
 
             if (spell.getTarget().isRandom()) {
                 randomizeList(targetData.getUnits());
@@ -322,7 +340,7 @@ public class GameLogic {
     }
 
 
-    private void addUnitsAndCellsToTargetData(Spell spell, TargetData targetData, Account account, ArrayList<Cell> targetCells) {
+    private void addUnitsAndCellsToTargetData(Spell spell, TargetData targetData, ArrayList<Cell> targetCells) {
 
         for (Cell cell : targetCells) {
             if (spell.getTarget().isAffectCells()) {
@@ -356,6 +374,7 @@ public class GameLogic {
         }
     }
 
+
     private ArrayList<Cell> detectCells(Coordination centerPosition, Coordination dimensions) {
 
         int firstRow = calculateFirstCoordinate(centerPosition.getRow(), dimensions.getRow());
@@ -374,6 +393,7 @@ public class GameLogic {
         return targetCells;
     }
 
+
     private int calculateFirstCoordinate(int center, int dimension) {
 
         int firstCoordinate = center - (dimension - 1) / 2;
@@ -381,6 +401,7 @@ public class GameLogic {
             firstCoordinate = 0;
         return firstCoordinate;
     }
+
 
     private int calculateLastCoordinate(int first, int dimension, int maxNumber) {
 
@@ -417,7 +438,6 @@ public class GameLogic {
 
 
     ///////////Target
-
     private void applySpell(Spell spell, TargetData targetData) {
 
         Buff buff = spell.getBuff();
@@ -443,6 +463,7 @@ public class GameLogic {
             match.player2Mana += buff.getManaChange();
         }
     }
+
 
     private void castBuffOnCards(Buff buff, ArrayList<Card> cards) {
         for (Card card : cards) {
@@ -496,24 +517,6 @@ public class GameLogic {
     }
 
 
-    public void attack(Unit attacker, Unit defender) {
-        //    if (!attacker.isCanAttack()) {
-        //      return;
-        // }
-
-        if (!(defender.isNoDamageFromWeakers() || attacker.getAP() > defender.getAP())) {
-            damage(attacker, defender);
-
-            attacker.setCanAttack(false);
-            attacker.setCanMove(false);
-
-            useOnAttackSpells(attacker, defender);
-            useOnDefendSpells(defender, attacker);
-            counterAttack(defender, attacker);
-        }
-    }
-
-
     private void castBuffOnUnits(Buff buff, ArrayList<Unit> units) {
         for (Unit victimUnit : units) {
             if (buff.getDuration() <= 0) {
@@ -555,16 +558,15 @@ public class GameLogic {
                 killUnit(victimUnit);
             }
         }
-
     }
 
+
     public void counterAttack(Unit defender, Unit attacker) {
-        if (defender.isDisarm()) {
-            return;
-        }
+
+        if (defender.isDisarm()) return;
         checkRangeForAttack(defender, attacker);
-        if (!attacker.isNoBadEffect() && (attacker.isNoDamageFromWeakers() || defender.getAP() > attacker.getAP())) {
-            damage(attacker, defender);
+        if (!attacker.isNoBadEffect() || (attacker.isNoDamageFromWeakers() && defender.getAP() > attacker.getAP())) {
+            damage(defender, attacker);
         }
     }
 
@@ -576,6 +578,7 @@ public class GameLogic {
             killUnit(defender);
         }
     }
+
 
     private int apCompute(Unit attacker, Unit defender) {
         int ap = attacker.getAP();

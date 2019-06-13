@@ -173,8 +173,8 @@ public class BattleController {
             BattleLog.errorInvalidTarget();
             return;
         }
-        System.err.println(attacker.getTeam() + " " + victim.getTeam());
         gameLogic.attack(attacker, victim);
+        BattleLog.logAttacked();
     }
 
     private void selectAndUseCardRequestAttackRanged(Unit attacker, Unit victim) {
@@ -186,11 +186,13 @@ public class BattleController {
             return;
         }
         gameLogic.attack(attacker, victim);
+        BattleLog.logAttacked();
     }
 
     private void selectAndUseCardRequestAttackHybrid(Unit attacker, Unit victim) {
 
         gameLogic.attack(attacker, victim);
+        BattleLog.logAttacked();
     }
 
     private void selectAndUseCardRequestAttackCombo(SelectAndUseCardRequest request) {
@@ -497,7 +499,6 @@ public class BattleController {
         for (Card card : cards) showCardsBattleView.setCard(card);
         if (match.findPlayerPlayingThisTurn().getHand().getReserveCard() != null)
             showCardsBattleView.setCard(match.findPlayerPlayingThisTurn().getHand().getReserveCard());
-        else System.err.println("haji nulle &&&");
 
         showCardsBattleView.show(showCardsBattleView);
     }
