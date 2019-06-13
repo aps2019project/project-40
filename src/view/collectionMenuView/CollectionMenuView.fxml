@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CollectionController">
+   <children>
+      <ImageView fitHeight="726.0" fitWidth="1287.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../resources/scenes/collectionBackground.png" />
+         </image>
+      </ImageView>
+      <ScrollPane layoutX="39.0" layoutY="59.0" prefHeight="603.0" prefWidth="938.0" style="-fx-background-color: #215272;">
+        <content>
+          <AnchorPane fx:id="cardPane" minHeight="0.0" minWidth="0.0" prefHeight="601.0" prefWidth="936.0" style="-fx-background-color: #215272;" />
+        </content>
+      </ScrollPane>
+      <AnchorPane layoutX="1034.0" layoutY="-2.0" prefHeight="708.0" prefWidth="246.0" style="-fx-background-color: #1C171D;" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <VBox fx:id="deckVBox" prefHeight="625.0" prefWidth="246.0" AnchorPane.bottomAnchor="95.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="23.0" layoutY="639.0" onMouseEntered="#mouseEnter" onMouseExited="#mouseExit" opacity="0.6" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../resources/ui/button_secondary@2x.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="83.0" layoutY="662.0" text="New Deck" textFill="WHITE">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <ImageView fitHeight="88.0" fitWidth="108.0" layoutX="-3.0" onMouseClicked="#gotoStartMenu" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../resources/ui/button_back_corner@2x.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

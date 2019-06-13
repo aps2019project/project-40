@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.StartMenuController">
+   <children>
+      <ImageView fitHeight="843.0" fitWidth="1313.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../resources/scenes/magaari_ember_highlands/magaari_ember_highlands_background@2x.jpg" />
+         </image>
+      </ImageView>
+      <Button alignment="BASELINE_LEFT" layoutX="175.0" layoutY="124.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="298.0" style="-fx-background-color: transparent;" text="PLAY" textFill="#252246">
+         <font>
+            <Font name="System Bold Italic" size="20.0" />
+         </font></Button>
+      <ImageView fitHeight="58.0" fitWidth="58.0" layoutX="1221.0" layoutY="410.0" onMouseClicked="#gotoSettings" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../resources/ui/utility_menu/settings@2x.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="58.0" fitWidth="58.0" layoutX="1221.0" layoutY="294.0" onMouseClicked="#gotoLeaderboard" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../resources/ui/utility_menu/profile@2x.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="60.0" fitWidth="58.0" layoutX="1219.0" layoutY="180.0" onMouseClicked="#gotoMatchHistory" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../resources/ui/utility_menu/armory@2x.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="1189.0" layoutY="245.0" text="MATCH HISTORY" textFill="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
+      <Label layoutX="1192.0" layoutY="359.0" text="LEADER BOARD" textFill="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
+      <Label layoutX="1215.0" layoutY="479.0" text="SETTINGS" textFill="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
+      <Button alignment="BASELINE_LEFT" layoutX="175.0" layoutY="195.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="298.0" style="-fx-background-color: transparent;" text="COLLECTION" textFill="#252246">
+         <font>
+            <Font name="System Bold Italic" size="20.0" />
+         </font></Button>
+      <Button alignment="BASELINE_LEFT" layoutX="175.0" layoutY="263.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="298.0" style="-fx-background-color: transparent;" text="SHOP" textFill="#252246">
+         <font>
+            <Font name="System Bold Italic" size="20.0" />
+         </font></Button>
+      <Button alignment="BASELINE_LEFT" layoutX="175.0" layoutY="331.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="298.0" style="-fx-background-color: transparent;" text="SAVE" textFill="#252246">
+         <font>
+            <Font name="System Bold Italic" size="20.0" />
+         </font></Button>
+      <ImageView fitHeight="51.0" fitWidth="47.0" layoutX="106.0" layoutY="124.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../resources/ui/mouse_attack@2x.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="51.0" fitWidth="47.0" layoutX="106.0" layoutY="263.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../resources/ui/icon_premium@2x.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="51.0" fitWidth="47.0" layoutX="106.0" layoutY="195.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../resources/ui/instructional_arrow@2x.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="44.0" fitWidth="47.0" layoutX="108.0" layoutY="330.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../resources/ui/ranked_chevron_empty@2x.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

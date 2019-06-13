@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#cardClicked" prefHeight="400.0" prefWidth="313.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CardController">
+   <children>
+      <ImageView fitHeight="522.0" fitWidth="312.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../resources/card_backgrounds/neutral_spell@2x.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="137.0" layoutY="193.0" text="SPELL" textFill="WHITE" />
+      <Label fx:id="cardName" alignment="CENTER" layoutX="64.0" layoutY="165.0" prefHeight="22.0" prefWidth="189.0" text="Name" textFill="#fcfcfc">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <Label fx:id="cardInfo" alignment="CENTER" layoutX="50.0" layoutY="296.0" prefHeight="64.0" prefWidth="218.0" text="Information" textFill="#fcfcfc" wrapText="true">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="82.0" fitWidth="73.0" layoutX="-16.0" layoutY="-18.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../resources/ui/icon_mana@2x.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="manaPoint" alignment="CENTER" layoutX="5.0" layoutY="8.0" prefHeight="28.0" prefWidth="32.0" text="1" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="cardImage" fitHeight="89.0" fitWidth="100.0" layoutX="106.0" layoutY="56.0" pickOnBounds="true" preserveRatio="true" />
+   </children>
+</Pane>
