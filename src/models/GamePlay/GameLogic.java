@@ -175,9 +175,12 @@ public class GameLogic {
 
     public void insertProcess(Spell spell, Cell cell) {
 
-
-        //todo
         //todo some cell must fill and some cell must empty for poison
+        if (match.findPlayerPlayingThisTurn().equals(match.player1))
+            match.getPlayer1().getHand().removeFromHand(spell);
+        else
+            match.getPlayer2().getHand().removeFromHand(spell);
+
         decrementMana(spell.getManaCost());
         applySpell(spell, findTarget(spell, cell, cell,
                 match.findPlayerPlayingThisTurn().getHand().getHero().getCell()));
@@ -226,9 +229,8 @@ public class GameLogic {
 
     public void attack(Unit attacker, Unit defender) {
 
-        if (!(defender.isNoDamageFromWeakers() || attacker.getAP() > defender.getAP())) {
+        if (!(defender.isNoDamageFromWeakers() && attacker.getAP() > defender.getAP())) {
             damage(attacker, defender);
-
             useOnAttackSpells(attacker, defender);
             useOnDefendSpells(defender, attacker);
             counterAttack(defender, attacker);

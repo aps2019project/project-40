@@ -70,8 +70,7 @@ public class Cell {
     private static boolean isCellsDiagonalWith2ManhattanDistance(Cell cell1, Cell cell2) {
 
         return
-                Math.abs(
-                        cell1.getCoordination().getRow() - cell2.getCoordination().getRow()) == 1 &&
+                Math.abs(cell1.getCoordination().getRow() - cell2.getCoordination().getRow()) == 1 &&
                         Math.abs(cell1.getCoordination().getColumn() - cell2.getCoordination().getColumn()) == 1;
     }
 }

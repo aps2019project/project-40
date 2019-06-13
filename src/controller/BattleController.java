@@ -206,7 +206,7 @@ public class BattleController {
 
     private void selectAndUseCardRequestUseSpecialPower() {
 
-        //TODO
+        gameLogic.useSpecialPower((Unit) match.findPlayerPlayingThisTurn().getHand().getHero());
     }
 
 
@@ -291,21 +291,47 @@ public class BattleController {
 
         Cell cell = match.getTable().getCellByCoordination(coordination);
 
-        if (card instanceof Unit) {
+        if (card instanceof Unit)
+            insertCardRequestForUnit(cell, coordination, card);
+        else insertCardRequestForSpell(cell, (Spell) card);
+    }
 
-            if (battleLogicController.isCellFill(cell)) {
-                BattleLog.errorCellIsFill();
+    private void insertCardRequestForUnit(Cell cell, Coordination coordination, Card card) {
+
+        if (battleLogicController.isCellFill(cell)) {
+            BattleLog.errorCellIsFill();
+            return;
+        }
+        if (!battleLogicController.isCellAvailableForInsert(coordination)) return;
+        gameLogic.insertProcess((Unit) card, cell);
+        BattleLog.logCardInserted(card.getCardName(), card.getCardID(),
+                cell.getCoordination().getRow(), cell.getCoordination().getColumn());
+    }
+
+    private void insertCardRequestForSpell(Cell cell, Spell spell) {
+
+        if (spell.getTarget().isAffectCells())
+            gameLogic.insertProcess(spell, cell);
+
+        else {      //for minions and hero
+            if (!battleLogicController.isCellFill(cell)) {
+                BattleLog.errorCellIsNotFill();
                 return;
             }
-            if (!battleLogicController.isCellAvailableForInsert(coordination)) return;
-            gameLogic.insertProcess((Unit) card, cell);
-            BattleLog.logCardInserted(card.getCardName(), card.getCardID(),
-                    cell.getCoordination().getRow(), cell.getCoordination().getColumn());
-        } else {
-            //TODO isTargetValid?
-            gameLogic.insertProcess((Spell) card, cell);
+            if (spell.getTarget().isTargetEnemy() &&
+                    !cell.getCard().getTeam().equals(match.findPlayerDoesNotPlayingThisTurn().getUserName())) {
+                BattleLog.errorItIsYourUnit();
+                return;
+            }
+            if (!spell.getTarget().isTargetEnemy() &&
+                    cell.getCard().getTeam().equals(match.findPlayerDoesNotPlayingThisTurn().getUserName())) {
+                BattleLog.errorItIsUnitOfEnemy();
+                return;
+            }
+            gameLogic.insertProcess(spell, cell);
         }
     }
+
 
     private void requestWithoutVariable(RequestWithoutVariable request) {
 
