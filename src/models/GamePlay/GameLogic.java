@@ -166,7 +166,11 @@ public class GameLogic {
             match.getPlayer2().getHand().removeFromHand(unit);
             cardsInTablePlayer2.add(unit);
         }
-        //todo apply special power on spawn
+        if (unit.getSpecialPowerType() == SpecialPowerType.ON_SPAWN) {
+            applySpell(unit.getSpells().get(0),
+                    findTarget(unit.getSpells().get(0),cell, cell,
+                            match.findPlayerPlayingThisTurn().getHand().getHero().getCell()));
+        }
     }
 
     public void insertProcess(Spell spell, Cell cell) {
@@ -175,6 +179,8 @@ public class GameLogic {
         //todo
         //todo some cell must fill and some cell must empty for poison
         decrementMana(spell.getManaCost());
+        applySpell(spell, findTarget(spell, cell, cell,
+                match.findPlayerPlayingThisTurn().getHand().getHero().getCell()));
     }
 
     private void decrementMana(int mana) {
@@ -186,8 +192,8 @@ public class GameLogic {
     }
 
     public void useItem(Spell spell, Cell cell) {
-
-
+        applySpell(spell, findTarget(spell, cell,cell,
+                match.findPlayerPlayingThisTurn().getHand().getHero().getCell()));
     }
 
     public void switchTurn() {
@@ -222,9 +228,6 @@ public class GameLogic {
 
         if (!(defender.isNoDamageFromWeakers() || attacker.getAP() > defender.getAP())) {
             damage(attacker, defender);
-
-            attacker.setCanAttack(false);
-            attacker.setCanMove(false);     //todo delete this for stun no for move each turn
 
             useOnAttackSpells(attacker, defender);
             useOnDefendSpells(defender, attacker);
@@ -587,4 +590,15 @@ public class GameLogic {
         }
         return ap;
     }
+
+    public void useSpecialPower(Unit hero){
+
+        Spell specialPower = hero.getSpells().get(0);
+
+        applySpell(
+                specialPower, findTarget(specialPower, hero.getCell(), hero.getCell(),hero.getCell()) );
+    }
+
+
+
 }
