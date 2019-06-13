@@ -67,36 +67,17 @@ public class BattleController {
 
     private void selectAndUseCardRequest(SelectAndUseCardRequest request) {
         //todo
-        if (request.isForUnit()) {
+        if (request.isForMove())
+            selectAndUseCardRequestMove(request);
 
-            //doing request
-            if (request.isForMove())
-                selectAndUseCardRequestMove(request);
+        else if (request.isForAttack())
+            selectAndUseCardRequestAttack(request);
 
-            else if (request.isForAttack())
-                selectAndUseCardRequestAttack(request);
+        else if (request.isForAttackCombo())
+            selectAndUseCardRequestAttackCombo(request);
 
-            else if (request.isForAttackCombo())
-                selectAndUseCardRequestAttackCombo(request);
-
-            else if (request.isForUseSpecialPower()) ;
-
-        } else if (request.isForItem()) {
-
-            Card item = Collection.findCardByCardName(
-                    match.findPlayerPlayingThisTurn().getHand().getCollectedItems(), request.getID());
-
-            if (item == null) {
-                BattleLog.errorInvalidItemName();
-                return;
-            }
-
-            //doing request
-            if (request.isForShowInfo())
-                selectAndUseCardRequestShowInfo(request, item);
-
-            else if (request.isForUseItem()) ;
-        }
+        else if (request.isForUseSpecialPower())
+            selectAndUseCardRequestUseSpecialPower();
     }
 
     private void selectAndUseCardRequestMove(SelectAndUseCardRequest request) {
@@ -223,18 +204,11 @@ public class BattleController {
         //todo
     }
 
-    private void selectAndUseCardRequestUseSpecialPower(SelectAndUseCardRequest request) {
+    private void selectAndUseCardRequestUseSpecialPower() {
 
-
+        gameLogic.useSpecialPower((Unit) match.findPlayerPlayingThisTurn().getHand().getHero());
     }
 
-    private void selectAndUseCardRequestShowInfo(SelectAndUseCardRequest request, Card item) {
-
-        ShowSelectedItemInfoBattleView showSelectedItemInfoBattleView = new ShowSelectedItemInfoBattleView();
-        showSelectedItemInfoBattleView.setName(item.getCardName());
-        showSelectedItemInfoBattleView.setDescription(item.getDescription());
-        showSelectedItemInfoBattleView.show(showSelectedItemInfoBattleView);
-    }
 
     private void showCardInfoRequest(ShowCardInfoRequest request) {
 
@@ -250,6 +224,7 @@ public class BattleController {
             BattleLog.errorInvalidCardID();
         }
     }
+
 
     private void enterGraveYardRequest(EnterGraveYardRequest request) {
         //todo help
@@ -316,21 +291,47 @@ public class BattleController {
 
         Cell cell = match.getTable().getCellByCoordination(coordination);
 
-        if (card instanceof Unit) {
+        if (card instanceof Unit)
+            insertCardRequestForUnit(cell, coordination, card);
+        else insertCardRequestForSpell(cell, (Spell) card);
+    }
 
-            if (battleLogicController.isCellFill(cell)) {
-                BattleLog.errorCellIsFill();
+    private void insertCardRequestForUnit(Cell cell, Coordination coordination, Card card) {
+
+        if (battleLogicController.isCellFill(cell)) {
+            BattleLog.errorCellIsFill();
+            return;
+        }
+        if (!battleLogicController.isCellAvailableForInsert(coordination)) return;
+        gameLogic.insertProcess((Unit) card, cell);
+        BattleLog.logCardInserted(card.getCardName(), card.getCardID(),
+                cell.getCoordination().getRow(), cell.getCoordination().getColumn());
+    }
+
+    private void insertCardRequestForSpell(Cell cell, Spell spell) {
+
+        if (spell.getTarget().isAffectCells())
+            gameLogic.insertProcess(spell, cell);
+
+        else {      //for minions and hero
+            if (!battleLogicController.isCellFill(cell)) {
+                BattleLog.errorCellIsNotFill();
                 return;
             }
-            if (!battleLogicController.isCellAvailableForInsert(coordination)) return;
-            gameLogic.insertProcess((Unit) card, cell);
-            BattleLog.logCardInserted(card.getCardName(), card.getCardID(),
-                    cell.getCoordination().getRow(), cell.getCoordination().getColumn());
-        } else {
-            //TODO isTargetValid?
-            gameLogic.insertProcess((Spell) card, cell);
+            if (spell.getTarget().isTargetEnemy() &&
+                    !cell.getCard().getTeam().equals(match.findPlayerDoesNotPlayingThisTurn().getUserName())) {
+                BattleLog.errorItIsYourUnit();
+                return;
+            }
+            if (!spell.getTarget().isTargetEnemy() &&
+                    cell.getCard().getTeam().equals(match.findPlayerDoesNotPlayingThisTurn().getUserName())) {
+                BattleLog.errorItIsUnitOfEnemy();
+                return;
+            }
+            gameLogic.insertProcess(spell, cell);
         }
     }
+
 
     private void requestWithoutVariable(RequestWithoutVariable request) {
 

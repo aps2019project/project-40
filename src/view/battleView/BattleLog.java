@@ -101,11 +101,6 @@ public class BattleLog {
         System.err.println("Invalid command");
     }
 
-    public static void errorInvalidItemName() {
-
-        System.err.println("Invalid item name");
-    }
-
     public static void errorUnitIsStunned() {
 
         System.err.println("Unit is stun");
@@ -148,5 +143,15 @@ public class BattleLog {
     public static void logAttacked() {
 
         System.out.println("Unit attacked");
+    }
+
+    public static void errorItIsYourUnit() {
+
+        System.out.println("It is your unit and not enemy");
+    }
+
+    public static void errorItIsUnitOfEnemy() {
+
+        System.out.println("It is enemy unit");
     }
 }
