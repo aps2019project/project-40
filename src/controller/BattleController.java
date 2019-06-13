@@ -67,36 +67,17 @@ public class BattleController {
 
     private void selectAndUseCardRequest(SelectAndUseCardRequest request) {
         //todo
-        if (request.isForUnit()) {
+        if (request.isForMove())
+            selectAndUseCardRequestMove(request);
 
-            //doing request
-            if (request.isForMove())
-                selectAndUseCardRequestMove(request);
+        else if (request.isForAttack())
+            selectAndUseCardRequestAttack(request);
 
-            else if (request.isForAttack())
-                selectAndUseCardRequestAttack(request);
+        else if (request.isForAttackCombo())
+            selectAndUseCardRequestAttackCombo(request);
 
-            else if (request.isForAttackCombo())
-                selectAndUseCardRequestAttackCombo(request);
-
-            else if (request.isForUseSpecialPower()) ;
-
-        } else if (request.isForItem()) {
-
-            Card item = Collection.findCardByCardName(
-                    match.findPlayerPlayingThisTurn().getHand().getCollectedItems(), request.getID());
-
-            if (item == null) {
-                BattleLog.errorInvalidItemName();
-                return;
-            }
-
-            //doing request
-            if (request.isForShowInfo())
-                selectAndUseCardRequestShowInfo(request, item);
-
-            else if (request.isForUseItem()) ;
-        }
+        else if (request.isForUseSpecialPower())
+            selectAndUseCardRequestUseSpecialPower();
     }
 
     private void selectAndUseCardRequestMove(SelectAndUseCardRequest request) {
@@ -223,18 +204,11 @@ public class BattleController {
         //todo
     }
 
-    private void selectAndUseCardRequestUseSpecialPower(SelectAndUseCardRequest request) {
+    private void selectAndUseCardRequestUseSpecialPower() {
 
-
+        //TODO
     }
 
-    private void selectAndUseCardRequestShowInfo(SelectAndUseCardRequest request, Card item) {
-
-        ShowSelectedItemInfoBattleView showSelectedItemInfoBattleView = new ShowSelectedItemInfoBattleView();
-        showSelectedItemInfoBattleView.setName(item.getCardName());
-        showSelectedItemInfoBattleView.setDescription(item.getDescription());
-        showSelectedItemInfoBattleView.show(showSelectedItemInfoBattleView);
-    }
 
     private void showCardInfoRequest(ShowCardInfoRequest request) {
 
@@ -250,6 +224,7 @@ public class BattleController {
             BattleLog.errorInvalidCardID();
         }
     }
+
 
     private void enterGraveYardRequest(EnterGraveYardRequest request) {
         //todo help

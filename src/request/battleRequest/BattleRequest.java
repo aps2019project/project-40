@@ -44,6 +44,9 @@ public class BattleRequest extends Request {
                 else continue;
             }
 
+            if (command.matches("use special power"))
+                return useSpecialPower();
+
             if (command.matches("enter graveyard")) {
 
                 BattleRequest request = enterGraveYard();
@@ -102,17 +105,16 @@ public class BattleRequest extends Request {
             if (secondCommand.matches("attack combo .+( .+)+"))
                 return attackCombo(secondCommand, selectAndUseCardRequest);
 
-            if (command.matches("use special power \\(\\d+,\\d+\\)"))
-                return useSpecialPower(secondCommand, selectAndUseCardRequest);
-
-            if (secondCommand.matches("show info"))
-                return showInfo(secondCommand, selectAndUseCardRequest);
-
-            if (secondCommand.matches("use \\(\\d+,\\d+\\)"))
-                return useItem(secondCommand, selectAndUseCardRequest);
-
             if (secondCommand.matches("exit")) return null; //todo pay attention to null
         }
+    }
+
+    private BattleRequest useSpecialPower() {
+
+        SelectAndUseCardRequest selectAndUseCardRequest = new SelectAndUseCardRequest();
+        selectAndUseCardRequest.setForUnit(true);
+        selectAndUseCardRequest.setForUseSpecialPower(true);
+        return selectAndUseCardRequest;
     }
 
     private BattleRequest moveTo(String command, SelectAndUseCardRequest selectAndUseCardRequest) {
@@ -153,45 +155,6 @@ public class BattleRequest extends Request {
         }
 
         selectAndUseCardRequest.setMyCardsID(myCardsID);
-        return selectAndUseCardRequest;
-    }
-
-    private BattleRequest showInfo(String command, SelectAndUseCardRequest selectAndUseCardRequest) {
-
-        selectAndUseCardRequest.setForItem(true);
-        selectAndUseCardRequest.setForShowInfo(true);
-        return selectAndUseCardRequest;
-    }
-
-    private BattleRequest useItem(String command, SelectAndUseCardRequest selectAndUseCardRequest) {
-
-        selectAndUseCardRequest.setForItem(true);
-        selectAndUseCardRequest.setForUseItem(true);
-
-        selectAndUseCardRequest.setRow(
-                Integer.parseInt(
-                        command.split("[\\(|\\)]")[1].split(",")[0]));
-
-        selectAndUseCardRequest.setColumn(
-                Integer.parseInt(
-                        command.split("[\\(|\\)]")[1].split(",")[1]));
-
-        return selectAndUseCardRequest;
-    }
-
-    private BattleRequest useSpecialPower(String command, SelectAndUseCardRequest selectAndUseCardRequest) {
-
-        selectAndUseCardRequest.setForUnit(true);
-        selectAndUseCardRequest.setForUseSpecialPower(true);
-
-        selectAndUseCardRequest.setRow(
-                Integer.parseInt(
-                        command.split("[\\(|\\)]")[1].split(",")[0]));
-
-        selectAndUseCardRequest.setColumn(
-                Integer.parseInt(
-                        command.split("[\\(|\\)]")[1].split(",")[1]));
-
         return selectAndUseCardRequest;
     }
 
