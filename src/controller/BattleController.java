@@ -291,8 +291,7 @@ public class BattleController {
 
         Cell cell = match.getTable().getCellByCoordination(coordination);
 
-        if (card instanceof Unit)
-            insertCardRequestForUnit(cell, coordination, card);
+        if (card instanceof Unit) insertCardRequestForUnit(cell, coordination, card);
         else insertCardRequestForSpell(cell, (Spell) card);
     }
 
