@@ -6,8 +6,8 @@ import models.Account;
 public class Controller {
     private static Controller controller;
     private Account account = null;
-    public ShopController shopController=null;
-    public CollectionController collectionController=null;
+    public ShopController shopController = null;
+    public CollectionController collectionController = null;
     public static Stage stage;
     public double x, y;
 

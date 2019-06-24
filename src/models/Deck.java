@@ -112,9 +112,9 @@ public class Deck implements Serializable {
         return deck;
     }
 
-    public int countCardType(CardType cardType){
-        int num=0;
-        for(Card card:cards)
+    public int countCardType(CardType cardType) {
+        int num = 0;
+        for (Card card : cards)
             if (card.getType().equals(cardType))
                 num++;
         return num;

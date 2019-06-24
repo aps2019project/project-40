@@ -48,7 +48,7 @@ public class ShopController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        Controller.getInstance().shopController=this;
+        Controller.getInstance().shopController = this;
         money.setText(String.valueOf(Controller.getInstance().getAccount().getMoney()));
         showCards(shopCollection.getCards());
     }

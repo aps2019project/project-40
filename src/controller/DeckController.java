@@ -5,7 +5,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
 import models.Card;
 import models.CardType;
 import models.Deck;
@@ -26,7 +25,8 @@ public class DeckController {
 
     @FXML
     private Label numOfItem;
-    private double x,y;
+    private double x, y;
+
     @FXML
     void deleteDeck() {
         Deck deck = Controller.getInstance().getAccount().getCollection().getDeckByName(deckName.getText());
@@ -36,8 +36,8 @@ public class DeckController {
         Controller.getInstance().collectionController.showDecks();
     }
 
-     void setInformation(Deck deck) {
-        this.deck=deck;
+    void setInformation(Deck deck) {
+        this.deck = deck;
         deckName.setText(deck.getDeckName());
         numOfMinion.setText(String.valueOf(deck.countCardType(CardType.MINION)));
         numOfItem.setText(String.valueOf(deck.countCardType(CardType.USABLE_ITEM)));
@@ -50,7 +50,7 @@ public class DeckController {
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(getClass().getResource("../view/collectionMenuView/DeckMenu.fxml"));
             Parent root = fxmlLoader.load();
-            DeckMenu deckMenu=fxmlLoader.getController();
+            DeckMenu deckMenu = fxmlLoader.getController();
             deckMenu.setInfo(deck);
             Scene scene = new Scene(root);
             scene.setOnMousePressed(event -> {

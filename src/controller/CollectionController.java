@@ -91,8 +91,8 @@ public class CollectionController implements Initializable {
 
 
     public void add() {
-        String cardID=txtCardId.getText(), deckName=txtToDeckName.getText();
-        if (cardID.isEmpty()||deckName.isEmpty())
+        String cardID = txtCardId.getText(), deckName = txtToDeckName.getText();
+        if (cardID.isEmpty() || deckName.isEmpty())
             labelErrorInAdd.setText("No field can be empty");
         CollectionErrors collectionErrors = Controller.getInstance().getAccount().getCollection().addToDeck(cardID, deckName);
         if (collectionErrors != null)
@@ -103,7 +103,7 @@ public class CollectionController implements Initializable {
     }
 
     public void createDeck(Deck deck, String deckName) {
-        if (deckName.isEmpty()){
+        if (deckName.isEmpty()) {
             labelError.setText("Name cant be empty");
             return;
         }

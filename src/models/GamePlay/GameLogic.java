@@ -287,16 +287,13 @@ public class GameLogic {
     private boolean isRangeValidForAttack(Unit attacker, Unit defender) {
 
         if (attacker.getUnitType() == UnitType.MELEE) {
-            if (!attacker.getCell().isAdjacent(defender.getCell()))
-                return false;
+            return attacker.getCell().isAdjacent(defender.getCell());
 
         } else if (attacker.getUnitType() == UnitType.RANGED) {
-            if (attacker.getCell().isAdjacent(defender.getCell()))
-                return false;
+            return !attacker.getCell().isAdjacent(defender.getCell());
 
         } else if (attacker.getUnitType() == UnitType.HYBRID) {
-            if (attacker.getCell().isAdjacent(defender.getCell()))
-                return false;
+            return !attacker.getCell().isAdjacent(defender.getCell());
         }
 
         return true;

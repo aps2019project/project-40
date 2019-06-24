@@ -119,6 +119,7 @@ public class BattleMenuController implements Initializable {
     public boolean checkValidateDeck() {
         if (account.getCollection().getSelectedDeck() != null)
             return account.getCollection().getSelectedDeck().isDeckValidate();
+        return false;
     }
 
     public void playMultiPlayer() {
