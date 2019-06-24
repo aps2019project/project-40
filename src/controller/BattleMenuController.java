@@ -2,7 +2,10 @@ package controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
@@ -13,11 +16,13 @@ import models.*;
 import models.GamePlay.Match;
 import request.battleMenuRequest.battleMenuRequestChilds.MultiPlayerMenuRequest;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class BattleMenuController implements Initializable {
+    double x,y;
     private Account account;
     private MatchType matchType;
     @FXML
@@ -51,9 +56,26 @@ public class BattleMenuController implements Initializable {
     private Button btnMode2;
 
     @FXML
-    void gotoStartMenu(ActionEvent event) {
+    void gotoStartMenu() {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("../view/StartMenuView.fxml"));
+            Scene scene = new Scene(root);
+            scene.setOnMousePressed(event -> {
+                x = event.getSceneX();
+                y = event.getSceneY();
+            });
 
+            scene.setOnMouseDragged(event -> {
+
+                Controller.stage.setX(event.getScreenX() - x);
+                Controller.stage.setY(event.getScreenY() - y);
+
+            });
+            Controller.stage.setScene(scene);
+        } catch (IOException e) {
+        }
     }
+
 
     @FXML
     void playSinglePlayer(ActionEvent event) {

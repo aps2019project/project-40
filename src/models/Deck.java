@@ -23,7 +23,7 @@ public class Deck implements Serializable {
     }
 
     public boolean isDeckValidate() {
-        int numOfCards = 0, numOfHero = 0, numOfItem = 0;
+        int numOfCards = 0, numOfHero = 0;
         for (Card card : cards)
             switch (card.getType()) {
                 case SPELL:
@@ -36,9 +36,9 @@ public class Deck implements Serializable {
                     numOfCards++;
                     break;
                 case USABLE_ITEM:
-                    numOfItem++;
+                    numOfCards++;
             }
-        return numOfCards == 20 && numOfHero == 1 && numOfItem == 1;
+        return numOfCards == 20 && numOfHero == 1;
 
     }
 
