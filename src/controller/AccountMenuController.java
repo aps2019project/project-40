@@ -2,27 +2,27 @@ package controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import models.Account;
 import models.LoginMenu;
 import request.accountMenuRequest.AccountError;
-import request.accountMenuRequest.AccountMenuRequest;
-import request.accountMenuRequest.accountMenuRequestChilds.AccountCreate;
-import request.accountMenuRequest.accountMenuRequestChilds.AccountLoginRequest;
-import request.accountMenuRequest.accountMenuRequestChilds.AccountSimpleRequest;
-import view.AccountMenuView;
 
-
+import java.io.IOException;
 import java.util.Collections;
 import java.util.Comparator;
 
 public class AccountMenuController {
-    private static AccountMenuController accountMenuController;
+    private double x, y;
     private Account account;
     @FXML
-    private TextField txt;
+    private TextField txtUsername;
 
     @FXML
     private Label loginError;
@@ -32,88 +32,69 @@ public class AccountMenuController {
 
     @FXML
     void signIn(ActionEvent event) {
+        String userName = txtUsername.getText();
+        String password = txtPassword.getText();
+        if (userName.trim().isEmpty() || password.trim().isEmpty()) {
+            loginError.setText(AccountError.FIELDS_CAN_NOT_BE_EMPTY.toString());
+            return;
+        }
+        if (LoginMenu.getInstance().checkIfAccountExist(userName)) {
+            account = LoginMenu.getInstance().login(userName, password);
 
+            if (account == null)
+                loginError.setText(AccountError.PASSWORD_IS_INCORRECT.toString());
+            else {
+                Controller.getInstance().setAccount(account);
+                gotoStartMenu();
+            }
+
+        } else
+            loginError.setText(AccountError.USERNAME_DOESENT_EXIST.toString());
     }
 
     @FXML
     void signUp(ActionEvent event) {
-
+        String userName = txtUsername.getText();
+        String password = txtPassword.getText();
+        if (userName.trim().isEmpty() || password.trim().isEmpty()) {
+            loginError.setText(AccountError.FIELDS_CAN_NOT_BE_EMPTY.toString());
+            return;
+        }
+        if (LoginMenu.getInstance().checkIfAccountExist(userName)) {
+            loginError.setText(AccountError.USERNAME_ALREADY_EXIST.toString());
+            return;
+        }
+        Controller.getInstance().setAccount(account);
+        account = LoginMenu.getInstance().createAccount(userName, password);
+        Controller.getInstance().setAccount(account);
+        Account.save(account);
+        gotoStartMenu();
     }
 
     @FXML
     void exit(ActionEvent event) {
-
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.close();
     }
 
-    public static AccountMenuController getInstance() {
-        if(accountMenuController==null)
-            accountMenuController=new AccountMenuController();
-        return accountMenuController;
-    }
+    public void gotoStartMenu() {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("../view/StartMenuView.fxml"));
+            Scene scene = new Scene(root);
+            scene.setOnMousePressed(event -> {
+                x = event.getSceneX();
+                y = event.getSceneY();
+            });
 
-    public void accountControllerMain() {
-        AccountMenuRequest accountMenuRequest = AccountMenuRequest.getInstance().getCommand();
+            scene.setOnMouseDragged(event -> {
 
-        if (accountMenuRequest instanceof AccountSimpleRequest)
-            simpleCommand((AccountSimpleRequest) accountMenuRequest);
+                Controller.stage.setX(event.getScreenX() - x);
+                Controller.stage.setY(event.getScreenY() - y);
 
-        if (accountMenuRequest instanceof AccountLoginRequest)
-            loginCommand((AccountLoginRequest) accountMenuRequest);
-
-        if (accountMenuRequest instanceof AccountCreate)
-            createCommand((AccountCreate) accountMenuRequest);
-
-        Controller.getInstance().setAccount(account);
-    }
-
-    private void simpleCommand(AccountSimpleRequest accountSimpleRequest) {
-        switch (accountSimpleRequest.getAccountOptionList()) {
-            case SHOW_LEADERBOARD:
-                showLeaderboard();
-                break;
-            case SAVE:
-                break;
-            case LOGOUT:
-                account = null;
-                break;
-            case HELP:
-                AccountMenuView accountMenuView = new AccountMenuView();
-                accountMenuView.showHelp();
-                break;
+            });
+            Controller.stage.setScene(scene);
+        } catch (IOException e) {
         }
-    }
-
-    private void loginCommand(AccountLoginRequest accountLoginRequest) {
-        if (account != null) {
-            AccountMenuView.getInstance().showError(AccountError.ALREADY_LOGGED_IN);
-            return;
-        }
-        String userName = accountLoginRequest.getLine();
-        if (LoginMenu.getInstance().checkIfAccountExist(userName)) {
-            account = LoginMenu.getInstance().login(userName, AccountMenuRequest.getInstance().getPassWord());
-
-            if (account == null)
-                AccountMenuView.getInstance().showError(AccountError.PASSWORD_IS_INCORRECT);
-            else
-                Controller.getInstance().addStack(StartMenuController.getInstance());
-
-        } else
-            AccountMenuView.getInstance().showError(AccountError.USERNAME_DOESENT_EXIST);
-    }
-
-    private void createCommand(AccountCreate accountCreate) {
-        if (account != null) {
-            AccountMenuView.getInstance().showError(AccountError.ALREADY_LOGGED_IN);
-            return;
-        }
-        String userName = accountCreate.getLine();
-        if (LoginMenu.getInstance().checkIfAccountExist(userName)) {
-            AccountMenuView.getInstance().showError(AccountError.USERNAME_ALREADY_EXIST);
-            return;
-        }
-        Controller.getInstance().addStack(StartMenuController.getInstance());
-        account = LoginMenu.getInstance().createAccount(userName, AccountMenuRequest.getInstance().getPassWord());
-
     }
 
     private void showLeaderboard() {
@@ -123,6 +104,6 @@ public class AccountMenuController {
                     return account1.getWinsNumber() - account2.getWinsNumber();
                 }
             });
-        AccountMenuView.getInstance().showLeaderBoard(LoginMenu.getUsers());
+        //AccountMenuView.getInstance().showLeaderBoard(LoginMenu.getUsers());
     }
 }
