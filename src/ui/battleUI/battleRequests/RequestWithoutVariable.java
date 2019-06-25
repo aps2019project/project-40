@@ -1,6 +1,4 @@
-package request.battleRequest.BattleRequestChilds;
-
-import request.battleRequest.BattleRequest;
+package ui.battleUI.battleRequests;
 
 public class RequestWithoutVariable extends BattleRequest {
 

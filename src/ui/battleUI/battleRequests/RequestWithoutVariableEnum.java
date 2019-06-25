@@ -1,4 +1,4 @@
-package request.battleRequest.BattleRequestChilds;
+package ui.battleUI.battleRequests;
 
 public enum RequestWithoutVariableEnum {
 

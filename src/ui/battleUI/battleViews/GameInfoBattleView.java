@@ -1,4 +1,4 @@
-package view.battleView;
+package ui.battleUI.battleViews;
 
 public class GameInfoBattleView extends BattleView {
 

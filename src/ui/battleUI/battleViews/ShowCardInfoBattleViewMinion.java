@@ -1,4 +1,4 @@
-package view.battleView;
+package ui.battleUI.battleViews;
 
 import models.UnitType;
 

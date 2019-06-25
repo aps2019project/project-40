@@ -141,7 +141,7 @@ public class ShopController implements Initializable {
                     account.getCollection().getCards().add(newCard);
                     account.setMoney(account.getMoney() - card.getPrice());
                     money.setText(String.valueOf(account.getMoney() - card.getPrice()));
-                    labelErrorInShop.setText(ShopError.SUCSSES.toString());
+                    labelErrorInShop.setText(ShopError.SUCCESS.toString());
                 } else
                     labelErrorInShop.setText(ShopError.NOT_ENOUGH_MONEY.toString());
                 return;
@@ -158,7 +158,7 @@ public class ShopController implements Initializable {
                 account.setMoney(account.getMoney() + cards.get(i).getSellCost());
                 money.setText(String.valueOf(account.getMoney() + cards.get(i).getSellCost()));
                 account.getCollection().getCards().remove(cards.get(i));
-                labelErrorInShop.setText(ShopError.SUCSSES.toString());
+                labelErrorInShop.setText(ShopError.SUCCESS.toString());
                 return;
             }
         labelErrorInShop.setText(ShopError.CARD_NOT_FOUND.toString());

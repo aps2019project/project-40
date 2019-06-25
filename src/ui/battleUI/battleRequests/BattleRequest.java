@@ -1,7 +1,6 @@
-package request.battleRequest;
+package ui.battleUI.battleRequests;
 
 import request.Request;
-import request.battleRequest.BattleRequestChilds.*;
 import view.battleView.BattleLog;
 
 import java.util.ArrayList;

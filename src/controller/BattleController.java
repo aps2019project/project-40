@@ -3,8 +3,9 @@ package controller;
 import models.*;
 import models.GamePlay.GameLogic;
 import models.GamePlay.Match;
-import request.battleRequest.BattleRequest;
-import request.battleRequest.BattleRequestChilds.*;
+import ui.battleUI.battleRequests.BattleRequest;
+import ui.battleUI.battleRequests.*;
+import ui.battleUI.battleViews.*;
 import view.battleView.*;
 
 import java.util.ArrayList;
