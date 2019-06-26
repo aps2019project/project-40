@@ -3,6 +3,7 @@ package models;
 import java.io.Serializable;
 
 public class Buff implements Serializable {
+    private String name;
     private int duration;
     private int holy;
     private int poison;
@@ -152,5 +153,37 @@ public class Buff implements Serializable {
 
     public void setWaitingTime(int waitingTime) {
         this.waitingTime = waitingTime;
+    }
+
+    public Buff(){
+
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setHoly(int holy) {
+        this.holy = holy;
+    }
+
+    public void setPoison(int poison) {
+        this.poison = poison;
+    }
+
+    public void setWeaknessAP(int weaknessAP) {
+        this.weaknessAP = weaknessAP;
+    }
+
+    public void setWeaknessHP(int weaknessHP) {
+        this.weaknessHP = weaknessHP;
+    }
+
+    public void setLasts(boolean lasts) {
+        this.lasts = lasts;
     }
 }

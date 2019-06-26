@@ -110,5 +110,18 @@ public class Card implements Serializable, Cloneable {
     public void addSpell(Spell spell) {
         spells.add(spell);
     }
+
+
+    public void setCardName(String cardName) {
+        this.cardName = cardName;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    public void setType(CardType type) {
+        this.type = type;
+    }
 }
 
