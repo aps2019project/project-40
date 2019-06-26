@@ -2,101 +2,120 @@ package controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import models.*;
-import request.shopMenuRequest.ShopRequest;
-import request.shopMenuRequest.shopRequestChilds.ShopRequestVariable;
-import request.shopMenuRequest.shopRequestChilds.ShopRequestWithOutVariable;
 import view.shopMenuView.ShopError;
-import view.shopMenuView.ShopMenuView;
 
+import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 
-public class ShopController {
-    private static ShopController shopController;
-    private boolean isShopClosed = false;
-    private Account account;
-    private static Collection shopCollection = initializeShopCollection();
-    private ShopMenuView shopMenuView = ShopMenuView.getInstance();
+public class ShopController implements Initializable {
+    private Collection shopCollection = initializeShopCollection();
+    private double x, y;
+    Node[] shopNodes;
     @FXML
-    private Label labelErroInShop;
+    private TextField searchCArdName;
 
     @FXML
     private Label money;
 
     @FXML
-    private AnchorPane cardPane;
+    private Label labelErrorInShop;
+
+    @FXML
+    private RadioButton optSearchInShop;
+
+    @FXML
+    private HBox hBox2;
+
+    @FXML
+    private HBox hBox1;
+
+    @FXML
+    private RadioButton optSearchInCollection;
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        Controller.getInstance().shopController = this;
+        money.setText(String.valueOf(Controller.getInstance().getAccount().getMoney()));
+        showCards(shopCollection.getCards());
+    }
 
     @FXML
     void showShop(ActionEvent event) {
-
+        showCards(shopCollection.getCards());
     }
 
     @FXML
     void showCollection(ActionEvent event) {
+        showCards(Controller.getInstance().getAccount().getCollection().getCards());
+    }
+
+    @FXML
+    void mouseIn(MouseEvent event) {
+        if (event.getSource() instanceof Button) {
+            Button button = (Button) event.getSource();
+            button.setOpacity(1);
+        }
+    }
+
+    @FXML
+    void mouseOut(MouseEvent event) {
+        if (event.getSource() instanceof Button) {
+            Button button = (Button) event.getSource();
+            button.setOpacity(0.6);
+        }
+    }
+
+    @FXML
+    void search(ActionEvent event) {
+        if (searchCArdName.getText().trim().isEmpty()) {
+            if (optSearchInCollection.isSelected())
+                showCards(Controller.getInstance().getAccount().getCollection().getCards());
+            else
+                showCards(shopCollection.getCards());
+        } else {
+            if (optSearchInCollection.isSelected())
+                searchCollection(searchCArdName.getText(), Controller.getInstance().getAccount().getCollection());
+            else
+                searchCollection(searchCArdName.getText(), shopCollection);
+        }
 
     }
 
     @FXML
-    void mouseEnter(ActionEvent event) {
+    void gotoStartMenu() {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("../view/StartMenuView.fxml"));
+            Scene scene = new Scene(root);
+            scene.setOnMousePressed(event -> {
+                x = event.getSceneX();
+                y = event.getSceneY();
+            });
 
-    }
+            scene.setOnMouseDragged(event -> {
 
-    @FXML
-    void mouseExit(ActionEvent event) {
+                Controller.stage.setX(event.getScreenX() - x);
+                Controller.stage.setY(event.getScreenY() - y);
 
-    }
-
-    @FXML
-    void gotoStartMenu(ActionEvent event) {
-
-    }
-    public static ShopController getInstance() {
-
-        if (shopController == null) {
-
-            shopController = new ShopController();
-        }
-
-        return shopController;
-    }
-
-    public void shopControllerMain() {
-        isShopClosed = false;
-        account = Controller.getInstance().getAccount();
-        while (!isShopClosed) {
-            ShopRequest shopRequest = ShopRequest.getInstance().getCommand();
-
-            if (shopRequest instanceof ShopRequestVariable)
-                handelShopRequestVariable((ShopRequestVariable) shopRequest);
-
-            else if (shopRequest instanceof ShopRequestWithOutVariable)
-                handelShopRequestWithOutVariable((ShopRequestWithOutVariable) shopRequest);
-
-        }
-        Controller.getInstance().addStack(StartMenuController.getInstance());
-    }
-
-    public void handelShopRequestVariable(ShopRequestVariable shopRequestVariable) {
-        switch (shopRequestVariable.getCommandType()) {
-            case BUY:
-                buy(shopRequestVariable.getNameOrId());
-                break;
-
-            case SELL:
-                sell(shopRequestVariable.getNameOrId());
-                break;
-
-            case SEARCH:
-                searchCollection(shopRequestVariable.getNameOrId(), shopCollection);
-                break;
-
-            case SEARCH_COLLECTION:
-                searchCollection(shopRequestVariable.getNameOrId(), account.getCollection());
-                break;
+            });
+            Controller.stage.setScene(scene);
+        } catch (IOException e) {
         }
     }
+
 
     private boolean checkBuyItem(ArrayList<Card> cards) {
         int numOfItemInCollection = 0;
@@ -108,10 +127,12 @@ public class ShopController {
     }
 
     public void buy(String cardName) {
+        Account account = Controller.getInstance().getAccount();
         for (Card card : shopCollection.getCards())
             if (card.getCardName().equals(cardName)) {
-                if (card.getType().equals(CardType.USABLE_ITEM) && checkBuyItem(account.getCollection().getCards())) {
-                    shopMenuView.showError(ShopError.ALREADY_3_ITEM);
+                if (card.getType().equals(CardType.USABLE_ITEM) &&
+                        checkBuyItem(Controller.getInstance().getAccount().getCollection().getCards())) {
+                    labelErrorInShop.setText(ShopError.ALREADY_3_ITEM.toString());
                     return;
                 }
                 if (account.getMoney() - card.getPrice() >= 0) {
@@ -119,58 +140,129 @@ public class ShopController {
                     account.setID(newCard);
                     account.getCollection().getCards().add(newCard);
                     account.setMoney(account.getMoney() - card.getPrice());
-
-                    shopMenuView.showError(ShopError.SUCSSES);
+                    money.setText(String.valueOf(account.getMoney() - card.getPrice()));
+                    labelErrorInShop.setText(ShopError.SUCCESS.toString());
                 } else
-                    shopMenuView.showError(ShopError.NOT_ENOUGH_MONEY);
+                    labelErrorInShop.setText(ShopError.NOT_ENOUGH_MONEY.toString());
                 return;
             }
-        shopMenuView.showError(ShopError.CARD_NOT_FOUND);
+        labelErrorInShop.setText(ShopError.CARD_NOT_FOUND.toString());
     }
 
-    public void sell(String cardID) {
-
-        for (Card card : account.getCollection().getCards())
-            if (card.getCardID().equals(cardID)) {
-                account.getCollection().getCards().remove(card);
-                account.setMoney(account.getMoney() + card.getSellCost());
-                shopMenuView.showError(ShopError.SUCSSES);
+    public void sell(String cardName) {
+        Account account = Controller.getInstance().getAccount();
+        ArrayList<Card> cards = account.getCollection().getCards();
+        for (int i = cards.size() - 1; i >= 0; i--)
+            if (cards.get(i).getCardName().equals(cardName)) {
+                account.getCollection().getCards().remove(cards.get(i));
+                account.setMoney(account.getMoney() + cards.get(i).getSellCost());
+                money.setText(String.valueOf(account.getMoney() + cards.get(i).getSellCost()));
+                account.getCollection().getCards().remove(cards.get(i));
+                labelErrorInShop.setText(ShopError.SUCCESS.toString());
                 return;
             }
-        shopMenuView.showError(ShopError.CARD_NOT_FOUND);
+        labelErrorInShop.setText(ShopError.CARD_NOT_FOUND.toString());
     }
 
     public void searchCollection(String cardName, Collection collection) {
-        ArrayList<String> cardIDs = new ArrayList<>();
+
+        ArrayList<Card> cards = new ArrayList<>();
         for (Card card : collection.getCards()) {
-            if (card.getCardName().equals(cardName))
-                cardIDs.add(card.getCardID());
+            try {
+                if (card.getCardName().indexOf(cardName) > 0)
+                    cards.add(card);
+            } catch (Exception e) {
+            }
         }
-        if (cardIDs.size() == 0)
-            shopMenuView.showError(ShopError.CARD_NOT_FOUND);
+        if (cards.size() == 0)
+            labelErrorInShop.setText(ShopError.CARD_NOT_FOUND.toString());
         else
-            shopMenuView.showIDs(cardIDs);
+            showCards(cards);
     }
 
-    public void handelShopRequestWithOutVariable(ShopRequestWithOutVariable shopRequestWithOutVariable) {
-        switch (shopRequestWithOutVariable.getShopSimpleRequestList()) {
-            case HELP:
-                shopMenuView.showHelp();
-                break;
-            case EXIT:
-                isShopClosed = true;
-                return;
-            case SHOW:
-                shopMenuView.show(shopCollection.getCards(), true);
-                return;
-            case SHOW_COLLECTION:
-                shopMenuView.show(account.getCollection().getCards(), false);
-        }
-    }
-
-    public static Collection initializeShopCollection() {
+    public Collection initializeShopCollection() {
         Collection collection = new Collection();
         JsonToCard.moveToCollection(collection);
         return collection;
+    }
+
+    public void showCards(ArrayList<Card> cards) {
+        Node[] nodes;
+        nodes = new Node[cards.size()];
+        for (int i = hBox1.getChildren().size() - 1; i >= 0; i--) {
+            hBox1.getChildren().remove(hBox1.getChildren().get(i));
+        }
+        for (int i = hBox2.getChildren().size() - 1; i >= 0; i--) {
+            hBox2.getChildren().remove(hBox2.getChildren().get(i));
+        }
+        int i = 0;
+        for (; i < nodes.length / 2 + nodes.length % 2; i++) {
+            try {
+                Card card = cards.get(i);
+                FXMLLoader fxmlLoader = new FXMLLoader();
+                switch (card.getType()) {
+                    case USABLE_ITEM:
+                        fxmlLoader.setLocation(getClass().getResource("../view/cardBackground/Item.fxml"));
+                        break;
+                    case MINION:
+                        fxmlLoader.setLocation(getClass().getResource("../view/cardBackground/MinionCard.fxml"));
+                        break;
+                    case HERO:
+                        fxmlLoader.setLocation(getClass().getResource("../view/cardBackground/General.fxml"));
+                        break;
+                    case SPELL:
+                        fxmlLoader.setLocation(getClass().getResource("../view/cardBackground/SpellCard.fxml"));
+                        break;
+                }
+                nodes[i] = fxmlLoader.load();
+                CardController cardController = fxmlLoader.getController();
+                cardController.setInformation(card);
+                nodes[i].setOnMouseClicked(event -> {
+                    if (cards.equals(shopCollection.getCards()))
+                        buy(card.getCardName());
+                    else sell(card.getCardName());
+                });
+                hBox1.getChildren().add(nodes[i]);
+            } catch (IOException e) {
+
+            }
+        }
+        for (; i < nodes.length; i++) {
+            try {
+                Card card = cards.get(i);
+                FXMLLoader fxmlLoader = new FXMLLoader();
+                boolean isContinue = false;
+                switch (card.getType()) {
+                    case USABLE_ITEM:
+                        fxmlLoader.setLocation(getClass().getResource("../view/cardBackground/Item.fxml"));
+                        break;
+                    case MINION:
+                        fxmlLoader.setLocation(getClass().getResource("../view/cardBackground/MinionCard.fxml"));
+                        break;
+                    case HERO:
+                        fxmlLoader.setLocation(getClass().getResource("../view/cardBackground/General.fxml"));
+                        break;
+                    case SPELL:
+                        fxmlLoader.setLocation(getClass().getResource("../view/cardBackground/SpellCard.fxml"));
+                        break;
+                    default:
+                        isContinue = true;
+
+                }
+                if (isContinue)
+                    continue;
+                nodes[i] = fxmlLoader.load();
+                nodes[i].setOnMouseClicked(event -> {
+                    if (cards.equals(shopCollection.getCards()))
+                        buy(card.getCardName());
+                    else sell(card.getCardName());
+                });
+                CardController cardController = fxmlLoader.getController();
+                cardController.setInformation(card);
+                hBox2.getChildren().add(nodes[i]);
+            } catch (IOException e) {
+
+            }
+        }
     }
 }

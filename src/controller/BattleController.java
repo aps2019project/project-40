@@ -3,8 +3,9 @@ package controller;
 import models.*;
 import models.GamePlay.GameLogic;
 import models.GamePlay.Match;
-import request.battleRequest.BattleRequest;
-import request.battleRequest.BattleRequestChilds.*;
+import ui.battleUI.battleRequests.BattleRequest;
+import ui.battleUI.battleRequests.*;
+import ui.battleUI.battleViews.*;
 import view.battleView.*;
 
 import java.util.ArrayList;
@@ -291,8 +292,7 @@ public class BattleController {
 
         Cell cell = match.getTable().getCellByCoordination(coordination);
 
-        if (card instanceof Unit)
-            insertCardRequestForUnit(cell, coordination, card);
+        if (card instanceof Unit) insertCardRequestForUnit(cell, coordination, card);
         else insertCardRequestForSpell(cell, (Spell) card);
     }
 

@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.*?>
+<AnchorPane prefHeight="724.0" prefWidth="1093.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controller.BattleMenuController">
+    <children>
+        <ImageView fitHeight="792.0" fitWidth="1609.0" layoutX="-97.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../resources/scenes/backgrounds/chapter22_background@2x.jpg"/>
+            </image>
+        </ImageView>
+        <ImageView fitHeight="88.0" fitWidth="108.0" layoutX="-3.0" onMouseClicked="#gotoStartMenu" pickOnBounds="true"
+                   preserveRatio="true">
+            <image>
+                <Image url="@../../resources/ui/button_back_corner@2x.png"/>
+            </image>
+        </ImageView>
+        <Button contentDisplay="CENTER" layoutX="28.0" layoutY="382.0" mnemonicParsing="false"
+                onAction="#playSinglePlayer" onMouseEntered="#mouseIn" onMouseExited="#mouseOut" opacity="0.7"
+                prefHeight="100.0" prefWidth="299.0" style="-fx-background-color: transparent;" text="SINGLE PLAYER"
+                textFill="WHITE">
+            <graphic>
+                <ImageView fitHeight="98.0" fitWidth="289.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../resources/ui/button_confirm@2x.png"/>
+                    </image>
+                </ImageView>
+            </graphic>
+            <font>
+                <Font size="20.0"/>
+            </font>
+        </Button>
+        <Button fx:id="btnMultiPlayer" contentDisplay="CENTER" layoutX="28.0" layoutY="493.0" mnemonicParsing="false"
+                onMouseEntered="#mouseIn" onMouseExited="#mouseOut" opacity="0.7" prefHeight="100.0" prefWidth="299.0"
+                style="-fx-background-color: transparent;" text="MULTI PLAYER" textFill="WHITE">
+            <font>
+                <Font size="20.0"/>
+            </font>
+            <graphic>
+                <ImageView fitHeight="98.0" fitWidth="289.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../resources/ui/button_confirm@2x.png"/>
+                    </image>
+                </ImageView>
+            </graphic>
+        </Button>
+        <AnchorPane fx:id="singlePlayerPane" layoutX="409.0" layoutY="72.0" prefHeight="580.0" prefWidth="1082.0"
+                    visible="false">
+            <children>
+                <Pane layoutX="62.0" layoutY="31.0" prefHeight="453.0" prefWidth="427.0"
+                      style="-fx-border-color: Gray; -fx-border-radius: 30;">
+                    <children>
+                        <Button fx:id="btnMode1" contentDisplay="CENTER" layoutX="42.0" layoutY="89.0"
+                                mnemonicParsing="false" onAction="#storyMode" onMouseEntered="#mouseIn"
+                                onMouseExited="#mouseOut" opacity="0.8" prefHeight="60.0" prefWidth="343.0"
+                                style="-fx-background-color: transparent;"
+                                text="1. Hero: dive sefid, Mode: kill the hero">
+                            <graphic>
+                                <ImageView fitHeight="101.0" fitWidth="352.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../../resources/ui/button_primary_middle_glow.png"/>
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </Button>
+                        <Button fx:id="btnMode2" contentDisplay="CENTER" layoutX="42.0" layoutY="200.0"
+                                mnemonicParsing="false" onAction="#storyMode" onMouseEntered="#mouseIn"
+                                onMouseExited="#mouseOut" opacity="0.8" prefHeight="60.0" prefWidth="343.0"
+                                style="-fx-background-color: transparent;"
+                                text="2. Hero: zahak, Mode: hold flag for 6 term">
+                            <graphic>
+                                <ImageView fitHeight="101.0" fitWidth="352.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../../resources/ui/button_primary_middle_glow.png"/>
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </Button>
+                        <Button fx:id="btnMode3" contentDisplay="CENTER" layoutX="42.0" layoutY="311.0"
+                                mnemonicParsing="false" onAction="#storyMode" onMouseEntered="#mouseIn"
+                                onMouseExited="#mouseOut" opacity="0.8" prefHeight="60.0" prefWidth="343.0"
+                                style="-fx-background-color: transparent;"
+                                text="3. Hero: arash, Mode: collect the flags">
+                            <graphic>
+                                <ImageView fitHeight="101.0" fitWidth="352.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../../resources/ui/button_primary_middle_glow.png"/>
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </Button>
+                        <Label layoutX="166.0" layoutY="45.0" text="Story" textFill="#173142">
+                            <font>
+                                <Font size="36.0"/>
+                            </font>
+                        </Label>
+                    </children>
+                </Pane>
+                <Pane layoutX="530.0" layoutY="31.0" prefHeight="453.0" prefWidth="485.0"
+                      style="-fx-border-color: Gray; -fx-border-radius: 30;">
+                    <children>
+                        <Label layoutX="174.0" layoutY="45.0" text="Custom" textFill="#173142">
+                            <font>
+                                <Font size="36.0"/>
+                            </font>
+                        </Label>
+                        <RadioButton fx:id="radioMode1" layoutX="65.0" layoutY="134.0" mnemonicParsing="false"
+                                     prefHeight="38.0" prefWidth="274.0" selected="true" text="KILL THE HERO">
+                            <toggleGroup>
+                                <ToggleGroup fx:id="mode"/>
+                            </toggleGroup>
+                            <font>
+                                <Font size="18.0"/>
+                            </font>
+                        </RadioButton>
+                        <RadioButton fx:id="radioMode2" layoutX="65.0" layoutY="172.0" mnemonicParsing="false"
+                                     prefHeight="38.0" prefWidth="274.0" text="HOLD THE FLAG" toggleGroup="$mode">
+                            <font>
+                                <Font size="18.0"/>
+                            </font>
+                        </RadioButton>
+                        <RadioButton fx:id="radioMode3" layoutX="65.0" layoutY="208.0" mnemonicParsing="false"
+                                     prefHeight="38.0" prefWidth="274.0" text="RadioButton" toggleGroup="$mode">
+                            <font>
+                                <Font size="18.0"/>
+                            </font>
+                        </RadioButton>
+                        <Button contentDisplay="CENTER" layoutX="91.0" layoutY="340.0" mnemonicParsing="false"
+                                onMouseEntered="#mouseIn" onMouseExited="#mouseOut" opacity="0.8" prefHeight="92.0"
+                                prefWidth="274.0" style="-fx-background-color: transparent;" text="Start">
+                            <graphic>
+                                <ImageView fitHeight="80.0" fitWidth="268.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../../resources/ui/button_primary_middle_glow.png"/>
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                            <font>
+                                <Font size="18.0"/>
+                            </font>
+                        </Button>
+                        <TextField fx:id="flagsNum" layoutX="260.0" layoutY="269.0" prefHeight="32.0"
+                                   prefWidth="167.0"/>
+                        <Label layoutX="65.0" layoutY="269.0" prefHeight="32.0" prefWidth="167.0"
+                               text="Number Of Flags :" textFill="#173142">
+                            <font>
+                                <Font size="18.0"/>
+                            </font>
+                        </Label>
+                    </children>
+                </Pane>
+            </children>
+        </AnchorPane>
+    </children>
+</AnchorPane>

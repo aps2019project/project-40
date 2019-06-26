@@ -14,15 +14,18 @@ public class GameLogic {
     public final int DRAW = 3;
     public final int MATCH_HAS_NOT_ENDED = 0;
     public final int NUMBER_OF_TURNS_TO_HOLD_THE_FLAG = 6;
-
-    private Match match;
     int flagsNumber;
     int remainTurnToHoldingTheFlag; //todo initialize in dead and get
-
     ArrayList<Card> attackedCardsInATurn = new ArrayList<>();      //todo add attacker to array
     ArrayList<Card> movedCardsInATurn = new ArrayList<>();
     ArrayList<Card> cardsInTablePlayer1 = new ArrayList<>(); //todo fill that in game and delete when minion die
     ArrayList<Card> cardsInTablePlayer2 = new ArrayList<>();
+    private Match match;
+
+    GameLogic(Match match) {
+
+        this.match = match;
+    }
 
     public ArrayList<Card> getCardsInTablePlayerPlayingThisTurn() {
 
@@ -58,11 +61,6 @@ public class GameLogic {
     public ArrayList<Card> getMovedCardsInATurn() {
 
         return movedCardsInATurn;
-    }
-
-    GameLogic(Match match) {
-
-        this.match = match;
     }
 
     public void moveProcess(Card card, Cell destinationCell) {
@@ -197,7 +195,7 @@ public class GameLogic {
     }
 
     public void useItem(Spell spell, Cell cell) {
-        applySpell(spell, findTarget(spell, cell,cell,
+        applySpell(spell, findTarget(spell, cell, cell,
                 match.findPlayerPlayingThisTurn().getHand().getHero().getCell()));
     }
 
@@ -286,23 +284,19 @@ public class GameLogic {
         }
     }
 
-    private void checkRangeForAttack(Unit attacker, Unit defender) {
+    private boolean isRangeValidForAttack(Unit attacker, Unit defender) {
 
         if (attacker.getUnitType() == UnitType.MELEE) {
-            if (!attacker.getCell().isAdjacent(defender.getCell())) {
-                throw new IllegalArgumentException("can't attack"); //
-            }
+            return attacker.getCell().isAdjacent(defender.getCell());
+
+        } else if (attacker.getUnitType() == UnitType.RANGED) {
+            return !attacker.getCell().isAdjacent(defender.getCell());
+
+        } else if (attacker.getUnitType() == UnitType.HYBRID) {
+            return !attacker.getCell().isAdjacent(defender.getCell());
         }
-        if (attacker.getUnitType() == UnitType.RANGED) {
-            if (attacker.getCell().isAdjacent(defender.getCell())) {
-                throw new IllegalArgumentException("can't attack"); //
-            }
-        }
-        if (attacker.getUnitType() == UnitType.HYBRID) {
-            if (attacker.getCell().isAdjacent(defender.getCell())) {
-                throw new IllegalArgumentException("can't attack"); //
-            }
-        }
+
+        return true;
     }
 
     ///////Target
@@ -575,7 +569,7 @@ public class GameLogic {
     public void counterAttack(Unit defender, Unit attacker) {
 
         if (defender.isDisarm()) return;
-        checkRangeForAttack(defender, attacker);
+        if (!isRangeValidForAttack(defender, attacker)) return;
         if (!attacker.isNoBadEffect() || (attacker.isNoDamageFromWeakers() && defender.getAP() > attacker.getAP())) {
             damage(defender, attacker);
         }
@@ -607,7 +601,6 @@ public class GameLogic {
                     specialPower, findTarget(specialPower, hero.getCell(), hero.getCell(), hero.getCell()));
         }
     }
-
 
 
 }

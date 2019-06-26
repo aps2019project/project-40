@@ -1,14 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="controller.DeckController"
-            prefHeight="400.0" prefWidth="600.0">
-
-</AnchorPane>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="80.0"
+      prefWidth="243.0" style="-fx-background-color: #2E3F53;" xmlns="http://javafx.com/javafx/8"
+      xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.DeckController">
+    <children>
+        <Label layoutX="8.0" layoutY="7.0" text="Deck Name :" textFill="WHITE"/>
+        <Label layoutX="8.0" layoutY="22.0" text="Minions :" textFill="WHITE"/>
+        <Label layoutX="8.0" layoutY="38.0" text="Spells :" textFill="WHITE"/>
+        <Label layoutX="8.0" layoutY="53.0" text="Item :" textFill="WHITE"/>
+        <Label fx:id="deckName" layoutX="104.0" layoutY="7.0" prefHeight="15.0" prefWidth="122.0" text="Label"
+               textFill="#bfb0b0"/>
+        <Label fx:id="numOfMinion" layoutX="104.0" layoutY="22.0" prefHeight="15.0" prefWidth="122.0" text="Label"
+               textFill="#bfb0b0"/>
+        <Label fx:id="numOfSpells" layoutX="104.0" layoutY="38.0" prefHeight="15.0" prefWidth="122.0" text="Label"
+               textFill="#bfb0b0"/>
+        <Label fx:id="numOfItem" layoutX="104.0" layoutY="53.0" prefHeight="15.0" prefWidth="122.0" text="Label"
+               textFill="#bfb0b0"/>
+        <ImageView fitHeight="22.0" fitWidth="30.0" layoutX="215.0" layoutY="50.0" onMouseClicked="#deleteDeck"
+                   pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../resources/ui/icons8-trash-24.png"/>
+            </image>
+        </ImageView>
+        <ImageView fitHeight="22.0" fitWidth="22.0" layoutX="215.0" layoutY="4.0" onMouseClicked="#gotoDeckMenu"
+                   pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../resources/ui/icons8-plus-48.png"/>
+            </image>
+        </ImageView>
+    </children>
+</Pane>

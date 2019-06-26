@@ -70,7 +70,6 @@ public class Collection implements Serializable {
                 chosenDeck = deck;
                 break;
             }
-
         Card chosenCard = null;
         for (Card card : cards)
             if (card.getCardID().equals(cardID)) {

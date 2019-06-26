@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.*?>
+<AnchorPane prefHeight="651.0" prefWidth="1087.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controller.LeaderBoardController">
+    <children>
+        <ImageView fitHeight="745.0" fitWidth="1447.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../resources/scenes/backgrounds/chapter11_background@2x.jpg"/>
+            </image>
+        </ImageView>
+        <ScrollPane layoutX="480.0" layoutY="205.0" prefHeight="417.0" prefWidth="756.0"
+                    stylesheets="@../resources/ui/style.css">
+            <content>
+                <VBox fx:id="vBoxLeaderBoard" prefHeight="428.0" prefWidth="756.0" spacing="5.0"
+                      style="-fx-background-color: #4D5A68;">
+                    <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                    </padding>
+                </VBox>
+            </content>
+        </ScrollPane>
+        <HBox fx:id="item" alignment="CENTER_LEFT" layoutX="480.0" layoutY="131.0" maxHeight="-Infinity"
+              maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="756.0"
+              spacing="140.0"
+              style="-fx-background-color: #02030A; -fx-background-radius: 5; -fx-background-insets: 0;">
+            <children>
+                <Label fx:id="labelRank" text="rank" textFill="#b7c3c7">
+                    <font>
+                        <Font size="16.0"/>
+                    </font>
+                </Label>
+                <Label fx:id="labelUsername" text="Username" textFill="#b7c3d7">
+                    <font>
+                        <Font size="16.0"/>
+                    </font>
+                </Label>
+                <Label fx:id="labelHighScore" text="Win Number" textFill="#b7c3d7">
+                    <font>
+                        <Font size="16.0"/>
+                    </font>
+                    <HBox.margin>
+                        <Insets/>
+                    </HBox.margin>
+                </Label>
+            </children>
+            <effect>
+                <DropShadow blurType="GAUSSIAN" height="5.0" radius="2.0" width="5.0"/>
+            </effect>
+            <opaqueInsets>
+                <Insets/>
+            </opaqueInsets>
+            <padding>
+                <Insets left="60.0"/>
+            </padding>
+        </HBox>
+        <Label layoutX="480.0" layoutY="42.0" prefHeight="89.0" prefWidth="300.0" text="Leader Board">
+            <font>
+                <Font size="36.0"/>
+            </font>
+        </Label>
+        <Button fx:id="btnBack" cancelButton="true" mnemonicParsing="false" onAction="#gotoStartMenu" prefHeight="653.0"
+                prefWidth="230.0" style="-fx-background-color: #02030A;" text="BACK" textFill="WHITE">
+            <font>
+                <Font size="30.0"/>
+            </font>
+        </Button>
+    </children>
+</AnchorPane>
