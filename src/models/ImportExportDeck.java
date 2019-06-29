@@ -22,7 +22,7 @@ public class ImportExportDeck {
 
     public static void exportDeck(Deck deck) throws IOException {
         Gson gson = new Gson();
-        String fileName = deck.getDeckName() + ".json"; // change here for file name
+        String fileName = "./Decks/" + deck.getDeckName() + ".json"; // change here for file name
         File file = new File(fileName);
         FileWriter fileWriter = new FileWriter(file);
         fileWriter.write(deck.getDeckName());
@@ -70,5 +70,7 @@ public class ImportExportDeck {
         }
         return deck;
     }
+
+
 }
 

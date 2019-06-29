@@ -1,5 +1,11 @@
 package models;
 
+import com.google.gson.Gson;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class CustomCard {
     private Unit setUnit(String name, int hp, int ap, UnitType unitType, int range,  int price,Spell... specialPower) {
         Unit unit = new Unit();
@@ -70,5 +76,21 @@ public class CustomCard {
         TargetType targetType = new TargetType(affectHybrid, affectRanged, affectMelee);
         target.setTargetType(targetType);
         return target;
+    }
+    public void jsonUnit(Unit unit) throws IOException {
+        Gson gson = new Gson();
+        String fileName =  "./json/customCards" + unit.getCardName() + ".json";
+        File file = new File(fileName);
+        FileWriter fileWriter = new FileWriter(file);
+        fileWriter.write(gson.toJson(unit));
+        fileWriter.close();
+    }
+    public void jsonSpell(Spell spell) throws IOException{
+        Gson gson = new Gson();
+        String fileName =  "./json/customCards" + spell.getCardName() + ".json";
+        File file = new File(fileName);
+        FileWriter fileWriter = new FileWriter(file);
+        fileWriter.write(gson.toJson(spell));
+        fileWriter.close();
     }
 }
