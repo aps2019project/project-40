@@ -1,7 +1,7 @@
 package models;
 
 public class CustomCard {
-    private Unit setUnit(String name, int hp, int ap, UnitType unitType, int range,  int price,Spell... specialPower) {
+    private Unit setUnit(String name, int hp, int ap, UnitType unitType, int range, int price, Spell... specialPower) {
         Unit unit = new Unit();
         unit.setCardName(name);
         unit.setHP(hp);
@@ -15,11 +15,11 @@ public class CustomCard {
     }
 
     public Unit customHero(String name, int hp, int ap, UnitType unitType, int range, int price, Spell... specialPower) {
-        return setUnit(name, hp, ap, unitType, range, price,specialPower);
+        return setUnit(name, hp, ap, unitType, range, price, specialPower);
     }
 
     public Unit customMinion(String name, int hp, int ap, UnitType unitType, int range, int price, Spell... specialPower) {
-        return setUnit(name, hp, ap, unitType, range, price,specialPower);
+        return setUnit(name, hp, ap, unitType, range, price, specialPower);
     }
 
     public Spell customSpell(String name, CardType type, int price, int coolDown, SpecialPowerType specialPowerType, Target target) {

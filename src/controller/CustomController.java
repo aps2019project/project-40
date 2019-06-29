@@ -1,13 +1,11 @@
 package controller;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
-import models.Card;
 
 import java.io.File;
 
@@ -32,13 +30,13 @@ public class CustomController {
 
     @FXML
     void addImage() {
-        FileChooser fileChooser=new FileChooser();
-        File file=fileChooser.showOpenDialog(null);
-        if (file!=null){
+        FileChooser fileChooser = new FileChooser();
+        File file = fileChooser.showOpenDialog(null);
+        if (file != null) {
             try {
-                Image image=new Image(file.toURI().toString());
+                Image image = new Image(file.toURI().toString());
                 imgCard.setImage(image);
-            }catch (Exception e){
+            } catch (Exception e) {
                 labelError.setText("PLEASE SELECT IMAGE FILE");
             }
         }
@@ -46,12 +44,12 @@ public class CustomController {
 
     @FXML
     void addCard() {
-      try {
-            int mana=Integer.parseInt(txtMana.getText());
-            int ap=Integer.parseInt(txtAP.getText());
-            int hp=Integer.parseInt(txtHP.getText());
+        try {
+            int mana = Integer.parseInt(txtMana.getText());
+            int ap = Integer.parseInt(txtAP.getText());
+            int hp = Integer.parseInt(txtHP.getText());
 
-        }catch(Exception e){
+        } catch (Exception e) {
         }
     }
 

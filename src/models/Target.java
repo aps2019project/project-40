@@ -100,7 +100,8 @@ public class Target implements Serializable {
     public void setTargetType(TargetType targetType) {
         this.targetType = targetType;
     }
-    Target(){
+
+    Target() {
 
     }
 }

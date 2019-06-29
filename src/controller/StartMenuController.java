@@ -93,7 +93,7 @@ public class StartMenuController implements Initializable {
                 Controller.stage.setY(event.getScreenY() - y);
 
             });
-            Stage stage=new Stage();
+            Stage stage = new Stage();
             stage.initStyle(StageStyle.UNDECORATED);
             stage.setScene(scene);
             stage.initModality(Modality.APPLICATION_MODAL);

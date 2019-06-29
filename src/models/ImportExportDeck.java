@@ -29,11 +29,11 @@ public class ImportExportDeck {
         fileWriter.write("-------");
         for (Card card : deck.getCards()) {
             if (card.getType().equals(CardType.MINION) || card.getType().equals(CardType.HERO)) {
-                String jsonCard = gson.toJson((Unit) card);
+                String jsonCard = gson.toJson(card);
                 fileWriter.write(jsonCard);
                 fileWriter.write("-------");
             } else if (card.getType().equals(CardType.SPELL)) {
-                String jsonCard = gson.toJson((Spell) card);
+                String jsonCard = gson.toJson(card);
                 fileWriter.write(jsonCard);
                 fileWriter.write("-------");
             } else if (card.getType().equals(CardType.COLLECTIBLE_ITEM)) {

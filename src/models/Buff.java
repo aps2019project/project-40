@@ -155,7 +155,7 @@ public class Buff implements Serializable {
         this.waitingTime = waitingTime;
     }
 
-    public Buff(){
+    public Buff() {
 
     }
 

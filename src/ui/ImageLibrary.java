@@ -1,7 +1,6 @@
 package ui;
 
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 
 import java.io.File;
 import java.io.FileInputStream;
