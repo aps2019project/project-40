@@ -11,7 +11,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import models.Account;
 
 import java.io.IOException;
@@ -74,8 +76,30 @@ public class StartMenuController implements Initializable {
     }
 
     @FXML
-    void gotoSettings(ActionEvent event) {
+    void gotoSettings() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("../view/cardBackground/CustomCard.fxml"));
+            Parent root = fxmlLoader.load();
+            Scene scene = new Scene(root);
+            scene.setOnMousePressed(event -> {
+                x = event.getSceneX();
+                y = event.getSceneY();
+            });
 
+            scene.setOnMouseDragged(event -> {
+
+                Controller.stage.setX(event.getScreenX() - x);
+                Controller.stage.setY(event.getScreenY() - y);
+
+            });
+            Stage stage=new Stage();
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.setScene(scene);
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.showAndWait();
+        } catch (IOException e) {
+        }
     }
 
     @FXML
