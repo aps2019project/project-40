@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class BattleMenuController implements Initializable {
-    double x,y;
+    double x, y;
     private Account account;
     private MatchType matchType;
     @FXML

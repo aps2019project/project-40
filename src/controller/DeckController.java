@@ -34,6 +34,7 @@ public class DeckController {
         for (Card card : deck.getCards())
             Controller.getInstance().getAccount().getCollection().getCards().add(card);
         Controller.getInstance().collectionController.showDecks();
+        Controller.getInstance().collectionController.showCards();
     }
 
     void setInformation(Deck deck) {
@@ -66,6 +67,7 @@ public class DeckController {
             });
             Controller.stage.setScene(scene);
         } catch (IOException e) {
+
         }
     }
 

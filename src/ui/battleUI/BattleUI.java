@@ -1,8 +1,8 @@
 package ui.battleUI;
 
 import javafx.scene.ImageCursor;
-import javafx.scene.image.*;
 import javafx.scene.Scene;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -15,7 +15,7 @@ public class BattleUI {
     public void battleUI(Stage mainStage) {
 
         Pane pane = new Pane();
-        background = new ImageView(ImageLibrary .Background.getImage());
+        background = new ImageView(ImageLibrary.Background.getImage());
         background.fitHeightProperty().bind(mainStage.heightProperty());
         background.fitWidthProperty().bind(mainStage.widthProperty());
 

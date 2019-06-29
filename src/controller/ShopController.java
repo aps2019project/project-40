@@ -14,12 +14,15 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import models.*;
+import models.GamePlay.Match;
 import view.shopMenuView.ShopError;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class ShopController implements Initializable {
     private Collection shopCollection = initializeShopCollection();
@@ -80,7 +83,7 @@ public class ShopController implements Initializable {
     }
 
     @FXML
-    void search(ActionEvent event) {
+    void search() {
         if (searchCArdName.getText().trim().isEmpty()) {
             if (optSearchInCollection.isSelected())
                 showCards(Controller.getInstance().getAccount().getCollection().getCards());
@@ -169,7 +172,9 @@ public class ShopController implements Initializable {
         ArrayList<Card> cards = new ArrayList<>();
         for (Card card : collection.getCards()) {
             try {
-                if (card.getCardName().indexOf(cardName) > 0)
+                Pattern pattern=Pattern.compile(cardName);
+                Matcher matcher=pattern.matcher(card.getCardName());
+                if (matcher.find())
                     cards.add(card);
             } catch (Exception e) {
             }

@@ -17,6 +17,4 @@ public class GraveYard {
 
         cards.add(card);
     }
-
-    //todo help
 }

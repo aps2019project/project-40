@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="599.0"
+            prefWidth="1325.0" style="-fx-background-color: #4747d1;" xmlns="http://javafx.com/javafx/8"
+            xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <ImageView fitHeight="646.0" fitWidth="1342.0" layoutY="-6.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../resources/scenes/backgrounds/chapter17_background@2x.jpg"/>
+            </image>
+        </ImageView>
+        <AnchorPane fx:id="paneMinion" layoutX="400.0" layoutY="53.0" prefHeight="504.0" prefWidth="387.0"
+                    style="-fx-background-color: #4747d1;" visible="false">
+            <children>
+                <ImageView fitHeight="504.0" fitWidth="387.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../resources/card_backgrounds/neutral_unit@2x.png"/>
+                    </image>
+                </ImageView>
+                <Label layoutX="162.0" layoutY="232.0" text="MInion" textFill="WHITE">
+                    <font>
+                        <Font size="16.0"/>
+                    </font>
+                </Label>
+                <TextField fx:id="txtHPMinion" layoutX="270.0" layoutY="292.0" prefHeight="24.0" prefWidth="46.0"
+                           promptText="HP..." style="-fx-background-color: transparent;"/>
+                <ImageView fitHeight="102.0" fitWidth="85.0" layoutX="-13.0" layoutY="-21.0" pickOnBounds="true"
+                           preserveRatio="true">
+                    <image>
+                        <Image url="@../../resources/ui/icon_mana@2x.png"/>
+                    </image>
+                </ImageView>
+                <TextField fx:id="txtAPMinion" layoutX="65.0" layoutY="292.0" prefHeight="24.0" prefWidth="46.0"
+                           promptText="AP..." style="-fx-background-color: transoarent;"/>
+                <TextField fx:id="txtNameMinion" layoutX="132.0" layoutY="203.0" prefHeight="36.0" prefWidth="121.0"
+                           promptText="Name" style="-fx-background-color: transoarent;">
+                    <font>
+                        <Font size="16.0"/>
+                    </font>
+                </TextField>
+                <TextField fx:id="txtManaMinion" layoutX="3.0" layoutY="13.0" prefHeight="25.0" prefWidth="53.0"
+                           promptText="Mana" style="-fx-background-color: transoarent;"/>
+                <ImageView fx:id="imgCardMinion" fitHeight="150.0" fitWidth="180.0" layoutX="112.0" layoutY="49.0"
+                           pickOnBounds="true" preserveRatio="true"/>
+                <Label fx:id="labelErrorMinion" layoutX="38.0" layoutY="362.0" prefHeight="36.0" prefWidth="309.0"
+                       textFill="#e40e0e"/>
+                <MenuButton fx:id="minionBuffs" layoutX="21.0" layoutY="431.0" mnemonicParsing="false" text="Buffs">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="+"/>
+                    </items>
+                </MenuButton>
+            </children>
+        </AnchorPane>
+        <AnchorPane fx:id="paneGeneral" layoutX="400.0" layoutY="53.0" prefHeight="504.0" prefWidth="387.0"
+                    style="-fx-background-color: #4747d1;" visible="false">
+            <children>
+                <ImageView fitHeight="504.0" fitWidth="387.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../resources/card_backgrounds/neutral_unit@2x.png"/>
+                    </image>
+                </ImageView>
+                <Label layoutX="162.0" layoutY="232.0" text="General" textFill="WHITE">
+                    <font>
+                        <Font size="16.0"/>
+                    </font>
+                </Label>
+                <TextField fx:id="txtHPGeneral" layoutX="270.0" layoutY="292.0" prefHeight="24.0" prefWidth="46.0"
+                           promptText="HP..." style="-fx-background-color: transparent;"/>
+                <TextField fx:id="txtAPGeneral" layoutX="65.0" layoutY="292.0" prefHeight="24.0" prefWidth="46.0"
+                           promptText="AP..." style="-fx-background-color: transoarent;"/>
+                <TextField fx:id="txtNameGeneral" layoutX="132.0" layoutY="203.0" prefHeight="36.0" prefWidth="121.0"
+                           promptText="Name" style="-fx-background-color: transoarent;">
+                    <font>
+                        <Font size="16.0"/>
+                    </font>
+                </TextField>
+                <ImageView fx:id="imgCardGeneral" fitHeight="150.0" fitWidth="172.0" layoutX="111.0" layoutY="53.0"
+                           pickOnBounds="true" preserveRatio="true"/>
+                <Label fx:id="labelErrorGeneral" layoutX="38.0" layoutY="362.0" prefHeight="36.0" prefWidth="309.0"
+                       textFill="#e40e0e"/>
+                <MenuButton fx:id="generalBuffs" layoutX="38.0" layoutY="437.0" mnemonicParsing="false" text="Buffs">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="+"/>
+                    </items>
+                </MenuButton>
+            </children>
+        </AnchorPane>
+        <Button alignment="CENTER" contentDisplay="CENTER" layoutX="99.0" layoutY="266.0" mnemonicParsing="false"
+                onAction="#addImage" style="-fx-background-color: transparent;" text="Add Image" textFill="WHITE">
+            <graphic>
+                <ImageView fitHeight="50.0" fitWidth="146.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../resources/ui/gold_main_menu_container@2x.png"/>
+                    </image>
+                </ImageView>
+            </graphic>
+        </Button>
+        <Button alignment="CENTER" contentDisplay="CENTER" layoutX="70.0" layoutY="473.0" mnemonicParsing="false"
+                onAction="#addCard" style="-fx-background-color: transparent;" text="Build Card" textFill="WHITE">
+            <graphic>
+                <ImageView fitHeight="97.0" fitWidth="182.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../resources/ui/gold_main_menu_container@2x.png"/>
+                    </image>
+                </ImageView>
+            </graphic>
+        </Button>
+        <Button alignment="CENTER" contentDisplay="CENTER" layoutX="99.0" layoutY="162.0" mnemonicParsing="false"
+                onAction="#addHero" style="-fx-background-color: transparent;" text="Add Hero" textFill="WHITE">
+            <graphic>
+                <ImageView fitHeight="50.0" fitWidth="146.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../resources/ui/gold_main_menu_container@2x.png"/>
+                    </image>
+                </ImageView>
+            </graphic>
+        </Button>
+        <Button alignment="CENTER" contentDisplay="CENTER" layoutX="99.0" layoutY="109.0" mnemonicParsing="false"
+                onAction="#addMInion" style="-fx-background-color: transparent;" text="Add Minion" textFill="WHITE">
+            <graphic>
+                <ImageView fitHeight="50.0" fitWidth="146.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../resources/ui/gold_main_menu_container@2x.png"/>
+                    </image>
+                </ImageView>
+            </graphic>
+        </Button>
+        <Button alignment="CENTER" contentDisplay="CENTER" layoutX="99.0" layoutY="215.0" mnemonicParsing="false"
+                onAction="#addSpell" style="-fx-background-color: transparent;" text="Add Spell" textFill="WHITE">
+            <graphic>
+                <ImageView fitHeight="50.0" fitWidth="146.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../resources/ui/gold_main_menu_container@2x.png"/>
+                    </image>
+                </ImageView>
+            </graphic>
+        </Button>
+        <AnchorPane fx:id="paneSpell" layoutX="400.0" layoutY="53.0" prefHeight="504.0" prefWidth="387.0"
+                    style="-fx-background-color: #4747d1;">
+            <children>
+                <ImageView fitHeight="504.0" fitWidth="387.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../resources/card_backgrounds/neutral_spell@2x.png"/>
+                    </image>
+                </ImageView>
+                <Label layoutX="162.0" layoutY="232.0" text="Spell" textFill="WHITE">
+                    <font>
+                        <Font size="16.0"/>
+                    </font>
+                </Label>
+                <ImageView fitHeight="102.0" fitWidth="85.0" layoutX="-13.0" layoutY="-21.0" pickOnBounds="true"
+                           preserveRatio="true">
+                    <image>
+                        <Image url="@../../resources/ui/icon_mana@2x.png"/>
+                    </image>
+                </ImageView>
+                <TextField fx:id="txtNameSpell" layoutX="132.0" layoutY="203.0" prefHeight="36.0" prefWidth="121.0"
+                           promptText="Name" style="-fx-background-color: transoarent;">
+                    <font>
+                        <Font size="16.0"/>
+                    </font>
+                </TextField>
+                <TextField fx:id="txtManaMinion1" layoutX="3.0" layoutY="13.0" prefHeight="25.0" prefWidth="53.0"
+                           promptText="Mana" style="-fx-background-color: transoarent;"/>
+                <ImageView fx:id="imgCardMinion1" fitHeight="150.0" fitWidth="180.0" layoutX="104.0" layoutY="38.0"
+                           pickOnBounds="true" preserveRatio="true"/>
+                <Label fx:id="labelErrorMinion1" layoutX="38.0" layoutY="362.0" prefHeight="36.0" prefWidth="309.0"
+                       textFill="#e40e0e"/>
+                <MenuButton fx:id="spellBuffs" layoutX="38.0" layoutY="435.0" mnemonicParsing="false" text="Buffs">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="+"/>
+                    </items>
+                </MenuButton>
+            </children>
+        </AnchorPane>
+        <AnchorPane layoutX="829.0" layoutY="53.0" prefHeight="445.0" prefWidth="350.0">
+            <children>
+                <ImageView fitHeight="451.0" fitWidth="385.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../../resources/card_backgrounds/Buff.png"/>
+                    </image>
+                </ImageView>
+            </children>
+        </AnchorPane>
+    </children>
+</AnchorPane>

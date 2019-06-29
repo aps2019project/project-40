@@ -196,4 +196,13 @@ public class Unit extends Card implements Serializable {
     public void setNoDamageFromWeakers(boolean noDamageFromWeakers) {
         this.noDamageFromWeakers = noDamageFromWeakers;
     }
+
+    public void setUnitType(UnitType unitType) {
+        this.unitType = unitType;
+    }
+
+    public void setRange(int range) {
+        this.range = range;
+    }
+
 }

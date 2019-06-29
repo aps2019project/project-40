@@ -69,4 +69,16 @@ public class Spell extends Card implements Serializable {
     public Spell() {
 
     }
+
+    public void setSpecialPowerType(SpecialPowerType specialPowerType) {
+        this.specialPowerType = specialPowerType;
+    }
+
+    public void setSpellName(String spellName) {
+        this.spellName = spellName;
+    }
+
+    public void setTarget(Target target) {
+        this.target = target;
+    }
 }

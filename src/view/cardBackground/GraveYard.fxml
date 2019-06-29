@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<Pane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+      prefHeight="720.0" prefWidth="240.0" style="-fx-background-color: #16232C;" xmlns="http://javafx.com/javafx/8"
+      xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.GraveYardController">
+    <children>
+        <ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+                    prefHeight="720.0" prefWidth="240.0" style="-fx-background-color: #16232C;"
+                    stylesheets="@../../resources/ui/style.css">
+            <content>
+                <VBox fx:id="vboxGraveYardCards" prefHeight="717.0" prefWidth="237.0"
+                      style="-fx-background-color: black;"/>
+            </content>
+        </ScrollPane>
+        <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="240.0" layoutY="297.0" onMouseClicked="#change"
+                   pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../resources/battle/battlelog_frame.png"/>
+            </image>
+        </ImageView>
+        <ImageView fx:id="forward" fitHeight="41.0" fitWidth="32.0" layoutX="240.0" layoutY="372.0" pickOnBounds="true"
+                   preserveRatio="true">
+            <image>
+                <Image url="@../../resources/battle/battlelog_button_expand.png"/>
+            </image>
+        </ImageView>
+        <ImageView fx:id="back" fitHeight="41.0" fitWidth="32.0" layoutX="240.0" layoutY="372.0" pickOnBounds="true"
+                   preserveRatio="true" visible="false">
+            <image>
+                <Image url="@../../resources/battle/battlelog_button_collapse_glow.png"/>
+            </image>
+        </ImageView>
+    </children>
+</Pane>

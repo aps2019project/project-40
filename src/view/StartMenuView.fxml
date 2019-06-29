@@ -29,7 +29,7 @@
                 <Font size="14.0"/>
             </font>
         </Label>
-        <Label layoutX="1215.0" layoutY="479.0" text="SETTINGS" textFill="WHITE">
+        <Label layoutX="1204.0" layoutY="479.0" text="Custom Card" textFill="WHITE">
             <font>
                 <Font size="14.0"/>
             </font>
