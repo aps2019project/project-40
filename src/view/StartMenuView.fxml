@@ -1,139 +1,119 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.*?>
-<AnchorPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="controller.StartMenuController">
+
+<AnchorPane prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.StartMenuController">
     <children>
         <ImageView fitHeight="729.0" fitWidth="1329.0" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@../resources/scenes/magaari_ember_highlands/magaari_ember_highlands_background@2x.jpg"/>
+                <Image url="@../resources/scenes/magaari_ember_highlands/magaari_ember_highlands_background@2x.jpg" />
             </image>
         </ImageView>
-        <Button fx:id="btnPlay" alignment="BASELINE_LEFT" layoutX="175.0" layoutY="124.0" mnemonicParsing="false"
-                onAction="#gotoBattleMenu" onMouseEntered="#mouseIn" onMouseExited="#mouseOut" prefHeight="43.0"
-                prefWidth="298.0" style="-fx-background-color: transparent;" text="PLAY" textFill="#252246">
+        <Button fx:id="btnPlay" alignment="BASELINE_LEFT" layoutX="175.0" layoutY="124.0" mnemonicParsing="false" onAction="#gotoBattleMenu" onMouseEntered="#mouseIn" onMouseExited="#mouseOut" prefHeight="43.0" prefWidth="298.0" style="-fx-background-color: transparent;" text="PLAY" textFill="#252246">
             <font>
-                <Font name="System Bold Italic" size="20.0"/>
+                <Font name="System Bold Italic" size="20.0" />
             </font>
         </Button>
         <Label layoutX="1189.0" layoutY="245.0" text="MATCH HISTORY" textFill="WHITE">
             <font>
-                <Font size="14.0"/>
+                <Font size="14.0" />
             </font>
         </Label>
         <Label layoutX="1192.0" layoutY="359.0" text="LEADER BOARD" textFill="WHITE">
             <font>
-                <Font size="14.0"/>
+                <Font size="14.0" />
             </font>
         </Label>
-        <Label layoutX="1215.0" layoutY="479.0" text="SETTINGS" textFill="WHITE">
+        <Label layoutX="1204.0" layoutY="479.0" text="Custom Card" textFill="WHITE">
             <font>
-                <Font size="14.0"/>
+                <Font size="14.0" />
             </font>
         </Label>
-        <Button fx:id="btnCollection" alignment="BASELINE_LEFT" layoutX="175.0" layoutY="195.0" mnemonicParsing="false"
-                onAction="#gotoCollectionMenu" onMouseEntered="#mouseIn" onMouseExited="#mouseOut" prefHeight="43.0"
-                prefWidth="298.0" style="-fx-background-color: transparent;" text="COLLECTION" textFill="#252246">
+        <Button fx:id="btnCollection" alignment="BASELINE_LEFT" layoutX="175.0" layoutY="195.0" mnemonicParsing="false" onAction="#gotoCollectionMenu" onMouseEntered="#mouseIn" onMouseExited="#mouseOut" prefHeight="43.0" prefWidth="298.0" style="-fx-background-color: transparent;" text="COLLECTION" textFill="#252246">
             <font>
-                <Font name="System Bold Italic" size="20.0"/>
+                <Font name="System Bold Italic" size="20.0" />
             </font>
         </Button>
-        <Button fx:id="btnShop" alignment="BASELINE_LEFT" layoutX="175.0" layoutY="263.0" mnemonicParsing="false"
-                onAction="#gotoShopMenu" onMouseEntered="#mouseIn" onMouseExited="#mouseOut" prefHeight="43.0"
-                prefWidth="298.0" style="-fx-background-color: transparent;" text="SHOP" textFill="#252246">
+        <Button fx:id="btnShop" alignment="BASELINE_LEFT" layoutX="175.0" layoutY="263.0" mnemonicParsing="false" onAction="#gotoShopMenu" onMouseEntered="#mouseIn" onMouseExited="#mouseOut" prefHeight="43.0" prefWidth="298.0" style="-fx-background-color: transparent;" text="SHOP" textFill="#252246">
             <font>
-                <Font name="System Bold Italic" size="20.0"/>
+                <Font name="System Bold Italic" size="20.0" />
             </font>
         </Button>
-        <Button fx:id="btnSave" alignment="BASELINE_LEFT" layoutX="175.0" layoutY="331.0" mnemonicParsing="false"
-                onAction="#save" onMouseEntered="#mouseIn" onMouseExited="#mouseOut" prefHeight="43.0" prefWidth="298.0"
-                style="-fx-background-color: transparent;" text="SAVE" textFill="#252246">
+        <Button fx:id="btnSave" alignment="BASELINE_LEFT" layoutX="175.0" layoutY="331.0" mnemonicParsing="false" onAction="#save" onMouseEntered="#mouseIn" onMouseExited="#mouseOut" prefHeight="43.0" prefWidth="298.0" style="-fx-background-color: transparent;" text="SAVE" textFill="#252246">
             <font>
-                <Font name="System Bold Italic" size="20.0"/>
+                <Font name="System Bold Italic" size="20.0" />
             </font>
         </Button>
-        <ImageView fitHeight="51.0" fitWidth="47.0" layoutX="106.0" layoutY="124.0" pickOnBounds="true"
-                   preserveRatio="true">
+        <ImageView fitHeight="51.0" fitWidth="47.0" layoutX="106.0" layoutY="124.0" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@../resources/ui/mouse_attack@2x.png"/>
+                <Image url="@../resources/ui/mouse_attack@2x.png" />
             </image>
         </ImageView>
-        <ImageView fitHeight="51.0" fitWidth="47.0" layoutX="106.0" layoutY="263.0" pickOnBounds="true"
-                   preserveRatio="true">
+        <ImageView fitHeight="51.0" fitWidth="47.0" layoutX="106.0" layoutY="263.0" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@../resources/ui/icon_premium@2x.png"/>
+                <Image url="@../resources/ui/icon_premium@2x.png" />
             </image>
         </ImageView>
-        <ImageView fitHeight="51.0" fitWidth="47.0" layoutX="106.0" layoutY="195.0" pickOnBounds="true"
-                   preserveRatio="true">
+        <ImageView fitHeight="51.0" fitWidth="47.0" layoutX="106.0" layoutY="195.0" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@../resources/ui/instructional_arrow@2x.png"/>
+                <Image url="@../resources/ui/instructional_arrow@2x.png" />
             </image>
         </ImageView>
-        <ImageView fitHeight="44.0" fitWidth="47.0" layoutX="108.0" layoutY="330.0" pickOnBounds="true"
-                   preserveRatio="true">
+        <ImageView fitHeight="44.0" fitWidth="47.0" layoutX="108.0" layoutY="330.0" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@../resources/ui/ranked_chevron_empty@2x.png"/>
+                <Image url="@../resources/ui/ranked_chevron_empty@2x.png" />
             </image>
         </ImageView>
-        <ImageView fitHeight="88.0" fitWidth="230.0" layoutX="1067.0" layoutY="576.0" opacity="0.6" pickOnBounds="true"
-                   preserveRatio="true">
+        <ImageView fitHeight="88.0" fitWidth="230.0" layoutX="1067.0" layoutY="576.0" opacity="0.6" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@../resources/ui/gold_main_menu_container@2x.png"/>
+                <Image url="@../resources/ui/gold_main_menu_container@2x.png" />
             </image>
         </ImageView>
-        <Label fx:id="money" layoutX="1142.0" layoutY="614.0" prefHeight="20.0" prefWidth="119.0" text="Money"
-               textFill="WHITE" wrapText="true">
+        <Label fx:id="money" layoutX="1142.0" layoutY="614.0" prefHeight="20.0" prefWidth="119.0" text="Money" textFill="WHITE" wrapText="true">
             <font>
-                <Font size="16.0"/>
+                <Font size="16.0" />
             </font>
         </Label>
-        <ImageView fitHeight="51.0" fitWidth="66.0" layoutX="1085.0" layoutY="598.0" pickOnBounds="true"
-                   preserveRatio="true">
+        <ImageView fitHeight="51.0" fitWidth="66.0" layoutX="1085.0" layoutY="598.0" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@../resources/ui/icon_gold@2x.png"/>
+                <Image url="@../resources/ui/icon_gold@2x.png" />
             </image>
         </ImageView>
-        <Button layoutX="1212.0" layoutY="171.0" mnemonicParsing="false" onAction="#gotoMatchHistory"
-                onMouseEntered="#mouseIn" onMouseExited="#mouseOut" opacity="0.6"
-                style="-fx-background-color: transparent;">
+        <Button layoutX="1212.0" layoutY="171.0" mnemonicParsing="false" onAction="#gotoMatchHistory" onMouseEntered="#mouseIn" onMouseExited="#mouseOut" opacity="0.6" style="-fx-background-color: transparent;">
             <graphic>
                 <ImageView fitHeight="60.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@../resources/ui/utility_menu/armory@2x.png"/>
+                        <Image url="@../resources/ui/utility_menu/armory@2x.png" />
                     </image>
                 </ImageView>
             </graphic>
         </Button>
-        <Button layoutX="1212.0" layoutY="287.0" mnemonicParsing="false" onAction="#gotoLeaderboard"
-                onMouseEntered="#mouseIn" onMouseExited="#mouseOut" opacity="0.6"
-                style="-fx-background-color: transparent;">
+        <Button layoutX="1212.0" layoutY="287.0" mnemonicParsing="false" onAction="#gotoLeaderboard" onMouseEntered="#mouseIn" onMouseExited="#mouseOut" opacity="0.6" style="-fx-background-color: transparent;">
             <graphic>
                 <ImageView fitHeight="58.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@../resources/ui/utility_menu/profile@2x.png"/>
+                        <Image url="@../resources/ui/utility_menu/profile@2x.png" />
                     </image>
                 </ImageView>
             </graphic>
         </Button>
-        <Button layoutX="1212.0" layoutY="411.0" mnemonicParsing="false" onAction="#gotoSettings"
-                onMouseEntered="#mouseIn" onMouseExited="#mouseOut" opacity="0.6"
-                style="-fx-background-color: transparent;">
+        <Button layoutX="1212.0" layoutY="411.0" mnemonicParsing="false" onAction="#gotoSettings" onMouseEntered="#mouseIn" onMouseExited="#mouseOut" opacity="0.6" style="-fx-background-color: transparent;">
             <graphic>
                 <ImageView fitHeight="58.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@../resources/ui/utility_menu/settings@2x.png"/>
+                        <Image url="@../resources/ui/utility_menu/settings@2x.png" />
                     </image>
                 </ImageView>
             </graphic>
         </Button>
-        <ImageView fitHeight="68.0" fitWidth="87.0" layoutX="1243.0" layoutY="14.0" onMouseClicked="#exit"
-                   pickOnBounds="true" preserveRatio="true">
+        <ImageView fitHeight="68.0" fitWidth="87.0" layoutX="1243.0" layoutY="14.0" onMouseClicked="#exit" pickOnBounds="true" preserveRatio="true">
             <image>
-                <Image url="@../resources/ui/button_close@2x.png"/>
+                <Image url="@../resources/ui/button_close@2x.png" />
             </image>
         </ImageView>
     </children>
