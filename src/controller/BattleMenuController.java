@@ -247,7 +247,6 @@ public class BattleMenuController implements Initializable {
                 break;
         }
         player2.addMatchHistory(newHistory);
-
     }
 
 }
