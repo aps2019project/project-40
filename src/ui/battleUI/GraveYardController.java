@@ -51,6 +51,7 @@ public class GraveYardController {
         this.typelabel.setText(type);
     }
 
+
     public void loadCards(Match match) {
         ArrayList<Card> cards = match.getPlayer1GraveYard().getCards();
         Node[] nodes;
