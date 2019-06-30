@@ -1,5 +1,7 @@
 package models;
 
+import controller.Controller;
+
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -85,7 +87,10 @@ public class Account implements Serializable {
         Account account = new Account();
         account.setUserName("Bot");
         account.isAI = true;
-        switch (matchType) {
+        Deck deck= Controller.getInstance().getAccount().getCollection().getSelectedDeck();
+        account.getCollection().getDecks().add(deck);
+        account.getCollection().setSelectedDeck(deck);
+/*        switch (matchType) {
             case KILL_THE_HERO:
                 account.getCollection().getDecks().add(Deck.getDefaultMode1deck());
                 account.getCollection().setSelectedDeck(Deck.getDefaultMode1deck());
@@ -98,7 +103,7 @@ public class Account implements Serializable {
                 account.getCollection().getDecks().add(Deck.getDefaultMode3deck());
                 account.getCollection().setSelectedDeck(Deck.getDefaultMode3deck());
                 break;
-        }
+        }*/
         return account;
     }
 
