@@ -1,23 +1,28 @@
 package controller;
 
+import javafx.application.Platform;
+import javafx.stage.Stage;
 import models.*;
 import models.GamePlay.GameLogic;
 import models.GamePlay.Match;
 import ui.battleUI.battleRequests.*;
+import ui.battleUI.BattleUI;
+import ui.battleUI.battleRequests.BattleRequest;
 import ui.battleUI.battleViews.*;
-import view.battleView.BattleLog;
+import view.battleView.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
 public class BattleController {
 
+    public static BattleUI battleUI;
     private static BattleController battleController;
     private BattleRequest battleRequest = BattleRequest.getInstance();
     private Match match;
     private GameLogic gameLogic;
     private BattleLogicController battleLogicController;
-    private boolean isEndedGame = false;
+    private int isEndedGame = 0;
 
     public static BattleController getInstance() {
 
@@ -29,7 +34,7 @@ public class BattleController {
         return battleController;
     }
 
-    public void mainBattleController(Match match) {
+    public void mainBattleController(Match match, Stage stage) {
 
         this.match = match;
         gameLogic = match.getGameLogic();
@@ -37,12 +42,27 @@ public class BattleController {
         battleLogicController.setGameLogic(gameLogic);
         battleLogicController.setMatch(match);
         BattleLog.logTurnForWho(match.findPlayerPlayingThisTurn().getUserName());
+
+        new Thread(() -> {
+            battleUI.battleUI(stage);
+        }).start();
+
         manageRequest();
     }
 
     private void manageRequest() {
 
         while (true) {
+
+            if (isEndedGame != 0) {
+                if (isEndedGame == 1) {
+                    BattleLog.PlayerOneWins();
+                }
+                else {
+                    BattleLog.PlayerTwoWins();
+                }
+                break;
+            }
 
             BattleRequest request = battleRequest.getRequest();
 
@@ -61,7 +81,13 @@ public class BattleController {
             else if (request instanceof RequestWithoutVariable)
                 requestWithoutVariable((RequestWithoutVariable) request);
 
-            if (isEndedGame) break;
+            Platform.runLater(() -> {
+
+                battleUI.updateHeroHP();
+                battleUI.updatePlayersMana();
+                battleUI.tableBuilder.updateTable(match);
+                battleUI.handBuilder.updateHand(match);
+            });
         }
     }
 
@@ -186,7 +212,7 @@ public class BattleController {
         }
 
         ArrayList<String> myCardsID = request.getMyCardsID();
-        ArrayList<Card> myCards = new ArrayList<>();
+        ArrayList<Unit> myCards = new ArrayList<>();
 
         for (String myCardID : myCardsID) {
 
@@ -199,8 +225,10 @@ public class BattleController {
                 BattleLog.errorHasNotCombo();
                 return;
             }
-            myCards.add(myCard);
+            myCards.add((Unit) myCard);
         }
+        Unit[] attackers = (Unit[]) myCards.toArray();
+        gameLogic.comboAttack(attackers, (Unit) opponent);
         //todo
     }
 
@@ -292,7 +320,7 @@ public class BattleController {
         Cell cell = match.getTable().getCellByCoordination(coordination);
 
         if (card instanceof Unit) insertCardRequestForUnit(cell, coordination, card);
-        else insertCardRequestForSpell(cell, (Spell) card);
+        else insertCardRequestForSpell(cell, card);
     }
 
     private void insertCardRequestForUnit(Cell cell, Coordination coordination, Card card) {
@@ -307,27 +335,32 @@ public class BattleController {
                 cell.getCoordination().getRow(), cell.getCoordination().getColumn());
     }
 
-    private void insertCardRequestForSpell(Cell cell, Spell spell) {
+    private void insertCardRequestForSpell(Cell cell, Card card) {
+        for (Spell spell: card.getSpells()) {
+            if (spell.getTarget().isAffectCells())
+                gameLogic.insertProcess(spell, cell);
 
-        if (spell.getTarget().isAffectCells())
-            gameLogic.insertProcess(spell, cell);
-
-        else {      //for minions and hero
-            if (!battleLogicController.isCellFill(cell)) {
-                BattleLog.errorCellIsNotFill();
-                return;
+            else {      //for minions and hero
+                if (!battleLogicController.isCellFill(cell)) {
+                    BattleLog.errorCellIsNotFill();
+                    return;
+                }
+                if (spell.getTarget().isTargetEnemy() &&
+                        !cell.getCard().getTeam().equals(match.findPlayerDoesNotPlayingThisTurn().getUserName())) {
+                    if (card.getSpells().size() == 1) {
+                        BattleLog.errorItIsYourUnit();
+                        return;
+                    }
+                }
+                if (!spell.getTarget().isTargetEnemy() &&
+                        cell.getCard().getTeam().equals(match.findPlayerDoesNotPlayingThisTurn().getUserName())) {
+                    if (card.getSpells().size() == 1) {
+                        BattleLog.errorItIsUnitOfEnemy();
+                        return;
+                    }
+                }
+                gameLogic.insertProcess(spell, cell);
             }
-            if (spell.getTarget().isTargetEnemy() &&
-                    !cell.getCard().getTeam().equals(match.findPlayerDoesNotPlayingThisTurn().getUserName())) {
-                BattleLog.errorItIsYourUnit();
-                return;
-            }
-            if (!spell.getTarget().isTargetEnemy() &&
-                    cell.getCard().getTeam().equals(match.findPlayerDoesNotPlayingThisTurn().getUserName())) {
-                BattleLog.errorItIsUnitOfEnemy();
-                return;
-            }
-            gameLogic.insertProcess(spell, cell);
         }
     }
 
@@ -356,7 +389,7 @@ public class BattleController {
             showCollectedItemRequest();
 
         else if (request.getEnumRequest() == RequestWithoutVariableEnum.END_GAME_REQUEST)
-            isEndedGame = false;
+            isEndedGame = 0;
 
         else if (request.getEnumRequest() == RequestWithoutVariableEnum.HELP_REQUEST)
             BattleLog.showHelp();
@@ -438,8 +471,7 @@ public class BattleController {
 
         for (Cell[] row : cells) {
             for (Cell cell : row) {
-
-
+                //todo
             }
         }
         gameInfoBattleViewCollectTheFlags.show(gameInfoBattleViewCollectTheFlags);
@@ -564,5 +596,9 @@ public class BattleController {
             }
         }
         endTurnRequest();
+    }
+
+    public void setIsEndedGame(int isEndedGame) {
+        this.isEndedGame = isEndedGame;
     }
 }

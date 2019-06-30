@@ -59,7 +59,7 @@ public class BattleLog {
 
     public static void errorCellIsNotFill() {
 
-        System.err.println("there is any unit on this cell");
+        System.err.println("there isn't any unit on this cell");
     }
 
     public static void errorCellNotAvailable() {
@@ -153,5 +153,13 @@ public class BattleLog {
     public static void errorItIsUnitOfEnemy() {
 
         System.out.println("It is enemy unit");
+    }
+
+    public static void PlayerOneWins(){
+        System.out.println("Player One Wins");
+    }
+
+    public static void PlayerTwoWins(){
+        System.out.println("Player Two Wins");
     }
 }

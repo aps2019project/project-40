@@ -101,17 +101,17 @@ public class BattleMenuController implements Initializable {
             case 1:
                 playerAI = Account.getAIAccount(MatchType.KILL_THE_HERO);
                 match = new Match(MatchType.KILL_THE_HERO, account, playerAI);
-                BattleController.getInstance().mainBattleController(match);
+                BattleController.getInstance().mainBattleController(match, Controller.stage);
                 break;
             case 2:
                 playerAI = Account.getAIAccount(MatchType.HOLD_THE_FLAG);
                 match = new Match(MatchType.HOLD_THE_FLAG, account, playerAI);
-                BattleController.getInstance().mainBattleController(match);
+                BattleController.getInstance().mainBattleController(match, Controller.stage);
                 break;
             case 3:
                 playerAI = Account.getAIAccount(MatchType.COLLECT_THE_FLAGS);
                 match = new Match(6, account, playerAI);
-                BattleController.getInstance().mainBattleController(match);
+                BattleController.getInstance().mainBattleController(match, Controller.stage);
                 break;
         }
     }
@@ -208,11 +208,11 @@ public class BattleMenuController implements Initializable {
             if (request.getMode().equals(MatchType.COLLECT_THE_FLAGS)) {
 
                 Match match = new Match(request.getNumberOfFlags(), account, player2);
-                BattleController.getInstance().mainBattleController(match);
+                BattleController.getInstance().mainBattleController(match, Controller.stage);
                 return;
             } else {
                 Match match = new Match(request.getMode(), account, player2);
-                BattleController.getInstance().mainBattleController(match);
+                BattleController.getInstance().mainBattleController(match, Controller.stage);
 
             }
 

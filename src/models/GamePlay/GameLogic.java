@@ -1,5 +1,6 @@
 package models.GamePlay;
 
+import controller.BattleController;
 import models.*;
 
 import java.util.ArrayList;
@@ -15,7 +16,9 @@ public class GameLogic {
     public final int MATCH_HAS_NOT_ENDED = 0;
     public final int NUMBER_OF_TURNS_TO_HOLD_THE_FLAG = 6;
     int flagsNumber;
-    int remainTurnToHoldingTheFlag; //todo initialize in dead and get
+    int turnsHavingFlagPlayer1; //todo initialize in dead and get
+    int turnsHavingFlagPlayer2;
+    String cardOnFlag = "";
     ArrayList<Card> attackedCardsInATurn = new ArrayList<>();      //todo add attacker to array
     ArrayList<Card> movedCardsInATurn = new ArrayList<>();
     ArrayList<Card> cardsInTablePlayer1 = new ArrayList<>(); //todo fill that in game and delete when minion die
@@ -65,14 +68,6 @@ public class GameLogic {
 
     public void moveProcess(Card card, Cell destinationCell) {
 
-        Cell originCell = card.getCell();
-
-        if (match.getMatchType() == MatchType.HOLD_THE_FLAG && originCell.getFlag() != null) {
-
-            destinationCell.setFlag(originCell.getFlag());
-            originCell.setFlag(null);
-        }
-
         card.getCell().setCard(null);
         destinationCell.setCard(card);
         card.setCell(destinationCell);
@@ -114,20 +109,64 @@ public class GameLogic {
         int player2HeroHP = ((Unit) match.getPlayer2().getHand().getHero()).getHP();
 
         if (player1HeroHP <= 0 && player2HeroHP <= 0) return DRAW;
-        if (player1HeroHP <= 0) return PLAYER2_WINS;
-        if (player2HeroHP <= 0) return PLAYER1_WINS;
+        if (player1HeroHP <= 0){
+            BattleController.getInstance().setIsEndedGame(2);
+            return PLAYER2_WINS;
+        }
+        if (player2HeroHP <= 0) {
+            BattleController.getInstance().setIsEndedGame(1);
+            return PLAYER1_WINS;
+        }
 
         return MATCH_HAS_NOT_ENDED;
     }
 
     private int getMatchResultForHoldTheFlag() {
+        getMatchResultForKillTheHero();
+        Cell[][] cells = match.getTable().getCells();
 
-        //todo benevis bere
+        for (Cell[] row : cells) {
+            for (Cell cell : row) {
+                if (cell.getFlag() != null && cell.getCard() != null) {
+                    if (cardOnFlag.equals("")){
+                        cardOnFlag = cell.getCard().getCardID();
+
+                    }
+                    else{
+                        if (cardOnFlag.equals( cell.getCard().getCardID())){
+                            if (cell.getCard().getTeam().equals(match.player1.getUserName()))
+                                turnsHavingFlagPlayer1++;
+
+                            else turnsHavingFlagPlayer2++;
+                        }
+                        else{
+                            cardOnFlag = cell.getCard().getCardID();
+                            turnsHavingFlagPlayer1 = 0;
+                            turnsHavingFlagPlayer2 = 0;
+                            if (cell.getCard().getTeam().equals(match.player1.getUserName()))
+                                turnsHavingFlagPlayer1++;
+
+                            else turnsHavingFlagPlayer2++;
+                        }
+                    }
+                }
+            }
+        }
+
+        if (turnsHavingFlagPlayer1 >= NUMBER_OF_TURNS_TO_HOLD_THE_FLAG) {
+            BattleController.getInstance().setIsEndedGame(1);
+            return PLAYER1_WINS;
+        }
+        if (turnsHavingFlagPlayer2 >= NUMBER_OF_TURNS_TO_HOLD_THE_FLAG) {
+            BattleController.getInstance().setIsEndedGame(2);
+            return PLAYER2_WINS;
+        }
+
         return MATCH_HAS_NOT_ENDED;
     }
 
     private int getMatchResultForCollectTheFlags() {
-
+        getMatchResultForKillTheHero();
         Cell[][] cells = match.getTable().getCells();
         int player1Flag = 0, player2Flag = 0;
 
@@ -144,8 +183,14 @@ public class GameLogic {
             }
         }
 
-        if (player1Flag >= Math.ceil(NUMBER_OF_TURNS_TO_HOLD_THE_FLAG / 2)) return PLAYER1_WINS;
-        if (player2Flag >= Math.ceil(NUMBER_OF_TURNS_TO_HOLD_THE_FLAG / 2)) return PLAYER2_WINS;
+        if (player1Flag >= Math.ceil(NUMBER_OF_TURNS_TO_HOLD_THE_FLAG / 2) + 1) {
+            BattleController.getInstance().setIsEndedGame(1);
+            return PLAYER1_WINS;
+        }
+        if (player2Flag >= Math.ceil(NUMBER_OF_TURNS_TO_HOLD_THE_FLAG / 2) + 1) {
+            BattleController.getInstance().setIsEndedGame(2);
+            return PLAYER2_WINS;
+        }
         return MATCH_HAS_NOT_ENDED;
     }
 
@@ -200,9 +245,9 @@ public class GameLogic {
     }
 
     public void switchTurn() {
-
         match.turnNumber++;
         manaHandler();
+        getMatchResult();
         match.findPlayerPlayingThisTurn().getHand().fillHandEmptyPlace();
         attackedCardsInATurn = new ArrayList<>();
         movedCardsInATurn = new ArrayList<>();
@@ -233,7 +278,10 @@ public class GameLogic {
             damage(attacker, defender);
             useOnAttackSpells(attacker, defender);
             useOnDefendSpells(defender, attacker);
-            counterAttack(defender, attacker);
+            try {
+                counterAttack(defender, attacker);
+            } catch (NullPointerException e) {
+            }
         }
     }
 
@@ -268,6 +316,7 @@ public class GameLogic {
             cardsInTablePlayer2.remove(unit);
             match.getPlayer2GraveYard().addCardToGraveYard(unit);
         }
+
     }
 
     private void ActivateOnDeathSpells(Unit unit) {
@@ -287,13 +336,16 @@ public class GameLogic {
     private boolean isRangeValidForAttack(Unit attacker, Unit defender) {
 
         if (attacker.getUnitType() == UnitType.MELEE) {
-            return attacker.getCell().isAdjacent(defender.getCell());
+            if (!attacker.getCell().isAdjacent(defender.getCell()))
+                return false;
 
         } else if (attacker.getUnitType() == UnitType.RANGED) {
-            return !attacker.getCell().isAdjacent(defender.getCell());
+            if (attacker.getCell().isAdjacent(defender.getCell()))
+                return false;
 
         } else if (attacker.getUnitType() == UnitType.HYBRID) {
-            return !attacker.getCell().isAdjacent(defender.getCell());
+            if (attacker.getCell().isAdjacent(defender.getCell()))
+                return false;
         }
 
         return true;
@@ -303,11 +355,10 @@ public class GameLogic {
     private TargetData findTarget(Spell spell, Cell cardCell, Cell clickCell, Cell heroCell) {
 
         TargetData targetData = new TargetData();
-
         if (spell.getTarget().isTargetEnemy()) {
-            setTargetData(spell, cardCell, clickCell, targetData);
+            setTargetData(spell, cardCell, clickCell, match.findPlayerDoesNotPlayingThisTurn(), targetData);
         } else {
-            setTargetData(spell, cardCell, heroCell, targetData);
+            setTargetData(spell, cardCell, heroCell, match.findPlayerPlayingThisTurn(), targetData);
         }
         if (spell.getTarget().isRandom()) {
             if (targetData.getCards().size() > 0) {
@@ -320,7 +371,8 @@ public class GameLogic {
     }
 
 
-    private void setTargetData(Spell spell, Cell cardCell, Cell clickCell, TargetData targetData) {
+    private void setTargetData(Spell spell, Cell cardCell, Cell clickCell, Account account, TargetData targetData) {
+        targetData.getAccounts().add(account);
 
         if (spell.getTarget().getRowsAffected() != 0 && spell.getTarget().getColumnsAffected() != 0) {
 
@@ -328,7 +380,7 @@ public class GameLogic {
             Coordination coordination = new Coordination();
             coordination.setRow(spell.getTarget().getRowsAffected());
             coordination.setColumn(spell.getTarget().getColumnsAffected());
-            ArrayList<Cell> targetCells = detectCells(centerPosition, coordination); //todo
+            ArrayList<Cell> targetCells = detectCells(centerPosition, coordination);
             addUnitsAndCellsToTargetData(spell, targetData, targetCells);
 
             if (spell.getTarget().isRandom()) {
@@ -450,7 +502,7 @@ public class GameLogic {
         castBuffOnCards(buff, targetData.getCards());
         //  castBuffOnCells(buff, targetData.getCells());
         castBuffOnUnits(buff, targetData.getUnits());
-        castBuffOnUsers(buff, targetData.getAccounts());
+      //  castBuffOnUsers(buff, targetData.getAccounts());
 
         buff.decrementDuration();
     }
@@ -601,6 +653,17 @@ public class GameLogic {
                     specialPower, findTarget(specialPower, hero.getCell(), hero.getCell(), hero.getCell()));
         }
     }
+    public void comboAttack(Unit[] attackers, Unit defender){
 
+        comboAttackLogic(attackers, defender);
+        useOnDefendSpells(defender, attackers[0]);
+        counterAttack(defender, attackers[0]);
+    }
 
+    private void comboAttackLogic(Unit[] attackers, Unit defender){
+        for (Unit attacker: attackers){
+            damage(attacker,defender);
+            useOnAttackSpells(attacker,defender);
+        }
+    }
 }
